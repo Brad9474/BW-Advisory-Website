@@ -124,14 +124,29 @@ const NoiseOverlay = () => (
 // Shield component with white background removal logic
 const TransparentShield = () => {
   const canvasRef = useRef(null);
+  const [rotationY, setRotationY] = useState(0);
+  const isDragging = useRef(false);
+  const lastX = useRef(0);
 
-  const handleSpin = () => {
-    // Spin it 360 degrees in 3D space on click/tap
-    gsap.to(canvasRef.current, {
-      rotationY: "+=360",
-      duration: 1.2,
-      ease: "power3.inOut"
-    });
+  const handlePointerDown = (e) => {
+    isDragging.current = true;
+    lastX.current = e.clientX;
+    if (canvasRef.current) canvasRef.current.style.cursor = 'grabbing';
+    e.target.setPointerCapture(e.pointerId);
+  };
+
+  const handlePointerMove = (e) => {
+    if (!isDragging.current) return;
+    const deltaX = e.clientX - lastX.current;
+    // The faster the mouse moves (deltaX), the more the shield spins
+    setRotationY(prev => prev + deltaX * 1.5);
+    lastX.current = e.clientX;
+  };
+
+  const handlePointerUp = (e) => {
+    isDragging.current = false;
+    if (canvasRef.current) canvasRef.current.style.cursor = 'grab';
+    e.target.releasePointerCapture(e.pointerId);
   };
 
   useEffect(() => {
@@ -202,16 +217,15 @@ const TransparentShield = () => {
   }, []);
 
   return (
-    <div className="relative group cursor-pointer" onClick={handleSpin}>
-      {/* Tooltip hint that floats gently below the shield when they hover over it */}
-      <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs font-bold tracking-[0.2em] text-accent pointer-events-none uppercase whitespace-nowrap">
-        Click to Spin
-      </div>
-      <canvas 
-        ref={canvasRef} 
-        className="shield-elem w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(27,110,194,0.6)]" 
-      />
-    </div>
+    <canvas 
+      ref={canvasRef} 
+      className="shield-elem w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(27,110,194,0.6)] touch-none" 
+      style={{ transform: `rotateY(${rotationY}deg)`, cursor: 'grab' }}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp}
+    />
   );
 };
 
