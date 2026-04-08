@@ -797,8 +797,7 @@ const App = () => {
         </div>
       </footer>
 
-      <style dangerouslySetInnerHTML={{
-        __html: `
+      <style>{`
         @keyframes dashReveal {
           to { stroke-dashoffset: 0; }
         }
@@ -806,7 +805,7 @@ const App = () => {
           0% { width: 0; }
           100% { width: 100%; }
         }
-      `}} />
+      `}</style>
     </div>
   );
 };
