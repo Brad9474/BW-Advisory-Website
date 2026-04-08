@@ -124,39 +124,14 @@ const NoiseOverlay = () => (
 // Shield component with white background removal logic
 const TransparentShield = () => {
   const canvasRef = useRef(null);
-  const [rotation, setRotation] = useState(0);
-  const isDragging = useRef(false);
-  const lastAngle = useRef(0);
 
-  const handlePointerDown = (e) => {
-    isDragging.current = true;
-    const rect = canvasRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    lastAngle.current = Math.atan2(e.clientY - centerY, e.clientX - centerX) * (180 / Math.PI);
-    if (canvasRef.current) canvasRef.current.style.cursor = 'grabbing';
-    e.target.setPointerCapture(e.pointerId);
-  };
-
-  const handlePointerMove = (e) => {
-    if (!isDragging.current) return;
-    const rect = canvasRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const currentAngle = Math.atan2(e.clientY - centerY, e.clientX - centerX) * (180 / Math.PI);
-    
-    let delta = currentAngle - lastAngle.current;
-    if (delta > 180) delta -= 360;
-    if (delta < -180) delta += 360;
-    
-    setRotation(prev => prev + delta);
-    lastAngle.current = currentAngle;
-  };
-
-  const handlePointerUp = (e) => {
-    isDragging.current = false;
-    if (canvasRef.current) canvasRef.current.style.cursor = 'grab';
-    e.target.releasePointerCapture(e.pointerId);
+  const handleSpin = () => {
+    // Spin it 360 degrees in 3D space on click/tap
+    gsap.to(canvasRef.current, {
+      rotationY: "+=360",
+      duration: 1.2,
+      ease: "power3.inOut"
+    });
   };
 
   useEffect(() => {
@@ -227,15 +202,16 @@ const TransparentShield = () => {
   }, []);
 
   return (
-    <canvas 
-      ref={canvasRef} 
-      className="shield-elem w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(27,110,194,0.6)] touch-none" 
-      style={{ transform: `rotate(${rotation}deg)`, cursor: 'grab' }}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerUp}
-    />
+    <div className="relative group cursor-pointer" onClick={handleSpin}>
+      {/* Tooltip hint that floats gently below the shield when they hover over it */}
+      <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs font-bold tracking-[0.2em] text-accent pointer-events-none uppercase whitespace-nowrap">
+        Click to Spin
+      </div>
+      <canvas 
+        ref={canvasRef} 
+        className="shield-elem w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(27,110,194,0.6)]" 
+      />
+    </div>
   );
 };
 
