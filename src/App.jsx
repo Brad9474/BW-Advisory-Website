@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Menu, X } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 const phases = [
@@ -242,6 +243,7 @@ const TransparentShield = () => {
 const Navbar = () => {
   const navRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -261,41 +263,73 @@ const Navbar = () => {
     return () => ctx.revert();
   }, []);
 
+  const navLinks = [
+    { name: 'About Us', href: '#about' },
+    { name: 'Our Framework', href: '#framework' },
+    { name: 'How We Work', href: '#protocol' },
+    { name: 'Contact Us', href: '#contact' },
+  ];
+
   return (
     <div className="fixed top-0 left-0 w-full z-50 transition-all duration-300">
-      <nav ref={navRef} className="px-6 py-5 flex items-center justify-between transition-all duration-300 min-h-[80px]">
+      <nav ref={navRef} className="px-6 py-4 flex items-center justify-between transition-all duration-300 min-h-[70px] md:min-h-[80px]">
 
-        {/* Left Side: Dynamic Logo Injection on Scroll */}
-        <div className="w-[300px] flex items-center justify-start">
-          <div className={"transition-all duration-500 transform origin-left " + (scrolled ? "opacity-100 scale-100 translate-x-0" : "opacity-0 scale-75 -translate-x-8")}>
+        {/* Left Side: Logo */}
+        <div className="w-[120px] lg:w-[300px] flex items-center justify-start">
+          <div className={"transition-all duration-500 transform origin-left " + (scrolled ? "opacity-100 scale-100 translate-x-0" : "opacity-0 md:opacity-100 md:scale-100 md:translate-x-0 lg:opacity-0 lg:scale-75 lg:-translate-x-8")}>
             <a href="#">
-              <img src="/BW_Advisory_Solutions_Logo.png" alt="Logo" className="h-10 w-auto object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]" />
+              <img src="/BW_Advisory_Solutions_Logo.png" alt="Logo" className="h-8 md:h-10 w-auto object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]" />
             </a>
           </div>
         </div>
 
-        {/* Center: Sleek Nav Links */}
-        <div className="flex items-center gap-8 md:gap-10 font-sans font-bold text-[16px] xl:text-[18px] text-surface tracking-[0.15em] uppercase">
-          <a href="#about" className="relative group overflow-hidden whitespace-nowrap">
-            About Us
-            <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-accent transform -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-300"></span>
-          </a>
-          <a href="#framework" className="relative group overflow-hidden whitespace-nowrap">
-            Our Framework
-            <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-accent transform -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-300"></span>
-          </a>
-          <a href="#protocol" className="relative group overflow-hidden whitespace-nowrap">
-            How We Work With You
-            <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-accent transform -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-300"></span>
-          </a>
-          <a href="#contact" className="relative group overflow-hidden whitespace-nowrap">
-            Contact Us
-            <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-accent transform -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-300"></span>
-          </a>
+        {/* Center: Desktop Nav Links */}
+        <div className="hidden lg:flex items-center gap-8 md:gap-10 font-sans font-bold text-[16px] xl:text-[18px] text-surface tracking-[0.15em] uppercase">
+          {navLinks.map((link) => (
+            <a key={link.name} href={link.href} className="relative group overflow-hidden whitespace-nowrap">
+              {link.name}
+              <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-accent transform -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-300"></span>
+            </a>
+          ))}
         </div>
 
-        {/* Right Side Spacer (Consult Button Removed) */}
-        <div className="w-[300px]"></div>
+        {/* Right Side: Hamburger Toggle (Mobile Only) */}
+        <div className="lg:w-[300px] flex justify-end items-center">
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="lg:hidden relative z-50 p-2 text-surface hover:text-accent transition-colors"
+            aria-label="Toggle Menu"
+          >
+            {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
+          </button>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        <div className={`fixed inset-0 bg-[#07132B]/95 backdrop-blur-2xl transition-all duration-500 lg:hidden ${isMenuOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-full pointer-events-none"}`}>
+          <div className="h-full flex flex-col items-center justify-center gap-10 p-8 pt-24 text-center">
+            {navLinks.map((link, i) => (
+              <a 
+                key={link.name} 
+                href={link.href} 
+                onClick={() => setIsMenuOpen(false)}
+                className="text-3xl font-sans font-bold text-surface tracking-widest uppercase hover:text-accent transition-colors block"
+                style={{ transitionDelay: `${i * 100}ms` }}
+              >
+                {link.name}
+              </a>
+            ))}
+            <div className="mt-10 pt-10 border-t border-white/10 w-full max-w-xs">
+              <a 
+                href="https://calendly.com/brad-bwadvisorysolutions/30min"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-block bg-accent text-white px-8 py-4 rounded-full font-bold tracking-widest uppercase text-sm shadow-[0_0_20px_rgba(27,110,194,0.4)]"
+              >
+                Schedule Consult
+              </a>
+            </div>
+          </div>
+        </div>
 
       </nav>
     </div>
@@ -548,7 +582,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen selection:bg-accent/40 selection:text-surface font-sans text-textDark bg-primary relative">
+    <div className="w-full min-h-screen selection:bg-accent/40 selection:text-surface font-sans text-textDark bg-primary relative overflow-x-hidden">
       <style>{`
         @keyframes shine-platinum {
           0% { background-position: -200% center; }
@@ -589,28 +623,28 @@ const App = () => {
             <TransparentShield />
           </div>
 
-          <div className="flex flex-wrap justify-center gap-x-2 gap-y-2 pb-4">
+          <div className="flex flex-wrap justify-center gap-x-1 sm:gap-x-2 gap-y-1 sm:gap-y-2 pb-4">
             {"BW ADVISORY".split("").map((char, i) => (
-              <span key={i} className="logo-letter font-sans font-bold text-5xl md:text-[5rem] lg:text-[6.5rem] tracking-[-0.03em] platinum-text drop-shadow-[0_4px_15px_rgba(255,255,255,0.1)] leading-none inline-block pb-2 pr-[0.1em]">
+              <span key={i} className="logo-letter font-sans font-bold text-4xl sm:text-5xl md:text-[5rem] lg:text-[6.5rem] tracking-[-0.03em] platinum-text drop-shadow-[0_4px_15px_rgba(255,255,255,0.1)] leading-none inline-block pb-1 sm:pb-2 pr-[0.1em]">
                 {char === " " ? "\u00A0" : char}
               </span>
             ))}
           </div>
 
-          <div className="flex items-center gap-4 mt-6 w-full justify-center overflow-hidden">
-            <div className="solutions-line h-[2px] w-12 md:w-24 bg-accent shadow-[0_0_15px_rgba(27,110,194,0.8)] origin-right"></div>
+          <div className="flex items-center gap-2 sm:gap-4 mt-4 sm:mt-6 w-full justify-center overflow-hidden">
+            <div className="solutions-line h-[2px] w-8 sm:w-16 md:w-24 bg-accent shadow-[0_0_15px_rgba(27,110,194,0.8)] origin-right"></div>
             {"SOLUTIONS".split("").map((char, i) => (
-              <span key={i} className="solutions-word font-sans font-bold text-accent tracking-[0.6em] md:tracking-[0.8em] text-2xl md:text-4xl drop-shadow-[0_0_15px_rgba(27,110,194,0.6)]">
+              <span key={i} className="solutions-word font-sans font-bold text-accent tracking-[0.4em] sm:tracking-[0.6em] md:tracking-[0.8em] text-lg sm:text-2xl md:text-4xl drop-shadow-[0_0_15px_rgba(27,110,194,0.6)]">
                 {char}
               </span>
             ))}
-            <div className="solutions-line h-[2px] w-12 md:w-24 bg-accent shadow-[0_0_15px_rgba(27,110,194,0.8)] origin-left"></div>
+            <div className="solutions-line h-[2px] w-8 sm:w-16 md:w-24 bg-accent shadow-[0_0_15px_rgba(27,110,194,0.8)] origin-left"></div>
           </div>
         </div>
 
         <div className="w-full max-w-5xl mx-auto mt-2 relative z-20">
           {/* Tagline */}
-          <h1 className="hero-elem font-semibold font-sans text-5xl md:text-6xl lg:text-[4.5rem] tracking-tight leading-[1.1] text-surface drop-shadow-md">
+          <h1 className="hero-elem font-semibold font-sans text-[2.5rem] sm:text-4xl md:text-6xl lg:text-[4.5rem] tracking-tight leading-[1.1] text-surface drop-shadow-md">
             Translating strategic intent <br />into <span className="font-serif italic text-accent pr-2 drop-shadow-[0_0_15px_rgba(27,110,194,0.3)]">operational success.</span>
           </h1>
 
@@ -650,7 +684,7 @@ const App = () => {
 
             {/* Col 1 */}
             <div className="relative p-10 xl:p-14 border-b lg:border-b-0 lg:border-r border-silver/10 flex flex-col group overflow-hidden hover:bg-white/[0.02] transition-colors duration-700">
-              <div className="framework-number absolute -top-6 right-2 text-[11rem] leading-none font-sans font-light text-silver opacity-0 select-none pointer-events-none transition-all duration-1000 group-hover:opacity-10 group-hover:scale-105">01</div>
+              <div className="framework-number absolute -top-4 sm:-top-6 right-2 text-[6rem] sm:text-[8rem] lg:text-[11rem] leading-none font-sans font-light text-silver opacity-0 select-none pointer-events-none transition-all duration-1000 group-hover:opacity-10 group-hover:scale-105">01</div>
               <h3 className="font-light text-4xl lg:text-5xl text-surface mb-6 relative z-10 mt-6">Identify.</h3>
               <p className="text-[#1B6EC2] tracking-[0.2em] text-sm md:text-base font-bold uppercase mb-8 relative z-10 drop-shadow-[0_0_10px_rgba(27,110,194,0.3)]">Understand the problem</p>
               <p className="text-surface/80 leading-relaxed font-light relative z-10 text-[15px] lg:text-lg flex-grow">
@@ -660,7 +694,7 @@ const App = () => {
 
             {/* Col 2 */}
             <div className="relative p-10 xl:p-14 border-b lg:border-b-0 lg:border-r border-silver/10 flex flex-col group overflow-hidden hover:bg-white/[0.02] transition-colors duration-700">
-              <div className="framework-number absolute -top-6 right-2 text-[11rem] leading-none font-sans font-light text-silver opacity-0 select-none pointer-events-none transition-all duration-1000 group-hover:opacity-10 group-hover:scale-105">02</div>
+              <div className="framework-number absolute -top-4 sm:-top-6 right-2 text-[6rem] sm:text-[8rem] lg:text-[11rem] leading-none font-sans font-light text-silver opacity-0 select-none pointer-events-none transition-all duration-1000 group-hover:opacity-10 group-hover:scale-105">02</div>
               <h3 className="font-light text-4xl lg:text-5xl text-surface mb-6 relative z-10 mt-6">Strategise.</h3>
               <p className="text-[#1B6EC2] tracking-[0.2em] text-sm md:text-base font-bold uppercase mb-8 relative z-10 drop-shadow-[0_0_10px_rgba(27,110,194,0.3)]">Design the solution</p>
               <p className="text-surface/80 leading-relaxed font-light relative z-10 text-[15px] lg:text-lg flex-grow">
@@ -670,7 +704,7 @@ const App = () => {
 
             {/* Col 3 */}
             <div className="relative p-10 xl:p-14 flex flex-col group overflow-hidden hover:bg-white/[0.02] transition-colors duration-700">
-              <div className="framework-number absolute -top-6 right-2 text-[11rem] leading-none font-sans font-light text-silver opacity-0 select-none pointer-events-none transition-all duration-1000 group-hover:opacity-10 group-hover:scale-105">03</div>
+              <div className="framework-number absolute -top-4 sm:-top-6 right-2 text-[6rem] sm:text-[8rem] lg:text-[11rem] leading-none font-sans font-light text-silver opacity-0 select-none pointer-events-none transition-all duration-1000 group-hover:opacity-10 group-hover:scale-105">03</div>
               <h3 className="font-light text-4xl lg:text-5xl text-surface mb-6 relative z-10 mt-6">Operationalise.</h3>
               <p className="text-[#1B6EC2] tracking-[0.2em] text-sm md:text-base font-bold uppercase mb-8 relative z-10 drop-shadow-[0_0_10px_rgba(27,110,194,0.3)]">Apply the treatment</p>
               <p className="text-surface/80 leading-relaxed font-light relative z-10 text-[15px] lg:text-lg flex-grow">
