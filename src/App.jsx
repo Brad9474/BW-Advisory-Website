@@ -276,12 +276,12 @@ const Navbar = () => {
 
         {/* Center: Sleek Nav Links */}
         <div className="flex items-center gap-8 md:gap-10 font-sans font-bold text-[16px] xl:text-[18px] text-surface tracking-[0.15em] uppercase">
-          <a href="#framework" className="relative group overflow-hidden whitespace-nowrap">
-            Our Framework
-            <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-accent transform -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-300"></span>
-          </a>
           <a href="#about" className="relative group overflow-hidden whitespace-nowrap">
             About Us
+            <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-accent transform -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-300"></span>
+          </a>
+          <a href="#framework" className="relative group overflow-hidden whitespace-nowrap">
+            Our Framework
             <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-accent transform -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-300"></span>
           </a>
           <a href="#protocol" className="relative group overflow-hidden whitespace-nowrap">
