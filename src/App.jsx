@@ -486,7 +486,7 @@ const App = () => {
         ease: "power2.out"
       });
 
-      // Elegant sequential sequence for Framework numbers
+      // Elegant sequential sequence for Framework numbers - Each pulses independently
       const frameworkTl = gsap.timeline({
         scrollTrigger: {
           trigger: "#framework",
@@ -494,27 +494,29 @@ const App = () => {
         }
       });
 
-      frameworkTl.fromTo(".framework-number", 
-        { 
-          opacity: 0, 
-          y: 20,
-          scale: 0.98,
-          filter: "brightness(1) blur(4px)"
-        },
-        {
-          opacity: 0.12, // Very subtle soft highlight
-          y: 0,
-          scale: 1,
-          filter: "brightness(1.5) blur(0px)",
+      // We animate each number individually to ensure they don't 'hold' brightness
+      gsap.utils.toArray('.framework-number').forEach((num, i) => {
+        frameworkTl.fromTo(num, 
+          { 
+            opacity: 0, 
+            y: 20,
+            scale: 0.98,
+            filter: "brightness(1) blur(4px)"
+          },
+          {
+            opacity: 0.15, // Bright pulse
+            y: 0,
+            scale: 1,
+            filter: "brightness(1.8) blur(0px)",
+            duration: 1,
+            ease: "power2.out"
+          }, 
+          i * 0.8 // stagger start time
+        ).to(num, {
+          opacity: 0.015, // Return to ghost state
           duration: 1.5,
-          stagger: 0.8,
-          ease: "power2.out"
-        }
-      ).to(".framework-number", {
-        opacity: 0.015, // Extremely discreet settled state
-        duration: 3,
-        ease: "power2.inOut",
-        delay: -1.2
+          ease: "power2.inOut"
+        }, ">-0.4"); // Start fade out before flash ends for softness
       });
 
       gsap.from(".phil-elem", {
