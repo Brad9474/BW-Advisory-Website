@@ -125,11 +125,13 @@ const NoiseOverlay = () => (
 const TransparentShield = () => {
   const canvasRef = useRef(null);
   const [rotationY, setRotationY] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
   const isDragging = useRef(false);
   const lastX = useRef(0);
 
   const handlePointerDown = (e) => {
     isDragging.current = true;
+    setIsAnimating(false);
     lastX.current = e.clientX;
     if (canvasRef.current) canvasRef.current.style.cursor = 'grabbing';
     e.target.setPointerCapture(e.pointerId);
@@ -138,15 +140,19 @@ const TransparentShield = () => {
   const handlePointerMove = (e) => {
     if (!isDragging.current) return;
     const deltaX = e.clientX - lastX.current;
-    // The faster the mouse moves (deltaX), the more the shield spins
+    
     setRotationY(prev => prev + deltaX * 1.5);
     lastX.current = e.clientX;
   };
 
   const handlePointerUp = (e) => {
     isDragging.current = false;
+    setIsAnimating(true);
     if (canvasRef.current) canvasRef.current.style.cursor = 'grab';
     e.target.releasePointerCapture(e.pointerId);
+    
+    // Smoothly snap to exactly the nearest 360-degree perfect resting position
+    setRotationY(prev => Math.round(prev / 360) * 360);
   };
 
   useEffect(() => {
@@ -220,7 +226,11 @@ const TransparentShield = () => {
     <canvas 
       ref={canvasRef} 
       className="shield-elem w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(27,110,194,0.6)] touch-none" 
-      style={{ transform: `rotateY(${rotationY}deg)`, cursor: 'grab' }}
+      style={{ 
+        transform: `rotateY(${rotationY}deg)`, 
+        cursor: 'grab',
+        transition: isAnimating ? 'transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)' : 'none'
+      }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
@@ -638,9 +648,10 @@ const App = () => {
           </div>
 
           {/* Framework Section CTA */}
-          <div className="mt-16 flex justify-center w-full relative z-10">
-            <a href="https://calendar.app.google/4aocn1oE9LZWHc5b9" target="_blank" rel="noreferrer" className="group relative bg-[#1B6EC2] hover:bg-[#155A9E] px-10 py-4 rounded-md text-surface font-semibold text-sm hover:shadow-[0_0_20px_rgba(27,110,194,0.4)] transition-all duration-300 tracking-[0.1em] uppercase">
+          <div className="mt-16 flex justify-center w-full relative z-10 px-6">
+            <a href="https://calendly.com/brad-bwadvisorysolutions/30min" target="_blank" rel="noreferrer" className="group relative overflow-hidden bg-accent px-12 py-4 md:py-5 rounded-full text-white font-bold text-sm md:text-base hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase text-center flex items-center justify-center gap-4 shadow-[0_0_25px_rgba(27,110,194,0.5)] hover:shadow-[0_0_40px_rgba(27,110,194,0.8)] ring-1 ring-accent/50 group-hover:ring-accent w-full md:w-auto">
               Schedule a 30 minute consultation
+              <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </a>
           </div>
 
