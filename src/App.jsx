@@ -140,7 +140,7 @@ const TransparentShield = () => {
   const handlePointerMove = (e) => {
     if (!isDragging.current) return;
     const deltaX = e.clientX - lastX.current;
-    
+
     setRotationY(prev => prev + deltaX * 1.5);
     lastX.current = e.clientX;
   };
@@ -150,7 +150,7 @@ const TransparentShield = () => {
     setIsAnimating(true);
     if (canvasRef.current) canvasRef.current.style.cursor = 'grab';
     e.target.releasePointerCapture(e.pointerId);
-    
+
     // Smoothly snap to exactly the nearest 360-degree perfect resting position
     setRotationY(prev => Math.round(prev / 360) * 360);
   };
@@ -223,11 +223,11 @@ const TransparentShield = () => {
   }, []);
 
   return (
-    <canvas 
-      ref={canvasRef} 
-      className="shield-elem w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(27,110,194,0.6)] touch-none" 
-      style={{ 
-        transform: `rotateY(${rotationY}deg)`, 
+    <canvas
+      ref={canvasRef}
+      className="shield-elem w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(27,110,194,0.6)] touch-none"
+      style={{
+        transform: `rotateY(${rotationY}deg)`,
         cursor: 'grab',
         transition: isAnimating ? 'transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)' : 'none'
       }}
@@ -294,7 +294,7 @@ const Navbar = () => {
 
         {/* Right Side: Hamburger Toggle (Mobile Only) */}
         <div className="lg:w-[300px] flex justify-end items-center">
-          <button 
+          <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="lg:hidden relative z-50 p-2 text-surface hover:text-accent transition-colors"
             aria-label="Toggle Menu"
@@ -315,9 +315,9 @@ const Navbar = () => {
         <div className={`fixed inset-0 bg-[#07132B]/95 backdrop-blur-2xl transition-all duration-500 lg:hidden ${isMenuOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-full pointer-events-none"}`}>
           <div className="h-full flex flex-col items-center justify-center gap-10 p-8 pt-24 text-center">
             {navLinks.map((link, i) => (
-              <a 
-                key={link.name} 
-                href={link.href} 
+              <a
+                key={link.name}
+                href={link.href}
                 onClick={() => setIsMenuOpen(false)}
                 className="text-3xl font-sans font-bold text-surface tracking-widest uppercase hover:text-accent transition-colors block"
                 style={{ transitionDelay: `${i * 100}ms` }}
@@ -326,7 +326,7 @@ const Navbar = () => {
               </a>
             ))}
             <div className="mt-10 pt-10 border-t border-white/10 w-full max-w-xs">
-              <a 
+              <a
                 href="https://calendly.com/brad-bwadvisorysolutions/30min"
                 target="_blank"
                 rel="noreferrer"
@@ -537,9 +537,9 @@ const App = () => {
 
       // We animate each number individually to ensure they don't 'hold' brightness
       gsap.utils.toArray('.framework-number').forEach((num, i) => {
-        frameworkTl.fromTo(num, 
-          { 
-            opacity: 0, 
+        frameworkTl.fromTo(num,
+          {
+            opacity: 0,
             y: 20,
             scale: 0.98,
             filter: "brightness(1) blur(4px)"
@@ -551,7 +551,7 @@ const App = () => {
             filter: "brightness(1.8) blur(0px)",
             duration: 1,
             ease: "power2.out"
-          }, 
+          },
           i * 0.8 // stagger start time
         ).to(num, {
           opacity: 0.015, // Return to ghost state
@@ -768,7 +768,7 @@ const App = () => {
                 Thirty years in law enforcement command—leading operations, integrating technology at scale, navigating policy and legislative frameworks under real budget and compliance pressure. I've since applied that same rigour to the private sector, delivering measurable outcomes across complex organisational networks.
               </p>
               <p>
-                I work with you to identify where your systems, processes, and workflows are breaking down. Together we map the gaps and close them within the constraints that actually matter to your operation. I bring my network to connect you with the right technology and capability.
+                I will work with you to identify where your systems, processes, and workflows are breaking down. Together we map the gaps and close them within the constraints that actually matter to your operation. I bring my network to connect you with the right technology and capability.
               </p>
               <p className="text-primary font-medium text-xl pt-3 border-l-2 border-accent pl-6">
                 The gap between intent and execution is where organisations lose value. I find it and close it.
@@ -785,14 +785,14 @@ const App = () => {
               ].map((skill, index) => (
                 <div key={index} className="group relative py-4 border-b border-silver/20 flex items-center justify-between overflow-hidden cursor-default transition-all duration-500">
                   <div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-transparent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out pointer-events-none"></div>
-                  
+
                   <div className="flex items-center gap-6 relative z-10 w-full transform group-hover:translate-x-3 transition-transform duration-500 ease-out">
                     <div className="w-1.5 h-1.5 bg-primary/20 group-hover:bg-accent rotate-45 transform group-hover:rotate-90 group-hover:scale-125 transition-all duration-500 ease-out flex-shrink-0"></div>
                     <span className="font-semibold text-primary text-[13px] md:text-[15px] tracking-[0.15em] group-hover:tracking-[0.18em] uppercase group-hover:text-accent transition-all duration-500 pr-4">
                       {skill}
                     </span>
                   </div>
-                  
+
                   <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-[1px] bg-accent group-hover:w-16 md:group-hover:w-28 transition-all duration-700 ease-out z-10 opacity-0 group-hover:opacity-100"></div>
                 </div>
               ))}
@@ -829,16 +829,16 @@ const App = () => {
             </h2>
             <p className="text-[16px] text-textDark/80 leading-[1.8] max-w-[380px] font-light">
               Thirty minutes is enough to understand your challenge and whether
-              I'm the right person to help. No obligation, no proposal until
+              I am the right person to help. No obligation, no proposal until
               we've talked.
             </p>
-            
+
             <div className="w-8 h-[2px] bg-accent/70" />
 
             <div className="flex flex-col gap-4 pt-4">
               {[
                 { prefix: 'E //', href: 'mailto:brad@bwadvisorysolutions.com.au', label: 'brad@bwadvisorysolutions.com.au' },
-                { prefix: 'M //', href: 'tel:+61407779474',                       label: '+61 407 779 474' },
+                { prefix: 'M //', href: 'tel:+61407779474', label: '+61 407 779 474' },
                 { prefix: 'LI //', href: 'https://linkedin.com/in/bradwarburton', label: 'linkedin.com/in/bradwarburton', external: true },
               ].map(({ prefix, href, label, external }) => (
                 <div key={prefix} className="flex items-center gap-4 group">
