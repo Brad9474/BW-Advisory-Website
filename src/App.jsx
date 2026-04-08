@@ -693,9 +693,15 @@ const App = () => {
 
       {/* 3) THE MANIFESTO */}
       <section id="manifesto" ref={philRef} className="relative py-40 w-full bg-primary z-10 border-y border-silver/5">
-        <div className="relative z-10 w-full max-w-5xl mx-auto px-6 flex flex-col items-center justify-center text-center">
-          <h2 className="phil-elem font-light text-4xl md:text-[3rem] text-silver/80 leading-tight tracking-wide">
-            Strategic vision without capability is a liability.<br />We engineer <span className="text-surface font-serif italic text-accent font-normal">genuine operational reality.</span>
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 flex flex-col items-center justify-center text-center">
+          <p className="phil-elem font-bold text-sm md:text-base text-silver/30 tracking-[0.3em] uppercase mb-8">
+            The Reality Gap
+          </p>
+          <h2 className="phil-elem font-semibold text-3xl md:text-5xl text-silver/60 leading-tight tracking-tight mb-6">
+            Strategic vision without capability is a liability.
+          </h2>
+          <h2 className="phil-elem font-light text-5xl md:text-7xl lg:text-[6rem] text-surface leading-[1.1] tracking-tight">
+            We engineer <br /><span className="text-accent font-serif italic font-normal drop-shadow-[0_0_20px_rgba(27,110,194,0.3)]">genuine operational reality.</span>
           </h2>
         </div>
       </section>
