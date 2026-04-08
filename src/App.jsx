@@ -636,7 +636,7 @@ const App = () => {
               <p className="text-accent font-bold tracking-[0.2em] text-xs uppercase mt-2">Principal Advisor</p>
             </div>
           </div>
-          <div className="lg:col-span-7 order-2 space-y-12">
+          <div className="lg:col-span-7 order-2 space-y-8">
             <div>
               <h2 className="font-light text-4xl lg:text-[3.2rem] text-primary leading-tight tracking-tight">
                 <span className="font-semibold block mb-2">Law enforcement precision.</span>
@@ -644,19 +644,19 @@ const App = () => {
               </h2>
             </div>
 
-            <div className="space-y-6 text-textDark/80 leading-relaxed text-lg font-light">
+            <div className="space-y-5 text-textDark/80 leading-relaxed text-lg font-light">
               <p>
                 Thirty years in law enforcement command—leading operations, integrating technology at scale, navigating policy and legislative frameworks under real budget and compliance pressure. I've since applied that same rigour to the private sector, delivering measurable outcomes across complex organisational networks.
               </p>
               <p>
                 I work with you to identify where your systems, processes, and workflows are breaking down. Together we map the gaps and close them within the constraints that actually matter to your operation. I bring my network to connect you with the right technology and capability.
               </p>
-              <p className="text-primary font-medium text-xl pt-4 border-l-2 border-accent pl-6">
+              <p className="text-primary font-medium text-xl pt-3 border-l-2 border-accent pl-6">
                 The gap between intent and execution is where organisations lose value. I find it and close it.
               </p>
             </div>
 
-            <div className="flex flex-col gap-0 pt-8 border-t border-silver/20 mt-8">
+            <div className="flex flex-col gap-0 pt-6 border-t border-silver/20 mt-2">
               {[
                 "Systems & Process Optimisation",
                 "Technology Integration & Capability Deployment",
@@ -664,7 +664,7 @@ const App = () => {
                 "Strategic Advisory & Programme Leadership",
                 "Closing the Intent-Execution Gap"
               ].map((skill, index) => (
-                <div key={index} className="group relative py-5 border-b border-silver/20 flex items-center justify-between overflow-hidden cursor-default transition-all duration-500">
+                <div key={index} className="group relative py-4 border-b border-silver/20 flex items-center justify-between overflow-hidden cursor-default transition-all duration-500">
                   <div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-transparent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out pointer-events-none"></div>
                   
                   <div className="flex items-center gap-6 relative z-10 w-full transform group-hover:translate-x-3 transition-transform duration-500 ease-out">
@@ -679,7 +679,7 @@ const App = () => {
               ))}
             </div>
 
-            <div className="pt-10">
+            <div className="pt-6">
               <a href="https://calendly.com/brad-bwadvisorysolutions/30min" target="_blank" rel="noreferrer" className="inline-block group relative overflow-hidden bg-[#0A1C42]/80 backdrop-blur-xl border border-[#1B6EC2]/50 px-10 py-4 rounded-full text-surface font-semibold text-sm hover:border-[#1B6EC2] hover:bg-[#1B6EC2]/20 transition-all duration-500 tracking-[0.2em] uppercase flex items-center justify-center gap-4 shadow-[0_0_20px_rgba(27,110,194,0.15)] hover:shadow-[0_0_30px_rgba(27,110,194,0.4)] w-max">
                 Schedule a 30 minute consultation
                 <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
