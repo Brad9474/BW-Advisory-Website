@@ -486,6 +486,27 @@ const App = () => {
         ease: "power2.out"
       });
 
+      // Sequential light up for Framework numbers 01, 02, 03
+      gsap.fromTo(".framework-number", 
+        { 
+          opacity: 0, 
+          scale: 0.8,
+          filter: "brightness(1) blur(10px)"
+        },
+        {
+          scrollTrigger: {
+            trigger: "#framework",
+            start: "top 60%",
+          },
+          opacity: 0.15, // Light up state
+          scale: 1,
+          filter: "brightness(1.5) blur(0px)",
+          duration: 1.5,
+          stagger: 0.5,
+          ease: "expo.out"
+        }
+      );
+
       gsap.from(".phil-elem", {
         scrollTrigger: {
           trigger: philRef.current,
@@ -617,7 +638,7 @@ const App = () => {
 
             {/* Col 1 */}
             <div className="relative p-10 xl:p-14 border-b lg:border-b-0 lg:border-r border-silver/10 flex flex-col group overflow-hidden">
-              <div className="absolute -top-6 right-2 text-[12rem] leading-none font-light text-surface opacity-[0.02] select-none transition-transform duration-700 group-hover:scale-105">01</div>
+              <div className="framework-number absolute -top-6 right-2 text-[12rem] leading-none font-light text-surface opacity-[0.02] select-none transition-transform duration-700 group-hover:scale-105">01</div>
               <h3 className="font-light text-4xl lg:text-5xl text-surface mb-6 relative z-10 mt-6">Identify.</h3>
               <p className="text-[#1B6EC2] tracking-[0.2em] text-sm md:text-base font-bold uppercase mb-8 relative z-10 drop-shadow-[0_0_10px_rgba(27,110,194,0.3)]">Understand the problem</p>
               <p className="text-surface/80 leading-relaxed font-light relative z-10 text-[15px] lg:text-lg flex-grow">
@@ -627,7 +648,7 @@ const App = () => {
 
             {/* Col 2 */}
             <div className="relative p-10 xl:p-14 border-b lg:border-b-0 lg:border-r border-silver/10 flex flex-col group overflow-hidden">
-              <div className="absolute -top-6 right-2 text-[12rem] leading-none font-light text-surface opacity-[0.02] select-none transition-transform duration-700 group-hover:scale-105">02</div>
+              <div className="framework-number absolute -top-6 right-2 text-[12rem] leading-none font-light text-surface opacity-[0.02] select-none transition-transform duration-700 group-hover:scale-105">02</div>
               <h3 className="font-light text-4xl lg:text-5xl text-surface mb-6 relative z-10 mt-6">Strategise.</h3>
               <p className="text-[#1B6EC2] tracking-[0.2em] text-sm md:text-base font-bold uppercase mb-8 relative z-10 drop-shadow-[0_0_10px_rgba(27,110,194,0.3)]">Design the solution</p>
               <p className="text-surface/80 leading-relaxed font-light relative z-10 text-[15px] lg:text-lg flex-grow">
@@ -637,7 +658,7 @@ const App = () => {
 
             {/* Col 3 */}
             <div className="relative p-10 xl:p-14 flex flex-col group overflow-hidden">
-              <div className="absolute -top-6 right-2 text-[12rem] leading-none font-light text-surface opacity-[0.02] select-none transition-transform duration-700 group-hover:scale-105">03</div>
+              <div className="framework-number absolute -top-6 right-2 text-[12rem] leading-none font-light text-surface opacity-[0.02] select-none transition-transform duration-700 group-hover:scale-105">03</div>
               <h3 className="font-light text-4xl lg:text-5xl text-surface mb-6 relative z-10 mt-6">Operationalise.</h3>
               <p className="text-[#1B6EC2] tracking-[0.2em] text-sm md:text-base font-bold uppercase mb-8 relative z-10 drop-shadow-[0_0_10px_rgba(27,110,194,0.3)]">Apply the treatment</p>
               <p className="text-surface/80 leading-relaxed font-light relative z-10 text-[15px] lg:text-lg flex-grow">
