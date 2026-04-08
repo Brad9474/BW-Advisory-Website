@@ -654,7 +654,7 @@ const App = () => {
               <h3 className="font-light text-4xl lg:text-5xl text-surface mb-6 relative z-10 mt-6">Identify.</h3>
               <p className="text-[#1B6EC2] tracking-[0.2em] text-sm md:text-base font-bold uppercase mb-8 relative z-10 drop-shadow-[0_0_10px_rgba(27,110,194,0.3)]">Understand the problem</p>
               <p className="text-surface/80 leading-relaxed font-light relative z-10 text-[15px] lg:text-lg flex-grow">
-                We engage directly with your environment. Through structured conversations and active listening, we surface the real problem — not the symptom. Strategic intent, operational gaps, and hidden friction all get named before any work begins.
+                We engage directly with your strategic and operational environment through structured conversation. This surfaces what matters: your true strategic intent, operational gaps, and the hidden friction that undermines execution — before solutions begin.
               </p>
             </div>
 
@@ -664,7 +664,7 @@ const App = () => {
               <h3 className="font-light text-4xl lg:text-5xl text-surface mb-6 relative z-10 mt-6">Strategise.</h3>
               <p className="text-[#1B6EC2] tracking-[0.2em] text-sm md:text-base font-bold uppercase mb-8 relative z-10 drop-shadow-[0_0_10px_rgba(27,110,194,0.3)]">Design the solution</p>
               <p className="text-surface/80 leading-relaxed font-light relative z-10 text-[15px] lg:text-lg flex-grow">
-                We diagnose root cause, not surface symptoms. Drawing on 30 years of operational experience across law enforcement and private sector, we build a strategy that connects your intent to a realistic, executable plan — with clear ownership at every level.
+                We diagnose the root cause, not surface symptoms. Backed by 30 years of operational experience across law enforcement and the private sector, we build executable strategies that close the gap between intent and reality — with clear ownership at every level.
               </p>
             </div>
 
@@ -674,7 +674,7 @@ const App = () => {
               <h3 className="font-light text-4xl lg:text-5xl text-surface mb-6 relative z-10 mt-6">Operationalise.</h3>
               <p className="text-[#1B6EC2] tracking-[0.2em] text-sm md:text-base font-bold uppercase mb-8 relative z-10 drop-shadow-[0_0_10px_rgba(27,110,194,0.3)]">Apply the treatment</p>
               <p className="text-surface/80 leading-relaxed font-light relative z-10 text-[15px] lg:text-lg flex-grow">
-                We deploy the solution and stay accountable to the outcome. Strategy without execution is theory. We embed the change, align the people, and measure what matters — until the gap between your intent and your frontline reality is closed.
+                We develop aligned solutions and stay accountable to outcomes. Strategy without execution is theory. We embed the change, align the people, and measure what matters — until the gap between your intent and frontline reality closes.
               </p>
             </div>
 
