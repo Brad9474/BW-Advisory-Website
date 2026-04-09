@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bwadvisorysolutions.com/sitemap.xml
