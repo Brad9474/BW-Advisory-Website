@@ -787,7 +787,7 @@ const App = () => {
 
             <div className="space-y-5 text-textDark/80 leading-relaxed text-lg font-light">
               <p>
-                Thirty years in law enforcement command — leading operations, integrating technology at scale, navigating policy and legislative frameworks under real budget and compliance pressure. That includes designing and delivering a digital border screening program that processed over one million traveller applications, establishing real-time crime centre capability, and leading complex, sensitive program delivery from conception through to operational deployment.
+                Thirty years in law enforcement command — leading operations, integrating technology at scale, navigating policy and legislative frameworks under real budget and compliance pressure. That includes designing and delivering a digital border screening program that processed over one million traveller applications, establishing real-time crime centre capability, and leading complex, high-governance program delivery from conception through to operational deployment.
               </p>
               <p>
                 I've since applied that same rigour to the private sector — establishing law enforcement presence across all Australian states and territories, influencing successful operations at a national level, and delivering measurable outcomes across complex operating environments.
