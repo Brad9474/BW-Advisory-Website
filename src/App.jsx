@@ -266,7 +266,7 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'About Us', href: '#about' },
+    { name: 'About', href: '#about' },
     { name: 'Framework', href: '#framework' },
     { name: 'The Engagement', href: '#protocol' },
     { name: 'Contact Us', href: '#contact' },
@@ -787,7 +787,10 @@ const App = () => {
 
             <div className="space-y-5 text-textDark/80 leading-relaxed text-lg font-light">
               <p>
-                Thirty years in law enforcement command—leading operations, integrating technology at scale, navigating policy and legislative frameworks under real budget and compliance pressure. I've since applied that same rigour to the private sector, delivering measurable outcomes across complex operating environments.
+                Thirty years in law enforcement command — leading operations, integrating technology at scale, navigating policy and legislative frameworks under real budget and compliance pressure. That includes designing and delivering a digital border screening program that processed over one million traveller applications, establishing real-time crime centre capability, and leading complex, sensitive program delivery from conception through to operational deployment.
+              </p>
+              <p>
+                I've since applied that same rigour to the private sector — establishing law enforcement presence across all Australian states and territories, influencing successful operations at a national level, and delivering measurable outcomes across complex operating environments.
               </p>
               <p>
                 I work with you to identify where your systems, processes, and workflows are breaking down. Together we map the gaps and close them within the constraints that actually matter to your operation. I bring my professional networks to connect you with the right technology partners and capability.
@@ -916,14 +919,14 @@ const App = () => {
           <div className="flex flex-col items-center md:items-start text-center md:text-left w-full md:w-auto overflow-hidden">
             <img src="/BW_Advisory_Solutions_Logo.png" alt="BW Advisory Logo" className="h-20 mb-6 object-contain" />
             <p className="footer-tagline font-sans text-xl md:text-2xl font-light text-surface tracking-wide drop-shadow-md whitespace-nowrap">
-              Bridging the gap between your strategic vision and frontline reality.
+              Bridging the gap between your strategic intent and frontline reality.
             </p>
           </div>
 
           <div className="flex flex-col gap-4 font-sans font-medium text-xs uppercase tracking-[0.2em] text-center md:text-right">
             <a href="#framework" className="text-silver/70 hover:text-accent transition-colors">Framework</a>
             <a href="#protocol" className="text-silver/70 hover:text-accent transition-colors">The Engagement</a>
-            <a href="#about" className="text-silver/70 hover:text-accent transition-colors">About Us</a>
+            <a href="#about" className="text-silver/70 hover:text-accent transition-colors">About</a>
           </div>
 
         </div>
