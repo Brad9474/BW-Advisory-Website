@@ -264,7 +264,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'About Us', href: '#about' },
-    { name: 'Our Framework', href: '#framework' },
+    { name: 'Framework', href: '#framework' },
     { name: 'How We Work', href: '#protocol' },
     { name: 'Contact Us', href: '#contact' },
   ];
@@ -656,7 +656,7 @@ const App = () => {
           </h1>
 
           {/* Subtext - sleek font but stands out heavily */}
-          <p className="hero-elem text-surface mx-auto text-2xl lg:text-[1.6rem] leading-relaxed mt-10 font-medium drop-shadow-[0_0_15px_rgba(27,110,194,0.5)] max-w-4xl tracking-wide">
+          <p className="hero-elem text-surface mx-auto text-xl lg:text-[1.45rem] leading-relaxed mt-10 font-light drop-shadow-[0_0_15px_rgba(27,110,194,0.5)] tracking-wide lg:whitespace-nowrap">
             I map where your strategy breaks down and build the path from intent to frontline reality.
           </p>
 
@@ -668,6 +668,13 @@ const App = () => {
             </a>
           </div>
         </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 animate-bounce opacity-40">
+          <svg className="w-6 h-6 text-silver" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
       </section>
 
       {/* PULL QUOTE */}
@@ -675,7 +682,7 @@ const App = () => {
         <div className="max-w-3xl mx-auto px-6 text-center">
           <div className="w-10 h-[2px] bg-accent mx-auto mb-7" />
           <p className="text-2xl md:text-[2rem] lg:text-[2.4rem] text-surface/90 font-light leading-relaxed tracking-wide">
-            The gap between intent and execution is where organisations lose value.{" "}
+            The gap between intent and execution is where organisations lose value.<br />
             <span className="font-serif italic font-normal text-accent">I find it and close it.</span>
           </p>
           <div className="w-10 h-[2px] bg-accent mx-auto mt-7" />
@@ -683,7 +690,7 @@ const App = () => {
       </section>
 
       {/* 2) OUR FRAMEWORK */}
-      <section id="framework" className="py-32 md:py-40 w-full relative z-10 bg-[#061124] border-t border-silver/5">
+      <section id="framework" className="py-20 md:py-28 w-full relative z-10 bg-[#061124] border-t border-silver/5">
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
 
           <div className="mb-20 max-w-[1200px]">
@@ -913,7 +920,7 @@ const App = () => {
           </div>
 
           <div className="flex flex-col gap-4 font-sans font-medium text-xs uppercase tracking-[0.2em] text-center md:text-right">
-            <a href="#framework" className="text-silver/70 hover:text-accent transition-colors">Our Framework</a>
+            <a href="#framework" className="text-silver/70 hover:text-accent transition-colors">Framework</a>
             <a href="#protocol" className="text-silver/70 hover:text-accent transition-colors">How We Work With You</a>
             <a href="#about" className="text-silver/70 hover:text-accent transition-colors">About Us</a>
           </div>
