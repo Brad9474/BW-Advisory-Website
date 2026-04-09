@@ -671,12 +671,14 @@ const App = () => {
       </section>
 
       {/* PULL QUOTE */}
-      <section className="py-24 w-full relative z-10 bg-[#061124] border-t border-silver/5">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-2xl md:text-[1.9rem] lg:text-[2.3rem] text-surface/90 font-light leading-relaxed tracking-wide">
+      <section className="py-14 w-full relative z-10 bg-[#061124] border-t border-silver/5">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <div className="w-10 h-[2px] bg-accent mx-auto mb-7" />
+          <p className="text-2xl md:text-[2rem] lg:text-[2.4rem] text-surface/90 font-light leading-relaxed tracking-wide">
             The gap between intent and execution is where organisations lose value.{" "}
-            <span className="text-accent font-medium">I find it and close it.</span>
+            <span className="font-serif italic font-normal text-accent">I find it and close it.</span>
           </p>
+          <div className="w-10 h-[2px] bg-accent mx-auto mt-7" />
         </div>
       </section>
 
@@ -685,9 +687,9 @@ const App = () => {
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
 
           <div className="mb-20 max-w-[1200px]">
-            <p className="text-accent font-semibold tracking-[0.2em] uppercase text-lg mb-4">My Framework</p>
+            <p className="text-accent font-semibold tracking-[0.2em] uppercase text-lg mb-4">Framework</p>
             <div className="pl-6 border-l-2 border-accent">
-              <h2 className="font-light text-5xl md:text-6xl text-surface tracking-tight mb-8 mt-2">How I solve the problem.</h2>
+              <h2 className="font-light text-5xl md:text-6xl text-surface tracking-tight mb-8 mt-2">The method.</h2>
               <p className="text-2xl text-surface font-medium leading-relaxed drop-shadow-md lg:whitespace-nowrap">
                 Every engagement follows the same disciplined path — from understanding your reality to closing the gap.
               </p>
