@@ -65,9 +65,12 @@ const HowWeWorkTogether = () => {
   }, []);
 
   return (
-    <section id="protocol" className="relative w-full pb-40 bg-primary z-10 pt-10 overflow-hidden">
-      <div className="text-center px-6 max-w-6xl mx-auto mb-24">
-        <h2 className="font-light text-4xl lg:text-5xl text-surface tracking-wide border-b border-silver/10 pb-6 mt-2 inline-block">How we will work together.</h2>
+    <section id="protocol" className="relative w-full pb-40 bg-primary z-10 pt-20 overflow-hidden">
+      <div className="px-6 max-w-6xl mx-auto mb-24">
+        <p className="text-accent font-semibold tracking-[0.2em] uppercase text-lg mb-4">The Engagement</p>
+        <div className="pl-6 border-l-2 border-accent">
+          <h2 className="font-light text-5xl lg:text-6xl text-surface tracking-tight mt-2">How we will work together.</h2>
+        </div>
       </div>
 
       <div className="timeline-container max-w-5xl mx-auto px-6 relative">
@@ -265,7 +268,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'About Us', href: '#about' },
     { name: 'Framework', href: '#framework' },
-    { name: 'How I Work', href: '#protocol' },
+    { name: 'The Engagement', href: '#protocol' },
     { name: 'Contact Us', href: '#contact' },
   ];
 
@@ -919,7 +922,7 @@ const App = () => {
 
           <div className="flex flex-col gap-4 font-sans font-medium text-xs uppercase tracking-[0.2em] text-center md:text-right">
             <a href="#framework" className="text-silver/70 hover:text-accent transition-colors">Framework</a>
-            <a href="#protocol" className="text-silver/70 hover:text-accent transition-colors">How I Work With You</a>
+            <a href="#protocol" className="text-silver/70 hover:text-accent transition-colors">The Engagement</a>
             <a href="#about" className="text-silver/70 hover:text-accent transition-colors">About Us</a>
           </div>
 
