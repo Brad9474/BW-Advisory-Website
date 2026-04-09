@@ -5,27 +5,27 @@ const phases = [
   {
     step: "01",
     title: "Engage.",
-    desc: "Every engagement starts with strategic intent. We sit down, listen, and establish what you're trying to achieve — and the distance between where you are and where you need to be."
+    desc: "Every engagement starts with strategic intent. I sit down, listen, and establish what you're trying to achieve — and the distance between where you are and where you need to be."
   },
   {
     step: "02",
     title: "Scope.",
-    desc: "We define the boundaries of the work before we start. What we examine, what we don't, and what a successful outcome looks like — so there are no surprises on either side."
+    desc: "I define the boundaries of the work before I start. What I examine, what I don't, and what a successful outcome looks like — so neither side faces surprises."
   },
   {
     step: "03",
     title: "Diagnose.",
-    desc: "We go beneath the surface. The friction points, blind spots, and operational realities that don't appear in strategy documents get identified and named."
+    desc: "I go beneath the surface. I identify and name the friction points, blind spots, and operational realities that don't appear in strategy documents."
   },
   {
     step: "04",
     title: "Plan & Align.",
-    desc: "We build the bridge between strategic intent and frontline reality. A clear roadmap with shared ownership of outcomes — from the boardroom to the ground."
+    desc: "I build the bridge between strategic intent and frontline reality. A clear roadmap with shared ownership of outcomes — from the boardroom to the ground."
   },
   {
     step: "05",
     title: "Operationalise.",
-    desc: "This is where strategy becomes reality. We stay accountable to the outcome — embedding the change, aligning the people, and measuring what matters until the gap between intent and frontline performance is closed."
+    desc: "Execution is the work. I stay accountable to the outcome — embedding the change, aligning the people, and measuring what matters until the gap between intent and frontline performance is closed."
   }
 ];
 
@@ -657,7 +657,7 @@ const App = () => {
 
           {/* Subtext - sleek font but stands out heavily */}
           <p className="hero-elem text-surface mx-auto text-2xl lg:text-[1.6rem] leading-relaxed mt-10 font-medium drop-shadow-[0_0_15px_rgba(27,110,194,0.5)] max-w-4xl tracking-wide">
-            We bridge the gap between your strategic vision and frontline reality by identifying gaps and developing a capability roadmap.
+            I map where your strategy breaks down and build the path from intent to frontline reality.
           </p>
 
           {/* Bold CTA */}
@@ -670,16 +670,26 @@ const App = () => {
         </div>
       </section>
 
+      {/* PULL QUOTE */}
+      <section className="py-24 w-full relative z-10 bg-[#061124] border-t border-silver/5">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <p className="text-2xl md:text-[1.9rem] lg:text-[2.3rem] text-surface/90 font-light leading-relaxed tracking-wide">
+            The gap between intent and execution is where organisations lose value.{" "}
+            <span className="text-accent font-medium">I find it and close it.</span>
+          </p>
+        </div>
+      </section>
+
       {/* 2) OUR FRAMEWORK */}
       <section id="framework" className="py-32 md:py-40 w-full relative z-10 bg-[#061124] border-t border-silver/5">
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
 
           <div className="mb-20 max-w-[1200px]">
-            <p className="text-accent font-semibold tracking-[0.2em] uppercase text-lg mb-4">Our Framework</p>
+            <p className="text-accent font-semibold tracking-[0.2em] uppercase text-lg mb-4">My Framework</p>
             <div className="pl-6 border-l-2 border-accent">
-              <h2 className="font-light text-5xl md:text-6xl text-surface tracking-tight mb-8 mt-2">How we solve the problem.</h2>
+              <h2 className="font-light text-5xl md:text-6xl text-surface tracking-tight mb-8 mt-2">How I solve the problem.</h2>
               <p className="text-2xl text-surface font-medium leading-relaxed drop-shadow-md lg:whitespace-nowrap">
-                Every contact follows the same disciplined path — from understanding your reality to delivering positive change.
+                Every engagement follows the same disciplined path — from understanding your reality to closing the gap.
               </p>
             </div>
           </div>
@@ -695,7 +705,7 @@ const App = () => {
               <h3 className="font-light text-4xl lg:text-5xl text-surface mb-6 relative z-10 mt-6">Identify.</h3>
               <p className="text-[#1B6EC2] tracking-[0.2em] text-sm md:text-base font-bold uppercase mb-8 relative z-10 drop-shadow-[0_0_10px_rgba(27,110,194,0.3)]">Understand the problem</p>
               <p className="text-surface/80 leading-relaxed font-light relative z-10 text-[15px] lg:text-lg flex-grow">
-                We engage directly with your strategic and operational environment through structured conversation. This surfaces what matters: your true strategic intent, operational gaps, and the hidden friction that undermines execution — before solutions begin.
+                I engage directly with your strategic and operational environment through structured conversation. This surfaces what matters: your true strategic intent, operational gaps, and the hidden friction that undermines execution — before solutions begin.
               </p>
             </div>
 
@@ -705,7 +715,7 @@ const App = () => {
               <h3 className="font-light text-4xl lg:text-5xl text-surface mb-6 relative z-10 mt-6">Strategise.</h3>
               <p className="text-[#1B6EC2] tracking-[0.2em] text-sm md:text-base font-bold uppercase mb-8 relative z-10 drop-shadow-[0_0_10px_rgba(27,110,194,0.3)]">Design the solution</p>
               <p className="text-surface/80 leading-relaxed font-light relative z-10 text-[15px] lg:text-lg flex-grow">
-                We diagnose the root cause, not surface symptoms. Backed by 30 years of operational experience across law enforcement and the private sector, we build executable strategies that close the gap between intent and reality — with clear ownership at every level.
+                I diagnose the root cause, not surface symptoms. Drawing on 30 years of operational experience across law enforcement and the private sector, I build executable strategies that close the gap between intent and reality — with clear ownership at every level.
               </p>
             </div>
 
@@ -715,7 +725,7 @@ const App = () => {
               <h3 className="font-light text-4xl lg:text-5xl text-surface mb-6 relative z-10 mt-6">Operationalise.</h3>
               <p className="text-[#1B6EC2] tracking-[0.2em] text-sm md:text-base font-bold uppercase mb-8 relative z-10 drop-shadow-[0_0_10px_rgba(27,110,194,0.3)]">Apply the treatment</p>
               <p className="text-surface/80 leading-relaxed font-light relative z-10 text-[15px] lg:text-lg flex-grow">
-                We develop aligned solutions and stay accountable to outcomes. Strategy without execution is theory. We embed the change, align the people, and measure what matters — until the gap between your intent and frontline reality closes.
+                I stay accountable to outcomes. Strategy without execution is theory. I embed the change, align the people, and measure what matters — until the gap between your intent and frontline reality closes.
               </p>
             </div>
 
@@ -736,7 +746,7 @@ const App = () => {
       <section id="manifesto" ref={philRef} className="relative py-40 w-full bg-primary z-10 border-y border-silver/5">
         <div className="relative z-10 w-full max-w-5xl mx-auto px-6 flex flex-col items-center justify-center text-center">
           <h2 className="phil-elem font-light text-4xl md:text-[3rem] text-silver/80 leading-tight tracking-wide">
-            Strategic vision without capability is a liability.<br />We engineer <span className="text-surface font-serif italic font-normal">genuine operational reality.</span>
+            Strategic vision without capability is a liability.<br />I engineer <span className="text-surface font-serif italic font-normal">genuine operational reality.</span>
           </h2>
         </div>
       </section>
@@ -765,13 +775,10 @@ const App = () => {
 
             <div className="space-y-5 text-textDark/80 leading-relaxed text-lg font-light">
               <p>
-                Thirty years in law enforcement command—leading operations, integrating technology at scale, navigating policy and legislative frameworks under real budget and compliance pressure. I've since applied that same rigour to the private sector, delivering measurable outcomes across complex organisational networks.
+                Thirty years in law enforcement command—leading operations, integrating technology at scale, navigating policy and legislative frameworks under real budget and compliance pressure. I've since applied that same rigour to the private sector, delivering measurable outcomes across complex operating environments.
               </p>
               <p>
-                I will work with you to identify where your systems, processes, and workflows are breaking down. Together we map the gaps and close them within the constraints that actually matter to your operation. I bring my network to connect you with the right technology and capability.
-              </p>
-              <p className="text-primary font-medium text-xl pt-3 border-l-2 border-accent pl-6">
-                The gap between intent and execution is where organisations lose value. I find it and close it.
+                I work with you to identify where your systems, processes, and workflows are breaking down. Together we map the gaps and close them within the constraints that actually matter to your operation. I bring my professional networks to connect you with the right technology partners and capability.
               </p>
             </div>
 
