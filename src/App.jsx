@@ -844,9 +844,7 @@ const App = () => {
               </em>
             </h2>
             <p className="text-[16px] text-textDark/80 leading-[1.8] max-w-[380px] font-light">
-              Thirty minutes is enough to understand your challenge and whether
-              I am the right person to help. No obligation, no proposal until
-              we've talked.
+              Thirty minutes is enough. I'll understand your challenge, you'll understand my approach. No proposal until we have talked.
             </p>
 
             <div className="w-8 h-[2px] bg-accent/70" />
