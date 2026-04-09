@@ -265,7 +265,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'About Us', href: '#about' },
     { name: 'Framework', href: '#framework' },
-    { name: 'How We Work', href: '#protocol' },
+    { name: 'How I Work', href: '#protocol' },
     { name: 'Contact Us', href: '#contact' },
   ];
 
@@ -921,7 +921,7 @@ const App = () => {
 
           <div className="flex flex-col gap-4 font-sans font-medium text-xs uppercase tracking-[0.2em] text-center md:text-right">
             <a href="#framework" className="text-silver/70 hover:text-accent transition-colors">Framework</a>
-            <a href="#protocol" className="text-silver/70 hover:text-accent transition-colors">How We Work With You</a>
+            <a href="#protocol" className="text-silver/70 hover:text-accent transition-colors">How I Work With You</a>
             <a href="#about" className="text-silver/70 hover:text-accent transition-colors">About Us</a>
           </div>
 
