@@ -10,22 +10,22 @@ const phases = [
   {
     step: "02",
     title: "Scope.",
-    desc: "I define the boundaries of the work before I start. What I examine, what I don't, and what a successful outcome looks like — so neither side faces surprises."
+    desc: "I define the boundaries of the work before I start. What I examine, what I don't, and what a successful outcome looks like — agreed upfront, no ambiguity on either side."
   },
   {
     step: "03",
     title: "Diagnose.",
-    desc: "I go beneath the surface. I identify and name the friction points, blind spots, and operational realities that don't appear in strategy documents."
+    desc: "I go beneath the surface. The friction points, blind spots, and operational realities that don't appear in strategy documents get named."
   },
   {
     step: "04",
     title: "Plan & Align.",
-    desc: "I build the bridge between strategic intent and frontline reality. A clear roadmap with shared ownership of outcomes — from the boardroom to the ground."
+    desc: "I build the bridge between strategic intent and frontline reality. A clear roadmap with shared ownership of outcomes — from leadership to the people responsible for delivering them."
   },
   {
     step: "05",
     title: "Operationalise.",
-    desc: "Execution is the work. I stay accountable to the outcome — embedding the change, aligning the people, and measuring what matters until the gap between intent and frontline performance is closed."
+    desc: "This is where strategy becomes result. I stay accountable to the outcome — embedding the change, aligning the people, and measuring what matters until the gap between intent and performance is closed."
   }
 ];
 
