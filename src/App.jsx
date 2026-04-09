@@ -5,27 +5,27 @@ const phases = [
   {
     step: "01",
     title: "Engage.",
-    desc: "Every engagement starts with strategic intent. I sit down, listen, and establish what you're trying to achieve — and the distance between where you are and where you need to be."
+    desc: "Every engagement begins with strategic intent. I listen, clarify your objectives, and establish the distance between your current state and your goals."
   },
   {
     step: "02",
     title: "Scope.",
-    desc: "I define the boundaries of the work before I start. What I examine, what I don't, and what a successful outcome looks like — agreed upfront, no ambiguity on either side."
+    desc: "I define the boundaries of the work before starting. We agree upfront on what I examine, what I will not, and what a successful outcome looks like — so neither party faces surprises."
   },
   {
     step: "03",
     title: "Diagnose.",
-    desc: "I go beneath the surface. The friction points, blind spots, and operational realities that don't appear in strategy documents get named."
+    desc: "I look beneath the surface to identify friction points, blind spots, and operational realities that are not captured in strategy documents."
   },
   {
     step: "04",
     title: "Plan & Align.",
-    desc: "I build the bridge between strategic intent and frontline reality. A clear roadmap with shared ownership of outcomes — from leadership to the people responsible for delivering them."
+    desc: "I connect strategic intent with frontline reality by providing a clear roadmap and shared ownership of outcomes, from leadership to frontline delivery."
   },
   {
     step: "05",
     title: "Operationalise.",
-    desc: "This is where strategy becomes result. I stay accountable to the outcome — embedding the change, aligning the people, and measuring what matters until the gap between intent and performance is closed."
+    desc: "Strategy delivers results here. I remain accountable for the outcome by embedding change, aligning people, and measuring what matters until the gap between intent and performance closes."
   }
 ];
 
@@ -544,14 +544,14 @@ const App = () => {
           </h1>
 
           {/* Subtext - sleek font but stands out heavily */}
-          <p className="hero-elem text-surface mx-auto text-xl lg:text-[1.45rem] leading-relaxed mt-10 font-light drop-shadow-[0_0_15px_rgba(27,110,194,0.5)] tracking-wide lg:whitespace-nowrap">
-            I map where your strategy breaks down and build the path from intent to frontline reality.
+          <p className="hero-elem text-surface mx-auto text-xl lg:text-[1.45rem] leading-relaxed mt-10 font-light drop-shadow-[0_0_15px_rgba(27,110,194,0.5)] tracking-wide">
+            I identify where your strategy breaks down and work with you to rebuild the path from intent to frontline reality.
           </p>
 
           {/* Bold CTA */}
           <div className="hero-elem pt-14 flex items-center justify-center">
             <a href="https://calendly.com/brad-bwadvisorysolutions/30min" target="_blank" rel="noreferrer" className="group relative overflow-hidden bg-accent px-12 py-4 md:py-5 rounded-full text-white font-bold text-sm md:text-base hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase text-center flex items-center justify-center gap-4 shadow-[0_0_25px_rgba(27,110,194,0.5)] hover:shadow-[0_0_40px_rgba(27,110,194,0.8)] ring-1 ring-accent/50 group-hover:ring-accent">
-              Schedule a 30 minute consultation
+              Schedule a 30-minute consultation
               <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </a>
           </div>
@@ -571,7 +571,7 @@ const App = () => {
           <div className="w-10 h-[2px] bg-accent mx-auto mb-7" />
           <p className="text-2xl md:text-[2rem] lg:text-[2.4rem] text-surface/90 font-light leading-relaxed tracking-wide">
             The gap between intent and execution is where organisations lose value.<br />
-            <span className="font-serif italic font-normal text-accent">I find it and close it.</span>
+            <span className="font-serif italic font-normal text-accent">I locate the gap and close it.</span>
           </p>
           <div className="w-10 h-[2px] bg-accent mx-auto mt-7" />
         </div>
@@ -586,7 +586,7 @@ const App = () => {
             <div className="pl-6 border-l-2 border-accent">
               <h2 className="font-light text-5xl md:text-6xl text-surface tracking-tight mb-8 mt-2">The method.</h2>
               <p className="text-2xl text-surface font-medium leading-relaxed drop-shadow-md lg:whitespace-nowrap">
-                Every engagement follows the same disciplined path — from understanding your reality to closing the gap.
+                Every engagement follows a disciplined path, from understanding your reality to closing the gap.
               </p>
             </div>
           </div>
@@ -602,7 +602,7 @@ const App = () => {
               <h3 className="font-light text-4xl lg:text-5xl text-surface mb-6 relative z-10 mt-6">Identify.</h3>
               <p className="text-[#1B6EC2] tracking-[0.2em] text-sm md:text-base font-bold uppercase mb-8 relative z-10 drop-shadow-[0_0_10px_rgba(27,110,194,0.3)]">Understand the problem</p>
               <p className="text-surface/80 leading-relaxed font-light relative z-10 text-[15px] lg:text-lg flex-grow">
-                I engage directly with your strategic and operational environment through structured conversation. This surfaces what matters: your true strategic intent, operational gaps, and the hidden friction that undermines execution — before solutions begin.
+                I engage directly with your strategic and operational environment through structured conversations. This reveals your true strategic intent, operational gaps, and the hidden friction that undermines execution — all before I develop solutions.
               </p>
             </div>
 
@@ -612,7 +612,7 @@ const App = () => {
               <h3 className="font-light text-4xl lg:text-5xl text-surface mb-6 relative z-10 mt-6">Strategise.</h3>
               <p className="text-[#1B6EC2] tracking-[0.2em] text-sm md:text-base font-bold uppercase mb-8 relative z-10 drop-shadow-[0_0_10px_rgba(27,110,194,0.3)]">Design the solution</p>
               <p className="text-surface/80 leading-relaxed font-light relative z-10 text-[15px] lg:text-lg flex-grow">
-                I diagnose the root cause, not surface symptoms. Drawing on 30 years of operational experience across law enforcement and the private sector, I build executable strategies that close the gap between intent and reality — with clear ownership at every level.
+                I diagnose the root cause, not just surface symptoms. With 30 years of operational experience in law enforcement and the private sector, I develop executable strategies that close the gap between intent and reality, ensuring clear ownership at every level.
               </p>
             </div>
 
@@ -622,7 +622,7 @@ const App = () => {
               <h3 className="font-light text-4xl lg:text-5xl text-surface mb-6 relative z-10 mt-6">Operationalise.</h3>
               <p className="text-[#1B6EC2] tracking-[0.2em] text-sm md:text-base font-bold uppercase mb-8 relative z-10 drop-shadow-[0_0_10px_rgba(27,110,194,0.3)]">Apply the treatment</p>
               <p className="text-surface/80 leading-relaxed font-light relative z-10 text-[15px] lg:text-lg flex-grow">
-                I stay accountable to outcomes. Strategy without execution is theory. I embed the change, align the people, and measure what matters — until the gap between your intent and frontline reality closes.
+                I remain accountable for outcomes. Strategy without execution is theory. I embed change, align people, and measure what matters until the gap between your intent and frontline reality is closed.
               </p>
             </div>
 
@@ -631,7 +631,7 @@ const App = () => {
           {/* Framework Section CTA */}
           <div className="mt-16 flex justify-center w-full relative z-10 px-6">
             <a href="https://calendly.com/brad-bwadvisorysolutions/30min" target="_blank" rel="noreferrer" className="group relative overflow-hidden bg-accent px-12 py-4 md:py-5 rounded-full text-white font-bold text-sm md:text-base hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase text-center flex items-center justify-center gap-4 shadow-[0_0_25px_rgba(27,110,194,0.5)] hover:shadow-[0_0_40px_rgba(27,110,194,0.8)] ring-1 ring-accent/50 group-hover:ring-accent w-full md:w-auto">
-              Schedule a 30 minute consultation
+              Schedule a 30-minute consultation
               <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </a>
           </div>
@@ -672,13 +672,13 @@ const App = () => {
 
             <div className="space-y-5 text-textDark/80 leading-relaxed text-lg font-light">
               <p>
-                Thirty years in law enforcement command — leading operations, integrating technology at scale, navigating policy and legislative frameworks under real budget and compliance pressure. That includes designing and delivering a digital border screening program that processed over one million traveller applications, establishing real-time crime centre capability, and leading complex, high-governance program delivery from conception through to operational deployment.
+                Thirty years in law enforcement command included leading operations, integrating technology at scale, and navigating policy and legislative frameworks under significant budget and compliance pressures. That work included designing and delivering a digital border screening program that processed over one million traveller applications, establishing real-time crime centre capability, and leading complex, high-governance program delivery from conception to operational deployment.
               </p>
               <p>
-                I've since applied that same rigour to the private sector — establishing law enforcement presence across all Australian states and territories, influencing successful operations at a national level, and delivering measurable outcomes across complex operating environments.
+                I have since applied the same rigour to the private sector, establishing a law enforcement presence across all Australian states and territories, influencing successful operations nationally, and delivering measurable outcomes in complex environments.
               </p>
               <p>
-                I work with you to identify where your systems, processes, and workflows are breaking down. Together we map the gaps and close them within the constraints that actually matter to your operation. I bring my professional networks to connect you with the right technology partners and capability.
+                I work with you to identify where your systems, processes, and workflows are breaking down. Together, we map and close these gaps within the constraints that matter to your operation. I draw on my professional network to connect you with the right technology partners and capabilities.
               </p>
             </div>
 
@@ -707,7 +707,7 @@ const App = () => {
 
             <div className="pt-6">
               <a href="https://calendly.com/brad-bwadvisorysolutions/30min" target="_blank" rel="noreferrer" className="inline-block group relative overflow-hidden bg-[#0A1C42]/80 backdrop-blur-xl border border-[#1B6EC2]/50 px-10 py-4 rounded-full text-surface font-semibold text-sm hover:border-[#1B6EC2] hover:bg-[#1B6EC2]/20 transition-all duration-500 tracking-[0.2em] uppercase flex items-center justify-center gap-4 shadow-[0_0_20px_rgba(27,110,194,0.15)] hover:shadow-[0_0_30px_rgba(27,110,194,0.4)] w-max">
-                Schedule a 30 minute consultation
+                Schedule a 30-minute consultation
                 <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
               </a>
             </div>
@@ -772,8 +772,7 @@ const App = () => {
               </h3>
 
               <p className="text-[15px] lg:text-[16px] text-silver/90 leading-[1.7] font-light">
-                A direct conversation about your challenge. We'll establish whether
-                there's a fit — and what working together looks like.
+                A direct conversation about your challenge. We will determine whether there is a fit and what an engagement would involve.
               </p>
 
               <a
