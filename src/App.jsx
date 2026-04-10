@@ -545,7 +545,7 @@ const App = () => {
 
           {/* Subtext - sleek font but stands out heavily */}
           <p className="hero-elem text-surface mx-auto text-xl lg:text-[1.45rem] leading-relaxed mt-10 font-light drop-shadow-[0_0_15px_rgba(27,110,194,0.5)] tracking-wide">
-            I identify where your strategy breaks down and work with you to rebuild the path from intent to frontline reality.
+            I identify where your strategy breaks down<br />and work with you to rebuild the path from intent to frontline reality.
           </p>
 
           {/* Bold CTA */}
@@ -670,7 +670,7 @@ const App = () => {
               </h2>
             </div>
 
-            <div className="space-y-5 text-textDark/80 leading-relaxed text-lg font-light">
+            <div className="space-y-5 text-textDark/80 leading-relaxed text-xl font-light">
               <p>
                 Thirty years in law enforcement command included leading operations, integrating technology at scale, and navigating policy and legislative frameworks under significant budget and compliance pressures. That work included designing and delivering a digital border screening program that processed over one million traveller applications, establishing real-time crime centre capability, and leading complex, high-governance program delivery from conception to operational deployment.
               </p>
@@ -735,7 +735,7 @@ const App = () => {
               </em>
             </h2>
             <p className="text-[16px] text-textDark/80 leading-[1.8] max-w-[380px] font-light">
-              Thirty minutes is enough. I'll understand your challenge, you'll understand my approach. No proposal until we have talked.
+              Thirty minutes is enough. I will understand your challenge, and you will understand my approach. No proposal until we have talked.
             </p>
 
             <div className="w-8 h-[2px] bg-accent/70" />
@@ -786,8 +786,7 @@ const App = () => {
               </a>
 
               <p className="text-[13px] text-silver/60 leading-[1.6] pt-2 font-light text-center">
-                You'll be taken to Calendly to select a time that works for you.
-                Booking confirms to your calendar automatically.
+                You will be taken to Calendly to select a time that works for you. Booking confirms to your calendar automatically.
               </p>
 
             </div>
