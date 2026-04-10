@@ -105,7 +105,7 @@ const HowWeWorkTogether = () => {
       {/* Protocol Section CTA */}
       <div className="mt-32 flex justify-center w-full relative z-10 px-6">
         <a href="https://calendly.com/brad-bwadvisorysolutions/30min" target="_blank" rel="noreferrer" className="group relative overflow-hidden bg-accent px-12 py-4 md:py-5 rounded-full text-white font-bold text-sm md:text-base hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase text-center flex items-center justify-center gap-4 shadow-[0_0_25px_rgba(27,110,194,0.5)] hover:shadow-[0_0_40px_rgba(27,110,194,0.8)] ring-1 ring-accent/50 group-hover:ring-accent w-full md:w-auto">
-          Schedule a 30 minute consultation
+          Schedule a 30-minute consultation
           <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </a>
       </div>
