@@ -269,7 +269,7 @@ const Navbar = () => {
     { name: 'About', href: '#about' },
     { name: 'Framework', href: '#framework' },
     { name: 'The Engagement', href: '#protocol' },
-    { name: 'Diagnostics', href: 'https://portal.bwadvisorysolutions.com.au/diagnostic.html', external: true },
+    { name: 'Diagnostics', href: '#diagnostics' },
     { name: 'Contact Us', href: '#contact' },
   ];
 
@@ -722,7 +722,7 @@ const App = () => {
       <HowWeWorkTogether />
 
       {/* DIAGNOSTIC — pre-engagement entry point */}
-      <section className="py-20 w-full relative z-10 bg-[#061124] border-t border-silver/5">
+      <section id="diagnostics" className="py-20 w-full relative z-10 bg-[#061124] border-t border-silver/5">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-accent font-semibold tracking-[0.2em] uppercase text-sm mb-4">Before the first conversation</p>
           <div className="pl-6 border-l-2 border-accent mb-8">
@@ -752,9 +752,10 @@ const App = () => {
           </div>
           <a
             href="https://portal.bwadvisorysolutions.com.au/intake.html"
-            className="text-silver/60 hover:text-accent text-sm font-medium tracking-wide transition-colors duration-200 underline underline-offset-4 decoration-silver/30 hover:decoration-accent"
+            className="group relative overflow-hidden bg-transparent px-10 py-4 rounded-full text-surface/70 font-bold text-sm border border-surface/20 hover:border-surface/50 hover:text-surface transition-all duration-500 tracking-[0.2em] uppercase flex items-center gap-4 w-fit"
           >
-            Or go straight to the intake form →
+            Book a Discovery Call
+            <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
           </a>
         </div>
       </section>
