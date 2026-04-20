@@ -274,74 +274,80 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 transition-all duration-300">
-      <nav ref={navRef} className="px-6 py-4 flex items-center justify-between transition-all duration-300 min-h-[70px] md:min-h-[80px]">
+    <>
+      <div className="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <nav ref={navRef} className="px-6 py-4 flex items-center justify-between transition-all duration-300 min-h-[70px] md:min-h-[80px]">
 
-        {/* Left Side: Logo */}
-        <div className="w-[120px] lg:w-[300px] flex items-center justify-start">
-          <div className={"transition-all duration-500 transform origin-left " + (scrolled ? "opacity-100 scale-100 translate-x-0" : "opacity-0 md:opacity-100 md:scale-100 md:translate-x-0 lg:opacity-0 lg:scale-75 lg:-translate-x-8")}>
-            <a href="#">
-              <img src="/BW_Advisory_Solutions_Logo.png" alt="Logo" className="h-8 md:h-10 w-auto object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]" />
-            </a>
-          </div>
-        </div>
-
-        {/* Center: Desktop Nav Links */}
-        <div className="hidden lg:flex items-center gap-8 md:gap-10 font-sans font-bold text-[16px] xl:text-[18px] text-surface tracking-[0.15em] uppercase">
-          {navLinks.map((link) => (
-            <a key={link.name} href={link.href} {...(link.external ? { target: '_blank', rel: 'noreferrer' } : {})} className="relative group overflow-hidden whitespace-nowrap">
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-accent transform -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-300"></span>
-            </a>
-          ))}
-        </div>
-
-        {/* Right Side: Hamburger Toggle (Mobile Only) */}
-        <div className="lg:w-[300px] flex justify-end items-center">
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden relative z-[60] p-2 text-surface hover:text-accent transition-colors"
-            aria-label="Toggle Menu"
-          >
-            {isMenuOpen ? (
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </button>
-        </div>
-
-        {/* Mobile Menu Overlay */}
-        <div className={`fixed inset-0 bg-[#07132B]/97 backdrop-blur-xl z-[55] transition-all duration-500 lg:hidden ${isMenuOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-full pointer-events-none"}`}>
-          <div className="h-full flex flex-col items-center justify-start gap-0 p-8 pt-24 text-center overflow-y-auto">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsMenuOpen(false)}
-                {...(link.external ? { target: '_blank', rel: 'noreferrer' } : {})}
-                className="text-2xl font-sans font-bold text-surface tracking-widest uppercase hover:text-accent transition-colors block py-4 border-b border-white/5 w-full max-w-xs"
-              >
-                {link.name}
-              </a>
-            ))}
-            <div className="mt-6 pt-6 border-t border-white/10 w-full max-w-xs">
-              <a
-                href="https://portal.bwadvisorysolutions.com.au/intake.html"
-                className="inline-block bg-accent text-white px-8 py-4 rounded-full font-bold tracking-widest uppercase text-sm shadow-[0_0_20px_rgba(27,110,194,0.4)]"
-              >
-                Schedule Consult
+          {/* Left Side: Logo */}
+          <div className="w-[120px] lg:w-[300px] flex items-center justify-start">
+            <div className={"transition-all duration-500 transform origin-left " + (scrolled ? "opacity-100 scale-100 translate-x-0" : "opacity-0 md:opacity-100 md:scale-100 md:translate-x-0 lg:opacity-0 lg:scale-75 lg:-translate-x-8")}>
+              <a href="#">
+                <img src="/BW_Advisory_Solutions_Logo.png" alt="Logo" className="h-8 md:h-10 w-auto object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]" />
               </a>
             </div>
           </div>
-        </div>
 
-      </nav>
-    </div>
+          {/* Center: Desktop Nav Links */}
+          <div className="hidden lg:flex items-center gap-8 md:gap-10 font-sans font-bold text-[16px] xl:text-[18px] text-surface tracking-[0.15em] uppercase">
+            {navLinks.map((link) => (
+              <a key={link.name} href={link.href} {...(link.external ? { target: '_blank', rel: 'noreferrer' } : {})} className="relative group overflow-hidden whitespace-nowrap">
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-accent transform -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-300"></span>
+              </a>
+            ))}
+          </div>
+
+          {/* Right Side: Hamburger Toggle (Mobile Only) */}
+          <div className="lg:w-[300px] flex justify-end items-center">
+            <button
+              onClick={() => setIsMenuOpen(true)}
+              className="lg:hidden relative p-2 text-surface hover:text-accent transition-colors"
+              aria-label="Open Menu"
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+
+        </nav>
+      </div>
+
+      {/* Mobile Menu Overlay — outside nav wrapper so it sits at root stacking context */}
+      <div className={`fixed inset-0 bg-[#07132B]/97 backdrop-blur-xl z-[9999] transition-all duration-500 lg:hidden ${isMenuOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-full pointer-events-none"}`}>
+        {/* Close button inside overlay */}
+        <button
+          onClick={() => setIsMenuOpen(false)}
+          className="absolute top-5 right-5 p-2 text-surface hover:text-accent transition-colors"
+          aria-label="Close Menu"
+        >
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <div className="h-full flex flex-col items-center justify-start gap-0 p-8 pt-24 text-center overflow-y-auto">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={() => setIsMenuOpen(false)}
+              {...(link.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+              className="text-2xl font-sans font-bold text-surface tracking-widest uppercase hover:text-accent transition-colors block py-4 border-b border-white/5 w-full max-w-xs"
+            >
+              {link.name}
+            </a>
+          ))}
+          <div className="mt-6 pt-6 border-t border-white/10 w-full max-w-xs">
+            <a
+              href="https://portal.bwadvisorysolutions.com.au/intake.html"
+              className="inline-block bg-accent text-white px-8 py-4 rounded-full font-bold tracking-widest uppercase text-sm shadow-[0_0_20px_rgba(27,110,194,0.4)]"
+            >
+              Schedule Consult
+            </a>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
