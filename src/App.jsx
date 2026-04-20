@@ -300,7 +300,7 @@ const Navbar = () => {
         <div className="lg:w-[300px] flex justify-end items-center">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden relative z-50 p-2 text-surface hover:text-accent transition-colors"
+            className="lg:hidden relative z-[60] p-2 text-surface hover:text-accent transition-colors"
             aria-label="Toggle Menu"
           >
             {isMenuOpen ? (
@@ -316,7 +316,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Overlay */}
-        <div className={`fixed inset-0 bg-[#07132B]/97 backdrop-blur-xl z-40 transition-all duration-500 lg:hidden ${isMenuOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-full pointer-events-none"}`}>
+        <div className={`fixed inset-0 bg-[#07132B]/97 backdrop-blur-xl z-[55] transition-all duration-500 lg:hidden ${isMenuOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-full pointer-events-none"}`}>
           <div className="h-full flex flex-col items-center justify-start gap-0 p-8 pt-24 text-center overflow-y-auto">
             {navLinks.map((link) => (
               <a
