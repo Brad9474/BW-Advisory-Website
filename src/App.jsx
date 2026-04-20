@@ -677,13 +677,13 @@ const App = () => {
 
             <div className="space-y-5 text-textDark/80 leading-relaxed text-xl font-light">
               <p>
-                Thirty years in law enforcement command included leading operations, integrating technology at scale, and navigating policy and legislative frameworks under significant budget and compliance pressures. That work included designing and delivering a digital border screening program that processed over one million traveller applications, establishing real-time crime centre capability, and leading complex, high-governance program delivery from conception to operational deployment.
+                With 30 years in law enforcement command, I drove operational and technological transformation under budgetary and compliance pressures, delivering outcomes amid complex policy and legislative demands. My achievements include designing a digital border screening program processing over one million traveller applications, establishing a real-time crime centre, and leading high-governance program delivery from conception to deployment.
               </p>
               <p>
                 I have since applied the same rigour to the private sector, establishing a law enforcement presence across all Australian states and territories, influencing successful operations nationally, and delivering measurable outcomes in complex environments.
               </p>
               <p>
-                I work with you to identify where your systems, processes, and workflows are breaking down. Together, we map and close these gaps within the constraints that matter to your operation. I draw on my professional network to connect you with the right technology partners and capabilities.
+                I help you identify and resolve breakdowns in your systems, processes, and workflows. Drawing on my network, I connect you with the right technology partners to deliver measurable improvements within your operational constraints.
               </p>
             </div>
 
