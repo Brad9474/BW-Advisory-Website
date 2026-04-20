@@ -269,7 +269,7 @@ const Navbar = () => {
     { name: 'About', href: '#about' },
     { name: 'Framework', href: '#framework' },
     { name: 'The Engagement', href: '#protocol' },
-    { name: 'Diagnostics', href: '#diagnostics' },
+    { name: '8-Min Diagnostic', href: '#diagnostics' },
     { name: 'Contact Us', href: '#contact' },
   ];
 
@@ -316,25 +316,22 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Overlay */}
-        <div className={`fixed inset-0 bg-[#07132B]/95 backdrop-blur-2xl transition-all duration-500 lg:hidden ${isMenuOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-full pointer-events-none"}`}>
-          <div className="h-full flex flex-col items-center justify-center gap-10 p-8 pt-24 text-center">
-            {navLinks.map((link, i) => (
+        <div className={`fixed inset-0 bg-[#07132B]/97 backdrop-blur-xl z-40 transition-all duration-500 lg:hidden ${isMenuOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-full pointer-events-none"}`}>
+          <div className="h-full flex flex-col items-center justify-start gap-0 p-8 pt-24 text-center overflow-y-auto">
+            {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
                 {...(link.external ? { target: '_blank', rel: 'noreferrer' } : {})}
-                className="text-3xl font-sans font-bold text-surface tracking-widest uppercase hover:text-accent transition-colors block"
-                style={{ transitionDelay: `${i * 100}ms` }}
+                className="text-2xl font-sans font-bold text-surface tracking-widest uppercase hover:text-accent transition-colors block py-4 border-b border-white/5 w-full max-w-xs"
               >
                 {link.name}
               </a>
             ))}
-            <div className="mt-10 pt-10 border-t border-white/10 w-full max-w-xs">
+            <div className="mt-6 pt-6 border-t border-white/10 w-full max-w-xs">
               <a
-                href="https://calendly.com/brad-bwadvisorysolutions/30min"
-                target="_blank"
-                rel="noreferrer"
+                href="https://portal.bwadvisorysolutions.com.au/intake.html"
                 className="inline-block bg-accent text-white px-8 py-4 rounded-full font-bold tracking-widest uppercase text-sm shadow-[0_0_20px_rgba(27,110,194,0.4)]"
               >
                 Schedule Consult
@@ -817,18 +814,12 @@ const App = () => {
               </p>
 
               <a
-                href="https://calendly.com/brad-bwadvisorysolutions/30min"
-                target="_blank"
-                rel="noreferrer"
+                href="https://portal.bwadvisorysolutions.com.au/intake.html"
                 className="group relative overflow-hidden bg-accent px-10 py-5 rounded-full text-white font-bold text-sm md:text-base hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase text-center flex items-center justify-center gap-4 shadow-[0_0_25px_rgba(27,110,194,0.5)] hover:shadow-[0_0_40px_rgba(27,110,194,0.8)] ring-1 ring-accent/50 group-hover:ring-accent mt-4 z-10 w-full"
               >
                 Schedule your call
                 <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
               </a>
-
-              <p className="text-[13px] text-silver/60 leading-[1.6] pt-2 font-light text-center">
-                You will be taken to Calendly to select a time that works for you. Booking confirms to your calendar automatically.
-              </p>
 
             </div>
           </div>
