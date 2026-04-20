@@ -104,7 +104,7 @@ const HowWeWorkTogether = () => {
 
       {/* Protocol Section CTA */}
       <div className="mt-32 flex justify-center w-full relative z-10 px-6">
-        <a href="https://calendly.com/brad-bwadvisorysolutions/30min" target="_blank" rel="noreferrer" className="group relative overflow-hidden bg-accent px-12 py-4 md:py-5 rounded-full text-white font-bold text-sm md:text-base hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase text-center flex items-center justify-center gap-4 shadow-[0_0_25px_rgba(27,110,194,0.5)] hover:shadow-[0_0_40px_rgba(27,110,194,0.8)] ring-1 ring-accent/50 group-hover:ring-accent w-full md:w-auto">
+        <a href="https://portal.bwadvisorysolutions.com.au/intake.html" className="group relative overflow-hidden bg-accent px-12 py-4 md:py-5 rounded-full text-white font-bold text-sm md:text-base hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase text-center flex items-center justify-center gap-4 shadow-[0_0_25px_rgba(27,110,194,0.5)] hover:shadow-[0_0_40px_rgba(27,110,194,0.8)] ring-1 ring-accent/50 group-hover:ring-accent w-full md:w-auto">
           Schedule a 30-minute consultation
           <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </a>
@@ -269,6 +269,7 @@ const Navbar = () => {
     { name: 'About', href: '#about' },
     { name: 'Framework', href: '#framework' },
     { name: 'The Engagement', href: '#protocol' },
+    { name: 'Diagnostics', href: 'https://portal.bwadvisorysolutions.com.au/diagnostic.html', external: true },
     { name: 'Contact Us', href: '#contact' },
   ];
 
@@ -288,7 +289,7 @@ const Navbar = () => {
         {/* Center: Desktop Nav Links */}
         <div className="hidden lg:flex items-center gap-8 md:gap-10 font-sans font-bold text-[16px] xl:text-[18px] text-surface tracking-[0.15em] uppercase">
           {navLinks.map((link) => (
-            <a key={link.name} href={link.href} className="relative group overflow-hidden whitespace-nowrap">
+            <a key={link.name} href={link.href} {...(link.external ? { target: '_blank', rel: 'noreferrer' } : {})} className="relative group overflow-hidden whitespace-nowrap">
               {link.name}
               <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-accent transform -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-300"></span>
             </a>
@@ -322,6 +323,7 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
+                {...(link.external ? { target: '_blank', rel: 'noreferrer' } : {})}
                 className="text-3xl font-sans font-bold text-surface tracking-widest uppercase hover:text-accent transition-colors block"
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
@@ -539,7 +541,7 @@ const App = () => {
 
         <div className="w-full max-w-5xl mx-auto mt-2 relative z-20">
           {/* Tagline */}
-          <h1 className="hero-elem font-semibold font-sans text-[2.5rem] sm:text-4xl md:text-6xl lg:text-[4.5rem] tracking-tight leading-[1.1] text-surface drop-shadow-md">
+          <h1 className="hero-elem font-semibold font-sans text-3xl sm:text-4xl md:text-5xl lg:text-[3rem] tracking-tight leading-[1.1] text-surface drop-shadow-md">
             Translating strategic intent <br />into <span className="font-serif italic text-accent pr-2 drop-shadow-[0_0_15px_rgba(27,110,194,0.3)]">operational success.</span>
           </h1>
 
@@ -550,7 +552,7 @@ const App = () => {
 
           {/* Bold CTA */}
           <div className="hero-elem pt-14 flex items-center justify-center">
-            <a href="https://calendly.com/brad-bwadvisorysolutions/30min" target="_blank" rel="noreferrer" className="group relative overflow-hidden bg-accent px-12 py-4 md:py-5 rounded-full text-white font-bold text-sm md:text-base hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase text-center flex items-center justify-center gap-4 shadow-[0_0_25px_rgba(27,110,194,0.5)] hover:shadow-[0_0_40px_rgba(27,110,194,0.8)] ring-1 ring-accent/50 group-hover:ring-accent">
+            <a href="https://portal.bwadvisorysolutions.com.au/intake.html" className="group relative overflow-hidden bg-accent px-12 py-4 md:py-5 rounded-full text-white font-bold text-sm md:text-base hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase text-center flex items-center justify-center gap-4 shadow-[0_0_25px_rgba(27,110,194,0.5)] hover:shadow-[0_0_40px_rgba(27,110,194,0.8)] ring-1 ring-accent/50 group-hover:ring-accent">
               Schedule a 30-minute consultation
               <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </a>
@@ -630,7 +632,7 @@ const App = () => {
 
           {/* Framework Section CTA */}
           <div className="mt-16 flex justify-center w-full relative z-10 px-6">
-            <a href="https://calendly.com/brad-bwadvisorysolutions/30min" target="_blank" rel="noreferrer" className="group relative overflow-hidden bg-accent px-12 py-4 md:py-5 rounded-full text-white font-bold text-sm md:text-base hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase text-center flex items-center justify-center gap-4 shadow-[0_0_25px_rgba(27,110,194,0.5)] hover:shadow-[0_0_40px_rgba(27,110,194,0.8)] ring-1 ring-accent/50 group-hover:ring-accent w-full md:w-auto">
+            <a href="https://portal.bwadvisorysolutions.com.au/intake.html" className="group relative overflow-hidden bg-accent px-12 py-4 md:py-5 rounded-full text-white font-bold text-sm md:text-base hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase text-center flex items-center justify-center gap-4 shadow-[0_0_25px_rgba(27,110,194,0.5)] hover:shadow-[0_0_40px_rgba(27,110,194,0.8)] ring-1 ring-accent/50 group-hover:ring-accent w-full md:w-auto">
               Schedule a 30-minute consultation
               <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </a>
@@ -655,7 +657,7 @@ const App = () => {
             <img
               src="/Brad_Professional_Shot_clean.jpg"
               alt="Brad Warburton - Principal Advisor"
-              className="w-full h-[600px] object-cover object-top"
+              className="w-full h-[400px] object-cover object-top"
             />
             <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-primary to-transparent p-10 pt-32">
               <p className="text-surface font-semibold text-2xl tracking-wide">Brad Warburton</p>
@@ -706,7 +708,7 @@ const App = () => {
             </div>
 
             <div className="pt-6">
-              <a href="https://calendly.com/brad-bwadvisorysolutions/30min" target="_blank" rel="noreferrer" className="inline-block group relative overflow-hidden bg-[#0A1C42]/80 backdrop-blur-xl border border-[#1B6EC2]/50 px-10 py-4 rounded-full text-surface font-semibold text-sm hover:border-[#1B6EC2] hover:bg-[#1B6EC2]/20 transition-all duration-500 tracking-[0.2em] uppercase flex items-center justify-center gap-4 shadow-[0_0_20px_rgba(27,110,194,0.15)] hover:shadow-[0_0_30px_rgba(27,110,194,0.4)] w-max">
+              <a href="https://portal.bwadvisorysolutions.com.au/intake.html" className="inline-block group relative overflow-hidden bg-[#0A1C42]/80 backdrop-blur-xl border border-[#1B6EC2]/50 px-10 py-4 rounded-full text-surface font-semibold text-sm hover:border-[#1B6EC2] hover:bg-[#1B6EC2]/20 transition-all duration-500 tracking-[0.2em] uppercase flex items-center justify-center gap-4 shadow-[0_0_20px_rgba(27,110,194,0.15)] hover:shadow-[0_0_30px_rgba(27,110,194,0.4)] w-max">
                 Schedule a 30-minute consultation
                 <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
               </a>
@@ -718,6 +720,44 @@ const App = () => {
 
       {/* 5) HOW WE WILL WORK TOGETHER (Extract) */}
       <HowWeWorkTogether />
+
+      {/* DIAGNOSTIC — pre-engagement entry point */}
+      <section className="py-20 w-full relative z-10 bg-[#061124] border-t border-silver/5">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-accent font-semibold tracking-[0.2em] uppercase text-sm mb-4">Before the first conversation</p>
+          <div className="pl-6 border-l-2 border-accent mb-8">
+            <h2 className="font-light text-4xl md:text-5xl text-surface tracking-tight mt-2">Understand where the gap is.</h2>
+          </div>
+          <p className="text-xl text-surface/70 font-light leading-relaxed max-w-2xl mb-4">
+            Most organisations know something is in the way. Few have a clear picture of exactly where — or what is driving it. The Strategic Diagnostic identifies where your strategy is meeting resistance. The Operational Diagnostic maps where your processes, capability, and execution are breaking down at the delivery level.
+          </p>
+          <p className="text-xl text-surface/70 font-light leading-relaxed max-w-2xl mb-10">
+            Ten questions each. A specific written report. No conversation required to begin.
+          </p>
+          <div className="flex flex-col sm:flex-row items-start gap-4 mb-6">
+            <a
+              href="https://portal.bwadvisorysolutions.com.au/diagnostic.html"
+              className="group relative overflow-hidden bg-accent px-10 py-4 rounded-full text-white font-bold text-sm hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase flex items-center gap-4 shadow-[0_0_25px_rgba(27,110,194,0.5)] hover:shadow-[0_0_40px_rgba(27,110,194,0.8)] ring-1 ring-accent/50"
+            >
+              Strategic Diagnostic
+              <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+            <a
+              href="https://portal.bwadvisorysolutions.com.au/operational-diagnostic.html"
+              className="group relative overflow-hidden bg-transparent px-10 py-4 rounded-full text-accent font-bold text-sm border border-accent hover:bg-accent hover:text-white transition-all duration-500 tracking-[0.2em] uppercase flex items-center gap-4"
+            >
+              Operational Diagnostic
+              <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+          <a
+            href="https://portal.bwadvisorysolutions.com.au/intake.html"
+            className="text-silver/60 hover:text-accent text-sm font-medium tracking-wide transition-colors duration-200 underline underline-offset-4 decoration-silver/30 hover:decoration-accent"
+          >
+            Or go straight to the intake form →
+          </a>
+        </div>
+      </section>
 
       {/* CONTACT US */}
       <section id="contact" className="py-32 px-6 w-full bg-surface border-t border-silver/5 relative z-10 flex items-center justify-center font-sans">
@@ -810,6 +850,7 @@ const App = () => {
             <a href="#framework" className="text-silver/70 hover:text-accent transition-colors">Framework</a>
             <a href="#protocol" className="text-silver/70 hover:text-accent transition-colors">The Engagement</a>
             <a href="#about" className="text-silver/70 hover:text-accent transition-colors">About</a>
+            <a href="https://portal.bwadvisorysolutions.com.au/client/" className="text-silver/70 hover:text-accent transition-colors">Client Login</a>
           </div>
 
         </div>
