@@ -167,7 +167,7 @@ const TransparentShield = () => {
 
     const img = new Image();
     img.crossOrigin = "Anonymous";
-    img.src = '/shield.jpg';
+    img.src = '/shield.webp';
     img.onload = () => {
       canvas.width = img.width;
       canvas.height = img.height;
@@ -282,7 +282,7 @@ const Navbar = () => {
           <div className="w-[120px] lg:w-[300px] flex items-center justify-start">
             <div className={"transition-all duration-500 transform origin-left " + (scrolled ? "opacity-100 scale-100 translate-x-0" : "opacity-0 md:opacity-100 md:scale-100 md:translate-x-0 lg:opacity-0 lg:scale-75 lg:-translate-x-8")}>
               <a href="#">
-                <img src="/BW_Advisory_Solutions_Logo.png" alt="Logo" className="h-8 md:h-10 w-auto object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]" />
+                <img src="/BW_Advisory_Solutions_Logo.webp" alt="Logo" className="h-8 md:h-10 w-auto object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]" />
               </a>
             </div>
           </div>
@@ -501,7 +501,7 @@ const App = () => {
       {/* GLOBAL BACKGROUND with new Data Grid Overlay */}
       <div className="fixed inset-0 z-0 bg-[#0A1C42] overflow-hidden">
         <img
-          src="/punchy.jpg"
+          src="/punchy.webp"
           alt="Digital Network Cityscape"
           className="w-full h-full object-cover object-center opacity-80 scale-[1.05] origin-bottom-right"
         />
@@ -658,7 +658,7 @@ const App = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
           <div className="lg:col-span-5 order-1 rounded-[2rem] overflow-hidden shadow-2xl bg-background border border-silver/20 sticky top-32">
             <img
-              src="/Brad_Professional_Shot_clean.jpg"
+              src="/Brad_Professional_Shot_clean.webp"
               alt="Brad Warburton - Principal Advisor"
               className="w-full h-[400px] object-cover object-top"
             />
