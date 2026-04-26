@@ -7,17 +7,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#0A1C42',      // Deep navy
+        primary: '#1A3560',      // True navy — identifiably blue at scale
         accent: '#1B6EC2',       // Electric blue
-        background: '#EBF3FA',   // Light blue
-        surface: '#FFFFFF',      // White surface for cards
-        silver: '#C0C8D0',       // Supporting silver
-        textDark: '#0A1C42',     // Text color on light bg
-        textLight: '#EBF3FA',    // Text color on dark bg
+        gold: '#C9A84C',         // Prestige accent — navy + gold = authority
+        background: '#F5F4F0',   // Warm off-white (replaces cold clinical blue)
+        surface: '#FFFFFF',
+        silver: '#C0C8D0',
+        textDark: '#1A3560',
+        textLight: '#F5F4F0',
       },
       fontFamily: {
         sans: ['Calibri', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
       }
     },
   },
