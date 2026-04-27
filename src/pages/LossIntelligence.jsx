@@ -65,7 +65,7 @@ const LossIntelligence = () => (
           </p>
           <div className="flex flex-col sm:flex-row items-start gap-4 mb-6">
             <a
-              href="https://portal.bwadvisorysolutions.com.au/retail-risk-diagnostic.html"
+              href="https://portal.bwadvisorysolutions.com.au/loss-intelligence-diagnostic.html"
               className="group relative overflow-hidden bg-accent px-10 py-4 rounded-full text-white font-bold text-sm hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase flex items-center gap-4 shadow-[0_4px_16px_rgba(27,110,194,0.25)] hover:shadow-[0_6px_24px_rgba(27,110,194,0.4)] ring-1 ring-accent/50"
             >
               Loss Intelligence Diagnostic

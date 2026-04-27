@@ -35,7 +35,7 @@ const groups = [
         audience: "GM · CEO · CFO",
         duration: "8 min · 10 questions",
         desc: "Identifies gaps in loss governance, risk visibility, and organisational accountability. For the senior leader who wants a clear picture of where the capability stands — and what it would take to strengthen it.",
-        href: "https://portal.bwadvisorysolutions.com.au/retail-risk-diagnostic.html",
+        href: "https://portal.bwadvisorysolutions.com.au/loss-intelligence-diagnostic.html",
       },
       {
         num: "04",
