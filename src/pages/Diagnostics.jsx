@@ -52,7 +52,7 @@ const groups = [
 const DiagnosticCard = ({ item }) => (
   <a
     href={item.href}
-    className="group relative block overflow-hidden rounded-2xl bg-[#112850]/60 hover:bg-[#112850] border-l-[3px] border-accent/25 hover:border-accent transition-all duration-500 hover:shadow-[0_12px_50px_rgba(27,110,194,0.15)]"
+    className="group relative block overflow-hidden rounded-2xl bg-[#112850] border border-[#1B6EC2]/20 hover:border-accent transition-all duration-500 hover:shadow-[0_12px_50px_rgba(27,110,194,0.2)]"
   >
     {/* Ghost number — depth element */}
     <div className="absolute bottom-0 right-0 text-[11rem] md:text-[14rem] font-bold text-surface leading-none select-none pointer-events-none opacity-[0.025] group-hover:opacity-[0.055] transition-opacity duration-700 translate-x-3 translate-y-6">
@@ -63,8 +63,8 @@ const DiagnosticCard = ({ item }) => (
 
       {/* Top metadata row */}
       <div className="flex items-center justify-between mb-8">
-        <span className="text-accent font-bold tracking-[0.22em] text-[11px] uppercase">{item.badge}</span>
-        <span className="text-surface/55 text-xs tracking-widest font-light">{item.duration}</span>
+        <span className="text-accent font-bold tracking-[0.2em] text-sm uppercase">{item.badge}</span>
+        <span className="text-surface/55 text-sm tracking-widest font-light">{item.duration}</span>
       </div>
 
       {/* Core description — this is the card's headline */}
@@ -74,8 +74,8 @@ const DiagnosticCard = ({ item }) => (
 
       {/* Bottom row — audience + CTA */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-silver/[0.08]">
-        <p className="text-surface/60 text-xs font-light tracking-[0.15em] uppercase">{item.audience}</p>
-        <span className="flex items-center gap-2 text-accent font-bold text-xs tracking-[0.2em] uppercase group-hover:gap-3 transition-all duration-300">
+        <p className="text-surface/60 text-sm font-light tracking-[0.15em] uppercase">{item.audience}</p>
+        <span className="flex items-center gap-2 text-accent font-bold text-sm tracking-[0.2em] uppercase group-hover:gap-3 transition-all duration-300">
           Begin assessment
           <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -92,7 +92,7 @@ const Diagnostics = () => (
     <section className="relative pt-40 pb-16 px-6 w-full z-10">
       <div className="max-w-5xl mx-auto">
 
-        <p className="text-accent/70 font-bold tracking-[0.28em] text-[11px] uppercase mb-10">
+        <p className="text-accent/70 font-bold tracking-[0.25em] text-sm uppercase mb-10">
           Before the first conversation
         </p>
 
@@ -103,8 +103,8 @@ const Diagnostics = () => (
         </h1>
 
         {/* Metadata strip */}
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-surface/60 text-sm font-light">
-          {['4 diagnostics', '2 practice areas', '8 minutes each', 'Reviewed personally by Brad'].map((item, i, arr) => (
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-surface/65 text-base font-light">
+          {['4 diagnostics', '2 practice areas', '8 minutes each'].map((item, i, arr) => (
             <span key={item} className="flex items-center gap-6">
               {item}
               {i < arr.length - 1 && <span className="inline-block w-px h-3 bg-silver/20" />}
@@ -124,10 +124,10 @@ const Diagnostics = () => (
             {/* Group header */}
             <div className="flex items-end gap-5 mb-10 pb-6 border-b border-silver/[0.08]">
               <div>
-                <p className="text-accent font-bold tracking-[0.28em] text-[10px] uppercase mb-2">{group.label}</p>
+                <p className="text-accent font-bold tracking-[0.25em] text-sm uppercase mb-2">{group.label}</p>
                 <h2 className="font-light text-3xl md:text-4xl text-surface tracking-tight leading-tight">{group.name}</h2>
               </div>
-              <p className="text-surface/60 text-sm font-light leading-snug pb-1 hidden md:block max-w-xs">{group.desc}</p>
+              <p className="text-surface/60 text-sm font-light leading-snug pb-1 hidden md:block whitespace-nowrap">{group.desc}</p>
             </div>
 
             {/* Cards */}
@@ -150,7 +150,7 @@ const Diagnostics = () => (
           <div className="w-px h-16 bg-accent flex-shrink-0 mt-1" />
           <div>
             <p className="text-surface/70 font-light text-lg md:text-xl leading-relaxed max-w-2xl">
-              Every submission is read by Brad personally. No automated scoring. No generic report template. A specific written assessment of your situation, sent within 24 hours.
+              Every submission is reviewed before the report is sent. No automated output — a specific written assessment, delivered within 24 hours.
             </p>
           </div>
         </div>
@@ -168,7 +168,7 @@ const Diagnostics = () => (
           href="https://portal.bwadvisorysolutions.com.au/intake.html"
           className="group flex-shrink-0 relative overflow-hidden bg-accent px-10 py-4 rounded-full text-white font-bold text-sm hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase flex items-center gap-4 shadow-[0_4px_16px_rgba(27,110,194,0.25)] hover:shadow-[0_6px_24px_rgba(27,110,194,0.4)] ring-1 ring-accent/50"
         >
-          Schedule a consultation
+          Request a scoping session
           <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>

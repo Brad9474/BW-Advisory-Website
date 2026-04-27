@@ -9,6 +9,7 @@ const navLinks = [
   { name: 'About', href: '/#about' },
   { name: 'Framework', href: '/#framework' },
   { name: 'The Engagement', href: '/#protocol' },
+  { name: 'Ground Truth', to: '/ground-truth' },
   { name: 'Loss Intelligence', to: '/loss-intelligence' },
   { name: 'Diagnostics', to: '/diagnostics' },
   { name: 'Contact Us', href: '/#contact' },

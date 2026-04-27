@@ -188,16 +188,16 @@ const Home = () => {
       {/* ── PRACTICE AREAS SIGNPOST ── */}
       <section className="py-20 w-full relative z-10 bg-[#0A1E3D] border-t border-silver/[0.06]">
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
-          <p className="text-surface/55 font-bold tracking-[0.3em] uppercase text-[10px] mb-12">Practice Areas</p>
+          <p className="text-surface/55 font-bold tracking-[0.25em] uppercase text-sm mb-12">Practice Areas</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-            <a href="/#framework" className="group relative block overflow-hidden rounded-2xl bg-[#112850]/60 hover:bg-[#112850] border-l-[3px] border-accent/25 hover:border-accent transition-all duration-500 hover:shadow-[0_12px_50px_rgba(27,110,194,0.12)] p-10 md:p-12">
-              <p className="text-accent font-bold tracking-[0.22em] text-[11px] uppercase mb-6">General Advisory</p>
+            <a href="/#framework" className="group relative block overflow-hidden rounded-2xl bg-[#112850] border border-[#1B6EC2]/20 hover:border-accent transition-all duration-500 hover:shadow-[0_12px_50px_rgba(27,110,194,0.15)] p-10 md:p-12">
+              <p className="text-accent font-bold tracking-[0.2em] text-sm uppercase mb-6">General Advisory</p>
               <h3 className="font-light text-3xl md:text-4xl text-surface mb-5 leading-snug tracking-tight">Strategic and operational advisory.</h3>
               <p className="text-surface/80 font-light text-base leading-relaxed mb-10">
                 Identifying where execution breaks down and rebuilding the path from strategic intent to frontline performance. Across law enforcement, government, and the private sector.
               </p>
-              <span className="flex items-center gap-2 text-accent font-bold text-xs tracking-[0.2em] uppercase group-hover:gap-3 transition-all duration-300">
+              <span className="flex items-center gap-2 text-accent font-bold text-sm tracking-[0.18em] uppercase group-hover:gap-3 transition-all duration-300">
                 Our method
                 <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -205,13 +205,13 @@ const Home = () => {
               </span>
             </a>
 
-            <Link to="/loss-intelligence" className="group relative block overflow-hidden rounded-2xl bg-[#112850]/60 hover:bg-[#112850] border-l-[3px] border-accent/25 hover:border-accent transition-all duration-500 hover:shadow-[0_12px_50px_rgba(27,110,194,0.12)] p-10 md:p-12">
-              <p className="text-accent font-bold tracking-[0.22em] text-[11px] uppercase mb-6">Loss Intelligence Advisory</p>
+            <Link to="/loss-intelligence" className="group relative block overflow-hidden rounded-2xl bg-[#112850] border border-[#1B6EC2]/20 hover:border-accent transition-all duration-500 hover:shadow-[0_12px_50px_rgba(27,110,194,0.15)] p-10 md:p-12">
+              <p className="text-accent font-bold tracking-[0.2em] text-sm uppercase mb-6">Loss Intelligence Advisory</p>
               <h3 className="font-light text-3xl md:text-4xl text-surface mb-5 leading-snug tracking-tight">Intelligence-led loss management for retail.</h3>
               <p className="text-surface/80 font-light text-base leading-relaxed mb-10">
                 Building the structured capability to detect, investigate, and prevent retail loss — from governance framework to active intelligence pipeline. One engagement, embedded results.
               </p>
-              <span className="flex items-center gap-2 text-accent font-bold text-xs tracking-[0.2em] uppercase group-hover:gap-3 transition-all duration-300">
+              <span className="flex items-center gap-2 text-accent font-bold text-sm tracking-[0.18em] uppercase group-hover:gap-3 transition-all duration-300">
                 Learn more
                 <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -299,15 +299,15 @@ const Home = () => {
               <div className="space-y-5 flex-grow">
                 <div>
                   <p className="text-surface/40 font-bold tracking-[0.15em] text-[11px] uppercase mb-2">The situation</p>
-                  <p className="text-surface/80 font-light leading-relaxed text-[15px]">A large operational unit with entrenched working practices and persistent performance gaps despite adequate resourcing.</p>
+                  <p className="text-surface/80 font-light leading-relaxed text-base lg:text-lg">A large operational unit with entrenched working practices and persistent performance gaps despite adequate resourcing.</p>
                 </div>
                 <div>
                   <p className="text-surface/40 font-bold tracking-[0.15em] text-[11px] uppercase mb-2">The gap</p>
-                  <p className="text-surface/80 font-light leading-relaxed text-[15px]">Investigative culture had not kept pace with available intelligence capability. The tools existed. The practice did not.</p>
+                  <p className="text-surface/80 font-light leading-relaxed text-base lg:text-lg">Investigative culture had not kept pace with available intelligence capability. The tools existed. The practice did not.</p>
                 </div>
                 <div>
                   <p className="text-surface/40 font-bold tracking-[0.15em] text-[11px] uppercase mb-2">The result</p>
-                  <p className="text-surface/80 font-light leading-relaxed text-[15px]">Restructured the workforce and modernised investigative practice. Measurable reductions in regional volume crime followed.</p>
+                  <p className="text-surface/80 font-light leading-relaxed text-base lg:text-lg">Restructured the workforce and modernised investigative practice. Measurable reductions in regional volume crime followed.</p>
                 </div>
               </div>
             </div>
@@ -317,15 +317,15 @@ const Home = () => {
               <div className="space-y-5 flex-grow">
                 <div>
                   <p className="text-surface/40 font-bold tracking-[0.15em] text-[11px] uppercase mb-2">The situation</p>
-                  <p className="text-surface/80 font-light leading-relaxed text-[15px]">A government agency needed a digital screening capability at scale, replacing a paper-based process that could not handle the operational volume during a sustained crisis.</p>
+                  <p className="text-surface/80 font-light leading-relaxed text-base lg:text-lg">A government agency needed a digital screening capability at scale, replacing a paper-based process that could not handle the operational volume during a sustained crisis.</p>
                 </div>
                 <div>
                   <p className="text-surface/40 font-bold tracking-[0.15em] text-[11px] uppercase mb-2">The gap</p>
-                  <p className="text-surface/80 font-light leading-relaxed text-[15px]">No digital infrastructure existed. A large workforce required real-time coordination across a politically sensitive and rapidly evolving operation.</p>
+                  <p className="text-surface/80 font-light leading-relaxed text-base lg:text-lg">No digital infrastructure existed. A large workforce required real-time coordination across a politically sensitive and rapidly evolving operation.</p>
                 </div>
                 <div>
                   <p className="text-surface/40 font-bold tracking-[0.15em] text-[11px] uppercase mb-2">The result</p>
-                  <p className="text-surface/80 font-light leading-relaxed text-[15px]">Designed and commanded the programme from the ground up. Paper process replaced entirely. Operation delivered without incident.</p>
+                  <p className="text-surface/80 font-light leading-relaxed text-base lg:text-lg">Designed and commanded the programme from the ground up. Paper process replaced entirely. Operation delivered without incident.</p>
                 </div>
               </div>
             </div>
@@ -335,15 +335,15 @@ const Home = () => {
               <div className="space-y-5 flex-grow">
                 <div>
                   <p className="text-surface/40 font-bold tracking-[0.15em] text-[11px] uppercase mb-2">The situation</p>
-                  <p className="text-surface/80 font-light leading-relaxed text-[15px]">A government agency's intelligence infrastructure existed in disconnected systems, with no single operational picture available to frontline commanders.</p>
+                  <p className="text-surface/80 font-light leading-relaxed text-base lg:text-lg">A government agency's intelligence infrastructure existed in disconnected systems, with no single operational picture available to frontline commanders.</p>
                 </div>
                 <div>
                   <p className="text-surface/40 font-bold tracking-[0.15em] text-[11px] uppercase mb-2">The gap</p>
-                  <p className="text-surface/80 font-light leading-relaxed text-[15px]">Intelligence was not reaching the people who needed it at the speed they needed it.</p>
+                  <p className="text-surface/80 font-light leading-relaxed text-base lg:text-lg">Intelligence was not reaching the people who needed it at the speed they needed it.</p>
                 </div>
                 <div>
                   <p className="text-surface/40 font-bold tracking-[0.15em] text-[11px] uppercase mb-2">The result</p>
-                  <p className="text-surface/80 font-light leading-relaxed text-[15px]">Led the architecture and deployment of a real-time intelligence environment, aggregating multiple sources into a single actionable picture integrated with frontline systems.</p>
+                  <p className="text-surface/80 font-light leading-relaxed text-base lg:text-lg">Led the architecture and deployment of a real-time intelligence environment, aggregating multiple sources into a single actionable picture integrated with frontline systems.</p>
                 </div>
               </div>
             </div>
