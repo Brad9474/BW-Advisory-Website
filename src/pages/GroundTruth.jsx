@@ -120,7 +120,7 @@ const GroundTruth = () => (
           <p className="text-silver/75 text-xl md:text-2xl font-light">Direct engagement. No proposal until we have talked.</p>
         </div>
         <a
-          href="https://portal.bwadvisorysolutions.com.au/intake.html"
+          href="https://portal.bwadvisorysolutions.com.au/"
           className="group relative overflow-hidden bg-[#C9A84C] px-14 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase flex items-center justify-center gap-3 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 whitespace-nowrap cursor-pointer"
         >
           Request Scoping Session
