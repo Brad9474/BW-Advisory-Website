@@ -61,9 +61,6 @@ const Layout = ({ children }) => (
     <NoiseOverlay />
     <Navbar />
 
-    {/* Thin blue line — the signature element, pinned below nav */}
-    <div className="fixed top-[70px] md:top-[80px] left-0 w-full h-px bg-accent z-40 shadow-[0_0_4px_rgba(27,110,194,0.3)]" />
-
     {children}
   </div>
 );

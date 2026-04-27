@@ -7,18 +7,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#1A3560',      // True navy — identifiably blue at scale
-        accent: '#1B6EC2',       // Electric blue
-        gold: '#C9A84C',         // Prestige accent — navy + gold = authority
-        background: '#F5F4F0',   // Warm off-white (replaces cold clinical blue)
+        primary: '#0F172A',      // Deep navy — premium feel
+        accent: '#0369A1',       // Vibrant blue CTA — electric, modern
+        secondary: '#334155',    // Professional mid-tone
+        gold: '#C9A84C',         // Prestige accent
+        background: '#F5F4F0',   // Warm off-white
         surface: '#FFFFFF',
         silver: '#C0C8D0',
         textDark: '#1A3560',
         textLight: '#F5F4F0',
+        'premium-dark': '#0A1520',  // Ultra dark for depth
+        'premium-light': '#1A3560',  // Lighter navy for contrast
       },
       fontFamily: {
-        sans: ['Calibri', 'system-ui', 'sans-serif'],
-        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        display: ['"Poppins"', 'system-ui', 'sans-serif'],
+        sans: ['"Open Sans"', '"Freight Text Pro"', '"Inter"', 'system-ui', 'sans-serif'],
+        serif: ['"Garamond Premier Pro"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+        mono: ['Courier Prime', 'monospace'],
       }
     },
   },
