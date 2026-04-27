@@ -87,8 +87,8 @@ const Footer = () => (
               <a href="/ground-truth" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 PROVED Methodology
               </a>
-              <a href="https://portal.bwadvisorysolutions.com.au/" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
-                Portal
+              <a href="https://portal.bwadvisorysolutions.com.au/client/" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
+                Client Login
               </a>
             </nav>
           </div>
