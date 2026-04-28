@@ -134,7 +134,7 @@ const Home = () => {
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: 'url("/hero-bg.png")',
+              backgroundImage: 'url("/hero-bg.webp")',
               backgroundPosition: 'center center',
               animation: 'ken-burns 16s ease-in-out infinite'
             }}
