@@ -52,10 +52,10 @@ const groups = [
 const DiagnosticCard = ({ item }) => (
   <a
     href={item.href}
-    className="group relative overflow-hidden"
+    className="group relative overflow-hidden h-full flex flex-col"
   >
     <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-3xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
-    <div className="relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 group-hover:border-[#C9A84C]/50 rounded-3xl p-10 md:p-14 lg:p-16 transition-all duration-500 group-hover:bg-white/14">
+    <div className="relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 group-hover:border-[#C9A84C]/50 rounded-3xl p-10 md:p-14 lg:p-16 transition-all duration-500 group-hover:bg-white/14 flex flex-col h-full">
       <div className="flex items-start justify-between mb-10">
         <div className="space-y-3">
           <p className="text-[#C9A84C] font-mono tracking-[0.2em] text-xs uppercase font-bold">{item.badge}</p>
@@ -63,11 +63,11 @@ const DiagnosticCard = ({ item }) => (
         </div>
       </div>
 
-      <h3 className="font-display font-bold text-3xl md:text-4xl text-white mb-8 leading-tight">
+      <h3 className="font-display font-bold text-3xl md:text-4xl text-white mb-8 leading-tight flex-1">
         {item.desc}
       </h3>
 
-      <div className="flex items-end justify-between pt-8 border-t border-accent/15">
+      <div className="flex items-end justify-between pt-8 border-t border-accent/15 mt-auto">
         <p className="text-silver/70 text-xs font-mono tracking-widest uppercase font-bold">{item.audience}</p>
         <span className="flex items-center gap-3 text-[#C9A84C] font-bold text-sm tracking-[0.15em] uppercase group-hover:gap-4 transition-all duration-300">
           <span>Start</span>
