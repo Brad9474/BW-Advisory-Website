@@ -398,7 +398,7 @@ const Home = () => {
                   </div>
                   <div className="pt-2">
                     <p className="text-[#C9A84C] font-mono text-xs tracking-widest uppercase font-bold mb-2">Impact</p>
-                    <p className="text-white font-bold text-lg">Significant Reduction in Crime Volume</p>
+                    <p className="text-white font-bold text-lg">Investigative culture rebuilt. Crime rate fell.</p>
                   </div>
                 </div>
               </div>
