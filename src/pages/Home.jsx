@@ -389,7 +389,7 @@ const Home = () => {
                 <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-[#C9A84C]/20 to-accent/10 rounded-full flex items-center justify-center group-hover:from-[#C9A84C]/30 group-hover:to-accent/20 transition-all duration-500">
                   <span className="text-[#C9A84C] font-display font-bold text-xl">01</span>
                 </div>
-                <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16">Organisational Redesign</h3>
+                <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">Organisational Redesign</h3>
                 <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Law Enforcement / Government</p>
                 <div className="space-y-6">
                   <div className="pb-5 border-b border-accent/15">
@@ -406,7 +406,7 @@ const Home = () => {
                   </div>
                   <div className="pt-2">
                     <p className="text-[#C9A84C] font-mono text-xs tracking-widest uppercase font-bold mb-2">Impact</p>
-                    <p className="text-white font-bold text-lg">↓ 28% Crime Volume</p>
+                    <p className="text-white font-bold text-lg">Significant Reduction in Crime Volume</p>
                   </div>
                 </div>
               </div>
@@ -419,7 +419,7 @@ const Home = () => {
                 <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-[#C9A84C]/20 to-accent/10 rounded-full flex items-center justify-center group-hover:from-[#C9A84C]/30 group-hover:to-accent/20 transition-all duration-500">
                   <span className="text-[#C9A84C] font-display font-bold text-xl">02</span>
                 </div>
-                <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16">Digital Operations at Scale</h3>
+                <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">Digital Operations at Scale</h3>
                 <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Government / Crisis Response</p>
                 <div className="space-y-6">
                   <div className="pb-5 border-b border-accent/15">
@@ -436,7 +436,7 @@ const Home = () => {
                   </div>
                   <div className="pt-2">
                     <p className="text-[#C9A84C] font-mono text-xs tracking-widest uppercase font-bold mb-2">Impact</p>
-                    <p className="text-white font-bold text-lg">2.1K+ Processed / 6 Days</p>
+                    <p className="text-white font-bold text-lg">1M+ People Screened at Scale</p>
                   </div>
                 </div>
               </div>
@@ -449,7 +449,7 @@ const Home = () => {
                 <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-[#C9A84C]/20 to-accent/10 rounded-full flex items-center justify-center group-hover:from-[#C9A84C]/30 group-hover:to-accent/20 transition-all duration-500">
                   <span className="text-[#C9A84C] font-display font-bold text-xl">03</span>
                 </div>
-                <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16">Intelligence Architecture</h3>
+                <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">Intelligence Architecture</h3>
                 <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Government / Multi-Agency</p>
                 <div className="space-y-6">
                   <div className="pb-5 border-b border-accent/15">
@@ -466,7 +466,7 @@ const Home = () => {
                   </div>
                   <div className="pt-2">
                     <p className="text-[#C9A84C] font-mono text-xs tracking-widest uppercase font-bold mb-2">Impact</p>
-                    <p className="text-white font-bold text-lg">↓ 40% Decision Latency</p>
+                    <p className="text-white font-bold text-lg">↓ 40% Faster Intelligence to Command</p>
                   </div>
                 </div>
               </div>
