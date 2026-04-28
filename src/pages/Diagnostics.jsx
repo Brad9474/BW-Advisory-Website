@@ -20,7 +20,7 @@ const groups = [
         audience: "GM · Head of Operations · Delivery Lead",
         duration: "8 min · 10 questions",
         desc: "Surfaces the functional friction between tactical decisions and frontline capability across processes, systems, and accountability.",
-        href: "https://portal.bwadvisorysolutions.com.au/diagnostic.html"
+        href: "https://portal.bwadvisorysolutions.com.au/operational-diagnostic.html"
       },
     ]
   },
@@ -35,7 +35,7 @@ const groups = [
         audience: "GM · CEO · CFO",
         duration: "8 min · 10 questions",
         desc: "Identifies breakdowns in loss governance and risk visibility. For senior leaders who require a clear picture of organisational exposure.",
-        href: "https://portal.bwadvisorysolutions.com.au/diagnostic.html"
+        href: "https://portal.bwadvisorysolutions.com.au/loss-intelligence-diagnostic.html"
       },
       {
         num: "04",
@@ -43,7 +43,7 @@ const groups = [
         audience: "LP Manager · Head of Security · Ops Manager",
         duration: "8 min · 10 questions",
         desc: "Assesses the integrity of the investigation lifecycle from signal collection to defensible documentation and outcome.",
-        href: "https://portal.bwadvisorysolutions.com.au/diagnostic.html"
+        href: "https://portal.bwadvisorysolutions.com.au/investigations-diagnostic.html"
       },
     ]
   }
