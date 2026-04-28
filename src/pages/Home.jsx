@@ -170,7 +170,7 @@ const Home = () => {
             </h2>
             <div className="flex items-center gap-8 w-full justify-center overflow-hidden">
               <div className="solutions-line h-[1px] flex-grow max-w-[80px] bg-gradient-to-r from-transparent via-[#C9A84C]/40 to-[#C9A84C]/60"></div>
-              <p className="solutions-word font-sans font-semibold text-[#C9A84C] tracking-[0.2em] text-xs md:text-sm uppercase drop-shadow-[0_0_12px_rgba(201,168,76,0.6)]">
+              <p className="solutions-word font-sans font-semibold text-[#C9A84C] tracking-[0.3em] text-base md:text-xl uppercase drop-shadow-[0_0_16px_rgba(201,168,76,0.7)]">
                 SOLUTIONS
               </p>
               <div className="solutions-line h-[1px] flex-grow max-w-[80px] bg-gradient-to-l from-transparent via-[#C9A84C]/40 to-[#C9A84C]/60"></div>
