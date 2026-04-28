@@ -527,10 +527,10 @@ const Home = () => {
             <div className="flex flex-col gap-0 pt-6 border-t border-silver/20 mt-2">
               {[
                 "Systems & Process Optimisation",
-                "Technology Integration & Capability Deployment",
                 "Organisational Design & Change Management",
-                "Strategic Advisory & Programme Leadership",
-                "Closing the Intent-Execution Gap"
+                "Technology Integration & Capability Deployment",
+                "Retail Loss Intelligence & Investigations",
+                "Law Enforcement & Government Advisory"
               ].map((skill, index) => (
                 <div key={index} className="group relative py-4 border-b border-silver/20 flex items-center justify-between overflow-hidden cursor-default transition-all duration-500">
                   <div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-transparent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out pointer-events-none"></div>
