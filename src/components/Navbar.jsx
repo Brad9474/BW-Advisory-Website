@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import ShieldLogo from './ShieldLogo';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,11 +46,7 @@ const Navbar = () => {
             to="/"
             className="group flex items-center gap-2 hover:opacity-80 transition-all duration-300"
           >
-            <img
-              src="/shield-transparent.png"
-              alt="BW Advisory Shield"
-              className="w-10 h-10 object-contain drop-shadow-[0_0_16px_rgba(3,105,161,0.5)] group-hover:drop-shadow-[0_0_20px_rgba(3,105,161,0.7)] transition-all duration-300 flex-shrink-0"
-            />
+            <ShieldLogo className="w-10 h-10 drop-shadow-[0_0_16px_rgba(201,168,76,0.4)] group-hover:drop-shadow-[0_0_22px_rgba(201,168,76,0.7)] transition-all duration-300 flex-shrink-0" />
             <div className="hidden sm:flex flex-col justify-center leading-tight">
               <span className="font-display font-bold text-xs tracking-[0.08em] text-white uppercase">
                 BW ADVISORY

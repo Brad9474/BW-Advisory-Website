@@ -32,21 +32,28 @@ const Home = () => {
         delay: 0.1
       });
 
-      gsap.from(".solutions-word", {
-        scale: 1.8,
+      gsap.fromTo(".solutions-word", {
+        y: 32,
         opacity: 0,
-        duration: 0.8,
-        stagger: 0.08,
-        ease: "expo.out",
-        delay: 0.8
+        clipPath: "inset(100% 0 0 0)",
+        filter: "blur(4px)",
+      }, {
+        y: 0,
+        opacity: 1,
+        clipPath: "inset(0% 0 0 0)",
+        filter: "blur(0px)",
+        duration: 0.9,
+        ease: "power4.out",
+        delay: 0.9
       });
 
       gsap.from(".solutions-line", {
         scaleX: 0,
         opacity: 0,
-        duration: 0.6,
-        ease: "power3.inOut",
-        delay: 1.2
+        transformOrigin: "center",
+        duration: 0.7,
+        ease: "expo.out",
+        delay: 1.5
       });
 
       gsap.from(".hero-elem", {
@@ -169,12 +176,12 @@ const Home = () => {
             <h2 className="logo-letter font-display font-bold text-4xl md:text-5xl lg:text-6xl tracking-[0.02em] text-white leading-tight inline-block drop-shadow-[0_12px_40px_rgba(0,0,0,0.6)]">
               BW ADVISORY
             </h2>
-            <div className="flex items-center gap-8 w-full justify-center">
-              <div className="h-[1px] flex-grow max-w-[80px] bg-gradient-to-r from-transparent via-[#C9A84C]/40 to-[#C9A84C]/60"></div>
-              <p className="font-sans font-semibold text-[#C9A84C] tracking-[0.2em] text-xs md:text-sm uppercase opacity-90">
+            <div className="flex items-center gap-8 w-full justify-center overflow-hidden">
+              <div className="solutions-line h-[1px] flex-grow max-w-[80px] bg-gradient-to-r from-transparent via-[#C9A84C]/40 to-[#C9A84C]/60"></div>
+              <p className="solutions-word font-sans font-semibold text-[#C9A84C] tracking-[0.2em] text-xs md:text-sm uppercase drop-shadow-[0_0_12px_rgba(201,168,76,0.6)]">
                 SOLUTIONS
               </p>
-              <div className="h-[1px] flex-grow max-w-[80px] bg-gradient-to-l from-transparent via-[#C9A84C]/40 to-[#C9A84C]/60"></div>
+              <div className="solutions-line h-[1px] flex-grow max-w-[80px] bg-gradient-to-l from-transparent via-[#C9A84C]/40 to-[#C9A84C]/60"></div>
             </div>
           </div>
         </div>
@@ -297,7 +304,10 @@ const Home = () => {
       <section id="framework" className="py-32 w-full relative z-10 bg-gradient-to-b from-[#0D1520] to-primary">
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
           <div className="mb-24 max-w-3xl">
-            <p className="text-accent font-mono tracking-[0.3em] uppercase text-xs font-bold mb-6">Proprietary Methodology</p>
+            <p className="text-accent font-mono tracking-[0.3em] uppercase text-xs font-bold mb-6">
+              Proprietary Methodology
+              <a href="/ground-truth" className="ml-1 text-[#C9A84C]/50 hover:text-[#C9A84C] transition-colors duration-200 text-[10px] align-super" title="PROVED — BW Advisory Solutions' proprietary investigations framework">*</a>
+            </p>
             <h2 className="font-display font-bold text-6xl md:text-7xl lg:text-8xl text-white tracking-tight mb-8">The Approach</h2>
             <p className="text-xl md:text-2xl text-silver/80 font-light leading-relaxed">
               Every engagement follows a disciplined three-stage protocol, from understanding your operational reality to closing the gap.
