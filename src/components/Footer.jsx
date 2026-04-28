@@ -79,13 +79,13 @@ const Footer = () => (
                 About Brad
               </a>
               <a href="/diagnostics" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
-                Diagnostics
+                8-Min Diagnostic
               </a>
               <a href="/loss-intelligence" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 Loss Intelligence
               </a>
               <a href="/ground-truth" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
-                PROVED Methodology
+                Investigations
               </a>
               <a href="https://portal.bwadvisorysolutions.com.au/client/" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 Client Login

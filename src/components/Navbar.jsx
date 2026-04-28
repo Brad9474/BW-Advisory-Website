@@ -10,9 +10,9 @@ const navLinks = [
   { name: 'About', href: '/#about' },
   { name: 'Framework', href: '/#framework' },
   { name: 'Engagement', href: '/#protocol' },
-  { name: 'PROVED Methodology', to: '/ground-truth' },
+  { name: 'Investigations', to: '/ground-truth' },
   { name: 'Loss Intelligence', to: '/loss-intelligence' },
-  { name: 'Diagnostics', to: '/diagnostics' },
+  { name: '8-Min Diagnostic', to: '/diagnostics' },
   { name: 'Contact', href: '/#contact' },
 ];
 
@@ -64,7 +64,13 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center gap-8 font-sans font-semibold text-[9px] tracking-[0.2em] uppercase text-silver/60 flex-1 justify-center px-8">
             {navLinks.slice(0, 6).map((link) => (
               link.to ? (
-                <Link key={link.name} to={link.to} className="text-silver/60 hover:text-white transition-all duration-300">
+                <Link
+                  key={link.name}
+                  to={link.to}
+                  className={link.name === '8-Min Diagnostic'
+                    ? "text-[#C9A84C] hover:text-[#E0BC60] transition-all duration-300"
+                    : "text-silver/60 hover:text-white transition-all duration-300"}
+                >
                   {link.name}
                 </Link>
               ) : (
