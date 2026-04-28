@@ -189,7 +189,7 @@ const Home = () => {
           </p>
 
           <div className="hero-elem pt-16 flex flex-col sm:flex-row items-center justify-center gap-6">
-            <a href="https://portal.bwadvisorysolutions.com.au/" className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-full text-[#0F172A] font-bold text-base md:text-lg hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase text-center flex items-center justify-center gap-3 shadow-[0_12px_32px_rgba(201,168,76,0.4)] hover:shadow-[0_16px_48px_rgba(201,168,76,0.6)] border border-white/10 hover:border-white/20 cursor-pointer min-w-[280px]">
+            <a href="https://portal.bwadvisorysolutions.com.au/intake.html" className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-full text-[#0F172A] font-bold text-base md:text-lg hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase text-center flex items-center justify-center gap-3 shadow-[0_12px_32px_rgba(201,168,76,0.4)] hover:shadow-[0_16px_48px_rgba(201,168,76,0.6)] border border-white/10 hover:border-white/20 cursor-pointer min-w-[280px]">
               Schedule Consultation
               <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
             </a>
@@ -354,7 +354,7 @@ const Home = () => {
           </div>
 
           <div className="flex justify-center w-full pt-8">
-            <a href="https://portal.bwadvisorysolutions.com.au/" className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer">
+            <a href="https://portal.bwadvisorysolutions.com.au/intake.html" className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer">
               Request a Scoping Session
               <svg className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
             </a>
@@ -546,7 +546,7 @@ const Home = () => {
             </div>
 
             <div className="pt-8">
-              <a href="https://portal.bwadvisorysolutions.com.au/" className="inline-block group relative overflow-hidden bg-[#C9A84C] px-12 py-4 rounded-full text-[#0F172A] font-bold text-sm hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase flex items-center justify-center gap-3 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-max cursor-pointer">
+              <a href="https://portal.bwadvisorysolutions.com.au/intake.html" className="inline-block group relative overflow-hidden bg-[#C9A84C] px-12 py-4 rounded-full text-[#0F172A] font-bold text-sm hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase flex items-center justify-center gap-3 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-max cursor-pointer">
                 Request a Scoping Session
                 <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
               </a>
@@ -649,7 +649,7 @@ const Home = () => {
                     A direct conversation about your challenge. We'll determine fit and what an engagement would involve.
                   </p>
                   <a
-                    href="https://portal.bwadvisorysolutions.com.au/"
+                    href="https://portal.bwadvisorysolutions.com.au/intake.html"
                     className="group/btn relative overflow-hidden bg-[#C9A84C] px-12 md:px-14 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-full cursor-pointer"
                   >
                     Schedule Call

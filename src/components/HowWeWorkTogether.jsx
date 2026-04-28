@@ -154,7 +154,7 @@ const HowWeWorkTogether = () => {
       {/* CTA */}
       <div className="flex justify-center w-full relative z-10 px-6">
         <a
-          href="https://portal.bwadvisorysolutions.com.au/"
+          href="https://portal.bwadvisorysolutions.com.au/intake.html"
           className="group relative overflow-hidden bg-accent px-12 py-4 md:py-5 rounded-full text-white font-bold text-sm md:text-base hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase text-center flex items-center justify-center gap-4 shadow-[0_4px_16px_rgba(27,110,194,0.25)] hover:shadow-[0_6px_24px_rgba(27,110,194,0.4)] ring-1 ring-accent/50 group-hover:ring-accent w-full md:w-auto"
         >
           Request a scoping session

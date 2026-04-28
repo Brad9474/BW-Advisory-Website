@@ -31,10 +31,10 @@ const groups = [
     items: [
       {
         num: "03",
-        badge: "Loss Governance Diagnostic",
+        badge: "Loss Intelligence Diagnostic",
         audience: "GM · CEO · CFO",
         duration: "8 min · 10 questions",
-        desc: "Identifies breakdowns in loss governance and risk visibility. For senior leaders who require a clear picture of organisational exposure.",
+        desc: "Assesses your capability to transform incident data into actionable loss intelligence. For leaders seeking to disrupt systemic retail crime and minimise exposure.",
         href: "https://portal.bwadvisorysolutions.com.au/loss-intelligence-diagnostic.html"
       },
       {
