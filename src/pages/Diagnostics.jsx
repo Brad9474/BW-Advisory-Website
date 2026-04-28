@@ -55,7 +55,7 @@ const DiagnosticCard = ({ item }) => (
     className="group relative overflow-hidden"
   >
     <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-3xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
-    <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/60 rounded-3xl p-10 md:p-14 lg:p-16 transition-all duration-500 group-hover:bg-white/12">
+    <div className="relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 group-hover:border-[#C9A84C]/50 rounded-3xl p-10 md:p-14 lg:p-16 transition-all duration-500 group-hover:bg-white/14">
       <div className="flex items-start justify-between mb-10">
         <div className="space-y-3">
           <p className="text-[#C9A84C] font-mono tracking-[0.2em] text-xs uppercase font-bold">{item.badge}</p>
@@ -128,7 +128,7 @@ const Diagnostics = () => (
             </div>
 
             {/* Diagnostic Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 auto-rows-fr">
               {group.items.map((item) => (
                 <DiagnosticCard key={item.badge} item={item} />
               ))}

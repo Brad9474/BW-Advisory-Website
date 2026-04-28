@@ -119,7 +119,7 @@ const LossIntelligence = () => (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {intelligenceStages.map((stage, i) => (
             <div key={i} className="group h-full">
-              <div className="bg-white/[0.06] rounded-lg border border-white/10 border-l-2 border-l-[#C9A84C] group-hover:border-white/15 group-hover:bg-white/[0.08] p-10 flex flex-col h-full transition-all duration-300">
+              <div className="bg-gradient-to-br from-white/8 via-white/4 to-white/2 rounded-lg border border-white/15 border-l-2 border-l-[#C9A84C] group-hover:border-white/25 group-hover:bg-gradient-to-br group-hover:from-white/10 group-hover:via-white/5 group-hover:to-white/3 p-10 flex flex-col h-full transition-all duration-300 backdrop-blur-sm">
                 <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase mb-6 font-semibold">{stage.name}</p>
                 <p className="text-silver/80 font-light text-base leading-[1.6] flex-grow">{stage.desc}</p>
               </div>
