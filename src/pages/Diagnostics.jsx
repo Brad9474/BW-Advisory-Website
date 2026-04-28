@@ -12,7 +12,7 @@ const groups = [
         audience: "CEO · Board · Senior Leadership",
         duration: "8 min · 10 questions",
         desc: "Maps the systemic gap between leadership intent and organisational delivery. Focuses on alignment, execution, and risk posture.",
-        href: "https://portal.bwadvisorysolutions.com.au/"
+        href: "https://portal.bwadvisorysolutions.com.au/diagnostic.html"
       },
       {
         num: "02",
@@ -20,7 +20,7 @@ const groups = [
         audience: "GM · Head of Operations · Delivery Lead",
         duration: "8 min · 10 questions",
         desc: "Surfaces the functional friction between tactical decisions and frontline capability across processes, systems, and accountability.",
-        href: "https://portal.bwadvisorysolutions.com.au/"
+        href: "https://portal.bwadvisorysolutions.com.au/diagnostic.html"
       },
     ]
   },
@@ -35,7 +35,7 @@ const groups = [
         audience: "GM · CEO · CFO",
         duration: "8 min · 10 questions",
         desc: "Identifies breakdowns in loss governance and risk visibility. For senior leaders who require a clear picture of organisational exposure.",
-        href: "https://portal.bwadvisorysolutions.com.au/"
+        href: "https://portal.bwadvisorysolutions.com.au/diagnostic.html"
       },
       {
         num: "04",
@@ -43,7 +43,7 @@ const groups = [
         audience: "LP Manager · Head of Security · Ops Manager",
         duration: "8 min · 10 questions",
         desc: "Assesses the integrity of the investigation lifecycle from signal collection to defensible documentation and outcome.",
-        href: "https://portal.bwadvisorysolutions.com.au/"
+        href: "https://portal.bwadvisorysolutions.com.au/diagnostic.html"
       },
     ]
   }
@@ -167,7 +167,7 @@ const Diagnostics = () => (
                 Direct engagement. No proposal until we've talked.
               </p>
               <a
-                href="https://portal.bwadvisorysolutions.com.au/"
+                href="https://portal.bwadvisorysolutions.com.au/diagnostic.html"
                 className="group/btn relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer"
               >
                 Start Your Assessment

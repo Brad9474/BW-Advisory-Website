@@ -61,7 +61,7 @@ const Navbar = () => {
           </Link>
 
           <div className="hidden lg:flex items-center gap-8 font-sans font-semibold text-[9px] tracking-[0.2em] uppercase text-silver/60 flex-1 justify-center px-8">
-            {navLinks.slice(0, 5).map((link) => (
+            {navLinks.slice(0, 6).map((link) => (
               link.to ? (
                 <Link key={link.name} to={link.to} className="hover:text-white transition-all duration-300">
                   {link.name}

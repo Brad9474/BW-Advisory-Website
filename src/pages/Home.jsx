@@ -194,19 +194,9 @@ const Home = () => {
               Schedule Consultation
               <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
             </a>
-            <a href="#framework" className="group text-silver/80 hover:text-white font-semibold text-sm tracking-[0.1em] uppercase flex items-center gap-2 transition-all duration-300">
-              Learn Our Method
-              <svg className="w-4 h-4 transform group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-            </a>
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-pulse opacity-50">
-          <span className="text-silver text-xs font-mono tracking-widest uppercase">Scroll</span>
-          <svg className="w-5 h-5 text-silver" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        </div>
       </section>
 
       {/* ── INSIGHT CARD ── */}
