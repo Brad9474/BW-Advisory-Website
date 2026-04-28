@@ -90,25 +90,76 @@ const GroundTruth = () => (
     </section>
 
     {/* ── THE PROVED MODEL ── */}
-    <section className="py-44 w-full relative z-10 bg-[#0A1E3D] border-t border-white/5">
-      <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
-        <div className="mb-32 space-y-8">
-          <p className="text-gold font-semibold tracking-[0.4em] uppercase text-xs">Investigations Protocol</p>
-          <div className="pl-12 border-l-2 border-gold/30">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight uppercase leading-[0.9]">The PROVED Model.</h2>
+    <section className="py-44 w-full relative z-10 bg-[#0A1E3D] border-t border-white/5 overflow-hidden">
+      {/* Ambient gold glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#C9A84C]/3 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-[1400px] mx-auto px-6 xl:px-12 relative z-10">
+        {/* Section Header */}
+        <div className="mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+          <div className="space-y-6">
+            <div className="flex items-center gap-4">
+              <span className="inline-flex items-center gap-2 bg-[#C9A84C]/10 border border-[#C9A84C]/30 rounded-full px-4 py-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] animate-pulse" />
+                <span className="text-[#C9A84C] font-mono text-[10px] tracking-[0.25em] uppercase font-bold">Proprietary Framework</span>
+              </span>
+            </div>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[0.95]">
+              The <span className="text-[#C9A84C]">PROVED</span> Model.
+            </h2>
+            <p className="text-silver/60 font-light text-lg max-w-xl leading-relaxed">
+              Six stages. One unified protocol. Every investigation conducted to a standard that withstands civil, disciplinary, or police scrutiny.
+            </p>
+          </div>
+          {/* Acronym display */}
+          <div className="hidden lg:flex items-center gap-1 flex-shrink-0">
+            {['P','R','O','V','E','D'].map((l) => (
+              <div key={l} className="w-10 h-10 flex items-center justify-center border border-[#C9A84C]/20 rounded bg-[#C9A84C]/5">
+                <span className="text-[#C9A84C] font-display font-bold text-sm tracking-wider">{l}</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {provedStages.map((stage) => (
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {provedStages.map((stage, i) => (
             <div key={stage.letter} className="group h-full">
-              <div className="bg-gradient-to-br from-white/8 via-white/4 to-white/2 rounded-lg border border-white/15 border-l-2 border-l-[#C9A84C] group-hover:border-white/25 group-hover:bg-gradient-to-br group-hover:from-white/10 group-hover:via-white/5 group-hover:to-white/3 p-10 flex flex-col h-full transition-all duration-300 backdrop-blur-sm">
-                <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase mb-6 font-semibold">{stage.name}</p>
-                <p className="text-silver/80 font-light text-base leading-[1.6] flex-grow">{stage.desc}</p>
+              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 rounded-xl border border-white/10 border-t-2 border-t-[#C9A84C]/60 group-hover:border-t-[#C9A84C] group-hover:border-white/20 p-8 flex flex-col h-full transition-all duration-500 backdrop-blur-sm overflow-hidden group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+                {/* Ghost letter background */}
+                <span className="absolute -bottom-4 -right-2 text-[9rem] font-display font-bold text-white/[0.04] group-hover:text-[#C9A84C]/[0.07] leading-none select-none transition-all duration-500 pointer-events-none">
+                  {stage.letter}
+                </span>
+
+                {/* Stage number + name */}
+                <div className="flex items-start justify-between mb-6 relative z-10">
+                  <div>
+                    <p className="text-[#C9A84C]/50 font-mono text-[10px] tracking-[0.3em] uppercase mb-2">
+                      Stage {String(i + 1).padStart(2, '0')}
+                    </p>
+                    <h3 className="text-white font-bold text-2xl tracking-tight">{stage.name}</h3>
+                  </div>
+                  <div className="w-8 h-8 rounded-full border border-[#C9A84C]/30 flex items-center justify-center flex-shrink-0 group-hover:border-[#C9A84C]/60 group-hover:bg-[#C9A84C]/10 transition-all duration-300">
+                    <span className="text-[#C9A84C] font-display font-bold text-sm">{stage.letter}</span>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="h-px bg-gradient-to-r from-[#C9A84C]/30 to-transparent mb-6 relative z-10" />
+
+                {/* Description */}
+                <p className="text-silver/70 font-light text-sm leading-relaxed flex-grow relative z-10 group-hover:text-silver/90 transition-colors duration-300">
+                  {stage.desc}
+                </p>
               </div>
             </div>
           ))}
         </div>
+
+        {/* Bottom note */}
+        <p className="mt-12 text-center text-silver/30 font-mono text-[10px] tracking-[0.2em] uppercase">
+          © BW Advisory Solutions — PROVED is a proprietary investigations framework
+        </p>
       </div>
     </section>
 
