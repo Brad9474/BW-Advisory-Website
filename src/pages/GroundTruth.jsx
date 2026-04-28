@@ -1,4 +1,9 @@
+import { useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Footer from '../components/Footer';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const provedStages = [
   {
@@ -34,7 +39,36 @@ const provedStages = [
 ];
 
 
-const GroundTruth = () => (
+const GroundTruth = () => {
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.proved-card', {
+        scrollTrigger: {
+          trigger: '.proved-grid',
+          start: 'top 80%',
+        },
+        y: 24,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: 'power2.out',
+      });
+
+      gsap.from('.proved-header', {
+        scrollTrigger: {
+          trigger: '.proved-header',
+          start: 'top 85%',
+        },
+        y: 16,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+      });
+    });
+    return () => ctx.revert();
+  }, []);
+
+  return (
   <div className="bg-primary min-h-screen">
     {/* ── HERO ── */}
     <section className="relative pt-48 pb-24 px-8 w-full z-10 text-center">
@@ -96,7 +130,7 @@ const GroundTruth = () => (
 
       <div className="max-w-[1400px] mx-auto px-6 xl:px-12 relative z-10">
         {/* Section Header */}
-        <div className="mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+        <div className="proved-header mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           <div className="space-y-6">
             <div className="flex items-center gap-4">
               <span className="inline-flex items-center gap-2 bg-[#C9A84C]/10 border border-[#C9A84C]/30 rounded-full px-4 py-1.5">
@@ -122,9 +156,9 @@ const GroundTruth = () => (
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="proved-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {provedStages.map((stage, i) => (
-            <div key={stage.letter} className="group h-full">
+            <div key={stage.letter} className="proved-card group h-full">
               <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 rounded-xl border border-white/10 border-t-2 border-t-[#C9A84C]/60 group-hover:border-t-[#C9A84C] group-hover:border-white/20 p-8 flex flex-col h-full transition-all duration-500 backdrop-blur-sm overflow-hidden group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
                 {/* Ghost letter background */}
                 <span className="absolute -bottom-4 -right-2 text-[9rem] font-display font-bold text-white/[0.04] group-hover:text-[#C9A84C]/[0.07] leading-none select-none transition-all duration-500 pointer-events-none">
@@ -182,6 +216,7 @@ const GroundTruth = () => (
 
     <Footer />
   </div>
-);
+  );
+};
 
 export default GroundTruth;
