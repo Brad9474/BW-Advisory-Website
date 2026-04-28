@@ -51,9 +51,13 @@ const Navbar = () => {
               <span className="font-display font-bold text-xs tracking-[0.08em] text-white uppercase">
                 BW ADVISORY
               </span>
-              <span className="text-[8px] tracking-[0.1em] uppercase text-[#C9A84C] font-semibold">
-                Solutions
-              </span>
+              <div className="flex items-center gap-1.5">
+                <div className="h-px w-2 bg-gradient-to-r from-transparent to-[#C9A84C]/50"></div>
+                <span className="text-[8px] tracking-[0.1em] uppercase text-[#C9A84C] font-semibold">
+                  Solutions
+                </span>
+                <div className="h-px w-2 bg-gradient-to-l from-transparent to-[#C9A84C]/50"></div>
+              </div>
             </div>
           </Link>
 
