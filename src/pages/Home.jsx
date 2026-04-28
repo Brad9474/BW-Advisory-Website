@@ -134,36 +134,28 @@ const Home = () => {
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: 'url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop")',
-              backgroundPosition: 'center 20%',
-              transform: 'scale(1.05)',
-              animation: 'subtle-zoom 8s ease-in-out infinite'
+              backgroundImage: 'url("/hero-bg.png")',
+              backgroundPosition: 'center center',
+              animation: 'ken-burns 16s ease-in-out infinite'
             }}
           ></div>
 
-          {/* Professional Dark Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A]/50 via-[#0F172A]/60 to-[#0A1520]/70"></div>
+          {/* Dark overlay — calibrated for this image */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A1E3D]/55 via-[#0F172A]/50 to-[#0A1520]/80"></div>
 
-          {/* Side Angle Overlay - Creates depth effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0A1520]/40 via-transparent to-[#0A1520]/20"></div>
+          {/* Side vignette */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A1520]/50 via-transparent to-[#0A1520]/30"></div>
 
-          {/* Premium Accent Glow */}
-          <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#0369A1]/6 rounded-full blur-3xl opacity-30" style={{
-            animation: 'float 8s ease-in-out infinite'
-          }}></div>
-
-          {/* Bottom Vignette */}
-          <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#0A1520] via-[#0A1520]/50 to-transparent"></div>
+          {/* Bottom vignette */}
+          <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#0A1520] via-[#0A1520]/60 to-transparent"></div>
         </div>
 
         <style>{`
-          @keyframes subtle-zoom {
-            0%, 100% { transform: scale(1.05); }
-            50% { transform: scale(1.08); }
-          }
-          @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(15px); }
+          @keyframes ken-burns {
+            0%   { transform: scale(1.05) translateX(0px) translateY(0px); }
+            33%  { transform: scale(1.09) translateX(-12px) translateY(-4px); }
+            66%  { transform: scale(1.07) translateX(8px) translateY(-2px); }
+            100% { transform: scale(1.05) translateX(0px) translateY(0px); }
           }
         `}</style>
 
