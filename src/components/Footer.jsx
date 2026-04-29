@@ -90,6 +90,9 @@ const Footer = () => (
               <a href="https://portal.bwadvisorysolutions.com.au/client/" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 Client Login
               </a>
+              <a href="/privacy" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
+                Privacy Policy
+              </a>
             </nav>
           </div>
         </div>
