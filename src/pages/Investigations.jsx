@@ -39,7 +39,7 @@ const provedStages = [
 ];
 
 
-const GroundTruth = () => {
+const Investigations = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.proved-card', {
@@ -219,4 +219,4 @@ const GroundTruth = () => {
   );
 };
 
-export default GroundTruth;
+export default Investigations;

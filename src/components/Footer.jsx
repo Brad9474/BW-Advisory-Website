@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import ShieldLogo from './ShieldLogo';
 
 const Footer = () => (
@@ -78,15 +79,15 @@ const Footer = () => (
               <a href="/#about" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 About Brad
               </a>
-              <a href="/diagnostics" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
+              <Link to="/diagnostics" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 8-Min Diagnostic
-              </a>
-              <a href="/loss-intelligence" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
+              </Link>
+              <Link to="/loss-intelligence" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 Loss Intelligence
-              </a>
-              <a href="/ground-truth" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
+              </Link>
+              <Link to="/investigations" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 Investigations
-              </a>
+              </Link>
               <a href="https://portal.bwadvisorysolutions.com.au/client/" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 Client Login
               </a>

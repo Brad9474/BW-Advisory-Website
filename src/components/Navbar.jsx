@@ -10,7 +10,7 @@ const navLinks = [
   { name: 'About', href: '/#about' },
   { name: 'Framework', href: '/#framework' },
   { name: 'Engagement', href: '/#protocol' },
-  { name: 'Investigations', to: '/ground-truth' },
+  { name: 'Investigations', to: '/investigations' },
   { name: 'Loss Intelligence', to: '/loss-intelligence' },
   { name: '8-Min Diagnostic', to: '/diagnostics' },
   { name: 'Contact', href: '/#contact' },
@@ -37,7 +37,7 @@ const Navbar = () => {
           className={`
             pointer-events-auto
             flex items-center justify-between
-            px-10 py-3 rounded-full border border-white/5
+            px-12 py-4 rounded-full border border-white/5
             transition-all duration-1000 cubic-bezier(0.2, 0.8, 0.2, 1)
             ${scrolled ? 'bg-primary/60 backdrop-blur-2xl border-accent/20 shadow-[0_20px_50px_rgba(3,105,161,0.3)]' : 'bg-primary/20 backdrop-blur-xl border-accent/10'}
           `}
@@ -46,14 +46,14 @@ const Navbar = () => {
             to="/"
             className="group flex items-center gap-2 hover:opacity-80 transition-all duration-300"
           >
-            <ShieldLogo className="w-10 h-10 drop-shadow-[0_0_16px_rgba(201,168,76,0.4)] group-hover:drop-shadow-[0_0_22px_rgba(201,168,76,0.7)] transition-all duration-300 flex-shrink-0" />
+            <ShieldLogo className="w-11 h-11 drop-shadow-[0_0_16px_rgba(201,168,76,0.4)] group-hover:drop-shadow-[0_0_22px_rgba(201,168,76,0.7)] transition-all duration-300 flex-shrink-0" />
             <div className="hidden sm:flex flex-col justify-center leading-tight">
-              <span className="font-display font-bold text-xs tracking-[0.08em] text-white uppercase">
+              <span className="font-display font-bold text-[13px] tracking-[0.08em] text-white uppercase">
                 BW ADVISORY
               </span>
               <div className="flex items-center gap-1.5">
                 <div className="h-px w-2 bg-gradient-to-r from-transparent to-[#C9A84C]/50"></div>
-                <span className="text-[8px] tracking-[0.1em] uppercase text-[#C9A84C] font-semibold">
+                <span className="text-[9px] tracking-[0.1em] uppercase text-[#C9A84C] font-semibold">
                   Solutions
                 </span>
                 <div className="h-px w-2 bg-gradient-to-l from-transparent to-[#C9A84C]/50"></div>
@@ -61,7 +61,7 @@ const Navbar = () => {
             </div>
           </Link>
 
-          <div className="hidden lg:flex items-center gap-8 font-sans font-semibold text-[9px] tracking-[0.2em] uppercase text-silver/60 flex-1 justify-center px-8">
+          <div className="hidden lg:flex items-center gap-10 font-sans font-semibold text-[11px] tracking-[0.2em] uppercase text-silver/60 flex-1 justify-center px-8">
             {navLinks.slice(0, 6).map((link) => (
               link.to ? (
                 <Link
@@ -84,7 +84,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
             <a
               href="https://portal.bwadvisorysolutions.com.au/intake.html"
-              className="group relative overflow-hidden bg-[#C9A84C] px-8 py-2.5 rounded-full text-primary font-bold text-[10px] tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 transform hover:scale-[1.05] shadow-lg shadow-[#C9A84C]/20 cursor-pointer"
+              className="group relative overflow-hidden bg-[#C9A84C] px-10 py-3.5 rounded-full text-primary font-bold text-[11px] tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 transform hover:scale-[1.05] shadow-lg shadow-[#C9A84C]/20 cursor-pointer"
             >
               Consultation
             </a>

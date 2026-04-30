@@ -298,7 +298,7 @@ const Home = () => {
           <div className="mb-24 max-w-3xl">
             <p className="text-accent font-mono tracking-[0.3em] uppercase text-xs font-bold mb-6">
               Proprietary Methodology
-              <a href="/ground-truth" className="ml-1 text-[#C9A84C]/50 hover:text-[#C9A84C] transition-colors duration-200 text-[10px] align-super" title="PROVED — BW Advisory Solutions' proprietary investigations framework">*</a>
+              <Link to="/investigations" className="ml-1 text-[#C9A84C]/50 hover:text-[#C9A84C] transition-colors duration-200 text-[10px] align-super" title="PROVED — BW Advisory Solutions' proprietary investigations framework">*</Link>
             </p>
             <h2 className="font-display font-bold text-6xl md:text-7xl lg:text-8xl text-white tracking-tight mb-8">The Approach</h2>
             <p className="text-xl md:text-2xl text-silver/80 font-light leading-relaxed">

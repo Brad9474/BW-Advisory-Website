@@ -13,7 +13,7 @@ import NoiseOverlay from './components/NoiseOverlay';
 import Home from './pages/Home';
 import LossIntelligence from './pages/LossIntelligence';
 import Diagnostics from './pages/Diagnostics';
-import PROVED from './pages/PROVED';
+import Investigations from './pages/Investigations';
 import Privacy from './pages/Privacy';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -73,7 +73,7 @@ const App = () => (
       <Route path="/" element={<Layout><Home /></Layout>} />
       <Route path="/loss-intelligence" element={<Layout><LossIntelligence /></Layout>} />
       <Route path="/diagnostics" element={<Layout><Diagnostics /></Layout>} />
-      <Route path="/proved" element={<Layout><PROVED /></Layout>} />
+      <Route path="/investigations" element={<Layout><Investigations /></Layout>} />
       <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
     </Routes>
   </BrowserRouter>
