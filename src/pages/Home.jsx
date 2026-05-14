@@ -180,12 +180,12 @@ const Home = () => {
 
         <div className="w-full max-w-7xl mx-auto mt-16 relative z-20">
           <h1 className="hero-elem font-display font-bold text-6xl md:text-8xl lg:text-[6.5rem] tracking-tight leading-[1.1] text-white drop-shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
-            Strategic Clarity.<br className="hidden md:block" />
-            <span className="font-serif italic text-[#C9A84C] block mt-4 text-5xl md:text-7xl lg:text-6xl">Operational Reality.</span>
+            Your Business Is<br className="hidden md:block" />
+            <span className="font-serif italic text-[#C9A84C] block mt-4 text-5xl md:text-7xl lg:text-6xl">More Exposed Than You Think.</span>
           </h1>
 
           <p className="hero-elem text-silver/75 mx-auto text-xl md:text-2xl leading-relaxed mt-12 font-light tracking-wide max-w-4xl">
-            The distance between what leadership intends and what happens at the frontline is where organisations lose value. <span className="text-white font-semibold">I close that gap.</span>
+            Operationally. Digitally. And to threats you haven't seen yet. I work with healthcare practices and professional services firms to fix that — practically, without jargon, and with a clear return on the investment.
           </p>
 
           <div className="hero-elem pt-16 flex flex-col sm:flex-row items-center justify-center gap-6">
