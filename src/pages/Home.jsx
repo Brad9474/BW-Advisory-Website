@@ -219,6 +219,69 @@ const Home = () => {
       </section>
 
 
+      {/* ── STREAM A: OPERATIONAL RESILIENCE & SECURITY ADVISORY ── */}
+      <section id="smb-advisory" className="py-32 w-full relative z-10 bg-gradient-to-b from-primary via-[#0D1520] to-primary">
+        <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
+          <div className="mb-20 max-w-4xl">
+            <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">For Healthcare & Professional Services</p>
+            <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight mb-8">
+              Operational Resilience and Security Advisory
+            </h2>
+            <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
+              I work with healthcare practices and professional services firms to eliminate operational risk, automate manual processes, and harden their security posture. Practical engagements that change how the business actually runs.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            {[
+              {
+                num: "01",
+                name: "Operational Resilience Diagnostic",
+                price: "$3,500 – $7,000",
+                desc: "Structured assessment of where the practice or firm is exposed — operationally, financially, and from a security and compliance standpoint. Delivered as a prioritised action plan."
+              },
+              {
+                num: "02",
+                name: "Security Hardening",
+                price: "from $15,000",
+                desc: "Essential Eight aligned remediation across endpoints, identity, backups, email, and access. Delivered with James Northey (SANS GREM) and Josh Cusens for ongoing maintenance."
+              },
+              {
+                num: "03",
+                name: "Process Automation and AI Integration",
+                price: "from $8,000",
+                desc: "Identify the manual, repetitive, error-prone work consuming partner and staff time. Replace it with automation and AI-assisted workflows that match how the business already operates."
+              },
+              {
+                num: "04",
+                name: "Quarterly Advisory Retainer",
+                price: "$600 – $2,500 / month",
+                desc: "Ongoing strategic advisory. Quarterly reviews of operations, security posture, and growth priorities. Direct access between reviews when something material changes."
+              }
+            ].map((tile) => (
+              <div key={tile.num} className="group relative">
+                <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
+                <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/60 rounded-2xl p-10 md:p-12 h-full transition-all duration-500">
+                  <div className="flex items-start justify-between mb-6">
+                    <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">Service {tile.num}</p>
+                    <p className="text-[#C9A84C] font-mono text-xs tracking-[0.15em] font-bold">{tile.price}</p>
+                  </div>
+                  <h3 className="font-display font-bold text-2xl md:text-3xl text-white mb-5 leading-tight">{tile.name}</h3>
+                  <p className="text-silver/80 font-light text-base leading-relaxed">{tile.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex justify-center w-full">
+            <a href="#contact" className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer">
+              Book a Discovery Call
+              <svg className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ── PRACTICE AREAS ── */}
       <section className="py-32 w-full relative z-10 bg-primary">
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
@@ -555,6 +618,55 @@ const Home = () => {
         </div>
       </section>
 
+      {/* ── DELIVERY TEAM ── */}
+      <section id="team" className="py-32 w-full relative z-10 bg-gradient-to-b from-primary via-[#0D1520] to-primary">
+        <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
+          <div className="mb-20 max-w-4xl">
+            <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">Delivery Team</p>
+            <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight mb-8">
+              Specialists, not generalists.
+            </h2>
+            <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
+              Every engagement is led by Brad and delivered by a small team of specialists matched to the work. No bench, no juniors, no farmed-out delivery.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                name: "Brad Warburton",
+                role: "Principal Advisor",
+                bio: "30 years WA Police Force at senior command level. Leads all engagements and client relationships. Owns the outcome on every piece of work that ships."
+              },
+              {
+                name: "James Northey",
+                role: "Security and Automation",
+                bio: "Ex-Royal Australian Navy. SANS GREM certified. Senior Cyber Security Analyst. Delivers security hardening and process automation across client engagements."
+              },
+              {
+                name: "Jevon Ang",
+                role: "DFIR and Process Advisory",
+                bio: "MDR SOC Analyst. Former police prosecutor with a GRC background. Brings digital forensics, incident response, and governance discipline to client work."
+              },
+              {
+                name: "Josh Cusens",
+                role: "IT Foundation and MSP",
+                bio: "Essential Eight compliance specialist. Provides ongoing post-delivery maintenance so the security and operational uplift holds long after the engagement ends."
+              }
+            ].map((member) => (
+              <div key={member.name} className="group relative">
+                <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-40 transition-all duration-700 blur-lg"></div>
+                <div className="relative bg-gradient-to-br from-white/6 via-white/3 to-white/1 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-10 md:p-12 h-full transition-all duration-500">
+                  <h3 className="font-display font-bold text-3xl text-white mb-2">{member.name}</h3>
+                  <p className="text-[#C9A84C] font-mono text-xs tracking-[0.25em] uppercase font-bold mb-6">{member.role}</p>
+                  <p className="text-silver/80 font-light text-base leading-relaxed">{member.bio}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── THE ENGAGEMENT ── */}
       <HowWeWorkTogether />
 
@@ -575,7 +687,7 @@ const Home = () => {
             <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-silver/70 font-light text-sm">
               <span className="flex items-center gap-2">
                 <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
-                4 diagnostics
+                3 diagnostics
               </span>
               <span className="flex items-center gap-2">
                 <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>

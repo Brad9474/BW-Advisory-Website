@@ -54,14 +54,6 @@ const groups = [
         desc: "Assesses your capability to transform incident data into actionable loss intelligence. For leaders seeking to disrupt systemic retail crime and minimise exposure.",
         href: "https://portal.bwadvisorysolutions.com.au/loss-intelligence-diagnostic.html"
       },
-      {
-        num: "04",
-        badge: "Investigations Capability Diagnostic",
-        audience: "LP Manager · Head of Security · Ops Manager",
-        duration: "8 min · 10 questions",
-        desc: "Assesses the integrity of the investigation lifecycle from signal collection to defensible documentation and outcome.",
-        href: "https://portal.bwadvisorysolutions.com.au/investigations-diagnostic.html"
-      },
     ]
   }
 ];
@@ -124,7 +116,7 @@ const Diagnostics = () => (
             Start with what's true.
           </h1>
           <p className="text-2xl md:text-3xl text-silver/75 font-light leading-relaxed max-w-5xl">
-            The gap doesn't close until you know exactly where it is. <span className="text-white font-semibold">Five assessments. Select the one that fits your situation.</span>
+            The gap doesn't close until you know exactly where it is. <span className="text-white font-semibold">Three diagnostics. Two streams. Eight minutes each.</span>
           </p>
         </div>
 
