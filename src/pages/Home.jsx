@@ -180,12 +180,12 @@ const Home = () => {
 
         <div className="w-full max-w-7xl mx-auto mt-16 relative z-20">
           <h1 className="hero-elem font-display font-bold text-6xl md:text-8xl lg:text-[6.5rem] tracking-tight leading-[1.1] text-white drop-shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
-            Your Business Is<br className="hidden md:block" />
-            <span className="font-serif italic text-[#C9A84C] block mt-4 text-5xl md:text-7xl lg:text-6xl">More Exposed Than You Think.</span>
+            You Can't Fix What You Can't See.
+            <span className="font-serif italic text-[#C9A84C] block mt-4 text-5xl md:text-7xl lg:text-6xl">Operational gaps. Security risks. Inefficient systems. All of it.</span>
           </h1>
 
           <p className="hero-elem text-silver/75 mx-auto text-xl md:text-2xl leading-relaxed mt-12 font-light tracking-wide max-w-4xl">
-            Operationally. Digitally. And to threats you haven't seen yet. I work with healthcare practices and professional services firms to fix that — practically, without jargon, and with a clear return on the investment.
+            I work with healthcare practices and professional services firms to fix that — practically, without jargon, and with a clear return on the investment.
           </p>
 
           <div className="hero-elem pt-16 flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -206,12 +206,12 @@ const Home = () => {
             <div className="absolute -bottom-1 -right-1 w-12 h-12 border-b-2 border-r-2 border-accent/50 rounded-full"></div>
 
             <div className="space-y-6 text-center">
-              <p className="text-xs font-mono tracking-[0.3em] uppercase text-accent/70 font-bold">Strategic Reality</p>
+              <p className="text-xs font-mono tracking-[0.3em] uppercase text-accent/70 font-bold">Operational Reality</p>
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
-                Organisations lose millions where intent collides with execution.
+                Most businesses are running at half capacity and don't know it.
               </h2>
               <p className="text-base md:text-lg text-silver/80 font-light leading-relaxed max-w-3xl mx-auto">
-                I locate that friction and engineer genuine operational reality.
+                The gap is in the systems, not the people.
               </p>
             </div>
           </div>
@@ -220,7 +220,7 @@ const Home = () => {
 
 
       {/* ── STREAM A: OPERATIONAL RESILIENCE & SECURITY ADVISORY ── */}
-      <section id="smb-advisory" className="py-32 w-full relative z-10 bg-gradient-to-b from-primary via-[#0D1520] to-primary">
+      <section id="advisory" className="py-32 w-full relative z-10 bg-gradient-to-b from-primary via-[#0D1520] to-primary">
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
           <div className="mb-20 max-w-4xl">
             <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">For Healthcare & Professional Services</p>

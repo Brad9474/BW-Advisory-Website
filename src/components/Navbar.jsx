@@ -10,6 +10,7 @@ const navLinks = [
   { name: 'About', href: '/#about' },
   { name: 'Framework', href: '/#framework' },
   { name: 'Engagement', href: '/#protocol' },
+  { name: 'Advisory', href: '/#advisory' },
   { name: 'Investigations', to: '/investigations' },
   { name: 'Loss Intelligence', to: '/loss-intelligence' },
   { name: '8-Min Diagnostic', to: '/diagnostics' },
@@ -62,7 +63,7 @@ const Navbar = () => {
           </Link>
 
           <div className="hidden lg:flex items-center gap-10 font-sans font-semibold text-[11px] tracking-[0.2em] uppercase text-silver/60 flex-1 justify-center px-8">
-            {navLinks.slice(0, 6).map((link) => (
+            {navLinks.slice(0, 7).map((link) => (
               link.to ? (
                 <Link
                   key={link.name}
