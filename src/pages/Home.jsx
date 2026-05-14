@@ -228,7 +228,7 @@ const Home = () => {
               Operational Resilience and Security Advisory
             </h2>
             <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
-              I work with healthcare practices and professional services firms to eliminate operational risk, automate manual processes, and harden their security posture. Practical engagements that change how the business actually runs.
+              Most healthcare practices and professional services firms know they need to modernise — they just don't know where to begin. I cut through the noise, identify what actually needs to change, and deliver practical improvements across operations, automation, and security.
             </p>
           </div>
 
@@ -631,38 +631,13 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              {
-                name: "Brad Warburton",
-                role: "Principal Advisor",
-                bio: "30 years WA Police Force at senior command level. Leads all engagements and client relationships. Owns the outcome on every piece of work that ships."
-              },
-              {
-                name: "James Northey",
-                role: "Security and Automation",
-                bio: "Ex-Royal Australian Navy. SANS GREM certified. Senior Cyber Security Analyst. Delivers security hardening and process automation across client engagements."
-              },
-              {
-                name: "Jevon Ang",
-                role: "DFIR and Process Advisory",
-                bio: "MDR SOC Analyst. Former police prosecutor with a GRC background. Brings digital forensics, incident response, and governance discipline to client work."
-              },
-              {
-                name: "Josh Cusens",
-                role: "IT Foundation and MSP",
-                bio: "Essential Eight compliance specialist. Provides ongoing post-delivery maintenance so the security and operational uplift holds long after the engagement ends."
-              }
-            ].map((member) => (
-              <div key={member.name} className="group relative">
-                <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-40 transition-all duration-700 blur-lg"></div>
-                <div className="relative bg-gradient-to-br from-white/6 via-white/3 to-white/1 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-10 md:p-12 h-full transition-all duration-500">
-                  <h3 className="font-display font-bold text-3xl text-white mb-2">{member.name}</h3>
-                  <p className="text-[#C9A84C] font-mono text-xs tracking-[0.25em] uppercase font-bold mb-6">{member.role}</p>
-                  <p className="text-silver/80 font-light text-base leading-relaxed">{member.bio}</p>
-                </div>
-              </div>
-            ))}
+          <div className="max-w-4xl space-y-6">
+            <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
+              Delivered with specialist partners in process automation, AI integration, IT infrastructure, and cybersecurity.
+            </p>
+            <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
+              Most businesses are running at less than half the capability of the systems they already own. The right engagement pays for itself — through automation savings, reduced overhead, and the cost of a breach you never have to absorb.
+            </p>
           </div>
         </div>
       </section>
