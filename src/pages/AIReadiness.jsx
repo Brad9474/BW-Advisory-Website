@@ -909,6 +909,16 @@ const QuestionScreen = ({
               className="w-full bg-white/5 border border-white/15 rounded-xl px-5 py-4 text-white placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
             />
           )}
+          {question.id === 'D6' && arr.includes(SOMETHING_ELSE) && (
+            <input
+              type="text"
+              value={otherValue || ''}
+              onChange={(e) => onOtherChange && onOtherChange(e.target.value.slice(0, 200))}
+              maxLength={200}
+              placeholder="Tell us what the problem is — optional"
+              className="w-full bg-white/5 border border-white/15 rounded-xl px-5 py-4 text-white placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
+            />
+          )}
         </div>
       </div>
     );
