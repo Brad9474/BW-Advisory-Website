@@ -13,6 +13,22 @@ const HELP_OPTIONS = [
   "Not sure yet — I just know something needs to change",
 ];
 
+const PRACTICE_SIZE_OPTIONS = [
+  "Sole trader",
+  "2–5 staff",
+  "6–10 staff",
+  "11–20 staff",
+  "20+ staff",
+];
+
+const SOURCE_OPTIONS = [
+  "Referral from a colleague",
+  "LinkedIn",
+  "Google search",
+  "Industry event",
+  "Other",
+];
+
 const Consultation = () => {
   const [values, setValues] = useState({
     name: "",
@@ -20,21 +36,27 @@ const Consultation = () => {
     role: "",
     email: "",
     phone: "",
+    practiceSize: "",
     objective: "",
     constraint: "",
     helpWith: "",
+    biggestConcern: "",
+    referralSource: "",
+    consentContact: false,
+    consentMarketing: false,
   });
   const [submitting, setSubmitting] = useState(false);
   const [errorVisible, setErrorVisible] = useState(false);
 
   const onChange = (e) => {
-    const { name, value } = e.target;
-    setValues((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setValues((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     if (submitting) return;
+    if (!values.consentContact) return;
     setSubmitting(true);
     setErrorVisible(false);
 
@@ -51,11 +73,16 @@ const Consultation = () => {
           organisation: values.organisation.trim(),
           role: values.role.trim(),
           phone: values.phone.trim(),
+          practiceSize: values.practiceSize,
           objective,
           constraint: values.constraint.trim(),
+          biggestConcern: values.biggestConcern.trim(),
+          referralSource: values.referralSource,
           areaOfInterest: "smb_advisory",
           source: "website_consultation",
           brand: "BW_ADVISORY",
+          consentContact: values.consentContact,
+          consentMarketing: values.consentMarketing,
         }),
       });
       if (res.status === 201) {
@@ -156,6 +183,25 @@ const Consultation = () => {
                         autoComplete="tel"
                       />
                     </div>
+
+                    <div>
+                      <label htmlFor="cp-practiceSize" className={labelClass}>Practice size</label>
+                      <select
+                        id="cp-practiceSize"
+                        name="practiceSize"
+                        required
+                        value={values.practiceSize}
+                        onChange={onChange}
+                        className={`${inputClass} appearance-none cursor-pointer`}
+                      >
+                        <option value="" disabled>Select one</option>
+                        {PRACTICE_SIZE_OPTIONS.map((label) => (
+                          <option key={label} value={label} className="bg-[#0F172A] text-white">
+                            {label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </section>
 
                   <section className="space-y-5 pt-2">
@@ -211,6 +257,74 @@ const Consultation = () => {
                         ))}
                       </select>
                     </div>
+
+                    <div>
+                      <label htmlFor="cp-biggestConcern" className={labelClass}>
+                        Biggest concern right now <span className="text-silver/40 font-normal lowercase tracking-normal">(optional)</span>
+                      </label>
+                      <textarea
+                        id="cp-biggestConcern"
+                        name="biggestConcern"
+                        rows={3}
+                        value={values.biggestConcern}
+                        onChange={onChange}
+                        placeholder="What's keeping you up at night? Even if it's not fully formed, it helps me prepare."
+                        className={`${inputClass} resize-y min-h-[90px]`}
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="cp-referralSource" className={labelClass}>How did you hear about us?</label>
+                      <select
+                        id="cp-referralSource"
+                        name="referralSource"
+                        required
+                        value={values.referralSource}
+                        onChange={onChange}
+                        className={`${inputClass} appearance-none cursor-pointer`}
+                      >
+                        <option value="" disabled>Select one</option>
+                        {SOURCE_OPTIONS.map((label) => (
+                          <option key={label} value={label} className="bg-[#0F172A] text-white">
+                            {label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </section>
+
+                  <section className="space-y-4 pt-2">
+                    <p className={sectionLabelClass}>YOUR CONSENT</p>
+
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <input
+                        id="cp-consentContact"
+                        name="consentContact"
+                        type="checkbox"
+                        checked={values.consentContact}
+                        onChange={onChange}
+                        required
+                        className="mt-1 w-4 h-4 accent-[#C9A84C] cursor-pointer flex-shrink-0"
+                      />
+                      <span className="text-silver/85 font-light text-sm leading-relaxed group-hover:text-white transition-colors duration-300">
+                        I consent to BW Advisory Solutions collecting and using the personal information in this form for the purpose of responding to my enquiry and preparing for our conversation, in line with the{" "}
+                        <a href="/privacy" className="text-[#C9A84C] hover:underline">Privacy Policy</a> and the <em>Privacy Act 1988</em> (Cth). <span className="text-[#C9A84C]">*</span>
+                      </span>
+                    </label>
+
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <input
+                        id="cp-consentMarketing"
+                        name="consentMarketing"
+                        type="checkbox"
+                        checked={values.consentMarketing}
+                        onChange={onChange}
+                        className="mt-1 w-4 h-4 accent-[#C9A84C] cursor-pointer flex-shrink-0"
+                      />
+                      <span className="text-silver/85 font-light text-sm leading-relaxed group-hover:text-white transition-colors duration-300">
+                        I'd also like to receive occasional insights, articles, and updates from BW Advisory Solutions. I understand I can unsubscribe at any time.
+                      </span>
+                    </label>
                   </section>
 
                   {errorVisible && (
@@ -225,8 +339,8 @@ const Consultation = () => {
 
                   <button
                     type="submit"
-                    disabled={submitting}
-                    className="group/btn relative overflow-hidden bg-[#C9A84C] px-12 md:px-14 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-full cursor-pointer disabled:opacity-60 disabled:cursor-wait"
+                    disabled={submitting || !values.consentContact}
+                    className="group/btn relative overflow-hidden bg-[#C9A84C] px-12 md:px-14 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-full cursor-pointer disabled:opacity-60 disabled:cursor-wait disabled:hover:bg-[#C9A84C]"
                   >
                     {submitting ? "Sending..." : "START THE CONVERSATION"}
                     {!submitting && (
