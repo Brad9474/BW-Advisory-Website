@@ -12,7 +12,7 @@ const groups = [
         badge: "AI Readiness Diagnostic",
         audience: "Healthcare practices · Professional services firms",
         duration: "5 min · 5 sections · 28 questions",
-        desc: "Five sections. Five minutes. A scored result with an opportunity estimate of what your gaps are costing you.",
+        desc: "Five sections. Five minutes. A scored result covering AI readiness, process optimisation opportunities, and security posture — with an opportunity estimate of what your gaps are costing you.",
         href: "/ai-readiness",
         internal: true,
       },
@@ -60,7 +60,8 @@ const groups = [
         audience: "LP Manager · Head of Security · Risk Manager",
         duration: "8 min · 10 questions",
         desc: "Assesses the integrity of the investigation lifecycle from signal collection to defensible documentation and outcome.",
-        href: "https://portal.bwadvisorysolutions.com.au/investigations-diagnostic.html"
+        href: "mailto:brad@bwadvisorysolutions.com.au?subject=Investigations%20Capability%20Diagnostic%20%E2%80%94%20register%20interest",
+        ctaLabel: "Register Interest"
       },
     ]
   }
@@ -84,7 +85,7 @@ const DiagnosticCardBody = ({ item }) => (
       <div className="flex items-end justify-between pt-8 border-t border-accent/15 mt-auto">
         <p className="text-silver/70 text-xs font-mono tracking-widest uppercase font-bold">{item.audience}</p>
         <span className="flex items-center gap-3 text-[#C9A84C] font-bold text-sm tracking-[0.15em] uppercase group-hover:gap-4 transition-all duration-300">
-          <span>Start</span>
+          <span>{item.ctaLabel || "Start"}</span>
           <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
@@ -113,7 +114,7 @@ const DiagnosticCard = ({ item }) => {
 const Diagnostics = () => (
   <div className="bg-primary min-h-screen">
     {/* ── HERO ── */}
-    <section className="relative py-40 md:py-48 px-6 w-full z-10 overflow-hidden">
+    <section className="relative pt-40 md:pt-48 pb-12 md:pb-16 px-6 w-full z-10 overflow-hidden">
       <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#0369A1]/5 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-0 left-1/2 w-[600px] h-[600px] bg-silver/5 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -146,7 +147,7 @@ const Diagnostics = () => (
     </section>
 
     {/* ── DIAGNOSTIC STREAMS ── */}
-    <section className="py-24 px-6 w-full relative z-10">
+    <section className="pt-12 md:pt-16 pb-24 px-6 w-full relative z-10">
       <div className="max-w-7xl mx-auto space-y-20">
         {groups.map((group) => (
           <div key={group.name} className="space-y-12">

@@ -440,7 +440,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Case Study 01 */}
             <div className="relative group overflow-hidden">
               <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
@@ -614,7 +614,7 @@ const Home = () => {
                 Brad built operational systems for large-scale law enforcement organisations long before digital tools existed to support them. Running some of Western Australia's largest operational units, he developed the systems, processes, and disciplines that made complex operations function — not because technology enabled it, but because the operational thinking was sound.
               </p>
               <p>
-                When COVID-19 arrived, he led the build of border management systems processing over one million travellers — built under pandemic pressure, with no room for failure. He then delivered intelligence capability through a state-level command environment, building the information architecture that enabled frontline operators to work effectively across high-pressure, high-stakes conditions.
+                When a national health crisis required border management systems built from scratch, he led the design and command of the operation — processing over one million travellers with no existing infrastructure and no tolerance for failure. He then delivered intelligence capability through a state-level command environment, building the information architecture that enabled frontline operators to work effectively across high-pressure, high-stakes conditions.
               </p>
               <p>
                 He moved into the private sector to lead law enforcement partnerships for a retail intelligence technology company — building the bridge between what law enforcement needs and what a technology business can deliver, proved across every Australian state and territory.
@@ -629,8 +629,9 @@ const Home = () => {
 
             <div className="flex flex-col gap-0 pt-6 border-t border-silver/20 mt-2">
               {[
+                "AI Adoption & Process Automation",
+                "Operational Resilience & Security",
                 "Systems & Process Optimisation",
-                "Organisational Design & Change Management",
                 "Technology Integration & Capability Deployment",
                 "Retail Loss Intelligence & Investigations",
                 "Law Enforcement & Government Advisory"
@@ -684,20 +685,19 @@ const Home = () => {
       {/* ── DELIVERY ── */}
       <section id="team" className="py-32 w-full relative z-10 bg-gradient-to-b from-primary via-[#0D1520] to-primary">
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
-          <div className="mb-20 max-w-4xl">
+          <div className="max-w-4xl">
             <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">Delivery</p>
-            <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight mb-8">
+            <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight mb-10">
               Led by Brad. Specialists when required.
             </h2>
-            <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
-              Every engagement is led personally. When the work requires deeper technical execution, it is delivered by a trusted specialist network matched to the engagement. No bench, no juniors, no farmed-out delivery.
-            </p>
-          </div>
-
-          <div className="max-w-4xl">
-            <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
-              Most businesses are running at less than half the capability of the systems they already own. The right engagement pays for itself — through automation savings, reduced overhead, and the cost of a breach you never have to absorb.
-            </p>
+            <div className="space-y-6 text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
+              <p>
+                Every engagement is led personally. The diagnostic, the client relationship, the strategic direction — all Brad. When the work requires deeper technical execution, it is delivered by best-in-class specialists drawn from cyber security, digital forensics, and IT infrastructure — practitioners at the top of their disciplines, matched to the specific need.
+              </p>
+              <p>
+                Most businesses are running at less than half the capability of the systems they already own. The right engagement pays for itself — through automation savings, reduced overhead, and the cost of a breach you never have to absorb.
+              </p>
+            </div>
           </div>
         </div>
       </section>
