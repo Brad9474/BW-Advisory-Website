@@ -893,7 +893,7 @@ const Home = () => {
             </h2>
             <div className="space-y-6 text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
               <p>
-                Every engagement is led personally. The diagnostic, the client relationship, the strategic direction — all Brad. When the work requires deeper technical execution, it is delivered by best-in-class specialists drawn from cyber security, digital forensics, and IT infrastructure — practitioners at the top of their disciplines, matched to the specific need.
+                Every engagement is led personally. The diagnostic, the client relationship, the strategic direction — all Brad. When the work requires deeper technical execution, it is delivered by best-in-class specialists drawn from cyber security, AI-powered automation, and IT infrastructure — practitioners at the top of their disciplines, matched to the specific need.
               </p>
               <p>
                 Most businesses are running at less than half the capability of the systems they already own. The right engagement pays for itself — through automation savings, reduced overhead, and the cost of a breach you never have to absorb.
