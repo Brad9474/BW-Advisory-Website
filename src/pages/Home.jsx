@@ -821,7 +821,7 @@ const Home = () => {
         >
           <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
             <p className="text-white font-light text-sm md:text-base flex-1 text-center sm:text-left leading-snug">
-              Find out where you're exposed and what it's costing you.
+              Find out what your gaps are costing you.
             </p>
             <div className="flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-auto">
               <Link
