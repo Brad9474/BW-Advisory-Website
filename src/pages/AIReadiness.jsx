@@ -760,6 +760,7 @@ const QuestionScreen = ({
   onChange,
   onOtherChange,
   onAdvance,
+  onSelectionMade,
   isFirstScreen,
 }) => {
   // Healthcare follow-up only triggers when A1 + healthcare option chosen.
@@ -774,7 +775,11 @@ const QuestionScreen = ({
 
   const handleSingle = (label) => {
     onChange(label);
-    if (question.id === 'A1' && isHealthcare(label)) return; // wait for follow-up + Next
+    if (question.id === 'A1' && isHealthcare(label)) {
+      // Healthcare branch surfaces an explicit Next button — bring it into view.
+      if (onSelectionMade) onSelectionMade();
+      return;
+    }
     setTimeout(() => onAdvance(), 400);
   };
 
@@ -782,6 +787,7 @@ const QuestionScreen = ({
     const arr = Array.isArray(value) ? value : [];
     const next = arr.includes(label) ? arr.filter((x) => x !== label) : [...arr, label];
     onChange(next);
+    if (onSelectionMade) onSelectionMade();
   };
 
   const arr = Array.isArray(value) ? value : [];
@@ -1099,9 +1105,20 @@ const AIReadiness = () => {
   const [submitting, setSubmitting] = useState(false);
   const [finalResults, setFinalResults] = useState(null);
   const advanceLockRef = useRef(false);
+  const nextButtonRef = useRef(null);
 
   const setAnswer = useCallback((qid, value) => {
     setResponses((prev) => ({ ...prev, [qid]: value }));
+  }, []);
+
+  const scrollNextIntoView = useCallback(() => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (nextButtonRef.current) {
+          nextButtonRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }
+      });
+    });
   }, []);
 
   const advance = useCallback(() => {
@@ -1199,6 +1216,7 @@ const AIReadiness = () => {
           onChange={(v) => setAnswer(q.id, v)}
           onOtherChange={(v) => setAnswer(`${q.id}_other`, v)}
           onAdvance={advance}
+          onSelectionMade={scrollNextIntoView}
           isFirstScreen={step === 0}
         />
       </div>
@@ -1294,6 +1312,7 @@ const AIReadiness = () => {
               </button>
               {showNextButton ? (
                 <button
+                  ref={nextButtonRef}
                   type="button"
                   onClick={advance}
                   disabled={!canGoNext}
