@@ -764,6 +764,13 @@ const QuestionScreen = ({
 }) => {
   // Healthcare follow-up only triggers when A1 + healthcare option chosen.
   const showHealthcareFollowUp = question.id === 'A1' && isHealthcare(value);
+  const followUpRef = useRef(null);
+
+  useEffect(() => {
+    if (showHealthcareFollowUp && followUpRef.current) {
+      followUpRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [showHealthcareFollowUp]);
 
   const handleSingle = (label) => {
     onChange(label);
@@ -873,7 +880,7 @@ const QuestionScreen = ({
         ))}
       </div>
       {showHealthcareFollowUp && (
-        <div className="space-y-3 pt-4 border-t border-white/10">
+        <div ref={followUpRef} className="space-y-3 pt-4 border-t border-white/10">
           <label className="block">
             <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
               Tell us more — what type of practice?
