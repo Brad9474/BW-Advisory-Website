@@ -1,14 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Footer from '../components/Footer';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Question definitions
-//
-// Each option carries the data needed for scoring and downstream calculation.
-// - `gap` (number) applies to scored questions only
-// - `hours` (number) applies to C1 only (used in calcTimeLost)
-// - `staff` (number) applies to A2 only (used in calcRevenueAtRisk)
-// Section A and informational questions in B carry no gap.
+// Question definitions — preserved verbatim from prior implementation.
+// 28 questions across 5 sections. Each option carries the data needed for
+// scoring and downstream calculation. `gap` applies to scored single-selects.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const SECTIONS = [
@@ -403,13 +399,54 @@ const SECTIONS = [
   },
 ];
 
-// Quick lookup of a question by id
+// Flatten into a single ordered list of question screens with section context.
+const QUESTIONS = SECTIONS.flatMap((section, sectionIndex) =>
+  section.questions.map((q, indexInSection) => ({
+    ...q,
+    section,
+    sectionIndex,
+    indexInSection,
+    questionsInSection: section.questions.length,
+  }))
+);
+
 const QUESTION_BY_ID = SECTIONS.reduce((acc, sec) => {
   for (const q of sec.questions) acc[q.id] = q;
   return acc;
 }, {});
 
-// Helpers to read the gap value for a scored single-select answer
+const HEALTHCARE_LABELS = new Set([
+  'Medical practice (GP)',
+  'Medical practice (specialist)',
+  'Dental practice',
+  'Allied health — physiotherapy',
+  'Allied health — chiropractic',
+  'Allied health — psychology',
+  'Allied health — occupational therapy',
+  'Allied health — podiatry',
+  'Allied health — other',
+]);
+
+const PROFESSIONAL_LABELS = new Set([
+  'Accounting firm',
+  'Financial planning / wealth management',
+  'Legal practice',
+  'Mortgage broking',
+  'Insurance broking',
+  'Other professional services',
+]);
+
+const isHealthcare = (label) => HEALTHCARE_LABELS.has(label);
+const getDiagnosticType = (label) => {
+  if (HEALTHCARE_LABELS.has(label)) return 'SMB_HEALTHCARE';
+  if (PROFESSIONAL_LABELS.has(label)) return 'SMB_PROFESSIONAL';
+  return 'SMB_HEALTHCARE';
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Scoring — preserved from prior implementation.
+// ─────────────────────────────────────────────────────────────────────────────
+
 const gapFor = (qid, value) => {
   const q = QUESTION_BY_ID[qid];
   if (!q || !value) return 0;
@@ -417,19 +454,9 @@ const gapFor = (qid, value) => {
   return opt?.gap ?? 0;
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Scoring
-//
-// Per-section max gap totals:
-//   B  =  3 + 3                            =  6    (B6 max 3, B7 max 3)
-//   C  =  4 * 6                            = 24    (C1..C6 each max 4)
-//   D  =  4 + 4 + 4 + 4 + 3 + 4 + 3        = 26    (D5 max 3, D7 max 3, D6 cap 4)
-//   E  =  4                                =  4    (E2 only)
-// ─────────────────────────────────────────────────────────────────────────────
-
 const SECTION_MAX = { B: 6, C: 24, D: 26, E: 4 };
 
-const computeScore = (responses) => {
+const computeSectionGaps = (responses) => {
   const bGap = gapFor('B6', responses.B6) + gapFor('B7', responses.B7);
   const cGap =
     gapFor('C1', responses.C1) +
@@ -438,7 +465,6 @@ const computeScore = (responses) => {
     gapFor('C4', responses.C4) +
     gapFor('C5', responses.C5) +
     gapFor('C6', responses.C6);
-
   const d6Count = Array.isArray(responses.D6) ? Math.min(responses.D6.length, 4) : 0;
   const dGap =
     gapFor('D1', responses.D1) +
@@ -448,47 +474,24 @@ const computeScore = (responses) => {
     gapFor('D5', responses.D5) +
     d6Count +
     gapFor('D7', responses.D7);
-
   const eGap = gapFor('E2', responses.E2);
+  return {
+    bGap,
+    cGap,
+    dGap,
+    eGap,
+    bNorm: bGap / SECTION_MAX.B,
+    cNorm: cGap / SECTION_MAX.C,
+    dNorm: dGap / SECTION_MAX.D,
+    eNorm: eGap / SECTION_MAX.E,
+  };
+};
 
-  const bNorm = bGap / SECTION_MAX.B;
-  const cNorm = cGap / SECTION_MAX.C;
-  const dNorm = dGap / SECTION_MAX.D;
-  const eNorm = eGap / SECTION_MAX.E;
-
+const computeScore = (responses) => {
+  const { bNorm, cNorm, dNorm, eNorm } = computeSectionGaps(responses);
   const totalGap = bNorm * 0.25 + cNorm * 0.25 + dNorm * 0.3 + eNorm * 0.2;
   return Math.round((1 - totalGap) * 100);
 };
-
-const bandFor = (score) => {
-  if (score >= 81) return 'ADVANCED';
-  if (score >= 66) return 'ESTABLISHED';
-  if (score >= 41) return 'DEVELOPING';
-  return 'EARLY STAGE';
-};
-
-const BAND_COPY = {
-  ADVANCED:
-    'Your operation is well-optimised. The diagnostic has identified any remaining friction and any hidden risk worth confirming.',
-  ESTABLISHED:
-    'Your operation is reasonably well-structured. The opportunity from here is targeted — specific automation and integration improvements with clear ROI.',
-  DEVELOPING:
-    'Your business has solid foundations in some areas, but identifiable gaps in automation and process efficiency that carry a measurable cost.',
-  'EARLY STAGE':
-    'Your operation has significant gaps in automation, integration, and process stability — and they are costing you time and money every week.',
-};
-
-// Colour ranges for the gauge.
-const colourFor = (score) => {
-  if (score >= 81) return '#15803D'; // deep green
-  if (score >= 66) return '#22C55E'; // green
-  if (score >= 41) return '#D97706'; // amber
-  return '#DC2626'; // red
-};
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Opportunity calculator
-// ─────────────────────────────────────────────────────────────────────────────
 
 const SESSION_RATES = {
   'Medical practice (GP)': 180,
@@ -508,163 +511,141 @@ const SESSION_RATES = {
   'Other professional services': 200,
 };
 
+const calcStaff = (responses) => {
+  const a2Opt = QUESTION_BY_ID.A2.options.find((o) => o.label === responses.A2);
+  return a2Opt?.staff ?? 3;
+};
+
 const calcTimeLost = (responses) => {
   const c1Opt = QUESTION_BY_ID.C1.options.find((o) => o.label === responses.C1);
   const dailyHours = c1Opt?.hours ?? 2;
   const weeklyHours = dailyHours * 5;
   const recoverablePerWeek = weeklyHours * 0.6;
   const annualHours = recoverablePerWeek * 52;
-  const annualCost = annualHours * 45; // AUD blended admin rate
-  return { dailyHours, recoverablePerWeek, annualHours, annualCost };
-};
-
-const calcStaff = (responses) => {
-  const a2Opt = QUESTION_BY_ID.A2.options.find((o) => o.label === responses.A2);
-  return a2Opt?.staff ?? 3;
+  const annualCost = annualHours * 45;
+  return { dailyHours, weeklyHours, recoverablePerWeek, annualHours, annualCost };
 };
 
 const calcRevenueAtRisk = (responses) => {
   const d1High = ['Weekly', 'Multiple times per week — ongoing problem'].includes(responses.D1);
   const d2High = ['A handful of times', "This happens regularly and I know it's costing us"].includes(responses.D2);
-  if (!d1High || !d2High) return null;
-
   const staff = calcStaff(responses);
   const rate = SESSION_RATES[responses.A1] ?? 180;
   const sessionsPerWeek = staff * 8;
+
+  if (!d1High || !d2High) {
+    // Conservative baseline: 2% attrition factor where signals are weak.
+    return Math.max(sessionsPerWeek * 52 * rate * 0.02, 0);
+  }
 
   const d1Critical = (responses.D1 || '').includes('Multiple');
   const d2Critical = (responses.D2 || '').includes('regularly');
   let attrition = 0.05;
   if (d1Critical && d2Critical) attrition = 0.15;
   else if (d1Critical || d2Critical) attrition = 0.1;
-
   return sessionsPerWeek * 52 * rate * attrition;
-};
-
-const calcCapacityConstraint = (responses, recoverablePerWeek) => {
-  const d5 = responses.D5 || '';
-  const triggers = d5.startsWith('Yes —') || d5.startsWith('Possibly —');
-  if (!triggers) return null;
-  return recoverablePerWeek * 52 * 45;
 };
 
 const computeOpportunity = (responses) => {
   const timeLost = calcTimeLost(responses);
   const revenueAtRisk = calcRevenueAtRisk(responses);
-  const capacityConstraint = calcCapacityConstraint(responses, timeLost.recoverablePerWeek);
-  return { timeLost, revenueAtRisk, capacityConstraint };
+  return { timeLost, revenueAtRisk };
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Flag engine
+// Risk-area breakdown — five labelled areas, each rated CRITICAL/HIGH/MODERATE.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const FLAG_ORDER = { CRITICAL: 0, HIGH: 1, MODERATE: 2 };
-
-const FLAG_COLOURS = {
-  CRITICAL: 'bg-red-500/15 text-red-300 border-red-500/40',
-  HIGH: 'bg-amber-500/15 text-amber-300 border-amber-500/40',
-  MODERATE: 'bg-silver/15 text-silver border-silver/30',
+const severityOf = (norm) => {
+  if (norm >= 0.6) return 'CRITICAL';
+  if (norm >= 0.35) return 'HIGH';
+  return 'MODERATE';
 };
 
-const matches = (value, needle) => {
-  if (!value) return false;
-  if (Array.isArray(value)) return value.some((v) => v.includes(needle));
-  return value.includes(needle);
+const SEVERITY_BADGE = {
+  CRITICAL: 'bg-red-500/20 text-red-300 border-red-500/50',
+  HIGH: 'bg-amber-500/20 text-amber-300 border-amber-500/50',
+  MODERATE: 'bg-white/10 text-silver/80 border-white/20',
 };
 
-const generateFlags = (responses) => {
-  const flags = [];
+const computeRiskAreas = (responses) => {
+  const gapNorm = (qid) => {
+    const q = QUESTION_BY_ID[qid];
+    const max = Math.max(...(q.options || []).map((o) => o.gap ?? 0));
+    if (max === 0) return 0;
+    return gapFor(qid, responses[qid]) / max;
+  };
 
-  if (matches(responses.C6, 'Multiple times'))
-    flags.push({
-      severity: 'CRITICAL',
-      area: 'Manual data entry across disconnected systems',
-      detail:
-        'Your team is re-entering information multiple times per day. This is one of the highest-cost operational patterns — measurable in staff hours and error rate.',
-    });
+  const avg = (arr) => (arr.length === 0 ? 0 : arr.reduce((a, b) => a + b, 0) / arr.length);
 
-  if (matches(responses.B6, 'No —'))
-    flags.push({
-      severity: 'CRITICAL',
-      area: 'No system integration',
-      detail:
-        'Every workflow that requires data from more than one system requires manual effort. The cost compounds across every working day.',
-    });
+  const systems = avg([gapNorm('B6'), gapNorm('B7')]);
+  const workflow = avg([
+    gapNorm('C1'),
+    gapNorm('C2'),
+    gapNorm('C3'),
+    gapNorm('C4'),
+    gapNorm('C5'),
+    gapNorm('C6'),
+  ]);
+  const d6Count = Array.isArray(responses.D6) ? Math.min(responses.D6.length, 4) : 0;
+  const failures = avg([gapNorm('D1'), gapNorm('D2'), d6Count / 4]);
+  const visibility = avg([gapNorm('D3'), gapNorm('D4')]);
+  const strategic = avg([gapNorm('D5'), gapNorm('D7'), gapNorm('E2')]);
 
-  if (matches(responses.C5, 'Everything stops'))
-    flags.push({
-      severity: 'CRITICAL',
-      area: 'Single point of failure dependency',
-      detail:
-        'Key processes depend entirely on specific individuals. One absence creates significant operational disruption.',
-    });
+  return [
+    {
+      id: 'systems',
+      label: 'Systems & Integration',
+      norm: systems,
+      severity: severityOf(systems),
+    },
+    {
+      id: 'workflow',
+      label: 'Operational Workflow',
+      norm: workflow,
+      severity: severityOf(workflow),
+    },
+    {
+      id: 'failures',
+      label: 'Recurring Operational Failures',
+      norm: failures,
+      severity: severityOf(failures),
+    },
+    {
+      id: 'visibility',
+      label: 'Visibility & Awareness',
+      norm: visibility,
+      severity: severityOf(visibility),
+    },
+    {
+      id: 'strategic',
+      label: 'Strategic Posture',
+      norm: strategic,
+      severity: severityOf(strategic),
+    },
+  ];
+};
 
-  if (matches(responses.C3, "don't do"))
-    flags.push({
-      severity: 'HIGH',
-      area: 'No structured follow-up process',
-      detail:
-        'Practices without structured follow-up lose an estimated 8–15% of retention revenue annually.',
-    });
+const REVIEW_TEMPLATES = {
+  systems:
+    'Your systems are operating in isolation. Every workflow that needs data from more than one place creates manual effort, and the cost compounds across every working day.',
+  workflow:
+    'Your team is spending significant time on manual administrative tasks that could be largely automated. This is the single biggest cost driver in your current operation.',
+  failures:
+    'You are losing measurable revenue from administrative and communication failures. These are recoverable with the right process design — the cost is real and the fix is well-understood.',
+  visibility:
+    "You don't currently have a clear picture of where time is being lost or what it is costing. That is the first thing to fix — you cannot manage what you cannot measure.",
+  strategic:
+    'Past attempts to improve your processes have not held. This is usually a sequencing and change-management problem, not a technology problem.',
+};
 
-  if (matches(responses.D2, 'regularly'))
-    flags.push({
-      severity: 'HIGH',
-      area: 'Recurring client or patient loss from admin failures',
-      detail:
-        'You have identified ongoing business loss from communication or administrative failures. This is measurable and recoverable.',
-    });
-
-  if (matches(responses.C4, 'Staff manually'))
-    flags.push({
-      severity: 'HIGH',
-      area: 'Manual data entry at onboarding',
-      detail:
-        'Staff time spent re-entering paper forms is a direct automation opportunity with no quality trade-off.',
-    });
-
-  if (matches(responses.D1, 'Multiple times'))
-    flags.push({
-      severity: 'HIGH',
-      area: 'Frequent scheduling failures',
-      detail:
-        'Multiple scheduling errors per week indicates a structural process gap, not an individual error pattern.',
-    });
-
-  if (matches(responses.D6, 'Security or data protection'))
-    flags.push({
-      severity: 'HIGH',
-      area: 'Security exposure — self-identified',
-      detail:
-        'You have identified security or data protection uncertainty. This requires a specific assessment.',
-    });
-
-  if (matches(responses.D6, 'Compliance — not confident'))
-    flags.push({
-      severity: 'HIGH',
-      area: 'Compliance gap — self-identified',
-      detail:
-        'Compliance obligations not met with confidence create regulatory exposure and personal liability.',
-    });
-
-  if (matches(responses.D3, 'barely'))
-    flags.push({
-      severity: 'MODERATE',
-      area: 'Underutilised systems',
-      detail:
-        'You are paying for systems you are not using. The capability exists — the implementation does not.',
-    });
-
-  if (matches(responses.D7, "tried and it hasn't worked"))
-    flags.push({
-      severity: 'MODERATE',
-      area: 'Prior improvement attempts stalled',
-      detail:
-        'Previous attempts to improve processes have not held. This is usually a sequencing and change management problem, not a technology problem.',
-    });
-
-  return flags.sort((a, b) => FLAG_ORDER[a.severity] - FLAG_ORDER[b.severity]).slice(0, 5);
+const generatePersonalReview = (areas) => {
+  const ranked = [...areas].filter((a) => a.severity !== 'MODERATE').sort((a, b) => b.norm - a.norm);
+  const top = ranked.slice(0, 3);
+  if (top.length === 0) {
+    return 'Your operation is running with relatively few obvious gaps. The remaining opportunity is targeted — confirming what is already working and removing the last sources of friction before they grow.';
+  }
+  return top.map((a) => REVIEW_TEMPLATES[a.id]).join(' ');
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -672,31 +653,6 @@ const generateFlags = (responses) => {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const API_URL = 'https://command.bwadvisorysolutions.com.au/api/intake/diagnostic';
-
-const getDiagnosticType = (a1) => {
-  const healthcare = [
-    'Medical practice (GP)',
-    'Medical practice (specialist)',
-    'Dental practice',
-    'Allied health — physiotherapy',
-    'Allied health — chiropractic',
-    'Allied health — psychology',
-    'Allied health — occupational therapy',
-    'Allied health — podiatry',
-    'Allied health — other',
-  ];
-  const professional = [
-    'Accounting firm',
-    'Financial planning / wealth management',
-    'Legal practice',
-    'Mortgage broking',
-    'Insurance broking',
-    'Other professional services',
-  ];
-  if (healthcare.includes(a1)) return 'SMB_HEALTHCARE';
-  if (professional.includes(a1)) return 'SMB_PROFESSIONAL';
-  return 'SMB_HEALTHCARE';
-};
 
 const submitToCommandCentre = async (payload) => {
   try {
@@ -717,64 +673,56 @@ const submitToCommandCentre = async (payload) => {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Formatting helpers
+// Formatting
 // ─────────────────────────────────────────────────────────────────────────────
 
 const fmtMoney = (n) => {
   const rounded = Math.round(n / 100) * 100;
   return `$${rounded.toLocaleString('en-AU')}`;
 };
-
-const fmtHours = (n) => `${Math.round(n).toLocaleString('en-AU')} hours`;
+const fmtHours = (n) => `${Math.round(n).toLocaleString('en-AU')}`;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // UI primitives
 // ─────────────────────────────────────────────────────────────────────────────
 
-const ProgressBar = ({ current, total, sectionTitle }) => {
+const ProgressBar = ({ current, total }) => {
   const pct = Math.round((current / total) * 100);
   return (
-    <div className="space-y-3">
-      <div className="flex items-center justify-between text-silver/70 text-xs font-mono tracking-[0.2em] uppercase font-bold">
-        <span>Section {current} of {total} — {sectionTitle}</span>
+    <div className="space-y-2">
+      <div className="flex items-center justify-between text-silver/70 text-[11px] font-mono tracking-[0.2em] uppercase font-bold">
+        <span>Question {current} of {total}</span>
         <span>{pct}%</span>
       </div>
       <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
-        <div className="h-full bg-[#C9A84C] transition-all duration-500" style={{ width: `${pct}%` }} />
+        <div
+          className="h-full bg-[#C9A84C] transition-all duration-500 ease-out"
+          style={{ width: `${pct}%` }}
+        />
       </div>
     </div>
   );
 };
 
-const Radio = ({ checked, label, onChange }) => (
-  <button
-    type="button"
-    onClick={onChange}
-    className={[
-      'group w-full text-left px-5 py-4 min-h-[44px] rounded-xl border transition-all duration-200 cursor-pointer',
-      checked
-        ? 'bg-[#C9A84C]/15 border-[#C9A84C] text-white'
-        : 'bg-white/5 border-white/15 text-silver hover:bg-white/10 hover:border-[#C9A84C]/40 hover:text-white',
-    ].join(' ')}
-  >
-    <span className="flex items-center gap-4">
-      <span
-        className={[
-          'w-5 h-5 rounded-full border-2 flex-shrink-0 transition-colors duration-200',
-          checked ? 'border-[#C9A84C] bg-[#C9A84C]' : 'border-silver/40 group-hover:border-[#C9A84C]/60',
-        ].join(' ')}
-      />
-      <span className="text-base font-light leading-snug">{label}</span>
-    </span>
-  </button>
+const SectionHeader = ({ section, sectionNumber, totalSections, indexInSection, questionsInSection }) => (
+  <div className="space-y-1">
+    <p className="text-[#C9A84C] font-mono text-[11px] tracking-[0.2em] uppercase font-bold">
+      Section {sectionNumber} of {totalSections} — {section.title}
+    </p>
+    <p className="text-silver/55 font-mono text-[11px] tracking-[0.15em] uppercase">
+      Question {indexInSection + 1} of {questionsInSection}
+    </p>
+  </div>
 );
 
-const Checkbox = ({ checked, label, onChange }) => (
+const OptionCard = ({ checked, label, multi, onClick, autoFocus }) => (
   <button
     type="button"
-    onClick={onChange}
+    onClick={onClick}
+    autoFocus={autoFocus}
     className={[
-      'group w-full text-left px-5 py-4 min-h-[44px] rounded-xl border transition-all duration-200 cursor-pointer',
+      'group w-full text-left px-5 py-4 min-h-[56px] rounded-xl border transition-all duration-200 cursor-pointer',
+      'focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60',
       checked
         ? 'bg-[#C9A84C]/15 border-[#C9A84C] text-white'
         : 'bg-white/5 border-white/15 text-silver hover:bg-white/10 hover:border-[#C9A84C]/40 hover:text-white',
@@ -783,7 +731,8 @@ const Checkbox = ({ checked, label, onChange }) => (
     <span className="flex items-center gap-4">
       <span
         className={[
-          'w-5 h-5 rounded-md border-2 flex-shrink-0 transition-colors duration-200 flex items-center justify-center',
+          multi ? 'rounded-md' : 'rounded-full',
+          'w-5 h-5 border-2 flex-shrink-0 transition-colors duration-200 flex items-center justify-center',
           checked ? 'border-[#C9A84C] bg-[#C9A84C]' : 'border-silver/40 group-hover:border-[#C9A84C]/60',
         ].join(' ')}
       >
@@ -793,27 +742,57 @@ const Checkbox = ({ checked, label, onChange }) => (
           </svg>
         )}
       </span>
-      <span className="text-base font-light leading-snug">{label}</span>
+      <span className="text-base md:text-lg font-light leading-snug">{label}</span>
     </span>
   </button>
 );
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Question screen — one question rendered, auto-advance for single-select.
+// ─────────────────────────────────────────────────────────────────────────────
+
 const OTHER_LABEL = 'Other — please specify';
 
-const QuestionBlock = ({ question, value, onChange, otherValue, onOtherChange }) => {
+const QuestionScreen = ({
+  question,
+  value,
+  otherValue,
+  onChange,
+  onOtherChange,
+  onAdvance,
+  isFirstScreen,
+}) => {
+  // Healthcare follow-up only triggers when A1 + healthcare option chosen.
+  const showHealthcareFollowUp = question.id === 'A1' && isHealthcare(value);
+
+  const handleSingle = (label) => {
+    onChange(label);
+    if (question.id === 'A1' && isHealthcare(label)) return; // wait for follow-up + Next
+    setTimeout(() => onAdvance(), 400);
+  };
+
+  const handleMultiToggle = (label) => {
+    const arr = Array.isArray(value) ? value : [];
+    const next = arr.includes(label) ? arr.filter((x) => x !== label) : [...arr, label];
+    onChange(next);
+  };
+
+  const arr = Array.isArray(value) ? value : [];
+
   if (question.kind === 'text') {
     return (
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <h3 className="font-display font-bold text-xl md:text-2xl text-white leading-snug">{question.text}</h3>
-          {question.helper && <p className="text-sm text-silver/60 font-light">{question.helper}</p>}
-        </div>
+      <div className="space-y-6">
+        <h2 className="font-display font-bold text-2xl md:text-3xl text-white leading-snug">
+          {question.text}
+        </h2>
+        {question.helper && <p className="text-sm text-silver/60 font-light">{question.helper}</p>}
         <textarea
+          autoFocus
           value={value || ''}
           onChange={(e) => onChange(e.target.value.slice(0, question.maxLength || 200))}
           maxLength={question.maxLength || 200}
-          rows={3}
-          className="w-full bg-white/5 border border-white/15 rounded-xl px-5 py-4 text-white placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
+          rows={4}
+          className="w-full bg-white/5 border border-white/15 rounded-xl px-5 py-4 text-white text-base md:text-lg placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
           placeholder="Optional — share in your own words"
         />
         <p className="text-xs text-silver/50 font-mono">
@@ -824,11 +803,6 @@ const QuestionBlock = ({ question, value, onChange, otherValue, onOtherChange })
   }
 
   if (question.kind === 'multi') {
-    const arr = Array.isArray(value) ? value : [];
-    const toggle = (label) => {
-      const next = arr.includes(label) ? arr.filter((x) => x !== label) : [...arr, label];
-      onChange(next);
-    };
     const otherChecked = question.allowOther && arr.includes(OTHER_LABEL);
     const toggleOther = () => {
       if (otherChecked) {
@@ -839,27 +813,29 @@ const QuestionBlock = ({ question, value, onChange, otherValue, onOtherChange })
       }
     };
     return (
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <h3 className="font-display font-bold text-xl md:text-2xl text-white leading-snug">{question.text}</h3>
-          {question.helper && <p className="text-sm text-silver/60 font-light">{question.helper}</p>}
-        </div>
+      <div className="space-y-6">
+        <h2 className="font-display font-bold text-2xl md:text-3xl text-white leading-snug">
+          {question.text}
+        </h2>
+        {question.helper && <p className="text-sm text-silver/60 font-light">{question.helper}</p>}
         <div className="grid grid-cols-1 gap-3">
-          {question.options.map((opt) => (
-            <Checkbox
+          {question.options.map((opt, i) => (
+            <OptionCard
               key={opt.label}
+              multi
               checked={arr.includes(opt.label)}
               label={opt.label}
-              onChange={() => toggle(opt.label)}
+              onClick={() => handleMultiToggle(opt.label)}
+              autoFocus={i === 0 && !isFirstScreen}
             />
           ))}
           {question.allowOther && (
             <>
-              <Checkbox
-                key="__other__"
+              <OptionCard
+                multi
                 checked={otherChecked}
                 label={OTHER_LABEL}
-                onChange={toggleOther}
+                onClick={toggleOther}
               />
               {otherChecked && (
                 <input
@@ -878,332 +854,216 @@ const QuestionBlock = ({ question, value, onChange, otherValue, onOtherChange })
     );
   }
 
+  // Single-select
   return (
-    <div className="space-y-4">
-      <div className="space-y-2">
-        <h3 className="font-display font-bold text-xl md:text-2xl text-white leading-snug">{question.text}</h3>
-        {question.helper && <p className="text-sm text-silver/60 font-light">{question.helper}</p>}
-      </div>
+    <div className="space-y-6">
+      <h2 className="font-display font-bold text-2xl md:text-3xl text-white leading-snug">
+        {question.text}
+      </h2>
+      {question.helper && <p className="text-sm text-silver/60 font-light">{question.helper}</p>}
       <div className="grid grid-cols-1 gap-3">
-        {question.options.map((opt) => (
-          <Radio
+        {question.options.map((opt, i) => (
+          <OptionCard
             key={opt.label}
             checked={value === opt.label}
             label={opt.label}
-            onChange={() => onChange(opt.label)}
+            onClick={() => handleSingle(opt.label)}
+            autoFocus={i === 0 && !isFirstScreen}
           />
         ))}
       </div>
+      {showHealthcareFollowUp && (
+        <div className="space-y-3 pt-4 border-t border-white/10">
+          <label className="block">
+            <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
+              Tell us more — what type of practice?
+            </span>
+            <input
+              type="text"
+              value={otherValue || ''}
+              onChange={(e) => onOtherChange && onOtherChange(e.target.value.slice(0, 200))}
+              placeholder="Optional — e.g. mixed billing GP, paediatric specialist, group dental"
+              className="mt-2 w-full bg-white/5 border border-white/15 rounded-xl px-5 py-4 text-white placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
+            />
+          </label>
+        </div>
+      )}
     </div>
   );
 };
 
-const sectionValid = (section, responses) => {
-  for (const q of section.questions) {
-    if (q.optional || q.kind === 'text') continue;
-    const v = responses[q.id];
-    if (q.kind === 'multi') {
-      if (!Array.isArray(v) || v.length === 0) return false;
-    } else {
-      if (!v) return false;
-    }
-  }
-  return true;
-};
-
 // ─────────────────────────────────────────────────────────────────────────────
-// Lead capture
+// Email capture screen
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Field = ({ label, required, type = 'text', value, onChange, className = '' }) => (
-  <label className={`flex flex-col gap-2 ${className}`}>
-    <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
-      {label} {required && <span className="text-[#C9A84C]">*</span>}
-    </span>
-    <input
-      type={type}
-      value={value || ''}
-      required={required}
-      onChange={(e) => onChange(e.target.value)}
-      className="bg-white/5 border border-white/15 rounded-lg px-4 py-3 min-h-[44px] text-white placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
-    />
-  </label>
-);
-
-const ConsentBox = ({ checked, onChange, label, required }) => (
-  <label className="flex items-start gap-3 cursor-pointer group">
-    <input
-      type="checkbox"
-      checked={!!checked}
-      onChange={(e) => onChange(e.target.checked)}
-      className="mt-1 w-4 h-4 accent-[#C9A84C] cursor-pointer"
-    />
-    <span className="text-silver/85 font-light text-sm md:text-base group-hover:text-white transition-colors duration-200">
-      {label}
-      {required && <span className="text-[#C9A84C]"> *</span>}
-    </span>
-  </label>
-);
-
-const LeadCapture = ({ values, onChange, onSubmit, submitting }) => {
-  const required = ['firstName', 'lastName', 'businessName', 'email'];
-  const missing = required.some((f) => !values[f]?.trim());
-  const consentOk = values.consentContact;
-
+const EmailCaptureScreen = ({ lead, onChange, onSubmit, submitting }) => {
+  const valid = lead.name.trim().length > 1 && /\S+@\S+\.\S+/.test(lead.email.trim());
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        if (missing || !consentOk || submitting) return;
+        if (!valid || submitting) return;
         onSubmit();
       }}
-      className="relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 rounded-3xl p-8 md:p-14 space-y-8"
+      className="space-y-6"
     >
+      <h2 className="font-display font-bold text-2xl md:text-3xl text-white leading-snug">
+        Where should we send your results?
+      </h2>
+      <p className="text-silver/70 font-light text-base md:text-lg">
+        Your score appears on the next screen. We will also email you a copy.
+      </p>
       <div className="space-y-4">
-        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">Last step</p>
-        <h2 className="font-display font-bold text-3xl md:text-4xl text-white leading-tight">
-          Your AI Readiness Score is ready.
-        </h2>
-        <p className="text-base md:text-lg text-silver/75 font-light">
-          To see your full results including your estimated opportunity value, enter your details below. We will also email you a summary of your results.
-        </p>
+        <label className="flex flex-col gap-2">
+          <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
+            Name <span className="text-[#C9A84C]">*</span>
+          </span>
+          <input
+            autoFocus
+            type="text"
+            required
+            value={lead.name}
+            onChange={(e) => onChange('name', e.target.value)}
+            className="bg-white/5 border border-white/15 rounded-lg px-5 py-4 min-h-[48px] text-white text-base placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
+          />
+        </label>
+        <label className="flex flex-col gap-2">
+          <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
+            Email <span className="text-[#C9A84C]">*</span>
+          </span>
+          <input
+            type="email"
+            required
+            value={lead.email}
+            onChange={(e) => onChange('email', e.target.value)}
+            className="bg-white/5 border border-white/15 rounded-lg px-5 py-4 min-h-[48px] text-white text-base placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
+          />
+        </label>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <Field label="First name" required value={values.firstName} onChange={(v) => onChange('firstName', v)} />
-        <Field label="Last name" required value={values.lastName} onChange={(v) => onChange('lastName', v)} />
-        <Field
-          label="Business name"
-          required
-          value={values.businessName}
-          onChange={(v) => onChange('businessName', v)}
-          className="md:col-span-2"
-        />
-        <Field label="Email address" type="email" required value={values.email} onChange={(v) => onChange('email', v)} />
-        <Field label="Phone (optional)" type="tel" value={values.phone} onChange={(v) => onChange('phone', v)} />
-      </div>
-
-      <div className="space-y-4 pt-2">
-        <ConsentBox
-          checked={values.consentContact}
-          onChange={(v) => onChange('consentContact', v)}
-          label="I consent to BW Advisory Solutions contacting me about these results."
-          required
-        />
-        <ConsentBox
-          checked={values.optInResearch}
-          onChange={(v) => onChange('optInResearch', v)}
-          label="I'm happy to receive occasional insights from BW Advisory Solutions."
-        />
-      </div>
-
-      <div className="pt-2">
+      <div className="pt-4">
         <button
           type="submit"
-          disabled={missing || !consentOk || submitting}
+          disabled={!valid || submitting}
           className={[
-            'w-full md:w-auto px-12 py-5 min-h-[44px] rounded-lg font-bold text-sm tracking-[0.15em] uppercase transition-all duration-300 inline-flex items-center justify-center gap-3',
-            missing || !consentOk || submitting
+            'w-full md:w-auto px-12 py-5 min-h-[48px] rounded-lg font-bold text-sm tracking-[0.15em] uppercase transition-all duration-300 inline-flex items-center justify-center gap-3',
+            !valid || submitting
               ? 'bg-white/10 text-silver/40 cursor-not-allowed'
               : 'bg-[#C9A84C] text-[#0F172A] hover:bg-[#E0BC60] cursor-pointer shadow-[0_8px_24px_rgba(201,168,76,0.3)]',
           ].join(' ')}
         >
-          {submitting ? 'Calculating…' : 'See My Results'}
-          {!submitting && (
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          )}
+          {submitting ? 'Calculating…' : 'Show My Results →'}
         </button>
       </div>
-
       <p className="text-xs text-silver/50 font-light">
-        Your details are handled in line with our <a href="/privacy" className="underline hover:text-[#C9A84C]">privacy policy</a>.
+        Handled in line with our <a href="/privacy" className="underline hover:text-[#C9A84C]">privacy policy</a>.
       </p>
     </form>
   );
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Score gauge (pure SVG half-arc)
+// Result screen
 // ─────────────────────────────────────────────────────────────────────────────
 
-const ScoreGauge = ({ score, colour }) => {
-  // Half-circle arc from 180° to 360° (left to right across the top).
-  // Centre (100, 100), radius 80. Path length ≈ π * 80 ≈ 251.33.
-  const radius = 80;
-  const circumference = Math.PI * radius;
-  const offset = circumference * (1 - score / 100);
-
-  return (
-    <div className="relative w-full max-w-[320px] mx-auto">
-      <svg viewBox="0 0 200 120" className="w-full" role="img" aria-label={`Readiness score ${score}`}>
-        {/* Background track */}
-        <path
-          d="M 20 100 A 80 80 0 0 1 180 100"
-          fill="none"
-          stroke="rgba(255,255,255,0.1)"
-          strokeWidth="14"
-          strokeLinecap="round"
-        />
-        {/* Score arc */}
-        <path
-          d="M 20 100 A 80 80 0 0 1 180 100"
-          fill="none"
-          stroke={colour}
-          strokeWidth="14"
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          style={{ transition: 'stroke-dashoffset 800ms ease-out, stroke 400ms ease-out' }}
-        />
-      </svg>
-      <div className="absolute inset-0 flex flex-col items-center justify-end pb-2">
-        <div className="font-display font-bold text-6xl md:text-7xl text-white leading-none">{score}</div>
-        <div className="text-silver/60 font-mono text-xs tracking-[0.2em] uppercase mt-2">out of 100</div>
-      </div>
-    </div>
-  );
-};
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Results page
-// ─────────────────────────────────────────────────────────────────────────────
-
-const Results = ({ score, band, opportunity, flags, businessName }) => {
-  const colour = colourFor(score);
-
-  let ctaCopy;
-  if (score <= 40) {
-    ctaCopy =
-      'Your results indicate significant operational gaps that are actively costing your business time and money. These compound over time. A BW Advisory Operational Resilience Diagnostic maps your full operation and delivers a prioritised plan with costs and timelines. Most clients recover the cost of the diagnostic within the first month of implementation.';
-  } else if (score <= 65) {
-    ctaCopy =
-      'Your results show a business with solid foundations and meaningful gaps in automation, integration, and process efficiency. A BW Advisory Operational Resilience Diagnostic identifies exactly where to invest next and what the return looks like.';
-  } else {
-    ctaCopy =
-      'Your results indicate a relatively mature operational environment. A targeted BW Advisory assessment confirms what is working, identifies remaining friction, and ensures you are not carrying hidden risk.';
-  }
-
-  const subject = `AI Readiness Diagnostic — Score ${score} — ${businessName || 'your business'}`;
-  const mailto = `mailto:brad@bwadvisorysolutions.com.au?subject=${encodeURIComponent(subject)}`;
-
-  const oppRows = [];
-  oppRows.push({
-    label: 'Time recoverable from manual admin',
-    value: `${fmtHours(opportunity.timeLost.annualHours)} per year`,
-    sub: `${fmtMoney(opportunity.timeLost.annualCost)} at AUD $45/hr blended admin rate`,
-  });
-  if (opportunity.revenueAtRisk !== null) {
-    oppRows.push({
-      label: 'Revenue at risk from admin and communication failures',
-      value: `${fmtMoney(opportunity.revenueAtRisk)} per year`,
-      sub: 'Estimated attrition from scheduling and communication gaps',
-    });
-  }
-  if (opportunity.capacityConstraint !== null) {
-    oppRows.push({
-      label: 'Capacity unlock from process improvement',
-      value: `${fmtMoney(opportunity.capacityConstraint)} per year`,
-      sub: 'Estimated value of recovered capacity at current rates',
-    });
-  }
+const Results = ({ score, opportunity, riskAreas, review, lead }) => {
+  const concernCount = riskAreas.filter((a) => a.severity !== 'MODERATE').length;
+  const weeklyHours = opportunity.timeLost.weeklyHours;
 
   return (
     <div className="space-y-12">
-      {/* Score block */}
-      <div className="relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 rounded-3xl p-8 md:p-14 text-center space-y-6">
-        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">Your Score</p>
-        <ScoreGauge score={score} colour={colour} />
-        <p
-          className="font-display font-bold text-2xl md:text-3xl tracking-[0.1em]"
-          style={{ color: colour }}
-        >
-          {band}
+      {/* Headline score */}
+      <div className="bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 rounded-3xl p-8 md:p-14 text-center space-y-5">
+        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">
+          Your Result
         </p>
-        <p className="text-lg md:text-xl text-silver/85 font-light leading-relaxed max-w-3xl mx-auto">
-          {BAND_COPY[band]}
+        <h1 className="font-display font-bold text-3xl md:text-5xl text-white leading-tight">
+          Your Operational Efficiency Score:{' '}
+          <span className="text-[#C9A84C]">{score}/100</span>
+        </h1>
+        <p className="text-base md:text-lg text-silver/80 font-light leading-relaxed max-w-3xl mx-auto">
+          Based on your responses, we've identified <span className="text-white font-semibold">{concernCount}</span> area{concernCount === 1 ? '' : 's'} where your current workflows are creating measurable inefficiency, duplication, and risk.
         </p>
       </div>
 
-      {/* Opportunity estimate */}
+      {/* Three-metric block */}
       <div>
         <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-6">
-          Opportunity Estimate
+          The Cost
         </p>
-        <div className="rounded-3xl border border-white/15 overflow-hidden">
-          {oppRows.map((row, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-white/5 border border-white/15 rounded-2xl p-6 md:p-8 space-y-2">
+            <p className="text-silver/65 text-sm font-light">Estimated time lost per week across your team</p>
+            <p className="text-[#C9A84C] font-display font-bold text-3xl md:text-4xl">
+              {fmtHours(weeklyHours)} hours
+            </p>
+          </div>
+          <div className="bg-white/5 border border-white/15 rounded-2xl p-6 md:p-8 space-y-2">
+            <p className="text-silver/65 text-sm font-light">Estimated annual cost of that lost time</p>
+            <p className="text-[#C9A84C] font-display font-bold text-3xl md:text-4xl">
+              {fmtMoney(opportunity.timeLost.annualCost)}
+            </p>
+          </div>
+          <div className="bg-white/5 border border-white/15 rounded-2xl p-6 md:p-8 space-y-2">
+            <p className="text-silver/65 text-sm font-light">Estimated annual revenue at risk</p>
+            <p className="text-[#C9A84C] font-display font-bold text-3xl md:text-4xl">
+              {fmtMoney(opportunity.revenueAtRisk)}
+            </p>
+          </div>
+        </div>
+        <p className="text-xs text-silver/55 font-light mt-4">
+          These are conservative estimates. The actual cost to your business is likely higher.
+        </p>
+      </div>
+
+      {/* Risk-area breakdown */}
+      <div>
+        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-6">
+          Risk Area Breakdown
+        </p>
+        <div className="grid grid-cols-1 gap-3">
+          {riskAreas.map((a) => (
             <div
-              key={row.label}
-              className={[
-                'p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4',
-                i < oppRows.length - 1 ? 'border-b border-white/10' : '',
-                'bg-white/5',
-              ].join(' ')}
+              key={a.id}
+              className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 bg-white/5 border border-white/15 rounded-xl px-5 md:px-6 py-4"
             >
-              <div className="space-y-1 md:max-w-md">
-                <p className="text-white font-display font-semibold text-lg md:text-xl leading-snug">{row.label}</p>
-                <p className="text-silver/60 text-sm font-light">{row.sub}</p>
-              </div>
-              <p className="text-[#C9A84C] font-display font-bold text-2xl md:text-3xl whitespace-nowrap">{row.value}</p>
+              <p className="text-white font-display font-semibold text-lg">{a.label}</p>
+              <span
+                className={`self-start md:self-auto text-[11px] font-mono font-bold tracking-[0.15em] uppercase px-3 py-1 rounded border ${SEVERITY_BADGE[a.severity]}`}
+              >
+                {a.severity}
+              </span>
             </div>
           ))}
         </div>
-        <p className="text-xs text-silver/50 font-light mt-4 max-w-3xl">
-          Conservative estimates based on your inputs and benchmarked against businesses of similar size and type.
-        </p>
       </div>
 
-      {/* Flags */}
-      {flags.length > 0 && (
-        <div>
-          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-6">What We Found</p>
-          <div className="space-y-4">
-            {flags.map((f, i) => (
-              <div key={i} className="bg-white/5 border border-white/15 rounded-2xl p-6 md:p-8 space-y-3">
-                <div className="flex items-center gap-3">
-                  <span className={`text-xs font-mono font-bold tracking-[0.15em] uppercase px-3 py-1 rounded border ${FLAG_COLOURS[f.severity]}`}>
-                    {f.severity}
-                  </span>
-                  <p className="text-white font-display font-bold text-lg md:text-xl leading-snug">{f.area}</p>
-                </div>
-                <p className="text-silver/80 font-light text-base leading-relaxed">{f.detail}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* What this does not tell you */}
-      <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8">
-        <p className="text-silver/60 font-mono text-xs tracking-[0.2em] uppercase font-bold mb-3">
-          What This Does Not Tell You
+      {/* Personal review */}
+      <div className="bg-white/5 border border-white/15 rounded-2xl p-6 md:p-8 space-y-3">
+        <p className="text-silver/60 font-mono text-xs tracking-[0.2em] uppercase font-bold">
+          Here's what stood out in your responses
         </p>
-        <p className="text-silver/80 font-light text-base md:text-lg leading-relaxed">
-          This assessment identifies that gaps exist and estimates what they cost. It does not specify which systems to implement, how to sequence the work, or what investment is required to fix it. That requires a professional assessment of your end-to-end operation.
+        <p className="text-silver/85 font-light text-base md:text-lg leading-relaxed">
+          {review}
         </p>
       </div>
 
       {/* CTA */}
-      <div className="relative group overflow-hidden">
-        <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-3xl opacity-0 group-hover:opacity-60 transition-all duration-700 blur-xl"></div>
-        <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-xl border border-accent/30 group-hover:border-[#C9A84C]/60 rounded-3xl p-8 md:p-16 transition-all duration-500 text-center space-y-8">
-          <p className="text-lg md:text-xl text-silver/85 font-light leading-relaxed max-w-3xl mx-auto">
-            {ctaCopy}
-          </p>
-          <a
-            href={mailto}
-            className="inline-flex items-center justify-center gap-3 bg-[#C9A84C] px-10 md:px-12 py-5 min-h-[44px] rounded-lg text-[#0F172A] font-bold text-sm tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 shadow-[0_8px_24px_rgba(201,168,76,0.3)] cursor-pointer"
-          >
-            Book a Diagnostic Call — 30 Minutes, No Cost
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </a>
-          <p className="text-sm md:text-base text-silver/60 font-light max-w-2xl mx-auto">
-            No sales pitch. I will tell you what the score means for your specific operation.
-          </p>
-        </div>
+      <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-xl border border-[#C9A84C]/30 rounded-3xl p-8 md:p-14 text-center space-y-6">
+        <p className="text-base md:text-lg text-silver/85 font-light leading-relaxed max-w-3xl mx-auto">
+          The next step is a BW Advisory Operational Resilience Diagnostic. Most clients recover the cost of the diagnostic within the first month of implementation.
+        </p>
+        <a
+          href={`mailto:brad@bwadvisorysolutions.com.au?subject=${encodeURIComponent(`Operational Resilience Diagnostic — Score ${score}`)}`}
+          className="inline-flex items-center justify-center gap-3 bg-[#C9A84C] px-10 md:px-12 py-5 min-h-[48px] rounded-lg text-[#0F172A] font-bold text-sm tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 shadow-[0_8px_24px_rgba(201,168,76,0.3)] cursor-pointer"
+        >
+          Book Your Diagnostic
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+        <p className="text-sm md:text-base text-silver/60 font-light">
+          We've also sent a copy to <span className="text-white">{lead.email}</span> for your records.
+        </p>
       </div>
     </div>
   );
@@ -1213,197 +1073,239 @@ const Results = ({ score, band, opportunity, flags, businessName }) => {
 // Page
 // ─────────────────────────────────────────────────────────────────────────────
 
+const TOTAL_QUESTIONS = QUESTIONS.length; // 28
+const STEP_EMAIL = TOTAL_QUESTIONS;       // 28
+const STEP_RESULTS = TOTAL_QUESTIONS + 1; // 29
+
+const isAnswerValid = (question, value) => {
+  if (!question) return false;
+  if (question.optional || question.kind === 'text') return true;
+  if (question.kind === 'multi') return Array.isArray(value) && value.length > 0;
+  return typeof value === 'string' && value.length > 0;
+};
+
 const AIReadiness = () => {
-  const [phase, setPhase] = useState('questions'); // questions | lead | results
-  const [sectionIndex, setSectionIndex] = useState(0);
+  const [step, setStep] = useState(0);
+  const [direction, setDirection] = useState('forward');
   const [responses, setResponses] = useState({});
-  const [lead, setLead] = useState({
-    firstName: '',
-    lastName: '',
-    businessName: '',
-    email: '',
-    phone: '',
-    consentContact: false,
-    optInResearch: true,
-  });
+  const [lead, setLead] = useState({ name: '', email: '' });
   const [submitting, setSubmitting] = useState(false);
+  const [finalResults, setFinalResults] = useState(null);
+  const advanceLockRef = useRef(false);
 
-  const totalSections = SECTIONS.length;
-  const section = SECTIONS[sectionIndex];
-  const valid = sectionValid(section, responses);
-
-  const setAnswer = (qid, value) => {
+  const setAnswer = useCallback((qid, value) => {
     setResponses((prev) => ({ ...prev, [qid]: value }));
-  };
+  }, []);
 
-  const goNext = () => {
-    if (!valid) return;
-    if (sectionIndex < totalSections - 1) {
-      setSectionIndex((i) => i + 1);
-      window.scrollTo({ top: 0, behavior: 'instant' });
-    } else {
-      setPhase('lead');
-      window.scrollTo({ top: 0, behavior: 'instant' });
-    }
-  };
+  const advance = useCallback(() => {
+    if (advanceLockRef.current) return;
+    advanceLockRef.current = true;
+    setDirection('forward');
+    setStep((s) => Math.min(s + 1, STEP_RESULTS));
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    setTimeout(() => { advanceLockRef.current = false; }, 350);
+  }, []);
 
-  const goBack = () => {
-    if (phase === 'lead') {
-      setPhase('questions');
-      setSectionIndex(totalSections - 1);
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      return;
-    }
-    if (sectionIndex > 0) {
-      setSectionIndex((i) => i - 1);
-      window.scrollTo({ top: 0, behavior: 'instant' });
-    }
-  };
+  const goBack = useCallback(() => {
+    if (advanceLockRef.current) return;
+    setDirection('back');
+    setStep((s) => Math.max(s - 1, 0));
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
 
-  const updateLead = (field, value) => setLead((prev) => ({ ...prev, [field]: value }));
-
-  const finalResults = useMemo(() => {
-    if (phase !== 'results') return null;
-    const score = computeScore(responses);
-    const band = bandFor(score);
-    const opportunity = computeOpportunity(responses);
-    const flags = generateFlags(responses);
-    return { score, band, opportunity, flags };
-  }, [phase, responses]);
-
-  const handleLeadSubmit = async () => {
+  const submitLead = async () => {
     setSubmitting(true);
     const score = computeScore(responses);
-    const band = bandFor(score);
     const opportunity = computeOpportunity(responses);
+    const riskAreas = computeRiskAreas(responses);
+    const review = generatePersonalReview(riskAreas);
+    setFinalResults({ score, opportunity, riskAreas, review });
+
     const payload = {
-      name: `${lead.firstName.trim()} ${lead.lastName.trim()}`.trim(),
+      name: lead.name.trim(),
       email: lead.email.trim(),
-      organisation: lead.businessName.trim(),
-      role: responses.A5 ?? 'Not specified',
-      phone: lead.phone.trim() || undefined,
+      organisation: responses.A1 || 'Not specified',
       diagnosticType: getDiagnosticType(responses.A1),
       responses: {
         ...responses,
         score,
-        readinessBand: band,
         opportunityEstimate: {
+          weeklyHours: opportunity.timeLost.weeklyHours,
           annualHours: opportunity.timeLost.annualHours,
           annualCost: opportunity.timeLost.annualCost,
           revenueAtRisk: opportunity.revenueAtRisk,
-          capacityConstraint: opportunity.capacityConstraint,
         },
+        riskAreas: riskAreas.map(({ id, label, severity }) => ({ id, label, severity })),
       },
-      score,
-      optInResearch: !!lead.optInResearch,
+      optInResearch: false,
       source: 'website_diagnostic',
       brand: 'BW_ADVISORY',
     };
-    await submitToCommandCentre(payload);
-    setSubmitting(false);
-    setPhase('results');
+
+    submitToCommandCentre(payload).finally(() => {
+      setSubmitting(false);
+    });
+
+    setDirection('forward');
+    setStep(STEP_RESULTS);
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
+  // Global Enter handler — advance when current screen is valid.
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key !== 'Enter') return;
+      const tag = (e.target?.tagName || '').toLowerCase();
+      if (tag === 'textarea' || tag === 'input' || tag === 'button') return;
+      if (step < TOTAL_QUESTIONS) {
+        const q = QUESTIONS[step];
+        if (isAnswerValid(q, responses[q.id])) advance();
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [step, responses, advance]);
+
+  // Determine which screen is rendered.
+  let screenContent;
+  let progressCurrent;
+  let canGoNext = false;
+
+  if (step < TOTAL_QUESTIONS) {
+    const q = QUESTIONS[step];
+    progressCurrent = step + 1;
+    canGoNext = isAnswerValid(q, responses[q.id]);
+
+    screenContent = (
+      <div className="space-y-8">
+        <SectionHeader
+          section={q.section}
+          sectionNumber={q.sectionIndex + 1}
+          totalSections={SECTIONS.length}
+          indexInSection={q.indexInSection}
+          questionsInSection={q.questionsInSection}
+        />
+        <QuestionScreen
+          question={q}
+          value={responses[q.id]}
+          otherValue={responses[`${q.id}_other`]}
+          onChange={(v) => setAnswer(q.id, v)}
+          onOtherChange={(v) => setAnswer(`${q.id}_other`, v)}
+          onAdvance={advance}
+          isFirstScreen={step === 0}
+        />
+      </div>
+    );
+  } else if (step === STEP_EMAIL) {
+    progressCurrent = TOTAL_QUESTIONS;
+    canGoNext = true;
+    screenContent = (
+      <EmailCaptureScreen
+        lead={lead}
+        onChange={(field, value) => setLead((prev) => ({ ...prev, [field]: value }))}
+        onSubmit={submitLead}
+        submitting={submitting}
+      />
+    );
+  } else {
+    screenContent = finalResults ? (
+      <Results
+        score={finalResults.score}
+        opportunity={finalResults.opportunity}
+        riskAreas={finalResults.riskAreas}
+        review={finalResults.review}
+        lead={lead}
+      />
+    ) : null;
+  }
+
+  const showProgress = step <= STEP_EMAIL;
+  const showBack = step > 0 && step <= STEP_EMAIL;
+  const currentQ = step < TOTAL_QUESTIONS ? QUESTIONS[step] : null;
+  const a1NeedsManualNext = currentQ?.id === 'A1' && isHealthcare(responses.A1);
+  const showNextButton =
+    step < TOTAL_QUESTIONS &&
+    currentQ &&
+    (currentQ.kind === 'multi' || currentQ.kind === 'text' || a1NeedsManualNext);
+
+  const slideClass = direction === 'forward' ? 'slide-fwd' : 'slide-back';
+
   return (
     <div className="bg-primary min-h-screen">
+      <style>{`
+        @keyframes aiFwd { from { opacity: 0; transform: translateX(32px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes aiBack { from { opacity: 0; transform: translateX(-32px); } to { opacity: 1; transform: translateX(0); } }
+        .slide-fwd { animation: aiFwd 280ms ease-out; }
+        .slide-back { animation: aiBack 280ms ease-out; }
+        @media (prefers-reduced-motion: reduce) {
+          .slide-fwd, .slide-back { animation: none; }
+        }
+      `}</style>
+
       {/* Hero */}
-      <section className="relative py-24 md:py-32 px-6 w-full z-10 overflow-hidden">
+      <section className="relative pt-24 md:pt-32 pb-12 px-6 w-full z-10 overflow-hidden">
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#0369A1]/5 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-1/2 w-[600px] h-[600px] bg-silver/5 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="max-w-3xl mx-auto space-y-6 relative z-10">
-          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">AI Readiness Diagnostic</p>
-          <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white tracking-tight leading-[1.1]">
+        <div className="max-w-3xl mx-auto space-y-4 relative z-10">
+          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">
+            AI Readiness Diagnostic
+          </p>
+          <h1 className="font-display font-bold text-3xl md:text-5xl text-white tracking-tight leading-[1.1]">
             See where AI fits — and where it doesn't.
           </h1>
-          <p className="text-lg md:text-xl text-silver/75 font-light leading-relaxed">
-            Answer all five sections. The moment you finish, your scored result appears — showing exactly where you're exposed, where value is leaking, and a dollar figure of what each gap is likely costing you annually. Five minutes. On screen. No forms submitted to someone's inbox. No waiting for a reply.
-          </p>
-          <p className="text-sm text-silver/50 font-light leading-relaxed">
-            The dollar figures are based on typical costs for businesses your size — a conservative indication, not a guarantee. The gaps are real.
+          <p className="text-base md:text-lg text-silver/75 font-light leading-relaxed">
+            Five minutes. One question at a time. Your scored result appears the moment you finish — showing exactly where you're exposed and what each gap is likely costing you.
           </p>
         </div>
       </section>
 
       {/* Body */}
       <section className="pb-32 px-6 w-full relative z-10">
-        <div className="max-w-3xl mx-auto">
-          {phase === 'questions' && (
-            <div className="space-y-10">
-              <ProgressBar current={sectionIndex + 1} total={totalSections} sectionTitle={section.title} />
+        <div className="max-w-3xl mx-auto space-y-6">
+          {showProgress && (
+            <ProgressBar current={progressCurrent} total={TOTAL_QUESTIONS} />
+          )}
 
-              <div className="relative bg-[#0F172A]/90 backdrop-blur-sm border border-white/20 rounded-3xl p-6 md:p-12 space-y-10">
-                <div className="space-y-2">
-                  <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">
-                    Section {section.id} — {section.title}
-                  </p>
-                </div>
-                {section.questions.map((q) => (
-                  <div key={q.id} className="border-t border-white/10 first:border-t-0 pt-8 first:pt-0">
-                    <QuestionBlock
-                      question={q}
-                      value={responses[q.id]}
-                      onChange={(v) => setAnswer(q.id, v)}
-                      otherValue={responses[`${q.id}_other`]}
-                      onOtherChange={(v) => setAnswer(`${q.id}_other`, v)}
-                    />
-                  </div>
-                ))}
-              </div>
+          <div className="relative bg-[#0F172A]/90 backdrop-blur-sm border border-white/20 rounded-3xl p-6 md:p-12 min-h-[420px]">
+            <div key={step} className={slideClass}>
+              {screenContent}
+            </div>
+          </div>
 
-              <div className="flex items-center justify-between gap-4">
+          {(showBack || showNextButton) && (
+            <div className="flex items-center justify-between gap-4">
+              <button
+                type="button"
+                onClick={goBack}
+                disabled={!showBack}
+                className={[
+                  'text-silver/70 font-mono text-xs tracking-[0.15em] uppercase font-bold transition-colors duration-200 px-4 py-3 min-h-[44px]',
+                  !showBack ? 'opacity-0 pointer-events-none' : 'hover:text-white cursor-pointer',
+                ].join(' ')}
+              >
+                ← Back
+              </button>
+              {showNextButton ? (
                 <button
                   type="button"
-                  onClick={goBack}
-                  disabled={sectionIndex === 0}
+                  onClick={advance}
+                  disabled={!canGoNext}
                   className={[
-                    'text-silver/70 font-mono text-xs tracking-[0.15em] uppercase font-bold transition-colors duration-200 px-4 py-3 min-h-[44px]',
-                    sectionIndex === 0 ? 'opacity-30 cursor-not-allowed' : 'hover:text-white cursor-pointer',
-                  ].join(' ')}
-                >
-                  ← Back
-                </button>
-                <button
-                  type="button"
-                  onClick={goNext}
-                  disabled={!valid}
-                  className={[
-                    'px-8 py-4 min-h-[44px] rounded-lg font-bold text-sm tracking-[0.15em] uppercase transition-all duration-300 inline-flex items-center gap-3',
-                    valid
+                    'px-8 py-4 min-h-[48px] rounded-lg font-bold text-sm tracking-[0.15em] uppercase transition-all duration-300 inline-flex items-center gap-3',
+                    canGoNext
                       ? 'bg-[#C9A84C] text-[#0F172A] hover:bg-[#E0BC60] cursor-pointer shadow-[0_8px_24px_rgba(201,168,76,0.3)]'
                       : 'bg-white/10 text-silver/40 cursor-not-allowed',
                   ].join(' ')}
                 >
-                  {sectionIndex === totalSections - 1 ? 'Continue' : 'Next section'}
+                  Next
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
                 </button>
-              </div>
+              ) : (
+                <span />
+              )}
             </div>
-          )}
-
-          {phase === 'lead' && (
-            <div className="space-y-6">
-              <button
-                type="button"
-                onClick={goBack}
-                className="text-silver/70 font-mono text-xs tracking-[0.15em] uppercase font-bold hover:text-white transition-colors duration-200 cursor-pointer"
-              >
-                ← Back to questions
-              </button>
-              <LeadCapture values={lead} onChange={updateLead} onSubmit={handleLeadSubmit} submitting={submitting} />
-            </div>
-          )}
-
-          {phase === 'results' && finalResults && (
-            <Results
-              score={finalResults.score}
-              band={finalResults.band}
-              opportunity={finalResults.opportunity}
-              flags={finalResults.flags}
-              businessName={lead.businessName}
-            />
           )}
         </div>
       </section>
