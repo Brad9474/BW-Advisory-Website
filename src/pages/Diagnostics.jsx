@@ -4,6 +4,22 @@ import Footer from '../components/Footer';
 const groups = [
   {
     label: "Stream 01",
+    name: "AI Readiness",
+    desc: "For healthcare practices and professional services firms.",
+    items: [
+      {
+        num: "05",
+        badge: "AI Readiness Diagnostic",
+        audience: "Healthcare practices · Professional services firms",
+        duration: "5 min · 5 sections · 28 questions",
+        desc: "Five sections. Five minutes. A scored result with an opportunity estimate of what your gaps are costing you.",
+        href: "/ai-readiness",
+        internal: true,
+      },
+    ]
+  },
+  {
+    label: "Stream 02",
     name: "Strategic & Operational",
     desc: "Identify the gap between intent and execution.",
     items: [
@@ -26,7 +42,7 @@ const groups = [
     ]
   },
   {
-    label: "Stream 02",
+    label: "Stream 03",
     name: "Loss Intelligence & Investigations",
     desc: "Assess your retail crime defence capability.",
     items: [
@@ -45,22 +61,6 @@ const groups = [
         duration: "8 min · 10 questions",
         desc: "Assesses the integrity of the investigation lifecycle from signal collection to defensible documentation and outcome.",
         href: "https://portal.bwadvisorysolutions.com.au/investigations-diagnostic.html"
-      },
-    ]
-  },
-  {
-    label: "Stream 03",
-    name: "AI Readiness",
-    desc: "For healthcare practices and professional services firms.",
-    items: [
-      {
-        num: "05",
-        badge: "AI Readiness Diagnostic",
-        audience: "Healthcare practices · Professional services firms",
-        duration: "5 min · 5 sections",
-        desc: "Five sections. Five minutes. A scored result with an opportunity estimate of what your gaps are costing you.",
-        href: "/ai-readiness",
-        internal: true,
       },
     ]
   }
@@ -121,10 +121,10 @@ const Diagnostics = () => (
         <div className="space-y-8">
           <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">Diagnostic Assessment</p>
           <h1 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1]">
-            Know Your Exposure
+            Start with what's true.
           </h1>
           <p className="text-2xl md:text-3xl text-silver/75 font-light leading-relaxed max-w-5xl">
-            The gap doesn't close until you know exactly where it is. <span className="text-white font-semibold">Four diagnostics. Two streams. Eight minutes each.</span>
+            The gap doesn't close until you know exactly where it is. <span className="text-white font-semibold">Five assessments. Select the one that fits your situation.</span>
           </p>
         </div>
 
