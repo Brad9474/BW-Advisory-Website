@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 const groups = [
@@ -46,14 +47,27 @@ const groups = [
         href: "https://portal.bwadvisorysolutions.com.au/investigations-diagnostic.html"
       },
     ]
+  },
+  {
+    label: "Stream 03",
+    name: "AI Readiness",
+    desc: "For healthcare practices and professional services firms.",
+    items: [
+      {
+        num: "05",
+        badge: "AI Readiness Diagnostic",
+        audience: "Healthcare practices · Professional services firms",
+        duration: "5 min · 12 questions",
+        desc: "Twelve questions. Five minutes. A scored result that tells you where your practice is exposed, where the easy wins are, and what to do first.",
+        href: "/ai-readiness-diagnostic",
+        internal: true,
+      },
+    ]
   }
 ];
 
-const DiagnosticCard = ({ item }) => (
-  <a
-    href={item.href}
-    className="group relative overflow-hidden h-full flex flex-col"
-  >
+const DiagnosticCardInner = ({ item }) => (
+  <>
     <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-3xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
     <div className="relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 group-hover:border-[#C9A84C]/50 rounded-3xl p-10 md:p-14 lg:p-16 transition-all duration-500 group-hover:bg-white/14 flex flex-col h-full">
       <div className="flex items-start justify-between mb-10">
@@ -77,8 +91,24 @@ const DiagnosticCard = ({ item }) => (
         </span>
       </div>
     </div>
-  </a>
+  </>
 );
+
+const DiagnosticCard = ({ item }) => {
+  const className = "group relative overflow-hidden h-full flex flex-col";
+  if (item.internal) {
+    return (
+      <Link to={item.href} className={className}>
+        <DiagnosticCardInner item={item} />
+      </Link>
+    );
+  }
+  return (
+    <a href={item.href} className={className}>
+      <DiagnosticCardInner item={item} />
+    </a>
+  );
+};
 
 const Diagnostics = () => (
   <div className="bg-primary min-h-screen">
