@@ -102,6 +102,7 @@ const SECTIONS = [
         text: 'Which practice or business management system do you use?',
         helper: 'Select all that apply.',
         kind: 'multi',
+        allowOther: true,
         options: [
           'Best Practice (Best Practice Software)', 'Medical Director (Telstra Health)', 'Genie Solutions', 'Zedmed',
           'Cliniko', 'Automed', 'Shexie', 'PPMP', 'HotDoc', 'HealthEngine', 'MedicalDirector Pracsoft', 'Nookal',
@@ -116,6 +117,7 @@ const SECTIONS = [
         text: 'Which accounting or billing software do you use?',
         helper: 'Select all that apply.',
         kind: 'multi',
+        allowOther: true,
         options: [
           'Xero', 'MYOB AccountRight', 'MYOB Essentials', 'QuickBooks Online', 'Reckon One', 'HICAPS', 'Medipass',
           'Tyro', 'Stripe', 'Square', 'PayWay', 'Healthpoint', 'We do this manually / in spreadsheets',
@@ -127,6 +129,7 @@ const SECTIONS = [
         text: 'Which communication and scheduling tools do you use?',
         helper: 'Select all that apply.',
         kind: 'multi',
+        allowOther: true,
         options: [
           'Microsoft 365 (Outlook, Teams, SharePoint)', 'Google Workspace (Gmail, Calendar, Drive)', 'Zoom',
           'Microsoft Teams', 'Slack', 'HotDoc (appointment booking)', 'HealthEngine (appointment booking)',
@@ -140,6 +143,7 @@ const SECTIONS = [
         text: 'Which file storage and document management tools do you use?',
         helper: 'Select all that apply.',
         kind: 'multi',
+        allowOther: true,
         options: [
           'Microsoft SharePoint / OneDrive', 'Google Drive', 'Dropbox', 'Box', 'Shared local server / NAS drive',
           'Documents stored within our practice management system', 'Physical files only',
@@ -151,6 +155,7 @@ const SECTIONS = [
         text: 'Which patient or client communication tools do you use?',
         helper: 'Select all that apply.',
         kind: 'multi',
+        allowOther: true,
         options: [
           'Automated SMS reminders (via practice management system)',
           'Automated email reminders (via practice management system)',
@@ -793,7 +798,9 @@ const Checkbox = ({ checked, label, onChange }) => (
   </button>
 );
 
-const QuestionBlock = ({ question, value, onChange }) => {
+const OTHER_LABEL = 'Other — please specify';
+
+const QuestionBlock = ({ question, value, onChange, otherValue, onOtherChange }) => {
   if (question.kind === 'text') {
     return (
       <div className="space-y-4">
@@ -822,6 +829,15 @@ const QuestionBlock = ({ question, value, onChange }) => {
       const next = arr.includes(label) ? arr.filter((x) => x !== label) : [...arr, label];
       onChange(next);
     };
+    const otherChecked = question.allowOther && arr.includes(OTHER_LABEL);
+    const toggleOther = () => {
+      if (otherChecked) {
+        onChange(arr.filter((x) => x !== OTHER_LABEL));
+        if (onOtherChange) onOtherChange('');
+      } else {
+        onChange([...arr, OTHER_LABEL]);
+      }
+    };
     return (
       <div className="space-y-4">
         <div className="space-y-2">
@@ -837,6 +853,26 @@ const QuestionBlock = ({ question, value, onChange }) => {
               onChange={() => toggle(opt.label)}
             />
           ))}
+          {question.allowOther && (
+            <>
+              <Checkbox
+                key="__other__"
+                checked={otherChecked}
+                label={OTHER_LABEL}
+                onChange={toggleOther}
+              />
+              {otherChecked && (
+                <input
+                  type="text"
+                  value={otherValue || ''}
+                  onChange={(e) => onOtherChange && onOtherChange(e.target.value.slice(0, 200))}
+                  maxLength={200}
+                  placeholder="Enter software name"
+                  className="w-full bg-white/5 border border-white/15 rounded-xl px-5 py-4 text-white placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
+                />
+              )}
+            </>
+          )}
         </div>
       </div>
     );
@@ -1204,10 +1240,10 @@ const AIReadiness = () => {
     if (!valid) return;
     if (sectionIndex < totalSections - 1) {
       setSectionIndex((i) => i + 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'instant' });
     } else {
       setPhase('lead');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'instant' });
     }
   };
 
@@ -1215,12 +1251,12 @@ const AIReadiness = () => {
     if (phase === 'lead') {
       setPhase('questions');
       setSectionIndex(totalSections - 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'instant' });
       return;
     }
     if (sectionIndex > 0) {
       setSectionIndex((i) => i - 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'instant' });
     }
   };
 
@@ -1266,7 +1302,7 @@ const AIReadiness = () => {
     await submitToCommandCentre(payload);
     setSubmitting(false);
     setPhase('results');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   return (
@@ -1293,7 +1329,7 @@ const AIReadiness = () => {
             <div className="space-y-10">
               <ProgressBar current={sectionIndex + 1} total={totalSections} sectionTitle={section.title} />
 
-              <div className="relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 rounded-3xl p-6 md:p-12 space-y-10">
+              <div className="relative bg-[#0F172A]/90 backdrop-blur-sm border border-white/20 rounded-3xl p-6 md:p-12 space-y-10">
                 <div className="space-y-2">
                   <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">
                     Section {section.id} — {section.title}
@@ -1301,7 +1337,13 @@ const AIReadiness = () => {
                 </div>
                 {section.questions.map((q) => (
                   <div key={q.id} className="border-t border-white/10 first:border-t-0 pt-8 first:pt-0">
-                    <QuestionBlock question={q} value={responses[q.id]} onChange={(v) => setAnswer(q.id, v)} />
+                    <QuestionBlock
+                      question={q}
+                      value={responses[q.id]}
+                      onChange={(v) => setAnswer(q.id, v)}
+                      otherValue={responses[`${q.id}_other`]}
+                      onOtherChange={(v) => setAnswer(`${q.id}_other`, v)}
+                    />
                   </div>
                 ))}
               </div>
