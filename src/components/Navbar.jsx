@@ -35,15 +35,38 @@ const Navbar = () => {
           ref={navRef}
           className={`
             pointer-events-auto
-            flex items-center justify-between
-            px-12 py-4 rounded-full border border-white/5
+            grid grid-cols-[1fr_auto_1fr] items-center
+            px-8 lg:px-12 py-4 rounded-full border border-white/5
             transition-all duration-1000 cubic-bezier(0.2, 0.8, 0.2, 1)
             ${scrolled ? 'bg-primary/60 backdrop-blur-2xl border-accent/20 shadow-[0_20px_50px_rgba(3,105,161,0.3)]' : 'bg-primary/20 backdrop-blur-xl border-accent/10'}
           `}
         >
+          <div className="hidden lg:flex items-center gap-8 justify-self-start font-sans font-semibold text-[11px] tracking-[0.2em] uppercase">
+            {navLinks.slice(0, 5).map((link) => {
+              const isAIReadiness = link.name === 'AI Readiness';
+              const baseClass = isAIReadiness
+                ? "bg-white/[0.08] hover:bg-white/[0.15] border border-white/15 rounded-full px-3.5 py-1.5 -my-1 text-white/85 hover:text-white transition-all duration-300 inline-flex items-center gap-1.5"
+                : "text-silver/60 hover:text-white transition-all duration-300";
+              return link.to ? (
+                <Link key={link.name} to={link.to} className={baseClass}>
+                  {link.name}
+                  {isAIReadiness && (
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  )}
+                </Link>
+              ) : (
+                <a key={link.name} href={link.href} className={baseClass}>
+                  {link.name}
+                </a>
+              );
+            })}
+          </div>
+
           <Link
             to="/"
-            className="group flex items-center gap-2 hover:opacity-80 transition-all duration-300"
+            className="group flex items-center gap-2 justify-self-center hover:opacity-80 transition-all duration-300"
           >
             <ShieldLogo className="w-11 h-11 drop-shadow-[0_0_16px_rgba(201,168,76,0.4)] group-hover:drop-shadow-[0_0_22px_rgba(201,168,76,0.7)] transition-all duration-300 flex-shrink-0" />
             <div className="hidden sm:flex flex-col justify-center leading-tight">
@@ -60,36 +83,17 @@ const Navbar = () => {
             </div>
           </Link>
 
-          <div className="hidden lg:flex items-center gap-10 font-sans font-semibold text-[11px] tracking-[0.2em] uppercase text-silver/60 flex-1 justify-center px-8">
-            {navLinks.slice(0, 5).map((link) => (
-              link.to ? (
-                <Link
-                  key={link.name}
-                  to={link.to}
-                  className={link.name === 'Diagnostics'
-                    ? "text-[#C9A84C] hover:text-[#E0BC60] transition-all duration-300"
-                    : "text-silver/60 hover:text-white transition-all duration-300"}
-                >
-                  {link.name}
-                </Link>
-              ) : (
-                <a key={link.name} href={link.href} className="text-silver/60 hover:text-white transition-all duration-300">
-                  {link.name}
-                </a>
-              )
-            ))}
-          </div>
-
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 justify-self-end">
             <a
               href="https://portal.bwadvisorysolutions.com.au/intake.html"
-              className="group relative overflow-hidden bg-[#C9A84C] px-10 py-3.5 rounded-full text-primary font-bold text-[11px] tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 transform hover:scale-[1.05] shadow-lg shadow-[#C9A84C]/20 cursor-pointer"
+              className="group relative overflow-hidden bg-[#C9A84C] px-8 lg:px-10 py-3.5 rounded-full text-primary font-bold text-[11px] tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 transform hover:scale-[1.05] shadow-lg shadow-[#C9A84C]/20 cursor-pointer whitespace-nowrap"
             >
               Consultation
             </a>
             <button
               onClick={() => setIsMenuOpen(true)}
               className="lg:hidden p-2 text-silver/60 hover:text-white transition-colors"
+              aria-label="Open menu"
             >
               <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 6h16M4 12h16M4 18h16" />

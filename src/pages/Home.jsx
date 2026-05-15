@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Home = () => {
   const heroRef = useRef(null);
   const philRef = useRef(null);
+  const [stickyDismissed, setStickyDismissed] = useState(false);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -810,6 +811,42 @@ const Home = () => {
       </section>
 
       <Footer />
+
+      {/* ── STICKY CTA BAR (homepage only) ── */}
+      {!stickyDismissed && (
+        <div
+          role="region"
+          aria-label="Diagnostic call to action"
+          className="fixed bottom-0 left-0 right-0 z-[90] bg-[#0F172A]/95 backdrop-blur-md border-t border-[#C9A84C]/30 shadow-[0_-8px_24px_rgba(0,0,0,0.35)]"
+        >
+          <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+            <p className="text-white font-light text-sm md:text-base flex-1 text-center sm:text-left leading-snug">
+              Find out where you're exposed and what it's costing you.
+            </p>
+            <div className="flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-auto">
+              <Link
+                to="/ai-readiness"
+                className="bg-[#C9A84C] hover:bg-[#E0BC60] text-[#0F172A] font-bold text-xs md:text-sm tracking-[0.15em] uppercase px-6 py-3 rounded-lg transition-all duration-300 inline-flex items-center gap-2 shadow-[0_4px_12px_rgba(201,168,76,0.3)] hover:shadow-[0_6px_16px_rgba(201,168,76,0.4)] cursor-pointer whitespace-nowrap"
+              >
+                Take the Diagnostic
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </Link>
+              <button
+                type="button"
+                onClick={() => setStickyDismissed(true)}
+                aria-label="Dismiss"
+                className="text-silver/50 hover:text-white p-2 transition-colors duration-200 cursor-pointer flex-shrink-0"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
