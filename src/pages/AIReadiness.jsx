@@ -1196,15 +1196,23 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
         <p className="text-base md:text-lg text-silver/85 font-light leading-relaxed max-w-3xl mx-auto">
           The next step is a BW Advisory Operational Resilience Diagnostic. Most clients recover the cost of the diagnostic within the first month of implementation.
         </p>
-        <a
-          href="/#contact"
+        <button
+          type="button"
+          onClick={() => {
+            window.location.href = '/#contact';
+            setTimeout(() => {
+              document.getElementById('contact')?.scrollIntoView({
+                behavior: 'smooth',
+              });
+            }, 100);
+          }}
           className="inline-flex items-center justify-center gap-3 bg-[#C9A84C] px-10 md:px-12 py-5 min-h-[48px] rounded-lg text-[#0F172A] font-bold text-sm tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 shadow-[0_8px_24px_rgba(201,168,76,0.3)] cursor-pointer"
         >
           Book Your Diagnostic
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
-        </a>
+        </button>
         <p className="text-sm md:text-base text-silver/60 font-light">
           We've also sent a copy to <span className="text-white">{lead.email}</span> for your records.
         </p>
