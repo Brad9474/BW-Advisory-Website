@@ -73,14 +73,14 @@ const Footer = () => (
           <div className="space-y-4">
             <p className="text-[#C9A84C]/70 font-mono text-xs tracking-widest uppercase font-bold">Navigation</p>
             <nav className="space-y-2 flex flex-col">
-              <a href="/#framework" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
-                Methodology
-              </a>
-              <a href="/#about" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
-                About Brad
-              </a>
+              <Link to="/" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
+                Home
+              </Link>
               <Link to="/diagnostics" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
-                8-Min Diagnostic
+                Diagnostics
+              </Link>
+              <Link to="/ai-readiness" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
+                AI Readiness
               </Link>
               <Link to="/loss-intelligence" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 Loss Intelligence
@@ -88,7 +88,10 @@ const Footer = () => (
               <Link to="/investigations" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 Investigations
               </Link>
-              <a href="https://portal.bwadvisorysolutions.com.au/client/" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
+              <a href="/#contact" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
+                Contact
+              </a>
+              <a href="https://command.bwadvisorysolutions.com.au" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 Client Login
               </a>
               <a href="/privacy" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
