@@ -371,6 +371,7 @@ const SECTIONS = [
           'Reduce my own hours and get out of the day-to-day',
           'Invest in business development and growth',
           'All of the above — any recovered time has value',
+          'Something else',
         ].map((label) => ({ label })),
       },
       {
@@ -385,6 +386,7 @@ const SECTIONS = [
           { label: 'Improve profitability — same revenue, lower cost', gap: 2 },
           { label: "Not sure yet — that's partly why I'm here", gap: 2 },
           { label: 'Prepare the business for sale or succession', gap: 1 },
+          { label: 'Something else', gap: 2 },
         ],
       },
       {
@@ -437,6 +439,17 @@ const PROFESSIONAL_LABELS = new Set([
 ]);
 
 const isHealthcare = (label) => HEALTHCARE_LABELS.has(label);
+
+const SOMETHING_ELSE = 'Something else';
+
+// Single-select questions whose "Something else" option suppresses auto-advance
+// and surfaces a free-text follow-up + explicit Next button.
+const singleSelectNeedsManualNext = (qid, value) => {
+  if (qid === 'A1') return isHealthcare(value);
+  if (qid === 'E2') return value === SOMETHING_ELSE;
+  return false;
+};
+
 const getDiagnosticType = (label) => {
   if (HEALTHCARE_LABELS.has(label)) return 'SMB_HEALTHCARE';
   if (PROFESSIONAL_LABELS.has(label)) return 'SMB_PROFESSIONAL';
@@ -775,8 +788,8 @@ const QuestionScreen = ({
 
   const handleSingle = (label) => {
     onChange(label);
-    if (question.id === 'A1' && isHealthcare(label)) {
-      // Healthcare branch surfaces an explicit Next button — bring it into view.
+    if (singleSelectNeedsManualNext(question.id, label)) {
+      // Surfaces an explicit Next button — bring it into view.
       if (onSelectionMade) onSelectionMade();
       return;
     }
@@ -862,6 +875,16 @@ const QuestionScreen = ({
               )}
             </>
           )}
+          {question.id === 'E1' && arr.includes(SOMETHING_ELSE) && (
+            <input
+              type="text"
+              value={otherValue || ''}
+              onChange={(e) => onOtherChange && onOtherChange(e.target.value.slice(0, 200))}
+              maxLength={200}
+              placeholder="Tell us what you'd do with it — optional"
+              className="w-full bg-white/5 border border-white/15 rounded-xl px-5 py-4 text-white placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
+            />
+          )}
         </div>
       </div>
     );
@@ -899,6 +922,17 @@ const QuestionScreen = ({
               className="mt-2 w-full bg-white/5 border border-white/15 rounded-xl px-5 py-4 text-white placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
             />
           </label>
+        </div>
+      )}
+      {question.id === 'E2' && value === SOMETHING_ELSE && (
+        <div className="space-y-3 pt-4 border-t border-white/10">
+          <input
+            type="text"
+            value={otherValue || ''}
+            onChange={(e) => onOtherChange && onOtherChange(e.target.value.slice(0, 200))}
+            placeholder="Tell us your goal — optional"
+            className="w-full bg-white/5 border border-white/15 rounded-xl px-5 py-4 text-white placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
+          />
         </div>
       )}
     </div>
@@ -1247,11 +1281,13 @@ const AIReadiness = () => {
   const showProgress = step <= STEP_EMAIL;
   const showBack = step > 0 && step <= STEP_EMAIL;
   const currentQ = step < TOTAL_QUESTIONS ? QUESTIONS[step] : null;
-  const a1NeedsManualNext = currentQ?.id === 'A1' && isHealthcare(responses.A1);
+  const singleNeedsNext =
+    currentQ?.kind === 'single' &&
+    singleSelectNeedsManualNext(currentQ.id, responses[currentQ.id]);
   const showNextButton =
     step < TOTAL_QUESTIONS &&
     currentQ &&
-    (currentQ.kind === 'multi' || currentQ.kind === 'text' || a1NeedsManualNext);
+    (currentQ.kind === 'multi' || currentQ.kind === 'text' || singleNeedsNext);
 
   const slideClass = direction === 'forward' ? 'slide-fwd' : 'slide-back';
 
