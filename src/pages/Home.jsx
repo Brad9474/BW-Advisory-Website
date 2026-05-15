@@ -185,7 +185,7 @@ const Home = () => {
           </h1>
 
           <p className="hero-elem text-silver/75 mx-auto text-xl md:text-2xl leading-relaxed mt-12 font-light tracking-wide max-w-4xl">
-            I work with allied health and healthcare practices, and professional services firms to fix that — practically, without jargon, and with a clear return on investment.
+            I work with allied health and healthcare practices, and professional services firms to fix that — practically, without jargon, and with a measurable return.
           </p>
 
           <p className="hero-elem text-silver/55 mx-auto text-base md:text-lg leading-relaxed mt-8 font-light max-w-3xl">
@@ -215,7 +215,7 @@ const Home = () => {
                 You can't fix what you can't see.
               </h2>
               <p className="text-base md:text-lg text-silver/80 font-light leading-relaxed max-w-3xl mx-auto">
-                Allied health and healthcare practices, and professional services firms are losing value every day to operational gaps they haven't identified. I find them and close them — practically, without jargon, with a clear return on investment.
+                Allied health and healthcare practices, and professional services firms are losing value every day to operational gaps they haven't identified. I find them and close them — practically, without jargon, with a measurable return.
               </p>
             </div>
           </div>
