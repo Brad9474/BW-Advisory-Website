@@ -641,17 +641,17 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Case Study 01 */}
             <div className="relative group overflow-hidden">
               <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
-              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-10 md:p-12 h-full transition-all duration-500 group-hover:bg-white/12">
+              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-4 h-full transition-all duration-500 group-hover:bg-white/12">
                 <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-[#C9A84C]/20 to-accent/10 rounded-full flex items-center justify-center group-hover:from-[#C9A84C]/30 group-hover:to-accent/20 transition-all duration-500">
                   <span className="text-[#C9A84C] font-display font-bold text-xl">01</span>
                 </div>
                 <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">Organisational Redesign</h3>
                 <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Law Enforcement / Organisational Command</p>
-                <div className="space-y-6">
+                <div className="space-y-2">
                   <div className="pb-5 border-b border-accent/15">
                     <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Situation</p>
                     <p className="text-silver/85 font-light leading-relaxed text-sm">Large operational unit with entrenched practices and persistent performance gaps despite adequate resourcing.</p>
@@ -675,13 +675,13 @@ const Home = () => {
             {/* Case Study 02 */}
             <div className="relative group overflow-hidden">
               <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
-              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-10 md:p-12 h-full transition-all duration-500 group-hover:bg-white/12">
+              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-4 h-full transition-all duration-500 group-hover:bg-white/12">
                 <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-[#C9A84C]/20 to-accent/10 rounded-full flex items-center justify-center group-hover:from-[#C9A84C]/30 group-hover:to-accent/20 transition-all duration-500">
                   <span className="text-[#C9A84C] font-display font-bold text-xl">02</span>
                 </div>
                 <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">Digital Operations at Scale</h3>
                 <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Government / Large-Scale Border Operations</p>
-                <div className="space-y-6">
+                <div className="space-y-2">
                   <div className="pb-5 border-b border-accent/15">
                     <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Situation</p>
                     <p className="text-silver/85 font-light leading-relaxed text-sm">Government agency required digital screening at scale during crisis, replacing inadequate paper-based process.</p>
@@ -705,13 +705,13 @@ const Home = () => {
             {/* Case Study 03 */}
             <div className="relative group overflow-hidden">
               <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
-              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-10 md:p-12 h-full transition-all duration-500 group-hover:bg-white/12">
+              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-4 h-full transition-all duration-500 group-hover:bg-white/12">
                 <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-[#C9A84C]/20 to-accent/10 rounded-full flex items-center justify-center group-hover:from-[#C9A84C]/30 group-hover:to-accent/20 transition-all duration-500">
                   <span className="text-[#C9A84C] font-display font-bold text-xl">03</span>
                 </div>
                 <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">Intelligence Architecture</h3>
                 <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Law Enforcement / Intelligence Architecture</p>
-                <div className="space-y-6">
+                <div className="space-y-2">
                   <div className="pb-5 border-b border-accent/15">
                     <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Situation</p>
                     <p className="text-silver/85 font-light leading-relaxed text-sm">Government intelligence infrastructure fragmented across disconnected systems. No single operational picture for frontline commanders.</p>
@@ -735,13 +735,13 @@ const Home = () => {
             {/* Case Study 04 */}
             <div className="relative group overflow-hidden">
               <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
-              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-10 md:p-12 h-full transition-all duration-500 group-hover:bg-white/12">
+              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-4 h-full transition-all duration-500 group-hover:bg-white/12">
                 <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-[#C9A84C]/20 to-accent/10 rounded-full flex items-center justify-center group-hover:from-[#C9A84C]/30 group-hover:to-accent/20 transition-all duration-500">
                   <span className="text-[#C9A84C] font-display font-bold text-xl">04</span>
                 </div>
                 <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">National Retail Crime Intelligence</h3>
                 <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">National Retail / Crime Intelligence</p>
-                <div className="space-y-6">
+                <div className="space-y-2">
                   <div className="pb-5 border-b border-accent/15">
                     <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Situation</p>
                     <p className="text-silver/85 font-light leading-relaxed text-sm">National retail group exposed to coordinated organised crime activity across stores, regions, and state lines. Incident response running well behind threat velocity.</p>
