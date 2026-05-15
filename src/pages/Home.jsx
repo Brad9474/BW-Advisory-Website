@@ -8,6 +8,126 @@ import Footer from '../components/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const COMMAND_CENTRE_ENDPOINT = "https://command.bwadvisorysolutions.com.au/api/intake/contact";
+
+const ConsultationForm = () => {
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    organisation: "",
+    role: "",
+    phone: "",
+    message: "",
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState("idle"); // 'idle' | 'success' | 'error'
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setValues((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
+    setStatus("idle");
+    try {
+      const res = await fetch(COMMAND_CENTRE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: values.name.trim(),
+          email: values.email.trim(),
+          organisation: values.organisation.trim(),
+          role: values.role.trim(),
+          phone: values.phone.trim(),
+          objective: values.message.trim(),
+          constraint: "",
+          areaOfInterest: "smb_advisory",
+          source: "website_consultation",
+          brand: "BW_ADVISORY",
+        }),
+      });
+      if (res.status === 201) {
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      setStatus("error");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (status === "success") {
+    return (
+      <div className="space-y-6 text-center">
+        <h3 className="font-display font-bold text-4xl text-white">Thank you</h3>
+        <p className="text-silver/85 font-light text-lg leading-relaxed">
+          Thanks — we'll be in touch within one business day.
+        </p>
+      </div>
+    );
+  }
+
+  const inputClass =
+    "w-full bg-white/5 border border-white/15 focus:border-[#C9A84C]/70 focus:bg-white/10 rounded-lg px-4 py-3 text-white placeholder-silver/40 font-light text-base outline-none transition-colors";
+  const labelClass =
+    "block text-silver/70 font-mono text-[10px] tracking-[0.2em] uppercase font-bold mb-2";
+
+  return (
+    <form onSubmit={onSubmit} className="space-y-5" noValidate>
+      <div>
+        <label htmlFor="cf-name" className={labelClass}>Name</label>
+        <input id="cf-name" name="name" type="text" required value={values.name} onChange={onChange} className={inputClass} autoComplete="name" />
+      </div>
+      <div>
+        <label htmlFor="cf-email" className={labelClass}>Email</label>
+        <input id="cf-email" name="email" type="email" required value={values.email} onChange={onChange} className={inputClass} autoComplete="email" />
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="cf-organisation" className={labelClass}>Organisation</label>
+          <input id="cf-organisation" name="organisation" type="text" required value={values.organisation} onChange={onChange} className={inputClass} autoComplete="organization" />
+        </div>
+        <div>
+          <label htmlFor="cf-role" className={labelClass}>Role</label>
+          <input id="cf-role" name="role" type="text" required value={values.role} onChange={onChange} className={inputClass} autoComplete="organization-title" />
+        </div>
+      </div>
+      <div>
+        <label htmlFor="cf-phone" className={labelClass}>Phone <span className="text-silver/40 font-normal lowercase tracking-normal">(optional)</span></label>
+        <input id="cf-phone" name="phone" type="tel" value={values.phone} onChange={onChange} className={inputClass} autoComplete="tel" />
+      </div>
+      <div>
+        <label htmlFor="cf-message" className={labelClass}>What you'd like to discuss</label>
+        <textarea id="cf-message" name="message" required rows={4} value={values.message} onChange={onChange} className={`${inputClass} resize-y min-h-[110px]`} />
+      </div>
+      {status === "error" && (
+        <p role="alert" className="text-sm text-[#F5A98C] font-light leading-relaxed">
+          Something went wrong — please email{" "}
+          <a href="mailto:brad@bwadvisorysolutions.com.au" className="underline decoration-[#F5A98C]/40 underline-offset-2">
+            brad@bwadvisorysolutions.com.au
+          </a>{" "}
+          directly.
+        </p>
+      )}
+      <button
+        type="submit"
+        disabled={submitting}
+        className="group/btn relative overflow-hidden bg-[#C9A84C] px-12 md:px-14 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-full cursor-pointer disabled:opacity-60 disabled:cursor-wait"
+      >
+        {submitting ? "Sending..." : "Schedule Call"}
+        {!submitting && (
+          <svg className="w-5 h-5 transform group-hover/btn:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+        )}
+      </button>
+    </form>
+  );
+};
+
 const Home = () => {
   const heroRef = useRef(null);
   const philRef = useRef(null);
@@ -800,13 +920,7 @@ const Home = () => {
                   <p className="text-silver/80 font-light text-lg leading-relaxed">
                     A direct conversation about your challenge. We'll determine fit and what an engagement would involve.
                   </p>
-                  <a
-                    href="https://portal.bwadvisorysolutions.com.au/intake.html"
-                    className="group/btn relative overflow-hidden bg-[#C9A84C] px-12 md:px-14 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-full cursor-pointer"
-                  >
-                    Schedule Call
-                    <svg className="w-5 h-5 transform group-hover/btn:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-                  </a>
+                  <ConsultationForm />
                 </div>
               </div>
             </div>

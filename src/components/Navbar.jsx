@@ -81,7 +81,7 @@ const Navbar = () => {
 
           <div className="flex items-center gap-4 flex-shrink-0">
             <a
-              href="https://portal.bwadvisorysolutions.com.au/intake.html"
+              href="/#contact"
               className="group relative overflow-hidden bg-[#C9A84C] px-8 lg:px-10 py-3.5 rounded-full text-primary font-bold text-[11px] tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 transform hover:scale-[1.05] shadow-lg shadow-[#C9A84C]/20 cursor-pointer whitespace-nowrap"
             >
               Consultation
