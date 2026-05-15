@@ -7,13 +7,11 @@ import ShieldLogo from './ShieldLogo';
 gsap.registerPlugin(ScrollTrigger);
 
 const navLinks = [
-  { name: 'About', href: '/#about' },
-  { name: 'Framework', href: '/#framework' },
-  { name: 'Engagement', href: '/#protocol' },
-  { name: 'Advisory', href: '/#advisory' },
-  { name: 'Investigations', to: '/investigations' },
+  { name: 'Home', to: '/' },
+  { name: 'Diagnostics', to: '/diagnostics' },
+  { name: 'AI Readiness', to: '/ai-readiness' },
   { name: 'Loss Intelligence', to: '/loss-intelligence' },
-  { name: '8-Min Diagnostic', to: '/diagnostics' },
+  { name: 'Investigations', to: '/investigations' },
   { name: 'Contact', href: '/#contact' },
 ];
 
@@ -63,12 +61,12 @@ const Navbar = () => {
           </Link>
 
           <div className="hidden lg:flex items-center gap-10 font-sans font-semibold text-[11px] tracking-[0.2em] uppercase text-silver/60 flex-1 justify-center px-8">
-            {navLinks.slice(0, 7).map((link) => (
+            {navLinks.slice(0, 5).map((link) => (
               link.to ? (
                 <Link
                   key={link.name}
                   to={link.to}
-                  className={link.name === '8-Min Diagnostic'
+                  className={link.name === 'Diagnostics'
                     ? "text-[#C9A84C] hover:text-[#E0BC60] transition-all duration-300"
                     : "text-silver/60 hover:text-white transition-all duration-300"}
                 >

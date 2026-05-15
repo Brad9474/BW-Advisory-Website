@@ -212,10 +212,10 @@ const Home = () => {
             <div className="space-y-6 text-center">
               <p className="text-xs font-mono tracking-[0.3em] uppercase text-accent/70 font-bold">Operational Reality</p>
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
-                Most businesses are running at half capacity and don't know it.
+                You can't fix what you can't see.
               </h2>
               <p className="text-base md:text-lg text-silver/80 font-light leading-relaxed max-w-3xl mx-auto">
-                The gap is in the systems, not the people.
+                Healthcare practices, allied health practices, and professional services firms are losing value every day to operational gaps they haven't identified. I find them and close them — practically, without jargon, with a clear return on the investment.
               </p>
             </div>
           </div>
@@ -449,7 +449,7 @@ const Home = () => {
                   <span className="text-[#C9A84C] font-display font-bold text-xl">01</span>
                 </div>
                 <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">Organisational Redesign</h3>
-                <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Law Enforcement / Government</p>
+                <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Law Enforcement / Organisational Command</p>
                 <div className="space-y-6">
                   <div className="pb-5 border-b border-accent/15">
                     <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Situation</p>
@@ -479,7 +479,7 @@ const Home = () => {
                   <span className="text-[#C9A84C] font-display font-bold text-xl">02</span>
                 </div>
                 <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">Digital Operations at Scale</h3>
-                <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Government / Crisis Response</p>
+                <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Government / Large-Scale Border Operations</p>
                 <div className="space-y-6">
                   <div className="pb-5 border-b border-accent/15">
                     <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Situation</p>
@@ -509,7 +509,7 @@ const Home = () => {
                   <span className="text-[#C9A84C] font-display font-bold text-xl">03</span>
                 </div>
                 <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">Intelligence Architecture</h3>
-                <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Government / Multi-Agency</p>
+                <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Law Enforcement / Intelligence Architecture</p>
                 <div className="space-y-6">
                   <div className="pb-5 border-b border-accent/15">
                     <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Situation</p>
@@ -539,7 +539,7 @@ const Home = () => {
                   <span className="text-[#C9A84C] font-display font-bold text-xl">04</span>
                 </div>
                 <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">National Retail Crime Intelligence</h3>
-                <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Retail / Multi-Jurisdiction</p>
+                <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">National Retail / Crime Intelligence</p>
                 <div className="space-y-6">
                   <div className="pb-5 border-b border-accent/15">
                     <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Situation</p>
@@ -611,13 +611,19 @@ const Home = () => {
 
             <div className="space-y-6 text-textDark/90 leading-relaxed text-xl font-light">
               <p>
-                Thirty years in law enforcement command. Decades of operational and technological transformation under extreme pressure. From designing digital border programmes processing millions to establishing real-time crime centres, I bridge the gap between policy and deployment.
+                Brad built operational systems for large-scale law enforcement organisations long before digital tools existed to support them. Running some of Western Australia's largest operational units, he developed the systems, processes, and disciplines that made complex operations function — not because technology enabled it, but because the operational thinking was sound.
               </p>
               <p>
-                In the private sector, I have established national law enforcement partnerships and delivered measurable outcomes in high-governance environments across all Australian states and territories.
+                When COVID-19 arrived, he led the build of border management systems processing over one million travellers — built under pandemic pressure, with no room for failure. He then delivered intelligence capability through a state-level command environment, building the information architecture that enabled frontline operators to work effectively across high-pressure, high-stakes conditions.
               </p>
               <p>
-                I identify and resolve the friction points in your systems. By leveraging a global network of technology partners, I deliver measurable operational improvements within your specific constraints.
+                He moved into the private sector to lead law enforcement partnerships for a retail intelligence technology company — building the bridge between what law enforcement needs and what a technology business can deliver, proved across every Australian state and territory.
+              </p>
+              <p>
+                He now brings that same discipline — blended with private sector technology experience and practical AI capability — to healthcare practices, allied health practices, and professional services firms.
+              </p>
+              <p className="font-medium text-textDark">
+                The problems look different. The fundamentals are the same.
               </p>
             </div>
 
@@ -652,48 +658,40 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── DELIVERY TEAM ── */}
+      {/* ── WHY THIS PRACTICE EXISTS ── */}
+      <section id="why" className="py-32 w-full relative z-10 bg-gradient-to-b from-surface via-background to-surface">
+        <div className="max-w-5xl mx-auto px-6 xl:px-12">
+          <div className="mb-12">
+            <p className="text-accent font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">Why This Practice Exists</p>
+            <h2 className="font-display font-semibold text-4xl md:text-5xl lg:text-6xl text-primary tracking-tight leading-tight mb-10">
+              Most have never had access to operational expertise at this level.
+            </h2>
+          </div>
+          <div className="space-y-6 text-textDark/90 font-light text-xl leading-relaxed max-w-4xl">
+            <p>
+              Healthcare practices, allied health practices, and professional services firms are at a genuine inflection point. AI is available but confusing. Cyber threats are escalating — health data and professional services data are among the most targeted in Australia. Compliance obligations are tightening with no sign of reversal.
+            </p>
+            <p>
+              The practices that get clear on this in the next 12 to 18 months will have a structural advantage. The ones that don't will spend years cleaning up problems that were preventable.
+            </p>
+            <p className="font-medium text-textDark">
+              Most have never had access to operational expertise at this level. That gap is what this practice exists to close.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── DELIVERY ── */}
       <section id="team" className="py-32 w-full relative z-10 bg-gradient-to-b from-primary via-[#0D1520] to-primary">
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
           <div className="mb-20 max-w-4xl">
-            <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">Delivery Team</p>
+            <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">Delivery</p>
             <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight mb-8">
-              Specialists, not generalists.
+              Led by Brad. Specialists when required.
             </h2>
             <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
-              Every engagement is led by Brad and delivered by a small team of specialists matched to the work. No bench, no juniors, no farmed-out delivery.
+              Every engagement is led personally. When the work requires deeper technical execution, it is delivered by a trusted specialist network matched to the engagement. No bench, no juniors, no farmed-out delivery.
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            {[
-              {
-                name: "Brad Warburton",
-                role: "Principal Consultant",
-                credentials: "30 years operational command — WA Police, COVID-19 border management, National Director Law Enforcement Partnerships (Auror)"
-              },
-              {
-                name: "James Northey",
-                role: "Senior Cyber Specialist",
-                credentials: "Ex-Royal Australian Navy · SANS GREM certified · incident response and reverse engineering"
-              },
-              {
-                name: "Jevon Ang",
-                role: "Security Operations",
-                credentials: "Ex-WAPOL · MDR SOC Analyst · detection engineering and threat response"
-              },
-              {
-                name: "Josh Cusens",
-                role: "IT Foundation and MSP",
-                credentials: "Essential Eight implementation · ongoing managed services and infrastructure"
-              }
-            ].map((member) => (
-              <div key={member.name} className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 rounded-2xl p-10 md:p-12">
-                <h3 className="font-display font-bold text-2xl md:text-3xl text-white mb-2 leading-tight">{member.name}</h3>
-                <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-5">{member.role}</p>
-                <p className="text-silver/80 font-light text-base leading-relaxed">{member.credentials}</p>
-              </div>
-            ))}
           </div>
 
           <div className="max-w-4xl">
@@ -716,7 +714,7 @@ const Home = () => {
               Know Your Exposure
             </h2>
             <p className="text-xl md:text-2xl text-silver/80 font-light leading-relaxed">
-              Before any conversation. Eight minutes. Ten questions. Reviewed by Brad — no automated output.
+              Start with what's true. Five diagnostics across three streams — each result reviewed by Brad, never automated.
             </p>
           </div>
 
@@ -724,15 +722,15 @@ const Home = () => {
             <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-silver/70 font-light text-sm">
               <span className="flex items-center gap-2">
                 <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
-                4 diagnostics
-              </span>
-              <span className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
-                3 streams
+                5 proprietary diagnostics
               </span>
               <span className="flex items-center gap-2">
                 <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
                 Personally reviewed
+              </span>
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
+                3 stream assessment
               </span>
             </div>
 
