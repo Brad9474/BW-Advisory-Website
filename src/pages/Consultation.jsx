@@ -235,7 +235,10 @@ const Consultation = () => {
                   </button>
 
                   <p className="text-center text-silver/50 font-light text-xs leading-relaxed pt-1">
-                    Your data is protected under the Australian Privacy Act.
+                    Your data is protected under the{" "}
+                    <a href="/privacy" className="text-[#C9A84C] hover:underline">Australian Privacy Act</a>.
+                    {" "}Read our{" "}
+                    <a href="/privacy" className="text-[#C9A84C] hover:underline">Privacy Policy</a>.
                   </p>
                 </form>
               </div>
