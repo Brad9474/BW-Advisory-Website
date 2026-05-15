@@ -668,6 +668,31 @@ const generateFlags = (responses) => {
 
 const API_URL = 'https://command.bwadvisorysolutions.com.au/api/intake/diagnostic';
 
+const getDiagnosticType = (a1) => {
+  const healthcare = [
+    'Medical practice (GP)',
+    'Medical practice (specialist)',
+    'Dental practice',
+    'Allied health — physiotherapy',
+    'Allied health — chiropractic',
+    'Allied health — psychology',
+    'Allied health — occupational therapy',
+    'Allied health — podiatry',
+    'Allied health — other',
+  ];
+  const professional = [
+    'Accounting firm',
+    'Financial planning / wealth management',
+    'Legal practice',
+    'Mortgage broking',
+    'Insurance broking',
+    'Other professional services',
+  ];
+  if (healthcare.includes(a1)) return 'SMB_HEALTHCARE';
+  if (professional.includes(a1)) return 'SMB_PROFESSIONAL';
+  return 'SMB_HEALTHCARE';
+};
+
 const submitToCommandCentre = async (payload) => {
   try {
     const res = await fetch(API_URL, {
@@ -1013,10 +1038,10 @@ const Results = ({ score, band, opportunity, flags, businessName }) => {
   const colour = colourFor(score);
 
   let ctaCopy;
-  if (score < 60) {
+  if (score <= 40) {
     ctaCopy =
       'Your results indicate significant operational gaps that are actively costing your business time and money. These compound over time. A BW Advisory Operational Resilience Diagnostic maps your full operation and delivers a prioritised plan with costs and timelines. Most clients recover the cost of the diagnostic within the first month of implementation.';
-  } else if (score < 80) {
+  } else if (score <= 65) {
     ctaCopy =
       'Your results show a business with solid foundations and meaningful gaps in automation, integration, and process efficiency. A BW Advisory Operational Resilience Diagnostic identifies exactly where to invest next and what the return looks like.';
   } else {
@@ -1221,7 +1246,7 @@ const AIReadiness = () => {
       organisation: lead.businessName.trim(),
       role: responses.A5 ?? 'Not specified',
       phone: lead.phone.trim() || undefined,
-      diagnosticType: 'SMB_HEALTHCARE',
+      diagnosticType: getDiagnosticType(responses.A1),
       responses: {
         ...responses,
         score,
