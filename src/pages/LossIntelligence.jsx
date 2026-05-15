@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 const intelligenceStages = [
@@ -26,13 +27,25 @@ const LossIntelligence = () => (
       <div className="max-w-7xl mx-auto space-y-14">
         <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">Intelligence Capability</p>
         <div className="mx-auto max-w-6xl">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1] mb-14">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1] mb-8">
             Build the capability to see,<br />
             <span className="font-serif italic text-[#C9A84C] text-4xl md:text-5xl lg:text-6xl block mt-4">investigate, and act.</span>
           </h1>
+          <p className="text-silver/70 font-light text-sm md:text-base tracking-[0.15em] uppercase mb-14">
+            Brad Warburton — Principal Consultant, BW Advisory Solutions
+          </p>
           <p className="text-2xl md:text-3xl text-silver/75 font-light leading-relaxed max-w-5xl mx-auto">
             Modern loss prevention is an <span className="text-white font-semibold">intelligence function</span>. I diagnose your current state, design and build the framework with your team, and hand over a fully operational intelligence capability that your organisation owns and controls.
           </p>
+          <p className="text-lg md:text-xl text-silver/70 font-light leading-relaxed max-w-5xl mx-auto mt-10">
+            Australian retail is operating in the most aggressive threat environment in a generation. Organised retail crime networks now coordinate across stores, regions, and state lines. Shrinkage has climbed sharply since 2022 and the gap between incident volume and frontline response capacity continues to widen. Intelligence-led prevention is no longer an aspiration — it is the only credible defence.
+          </p>
+          <div className="mt-10">
+            <Link to="/investigations" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.2em] uppercase font-bold transition-colors">
+              See also: Investigations
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+            </Link>
+          </div>
         </div>
       </div>
     </section>
@@ -88,13 +101,6 @@ const LossIntelligence = () => (
               className="group relative overflow-hidden bg-[#C9A84C] px-14 py-5 rounded-lg text-[#0F172A] font-bold text-sm hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase flex items-center justify-center gap-3 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer"
             >
               Loss Intelligence Diagnostic
-              <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-            </a>
-            <a
-              href="https://portal.bwadvisorysolutions.com.au/diagnostic.html"
-              className="group relative overflow-hidden border border-accent/40 hover:border-[#C9A84C]/60 text-white font-bold px-14 py-5 rounded-lg tracking-[0.15em] uppercase text-sm hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer"
-            >
-              Investigations Diagnostic
               <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
             </a>
           </div>
