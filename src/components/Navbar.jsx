@@ -7,13 +7,11 @@ import ShieldLogo from './ShieldLogo';
 gsap.registerPlugin(ScrollTrigger);
 
 const navLinks = [
-  { name: 'About', href: '/#about' },
-  { name: 'Framework', href: '/#framework' },
-  { name: 'Engagement', href: '/#protocol' },
-  { name: 'Advisory', href: '/#advisory' },
-  { name: 'Investigations', to: '/investigations' },
+  { name: 'Home', to: '/' },
+  { name: 'Diagnostics', to: '/diagnostics' },
+  { name: 'AI Readiness', to: '/ai-readiness' },
   { name: 'Loss Intelligence', to: '/loss-intelligence' },
-  { name: '8-Min Diagnostic', to: '/diagnostics' },
+  { name: 'Investigations', to: '/investigations' },
   { name: 'Contact', href: '/#contact' },
 ];
 
@@ -38,14 +36,14 @@ const Navbar = () => {
           className={`
             pointer-events-auto
             flex items-center justify-between
-            px-12 py-4 rounded-full border border-white/5
+            px-8 lg:px-12 py-4 rounded-full border border-white/5
             transition-all duration-1000 cubic-bezier(0.2, 0.8, 0.2, 1)
             ${scrolled ? 'bg-primary/60 backdrop-blur-2xl border-accent/20 shadow-[0_20px_50px_rgba(3,105,161,0.3)]' : 'bg-primary/20 backdrop-blur-xl border-accent/10'}
           `}
         >
           <Link
             to="/"
-            className="group flex items-center gap-2 hover:opacity-80 transition-all duration-300"
+            className="group flex items-center gap-2 hover:opacity-80 transition-all duration-300 flex-shrink-0"
           >
             <ShieldLogo className="w-11 h-11 drop-shadow-[0_0_16px_rgba(201,168,76,0.4)] group-hover:drop-shadow-[0_0_22px_rgba(201,168,76,0.7)] transition-all duration-300 flex-shrink-0" />
             <div className="hidden sm:flex flex-col justify-center leading-tight">
@@ -62,36 +60,36 @@ const Navbar = () => {
             </div>
           </Link>
 
-          <div className="hidden lg:flex items-center gap-10 font-sans font-semibold text-[11px] tracking-[0.2em] uppercase text-silver/60 flex-1 justify-center px-8">
-            {navLinks.slice(0, 7).map((link) => (
-              link.to ? (
-                <Link
-                  key={link.name}
-                  to={link.to}
-                  className={link.name === '8-Min Diagnostic'
-                    ? "text-[#C9A84C] hover:text-[#E0BC60] transition-all duration-300"
-                    : "text-silver/60 hover:text-white transition-all duration-300"}
-                >
+          <div className="hidden lg:flex items-center gap-10 font-sans text-[11px] tracking-[0.2em] uppercase text-silver/60 flex-1 justify-center px-8">
+            {navLinks.slice(0, 5).map((link) => {
+              const weightClass = link.name === 'AI Readiness' ? 'font-bold' : 'font-normal';
+              const colorClass = link.name === 'AI Readiness'
+                ? 'text-white/90 hover:text-white'
+                : 'text-silver/60 hover:text-white';
+              const className = `${weightClass} ${colorClass} transition-all duration-300`;
+              return link.to ? (
+                <Link key={link.name} to={link.to} className={className}>
                   {link.name}
                 </Link>
               ) : (
-                <a key={link.name} href={link.href} className="text-silver/60 hover:text-white transition-all duration-300">
+                <a key={link.name} href={link.href} className={className}>
                   {link.name}
                 </a>
-              )
-            ))}
+              );
+            })}
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-shrink-0">
             <a
               href="https://portal.bwadvisorysolutions.com.au/intake.html"
-              className="group relative overflow-hidden bg-[#C9A84C] px-10 py-3.5 rounded-full text-primary font-bold text-[11px] tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 transform hover:scale-[1.05] shadow-lg shadow-[#C9A84C]/20 cursor-pointer"
+              className="group relative overflow-hidden bg-[#C9A84C] px-8 lg:px-10 py-3.5 rounded-full text-primary font-bold text-[11px] tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 transform hover:scale-[1.05] shadow-lg shadow-[#C9A84C]/20 cursor-pointer whitespace-nowrap"
             >
               Consultation
             </a>
             <button
               onClick={() => setIsMenuOpen(true)}
               className="lg:hidden p-2 text-silver/60 hover:text-white transition-colors"
+              aria-label="Open menu"
             >
               <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 6h16M4 12h16M4 18h16" />

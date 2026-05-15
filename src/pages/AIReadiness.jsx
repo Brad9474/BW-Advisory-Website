@@ -1317,7 +1317,10 @@ const AIReadiness = () => {
             See where AI fits — and where it doesn't.
           </h1>
           <p className="text-lg md:text-xl text-silver/75 font-light leading-relaxed">
-            Five sections. Five minutes. A scored result with an estimate of what your gaps are costing you.
+            Answer all five sections. The moment you finish, your scored result appears — showing exactly where you're exposed, where value is leaking, and a dollar figure of what each gap is likely costing you annually. Five minutes. On screen. No forms submitted to someone's inbox. No waiting for a reply.
+          </p>
+          <p className="text-sm text-silver/50 font-light leading-relaxed">
+            The dollar figures are based on typical costs for businesses your size — a conservative indication, not a guarantee. The gaps are real.
           </p>
         </div>
       </section>

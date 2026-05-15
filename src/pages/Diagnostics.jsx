@@ -5,14 +5,14 @@ const groups = [
   {
     label: "Stream 01",
     name: "AI Readiness",
-    desc: "For healthcare practices and professional services firms.",
+    desc: "For allied health and healthcare practices, and professional services firms.",
     items: [
       {
         num: "01",
         badge: "AI Readiness Diagnostic",
-        audience: "Healthcare practices · Professional services firms",
+        audience: "Allied health and healthcare practices · Professional services firms",
         duration: "5 min · 5 sections · 28 questions",
-        desc: "Five sections. Five minutes. A scored result with an opportunity estimate of what your gaps are costing you.",
+        desc: "Five sections. Five minutes. A scored result covering AI readiness, process optimisation opportunities, and security posture — with an opportunity estimate of what your gaps are costing you.",
         href: "/ai-readiness",
         internal: true,
       },
@@ -44,7 +44,7 @@ const groups = [
   {
     label: "Stream 03",
     name: "Loss Intelligence & Investigations",
-    desc: "Assess your retail crime defence capability.",
+    desc: "Assess your retail crime defence and investigation capability.",
     items: [
       {
         num: "04",
@@ -53,6 +53,15 @@ const groups = [
         duration: "8 min · 10 questions",
         desc: "Assesses your capability to transform incident data into actionable loss intelligence. For leaders seeking to disrupt systemic retail crime and minimise exposure.",
         href: "https://portal.bwadvisorysolutions.com.au/loss-intelligence-diagnostic.html"
+      },
+      {
+        num: "05",
+        badge: "Investigations Capability Diagnostic",
+        audience: "LP Manager · Head of Security · Risk Manager",
+        duration: "8 min · 10 questions",
+        desc: "Assesses the integrity of the investigation lifecycle from signal collection to defensible documentation and outcome.",
+        href: "mailto:brad@bwadvisorysolutions.com.au?subject=Investigations%20Capability%20Diagnostic%20%E2%80%94%20register%20interest",
+        ctaLabel: "Register Interest"
       },
     ]
   }
@@ -76,7 +85,7 @@ const DiagnosticCardBody = ({ item }) => (
       <div className="flex items-end justify-between pt-8 border-t border-accent/15 mt-auto">
         <p className="text-silver/70 text-xs font-mono tracking-widest uppercase font-bold">{item.audience}</p>
         <span className="flex items-center gap-3 text-[#C9A84C] font-bold text-sm tracking-[0.15em] uppercase group-hover:gap-4 transition-all duration-300">
-          <span>Start</span>
+          <span>{item.ctaLabel || "Start"}</span>
           <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
@@ -105,7 +114,7 @@ const DiagnosticCard = ({ item }) => {
 const Diagnostics = () => (
   <div className="bg-primary min-h-screen">
     {/* ── HERO ── */}
-    <section className="relative py-40 md:py-48 px-6 w-full z-10 overflow-hidden">
+    <section className="relative pt-40 md:pt-48 pb-12 md:pb-16 px-6 w-full z-10 overflow-hidden">
       <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#0369A1]/5 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-0 left-1/2 w-[600px] h-[600px] bg-silver/5 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -116,14 +125,14 @@ const Diagnostics = () => (
             Start with what's true.
           </h1>
           <p className="text-2xl md:text-3xl text-silver/75 font-light leading-relaxed max-w-5xl">
-            The gap doesn't close until you know exactly where it is. <span className="text-white font-semibold">Four diagnostics. Three streams.</span>
+            The gap doesn't close until you know exactly where it is. <span className="text-white font-semibold">Five diagnostics. Three streams.</span>
           </p>
         </div>
 
         <div className="flex flex-wrap gap-8 text-silver/60 text-sm font-light">
           <span className="flex items-center gap-2">
             <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
-            Proprietary diagnostics
+            5 proprietary diagnostics
           </span>
           <span className="flex items-center gap-2">
             <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
@@ -131,15 +140,15 @@ const Diagnostics = () => (
           </span>
           <span className="flex items-center gap-2">
             <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
-            24-hour turnaround
+            3 stream assessment
           </span>
         </div>
       </div>
     </section>
 
     {/* ── DIAGNOSTIC STREAMS ── */}
-    <section className="py-32 px-6 w-full relative z-10">
-      <div className="max-w-7xl mx-auto space-y-24">
+    <section className="pt-12 md:pt-16 pb-24 px-6 w-full relative z-10">
+      <div className="max-w-7xl mx-auto space-y-20">
         {groups.map((group) => (
           <div key={group.name} className="space-y-12">
             {/* Stream Header */}
@@ -161,7 +170,7 @@ const Diagnostics = () => (
     </section>
 
     {/* ── METHODOLOGY ── */}
-    <section className="py-40 px-6 w-full relative z-10 bg-gradient-to-b from-primary to-[#051020] border-t border-accent/10">
+    <section className="py-28 px-6 w-full relative z-10 bg-gradient-to-b from-primary to-[#051020] border-t border-accent/10">
       <div className="max-w-5xl mx-auto text-center space-y-10">
         <div className="space-y-6">
           <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">Rigorous Process</p>
