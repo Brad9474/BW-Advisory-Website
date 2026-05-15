@@ -91,9 +91,6 @@ const Footer = () => (
               <a href="/#contact" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 Contact
               </a>
-              <a href="https://command.bwadvisorysolutions.com.au" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
-                Client Login
-              </a>
               <a href="/privacy" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 Privacy Policy
               </a>
