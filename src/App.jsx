@@ -20,6 +20,7 @@ import Diagnostics from './pages/Diagnostics';
 import Investigations from './pages/Investigations';
 import Privacy from './pages/Privacy';
 import AIReadiness from './pages/AIReadiness';
+import Consultation from './pages/Consultation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -81,6 +82,7 @@ const App = () => (
       <Route path="/investigations" element={<Layout><Investigations /></Layout>} />
       <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
       <Route path="/ai-readiness" element={<Layout><AIReadiness /></Layout>} />
+      <Route path="/consultation" element={<Layout><Consultation /></Layout>} />
     </Routes>
   </BrowserRouter>
 );
