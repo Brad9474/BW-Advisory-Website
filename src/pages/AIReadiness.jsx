@@ -1100,7 +1100,7 @@ const Results = ({ score, opportunity, riskAreas, review, lead }) => {
           The next step is a BW Advisory Operational Resilience Diagnostic. Most clients recover the cost of the diagnostic within the first month of implementation.
         </p>
         <a
-          href={`mailto:brad@bwadvisorysolutions.com.au?subject=${encodeURIComponent(`Operational Resilience Diagnostic — Score ${score}`)}`}
+          href="https://portal.bwadvisorysolutions.com.au/intake.html"
           className="inline-flex items-center justify-center gap-3 bg-[#C9A84C] px-10 md:px-12 py-5 min-h-[48px] rounded-lg text-[#0F172A] font-bold text-sm tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 shadow-[0_8px_24px_rgba(201,168,76,0.3)] cursor-pointer"
         >
           Book Your Diagnostic
