@@ -188,6 +188,10 @@ const Home = () => {
             I work with healthcare practices and professional services firms to fix that — practically, without jargon, and with a clear return on the investment.
           </p>
 
+          <p className="hero-elem text-silver/55 mx-auto text-base md:text-lg leading-relaxed mt-8 font-light max-w-3xl">
+            Thirty years of operational command experience — WA Police, COVID-19 border management, national retail crime intelligence — applied to the operational problems healthcare practices and professional services firms have never had a senior operator in the room to solve.
+          </p>
+
           <div className="hero-elem pt-16 flex flex-col sm:flex-row items-center justify-center gap-6">
             <a href="https://portal.bwadvisorysolutions.com.au/intake.html" className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-full text-[#0F172A] font-bold text-base md:text-lg hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase text-center flex items-center justify-center gap-3 shadow-[0_12px_32px_rgba(201,168,76,0.4)] hover:shadow-[0_16px_48px_rgba(201,168,76,0.6)] border border-white/10 hover:border-white/20 cursor-pointer min-w-[280px]">
               Schedule Consultation
@@ -526,6 +530,36 @@ const Home = () => {
                 </div>
               </div>
             </div>
+
+            {/* Case Study 04 */}
+            <div className="relative group overflow-hidden">
+              <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
+              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-10 md:p-12 h-full transition-all duration-500 group-hover:bg-white/12">
+                <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-[#C9A84C]/20 to-accent/10 rounded-full flex items-center justify-center group-hover:from-[#C9A84C]/30 group-hover:to-accent/20 transition-all duration-500">
+                  <span className="text-[#C9A84C] font-display font-bold text-xl">04</span>
+                </div>
+                <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">National Retail Crime Intelligence</h3>
+                <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Retail / Multi-Jurisdiction</p>
+                <div className="space-y-6">
+                  <div className="pb-5 border-b border-accent/15">
+                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Situation</p>
+                    <p className="text-silver/85 font-light leading-relaxed text-sm">National retail group exposed to coordinated organised crime activity across stores, regions, and state lines. Incident response running well behind threat velocity.</p>
+                  </div>
+                  <div className="pb-5 border-b border-accent/15">
+                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Gap</p>
+                    <p className="text-silver/85 font-light leading-relaxed text-sm">Loss prevention operating reactively. No shared intelligence picture between store, regional, and national teams. Police engagement ad hoc.</p>
+                  </div>
+                  <div className="pb-5 border-b border-accent/15">
+                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Outcome</p>
+                    <p className="text-silver/85 font-light leading-relaxed text-sm">Intelligence-led loss prevention framework designed and embedded. National pattern detection in place. Structured law enforcement partnerships at state and federal level.</p>
+                  </div>
+                  <div className="pt-2">
+                    <p className="text-[#C9A84C] font-mono text-xs tracking-widest uppercase font-bold mb-2">Impact</p>
+                    <p className="text-white font-bold text-lg">Reactive posture replaced with detection capability.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -631,10 +665,38 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="max-w-4xl space-y-6">
-            <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
-              Delivered with specialist partners in process automation, AI integration, IT infrastructure, and cybersecurity.
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            {[
+              {
+                name: "Brad Warburton",
+                role: "Principal Consultant",
+                credentials: "30 years operational command — WA Police, COVID-19 border management, National Director Law Enforcement Partnerships (Auror)"
+              },
+              {
+                name: "James Northey",
+                role: "Senior Cyber Specialist",
+                credentials: "Ex-Royal Australian Navy · SANS GREM certified · incident response and reverse engineering"
+              },
+              {
+                name: "Jevon Ang",
+                role: "Security Operations",
+                credentials: "Ex-WAPOL · MDR SOC Analyst · detection engineering and threat response"
+              },
+              {
+                name: "Josh Cusens",
+                role: "IT Foundation and MSP",
+                credentials: "Essential Eight implementation · ongoing managed services and infrastructure"
+              }
+            ].map((member) => (
+              <div key={member.name} className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 rounded-2xl p-10 md:p-12">
+                <h3 className="font-display font-bold text-2xl md:text-3xl text-white mb-2 leading-tight">{member.name}</h3>
+                <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-5">{member.role}</p>
+                <p className="text-silver/80 font-light text-base leading-relaxed">{member.credentials}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="max-w-4xl">
             <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
               Most businesses are running at less than half the capability of the systems they already own. The right engagement pays for itself — through automation savings, reduced overhead, and the cost of a breach you never have to absorb.
             </p>
@@ -662,15 +724,15 @@ const Home = () => {
             <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-silver/70 font-light text-sm">
               <span className="flex items-center gap-2">
                 <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
-                3 diagnostics
+                4 diagnostics
               </span>
               <span className="flex items-center gap-2">
                 <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
-                2 practice areas
+                3 streams
               </span>
               <span className="flex items-center gap-2">
                 <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
-                8 minutes each
+                Personally reviewed
               </span>
             </div>
 

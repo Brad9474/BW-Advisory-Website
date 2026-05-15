@@ -8,7 +8,7 @@ const groups = [
     desc: "For healthcare practices and professional services firms.",
     items: [
       {
-        num: "05",
+        num: "01",
         badge: "AI Readiness Diagnostic",
         audience: "Healthcare practices · Professional services firms",
         duration: "5 min · 5 sections · 28 questions",
@@ -24,7 +24,7 @@ const groups = [
     desc: "Identify the gap between intent and execution.",
     items: [
       {
-        num: "01",
+        num: "02",
         badge: "Strategic Diagnostic",
         audience: "CEO · Board · Senior Leadership",
         duration: "8 min · 10 questions",
@@ -32,7 +32,7 @@ const groups = [
         href: "https://portal.bwadvisorysolutions.com.au/diagnostic.html"
       },
       {
-        num: "02",
+        num: "03",
         badge: "Operational Diagnostic",
         audience: "GM · Head of Operations · Delivery Lead",
         duration: "8 min · 10 questions",
@@ -47,7 +47,7 @@ const groups = [
     desc: "Assess your retail crime defence capability.",
     items: [
       {
-        num: "03",
+        num: "04",
         badge: "Loss Intelligence Diagnostic",
         audience: "GM · CEO · CFO",
         duration: "8 min · 10 questions",
@@ -116,7 +116,7 @@ const Diagnostics = () => (
             Start with what's true.
           </h1>
           <p className="text-2xl md:text-3xl text-silver/75 font-light leading-relaxed max-w-5xl">
-            The gap doesn't close until you know exactly where it is. <span className="text-white font-semibold">Three diagnostics. Two streams. Eight minutes each.</span>
+            The gap doesn't close until you know exactly where it is. <span className="text-white font-semibold">Four diagnostics. Three streams.</span>
           </p>
         </div>
 
