@@ -666,6 +666,30 @@ const generatePersonalReview = (areas) => {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const API_URL = 'https://command.bwadvisorysolutions.com.au/api/intake/diagnostic';
+const TRACK_URL = 'https://command.bwadvisorysolutions.com.au/api/track/diagnostic';
+const REFERRAL_URL = 'https://command.bwadvisorysolutions.com.au/api/intake/referral';
+const SHARE_BASE = 'https://bwadvisorysolutions.com.au/ai-readiness';
+
+const trackEvent = (payload) => {
+  try {
+    fetch(TRACK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    }).catch(() => {});
+  } catch {
+    // fire-and-forget — never block the UI
+  }
+};
+
+const buildReferralToken = (email) => {
+  try {
+    return btoa((email || '').trim()).replace(/=/g, '');
+  } catch {
+    return '';
+  }
+};
 
 const submitToCommandCentre = async (payload) => {
   try {
@@ -1012,9 +1036,82 @@ const EmailCaptureScreen = ({ lead, onChange, onSubmit, submitting }) => {
 // Result screen
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Results = ({ score, opportunity, riskAreas, review, lead }) => {
+const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, diagnosticType }) => {
   const concernCount = riskAreas.filter((a) => a.severity !== 'MODERATE').length;
   const weeklyHours = opportunity.timeLost.weeklyHours;
+
+  const shareUrl = referralToken ? `${SHARE_BASE}?ref=${referralToken}` : SHARE_BASE;
+  const [linkCopied, setLinkCopied] = useState(false);
+  const [showShareForm, setShowShareForm] = useState(false);
+  const [shareForm, setShareForm] = useState({ name: '', email: '' });
+  const [shareAttempted, setShareAttempted] = useState(false);
+
+  const copyShareLink = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+    } catch {
+      // fall back silently — modern browsers expose clipboard in secure contexts
+    }
+    setLinkCopied(true);
+    setTimeout(() => setLinkCopied(false), 3000);
+  };
+
+  const buildMailtoBody = () => {
+    const riskLines = riskAreas
+      .map((a) => `- ${a.label} (${a.severity})`)
+      .join('\n');
+    const body = [
+      `I completed the BW Advisory AI Readiness Diagnostic.`,
+      ``,
+      `Score: ${score}/100`,
+      ``,
+      `Estimated time lost per week: ${fmtHours(weeklyHours)} hours`,
+      `Estimated annual cost of lost time: ${fmtMoney(opportunity.timeLost.annualCost)}`,
+      `Estimated annual revenue at risk: ${fmtMoney(opportunity.revenueAtRisk)}`,
+      ``,
+      `Risk areas:`,
+      riskLines,
+      ``,
+      `Assessment completed at bwadvisorysolutions.com.au/ai-readiness`,
+    ].join('\n');
+    return body;
+  };
+
+  const openMailto = () => {
+    const subject = `BW Advisory AI Readiness — Score ${score}/100`;
+    const href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildMailtoBody())}`;
+    window.location.href = href;
+  };
+
+  const sendShare = () => {
+    if (shareAttempted) {
+      openMailto();
+      return;
+    }
+    setShareAttempted(true);
+    const referrerEmail = (lead?.email || '').trim();
+    const referralName = shareForm.name.trim();
+    const referralEmail = shareForm.email.trim();
+    if (referralName || referralEmail) {
+      try {
+        fetch(REFERRAL_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            referrerEmail,
+            referralName,
+            referralEmail,
+            score,
+            diagnosticType,
+          }),
+          keepalive: true,
+        }).catch(() => {});
+      } catch {
+        // fire-and-forget
+      }
+    }
+    openMailto();
+  };
 
   return (
     <div className="space-y-12">
@@ -1112,6 +1209,65 @@ const Results = ({ score, opportunity, riskAreas, review, lead }) => {
           We've also sent a copy to <span className="text-white">{lead.email}</span> for your records.
         </p>
       </div>
+
+      {/* Share buttons */}
+      <div className="space-y-4">
+        <div className="flex flex-col md:flex-row gap-3">
+          <button
+            type="button"
+            onClick={copyShareLink}
+            className="flex-1 px-6 py-4 min-h-[48px] rounded-lg border border-[#C9A84C]/60 text-[#C9A84C] font-bold text-sm tracking-[0.15em] uppercase hover:bg-[#C9A84C]/10 hover:border-[#C9A84C] transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50"
+          >
+            {linkCopied ? 'Link copied' : 'Share this diagnostic'}
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowShareForm((s) => !s)}
+            className="flex-1 px-6 py-4 min-h-[48px] rounded-lg border border-[#C9A84C]/60 text-[#C9A84C] font-bold text-sm tracking-[0.15em] uppercase hover:bg-[#C9A84C]/10 hover:border-[#C9A84C] transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50"
+          >
+            Share results
+          </button>
+        </div>
+
+        {showShareForm && (
+          <div className="bg-white/5 border border-white/15 rounded-2xl p-6 space-y-4">
+            <p className="text-silver/80 font-light text-base">Who are you sharing this with?</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <label className="flex flex-col gap-2">
+                <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
+                  Name (optional)
+                </span>
+                <input
+                  type="text"
+                  value={shareForm.name}
+                  onChange={(e) => setShareForm((prev) => ({ ...prev, name: e.target.value.slice(0, 200) }))}
+                  className="bg-white/5 border border-white/15 rounded-lg px-4 py-3 min-h-[44px] text-white placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
+                />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
+                  Email (optional)
+                </span>
+                <input
+                  type="email"
+                  value={shareForm.email}
+                  onChange={(e) => setShareForm((prev) => ({ ...prev, email: e.target.value.slice(0, 200) }))}
+                  className="bg-white/5 border border-white/15 rounded-lg px-4 py-3 min-h-[44px] text-white placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
+                />
+              </label>
+            </div>
+            <div>
+              <button
+                type="button"
+                onClick={sendShare}
+                className="px-8 py-3 min-h-[44px] rounded-lg bg-[#C9A84C] text-[#0F172A] font-bold text-sm tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 cursor-pointer shadow-[0_8px_24px_rgba(201,168,76,0.3)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50"
+              >
+                Send
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
@@ -1138,12 +1294,38 @@ const AIReadiness = () => {
   const [lead, setLead] = useState({ name: '', email: '' });
   const [submitting, setSubmitting] = useState(false);
   const [finalResults, setFinalResults] = useState(null);
+  const [referredBy, setReferredBy] = useState(null);
+  const [sessionId] = useState(() => {
+    try {
+      return crypto.randomUUID();
+    } catch {
+      return `s_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+    }
+  });
   const advanceLockRef = useRef(false);
   const nextButtonRef = useRef(null);
+  const startFiredRef = useRef(false);
+  const stepRef = useRef(0);
+  const completedRef = useRef(false);
+
+  // Read inbound referral token from URL on mount.
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const ref = params.get('ref');
+      if (ref) setReferredBy(ref);
+    } catch {
+      // ignore
+    }
+  }, []);
 
   const setAnswer = useCallback((qid, value) => {
     setResponses((prev) => ({ ...prev, [qid]: value }));
-  }, []);
+    if (!startFiredRef.current) {
+      startFiredRef.current = true;
+      trackEvent({ sessionId, event: 'START', questionIndex: 0 });
+    }
+  }, [sessionId]);
 
   const scrollNextIntoView = useCallback(() => {
     requestAnimationFrame(() => {
@@ -1159,10 +1341,14 @@ const AIReadiness = () => {
     if (advanceLockRef.current) return;
     advanceLockRef.current = true;
     setDirection('forward');
-    setStep((s) => Math.min(s + 1, STEP_RESULTS));
+    setStep((s) => {
+      const next = Math.min(s + 1, STEP_RESULTS);
+      trackEvent({ sessionId, event: 'ADVANCE', questionIndex: next });
+      return next;
+    });
     window.scrollTo({ top: 0, behavior: 'instant' });
     setTimeout(() => { advanceLockRef.current = false; }, 350);
-  }, []);
+  }, [sessionId]);
 
   const goBack = useCallback(() => {
     if (advanceLockRef.current) return;
@@ -1177,13 +1363,15 @@ const AIReadiness = () => {
     const opportunity = computeOpportunity(responses);
     const riskAreas = computeRiskAreas(responses);
     const review = generatePersonalReview(riskAreas);
-    setFinalResults({ score, opportunity, riskAreas, review });
+    const diagnosticType = getDiagnosticType(responses.A1);
+    const referralToken = buildReferralToken(lead.email);
+    setFinalResults({ score, opportunity, riskAreas, review, diagnosticType, referralToken });
 
     const payload = {
       name: lead.name.trim(),
       email: lead.email.trim(),
       organisation: responses.A1 || 'Not specified',
-      diagnosticType: getDiagnosticType(responses.A1),
+      diagnosticType,
       responses: {
         ...responses,
         score,
@@ -1198,16 +1386,41 @@ const AIReadiness = () => {
       optInResearch: false,
       source: 'website_diagnostic',
       brand: 'BW_ADVISORY',
+      sessionId,
+      referralToken,
+      referredBy: referredBy || undefined,
     };
 
     submitToCommandCentre(payload).finally(() => {
       setSubmitting(false);
     });
 
+    completedRef.current = true;
+    trackEvent({ sessionId, event: 'COMPLETE', score, diagnosticType });
+
     setDirection('forward');
     setStep(STEP_RESULTS);
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
+
+  // Mirror step into a ref so the unload handler can read it without re-binding.
+  useEffect(() => {
+    stepRef.current = step;
+    if (step === STEP_EMAIL) {
+      trackEvent({ sessionId, event: 'EMAIL_CAPTURE' });
+    }
+  }, [step, sessionId]);
+
+  // Fire ABANDON if the user leaves before completing.
+  useEffect(() => {
+    const handler = () => {
+      if (completedRef.current) return;
+      if (!startFiredRef.current) return;
+      trackEvent({ sessionId, event: 'ABANDON', questionIndex: stepRef.current });
+    };
+    window.addEventListener('beforeunload', handler);
+    return () => window.removeEventListener('beforeunload', handler);
+  }, [sessionId]);
 
   // Global Enter handler — advance when current screen is valid.
   useEffect(() => {
@@ -1274,6 +1487,8 @@ const AIReadiness = () => {
         riskAreas={finalResults.riskAreas}
         review={finalResults.review}
         lead={lead}
+        referralToken={finalResults.referralToken}
+        diagnosticType={finalResults.diagnosticType}
       />
     ) : null;
   }
