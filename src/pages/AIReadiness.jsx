@@ -1135,7 +1135,7 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
           <span className="text-[#C9A84C]">{score}/100</span>
         </h1>
         <p className="text-base md:text-lg text-silver/80 font-light leading-relaxed max-w-3xl mx-auto">
-          Based on your responses, we've identified <span className="text-white font-semibold">{concernCount}</span> area{concernCount === 1 ? '' : 's'} where your current workflows are creating measurable inefficiency, duplication, and risk.
+          Based on your responses, we've identified <span className="text-4xl font-bold text-[#C9A84C]">{concernCount}</span> area{concernCount === 1 ? '' : 's'} where your current workflows are creating measurable <span className="text-[#C9A84C]">inefficiency</span>, <span className="text-[#C9A84C]">duplication</span>, and <span className="text-[#C9A84C]">risk</span>.
         </p>
       </div>
 
@@ -1242,40 +1242,48 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
 
         {showShareForm && (
           <div className="bg-white/5 border border-white/15 rounded-2xl p-6 space-y-4">
-            <p className="text-silver/80 font-light text-base">Who are you sharing this with?</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <label className="flex flex-col gap-2">
-                <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
-                  Name (optional)
-                </span>
-                <input
-                  type="text"
-                  value={shareForm.name}
-                  onChange={(e) => setShareForm((prev) => ({ ...prev, name: e.target.value.slice(0, 200) }))}
-                  className="bg-white/5 border border-white/15 rounded-lg px-4 py-3 min-h-[44px] text-white placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
-                />
-              </label>
-              <label className="flex flex-col gap-2">
-                <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
-                  Email (optional)
-                </span>
-                <input
-                  type="email"
-                  value={shareForm.email}
-                  onChange={(e) => setShareForm((prev) => ({ ...prev, email: e.target.value.slice(0, 200) }))}
-                  className="bg-white/5 border border-white/15 rounded-lg px-4 py-3 min-h-[44px] text-white placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
-                />
-              </label>
-            </div>
-            <div>
-              <button
-                type="button"
-                onClick={sendShare}
-                className="px-8 py-3 min-h-[44px] rounded-lg bg-[#C9A84C] text-[#0F172A] font-bold text-sm tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 cursor-pointer shadow-[0_8px_24px_rgba(201,168,76,0.3)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50"
-              >
-                Send
-              </button>
-            </div>
+            {shareAttempted ? (
+              <p className="text-silver/85 font-light text-base text-center py-4">
+                Results shared. Check your email for a copy.
+              </p>
+            ) : (
+              <>
+                <p className="text-silver/80 font-light text-base">Who are you sharing this with?</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <label className="flex flex-col gap-2">
+                    <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
+                      Name (optional)
+                    </span>
+                    <input
+                      type="text"
+                      value={shareForm.name}
+                      onChange={(e) => setShareForm((prev) => ({ ...prev, name: e.target.value.slice(0, 200) }))}
+                      className="bg-white/5 border border-white/15 rounded-lg px-4 py-3 min-h-[44px] text-white placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
+                    />
+                  </label>
+                  <label className="flex flex-col gap-2">
+                    <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
+                      Email (optional)
+                    </span>
+                    <input
+                      type="email"
+                      value={shareForm.email}
+                      onChange={(e) => setShareForm((prev) => ({ ...prev, email: e.target.value.slice(0, 200) }))}
+                      className="bg-white/5 border border-white/15 rounded-lg px-4 py-3 min-h-[44px] text-white placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
+                    />
+                  </label>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    onClick={sendShare}
+                    className="px-8 py-3 min-h-[44px] rounded-lg bg-[#C9A84C] text-[#0F172A] font-bold text-sm tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 cursor-pointer shadow-[0_8px_24px_rgba(201,168,76,0.3)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50"
+                  >
+                    Send
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         )}
       </div>
