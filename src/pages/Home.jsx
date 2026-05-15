@@ -763,6 +763,10 @@ const Home = () => {
                 Thirty minutes is enough. I'll understand your challenge. You'll understand my approach. No proposal until we've talked.
               </p>
 
+              <p className="text-base text-silver/55 font-light leading-relaxed">
+                Working outside these sectors? The fundamentals apply everywhere — <a href="mailto:brad@bwadvisorysolutions.com.au" className="text-silver/70 hover:text-accent underline decoration-silver/30 hover:decoration-accent/60 underline-offset-4 transition-colors duration-300">get in touch</a>.
+              </p>
+
               <div className="space-y-6 pt-8 border-t border-accent/20">
                 <div className="space-y-3">
                   <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold">Email</p>
