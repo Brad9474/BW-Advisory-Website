@@ -25,7 +25,7 @@ const Footer = () => (
               </div>
             </div>
             <p className="text-silver/60 font-light text-sm leading-relaxed">
-              Operational excellence through strategic clarity and disciplined execution.
+              Efficiency and security, built for how your business actually works.
             </p>
           </div>
 

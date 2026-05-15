@@ -630,7 +630,12 @@ const LeadCaptureForm = ({ values, onChange, onSubmit, submitting }) => {
         <Checkbox
           checked={values.consentMarketing}
           onChange={(v) => onChange('consentMarketing', v)}
-          label="I'd also like to receive occasional insights, articles, and updates from BW Advisory Solutions. I understand I can unsubscribe at any time."
+          label={
+            <>
+              I'd also like to receive occasional insights, articles, and updates from BW Advisory Solutions. I understand I can unsubscribe at any time, and that my information is handled in line with the{' '}
+              <a href="/privacy" className="underline hover:text-[#C9A84C]">Privacy Policy</a>.
+            </>
+          }
         />
       </div>
 
