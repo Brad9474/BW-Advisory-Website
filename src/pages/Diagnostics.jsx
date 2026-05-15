@@ -5,12 +5,12 @@ const groups = [
   {
     label: "Stream 01",
     name: "AI Readiness",
-    desc: "For healthcare practices and professional services firms.",
+    desc: "For allied health and healthcare practices, and professional services firms.",
     items: [
       {
         num: "01",
         badge: "AI Readiness Diagnostic",
-        audience: "Healthcare practices · Professional services firms",
+        audience: "Allied health and healthcare practices · Professional services firms",
         duration: "5 min · 5 sections · 28 questions",
         desc: "Five sections. Five minutes. A scored result covering AI readiness, process optimisation opportunities, and security posture — with an opportunity estimate of what your gaps are costing you.",
         href: "/ai-readiness",

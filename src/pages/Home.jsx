@@ -185,11 +185,11 @@ const Home = () => {
           </h1>
 
           <p className="hero-elem text-silver/75 mx-auto text-xl md:text-2xl leading-relaxed mt-12 font-light tracking-wide max-w-4xl">
-            I work with healthcare practices and professional services firms to fix that — practically, without jargon, and with a clear return on the investment.
+            I work with allied health and healthcare practices, and professional services firms to fix that — practically, without jargon, and with a clear return on the investment.
           </p>
 
           <p className="hero-elem text-silver/55 mx-auto text-base md:text-lg leading-relaxed mt-8 font-light max-w-3xl">
-            Thirty years of operational command experience — WA Police, COVID-19 border management, national retail crime intelligence — applied to the operational problems healthcare practices and professional services firms have never had a senior operator in the room to solve.
+            Thirty years of operational command experience — WA Police, COVID-19 border management, national retail crime intelligence — applied to the operational problems allied health and healthcare practices, and professional services firms have never had a senior operator in the room to solve.
           </p>
 
           <div className="hero-elem pt-16 flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -215,7 +215,7 @@ const Home = () => {
                 You can't fix what you can't see.
               </h2>
               <p className="text-base md:text-lg text-silver/80 font-light leading-relaxed max-w-3xl mx-auto">
-                Healthcare practices, allied health practices, and professional services firms are losing value every day to operational gaps they haven't identified. I find them and close them — practically, without jargon, with a clear return on the investment.
+                Allied health and healthcare practices, and professional services firms are losing value every day to operational gaps they haven't identified. I find them and close them — practically, without jargon, with a clear return on the investment.
               </p>
             </div>
           </div>
@@ -227,12 +227,12 @@ const Home = () => {
       <section id="advisory" className="py-32 w-full relative z-10 bg-gradient-to-b from-primary via-[#0D1520] to-primary">
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
           <div className="mb-20 max-w-4xl">
-            <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">For Healthcare & Professional Services</p>
+            <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">For Allied Health, Healthcare & Professional Services</p>
             <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight mb-8">
               Operational Resilience and Security Advisory
             </h2>
             <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
-              Most healthcare practices and professional services firms know they need to modernise — they just don't know where to begin. I cut through the noise, identify what actually needs to change, and deliver practical improvements across operations, automation, and security.
+              Most allied health and healthcare practices, and professional services firms know they need to modernise — they just don't know where to begin. I cut through the noise, identify what actually needs to change, and deliver practical improvements across operations, automation, and security.
             </p>
           </div>
 
@@ -248,7 +248,7 @@ const Home = () => {
                 num: "02",
                 name: "Security Hardening",
                 price: "from $15,000",
-                desc: "Essential Eight aligned remediation across endpoints, identity, backups, email, and access. Delivered with James Northey (SANS GREM) and Josh Cusens for ongoing maintenance."
+                desc: "Essential Eight aligned remediation across endpoints, identity, backups, email, and access. Delivered with senior cyber security specialists. Ongoing maintenance via dedicated MSP support."
               },
               {
                 num: "03",
@@ -291,21 +291,21 @@ const Home = () => {
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
           <div className="mb-24 max-w-4xl">
             <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">How I Close The Gap</p>
-            <h2 className="font-display font-bold text-6xl md:text-7xl lg:text-8xl text-white tracking-tight mb-8">Two Focus Areas.</h2>
+            <h2 className="font-display font-bold text-6xl md:text-7xl lg:text-8xl text-white tracking-tight mb-8">Two Practice Areas.</h2>
             <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
               Every engagement is tailored to your challenge. These are the areas where I deliver measurable outcomes and lasting operational change.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-            {/* General Advisory */}
+            {/* Allied Health & Healthcare Practices */}
             <a href="/#framework" className="group relative overflow-hidden">
               <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/30 rounded-3xl opacity-0 group-hover:opacity-70 transition-all duration-700 blur-xl"></div>
               <div className="relative block bg-gradient-to-br from-[#1A3560]/80 via-[#0D1520]/60 to-[#051020]/80 border border-accent/40 group-hover:border-[#C9A84C]/60 rounded-3xl p-12 md:p-16 transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.2)] h-full flex flex-col">
                 <div className="flex items-start justify-between mb-10">
                   <div className="space-y-4">
                     <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-xs uppercase font-bold">Service Area 01</p>
-                    <h3 className="font-display font-bold text-4xl md:text-5xl text-white leading-tight">Strategic & Operational Advisory</h3>
+                    <h3 className="font-display font-bold text-4xl md:text-5xl text-white leading-tight">Allied Health & Healthcare Practices</h3>
                   </div>
                   <div className="hidden md:flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#C9A84C]/20 to-accent/10 rounded-2xl group-hover:from-[#C9A84C]/40 group-hover:to-accent/20 transition-all duration-500 flex-shrink-0">
                     <svg className="w-10 h-10 text-[#C9A84C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -314,11 +314,11 @@ const Home = () => {
                   </div>
                 </div>
                 <p className="text-silver/85 font-light text-lg leading-relaxed mb-10">
-                  Identifying where execution breaks down. Rebuilding the path from strategic intent to frontline performance across law enforcement, government, and the private sector.
+                  Chiropractic, physiotherapy, occupational therapy, dental, and GP practices — where operational gaps, patient data risk, and compliance exposure combine. Diagnostic-led, practically delivered, without disrupting how the practice runs.
                 </p>
                 <div className="mt-auto">
                   <div className="flex items-center gap-3 text-[#C9A84C] font-bold text-sm tracking-[0.15em] uppercase group-hover:gap-4 transition-all duration-300">
-                    <span>Explore Our Method</span>
+                    <span>Explore our method</span>
                     <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
@@ -327,14 +327,14 @@ const Home = () => {
               </div>
             </a>
 
-            {/* Loss Intelligence */}
-            <Link to="/loss-intelligence" className="group relative overflow-hidden">
+            {/* Professional Services Firms */}
+            <a href="/#advisory" className="group relative overflow-hidden">
               <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/30 rounded-3xl opacity-0 group-hover:opacity-70 transition-all duration-700 blur-xl"></div>
               <div className="relative block bg-gradient-to-br from-[#1A3560]/80 via-[#0D1520]/60 to-[#051020]/80 border border-accent/40 group-hover:border-[#C9A84C]/60 rounded-3xl p-12 md:p-16 transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.2)] h-full flex flex-col">
                 <div className="flex items-start justify-between mb-10">
                   <div className="space-y-4">
                     <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-xs uppercase font-bold">Service Area 02</p>
-                    <h3 className="font-display font-bold text-4xl md:text-5xl text-white leading-tight">Loss Intelligence & Investigations</h3>
+                    <h3 className="font-display font-bold text-4xl md:text-5xl text-white leading-tight">Professional Services Firms</h3>
                   </div>
                   <div className="hidden md:flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#C9A84C]/20 to-accent/10 rounded-2xl group-hover:from-[#C9A84C]/40 group-hover:to-accent/20 transition-all duration-500 flex-shrink-0">
                     <svg className="w-10 h-10 text-[#C9A84C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -343,18 +343,18 @@ const Home = () => {
                   </div>
                 </div>
                 <p className="text-silver/85 font-light text-lg leading-relaxed mb-10">
-                  Building structured capability to detect, investigate, and prevent retail loss — from governance framework to active intelligence pipeline. One engagement. Embedded results.
+                  Accounting, legal, and financial advice practices facing the same operational pressures with less tolerance for downtime or breach. Clear process, protected data, competitive advantage.
                 </p>
                 <div className="mt-auto">
                   <div className="flex items-center gap-3 text-[#C9A84C] font-bold text-sm tracking-[0.15em] uppercase group-hover:gap-4 transition-all duration-300">
-                    <span>Learn More</span>
+                    <span>Learn more</span>
                     <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
                   </div>
                 </div>
               </div>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -620,7 +620,7 @@ const Home = () => {
                 He moved into the private sector to lead law enforcement partnerships for a retail intelligence technology company — building the bridge between what law enforcement needs and what a technology business can deliver, proved across every Australian state and territory.
               </p>
               <p>
-                He now brings that same discipline — blended with private sector technology experience and practical AI capability — to healthcare practices, allied health practices, and professional services firms.
+                He now brings that same discipline — blended with private sector technology experience and practical AI capability — to allied health and healthcare practices, and professional services firms.
               </p>
               <p className="font-medium text-textDark">
                 The problems look different. The fundamentals are the same.
@@ -670,7 +670,7 @@ const Home = () => {
           </div>
           <div className="space-y-6 text-textDark/90 font-light text-xl leading-relaxed max-w-4xl">
             <p>
-              Healthcare practices, allied health practices, and professional services firms are at a genuine inflection point. AI is available but confusing. Cyber threats are escalating — health data and professional services data are among the most targeted in Australia. Compliance obligations are tightening with no sign of reversal.
+              Allied health and healthcare practices, and professional services firms are at a genuine inflection point. AI is available but confusing. Cyber threats are escalating — health data and professional services data are among the most targeted in Australia. Compliance obligations are tightening with no sign of reversal.
             </p>
             <p>
               The practices that get clear on this in the next 12 to 18 months will have a structural advantage. The ones that don't will spend years cleaning up problems that were preventable.
