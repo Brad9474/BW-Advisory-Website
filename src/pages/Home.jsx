@@ -641,124 +641,72 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Case Study 01 */}
             <div className="relative group overflow-hidden">
               <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
-              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-10 md:p-12 h-full transition-all duration-500 group-hover:bg-white/12">
-                <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-[#C9A84C]/20 to-accent/10 rounded-full flex items-center justify-center group-hover:from-[#C9A84C]/30 group-hover:to-accent/20 transition-all duration-500">
-                  <span className="text-[#C9A84C] font-display font-bold text-xl">01</span>
+              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/20 group-hover:border-[#C9A84C]/40 rounded-2xl p-5 h-full transition-all duration-500 group-hover:bg-white/10">
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="font-display font-bold text-2xl md:text-3xl text-white leading-tight">Organisational Redesign</h3>
+                  <span className="text-[#C9A84C] font-display font-bold text-xl shrink-0">01</span>
                 </div>
-                <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">Organisational Redesign</h3>
-                <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Law Enforcement / Organisational Command</p>
-                <div className="space-y-6">
-                  <div className="pb-5 border-b border-accent/15">
-                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Situation</p>
-                    <p className="text-silver/85 font-light leading-relaxed text-sm">Large operational unit with entrenched practices and persistent performance gaps despite adequate resourcing.</p>
-                  </div>
-                  <div className="pb-5 border-b border-accent/15">
-                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Gap</p>
-                    <p className="text-silver/85 font-light leading-relaxed text-sm">Investigative culture lagged behind intelligence capability. Tools existed. Practice did not.</p>
-                  </div>
-                  <div className="pb-5 border-b border-accent/15">
-                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Outcome</p>
-                    <p className="text-silver/85 font-light leading-relaxed text-sm">Workforce restructured, investigative practice modernised. Regional volume crime decreased measurably.</p>
-                  </div>
-                  <div className="pt-2">
-                    <p className="text-[#C9A84C] font-mono text-xs tracking-widest uppercase font-bold mb-2">Impact</p>
-                    <p className="text-white font-bold text-lg">Investigative culture rebuilt. Crime rate fell.</p>
-                  </div>
-                </div>
+                <p className="text-silver/55 text-xs font-mono tracking-widest uppercase mt-1 truncate">Law Enforcement / Organisational Command</p>
+                <div className="h-px bg-white/10 my-4"></div>
+                <p className="text-silver/85 font-light leading-relaxed text-sm">
+                  A large operational unit carried entrenched practices and persistent performance gaps despite adequate resourcing — investigative culture lagged behind intelligence capability, tools were in place but practice was not.
+                </p>
+                <p className="text-white font-bold text-base mt-5">Investigative culture rebuilt. Crime rate fell.</p>
               </div>
             </div>
 
             {/* Case Study 02 */}
             <div className="relative group overflow-hidden">
               <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
-              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-10 md:p-12 h-full transition-all duration-500 group-hover:bg-white/12">
-                <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-[#C9A84C]/20 to-accent/10 rounded-full flex items-center justify-center group-hover:from-[#C9A84C]/30 group-hover:to-accent/20 transition-all duration-500">
-                  <span className="text-[#C9A84C] font-display font-bold text-xl">02</span>
+              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/20 group-hover:border-[#C9A84C]/40 rounded-2xl p-5 h-full transition-all duration-500 group-hover:bg-white/10">
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="font-display font-bold text-2xl md:text-3xl text-white leading-tight">Digital Operations at Scale</h3>
+                  <span className="text-[#C9A84C] font-display font-bold text-xl shrink-0">02</span>
                 </div>
-                <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">Digital Operations at Scale</h3>
-                <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Government / Large-Scale Border Operations</p>
-                <div className="space-y-6">
-                  <div className="pb-5 border-b border-accent/15">
-                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Situation</p>
-                    <p className="text-silver/85 font-light leading-relaxed text-sm">Government agency required digital screening at scale during crisis, replacing inadequate paper-based process.</p>
-                  </div>
-                  <div className="pb-5 border-b border-accent/15">
-                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Gap</p>
-                    <p className="text-silver/85 font-light leading-relaxed text-sm">No digital infrastructure. Large workforce needed real-time coordination across politically sensitive operation.</p>
-                  </div>
-                  <div className="pb-5 border-b border-accent/15">
-                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Outcome</p>
-                    <p className="text-silver/85 font-light leading-relaxed text-sm">Programme designed and commanded from ground up. Paper process eliminated entirely. Operation delivered without incident.</p>
-                  </div>
-                  <div className="pt-2">
-                    <p className="text-[#C9A84C] font-mono text-xs tracking-widest uppercase font-bold mb-2">Impact</p>
-                    <p className="text-white font-bold text-lg">1M+ People Screened at Scale</p>
-                  </div>
-                </div>
+                <p className="text-silver/55 text-xs font-mono tracking-widest uppercase mt-1 truncate">Government / Large-Scale Border Operations</p>
+                <div className="h-px bg-white/10 my-4"></div>
+                <p className="text-silver/85 font-light leading-relaxed text-sm">
+                  A government agency needed digital screening at scale during crisis with no existing infrastructure and a large workforce requiring real-time coordination across a politically sensitive operation that was still running on paper.
+                </p>
+                <p className="text-white font-bold text-base mt-5">1M+ People Screened at Scale</p>
               </div>
             </div>
 
             {/* Case Study 03 */}
             <div className="relative group overflow-hidden">
               <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
-              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-10 md:p-12 h-full transition-all duration-500 group-hover:bg-white/12">
-                <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-[#C9A84C]/20 to-accent/10 rounded-full flex items-center justify-center group-hover:from-[#C9A84C]/30 group-hover:to-accent/20 transition-all duration-500">
-                  <span className="text-[#C9A84C] font-display font-bold text-xl">03</span>
+              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/20 group-hover:border-[#C9A84C]/40 rounded-2xl p-5 h-full transition-all duration-500 group-hover:bg-white/10">
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="font-display font-bold text-2xl md:text-3xl text-white leading-tight">Intelligence Architecture</h3>
+                  <span className="text-[#C9A84C] font-display font-bold text-xl shrink-0">03</span>
                 </div>
-                <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">Intelligence Architecture</h3>
-                <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">Law Enforcement / Intelligence Architecture</p>
-                <div className="space-y-6">
-                  <div className="pb-5 border-b border-accent/15">
-                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Situation</p>
-                    <p className="text-silver/85 font-light leading-relaxed text-sm">Government intelligence infrastructure fragmented across disconnected systems. No single operational picture for frontline commanders.</p>
-                  </div>
-                  <div className="pb-5 border-b border-accent/15">
-                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Gap</p>
-                    <p className="text-silver/85 font-light leading-relaxed text-sm">Intelligence didn't reach decision-makers at speed. Information silos prevented unified command.</p>
-                  </div>
-                  <div className="pb-5 border-b border-accent/15">
-                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Outcome</p>
-                    <p className="text-silver/85 font-light leading-relaxed text-sm">Real-time intelligence environment deployed. Multiple sources aggregated into single actionable picture integrated with frontline systems.</p>
-                  </div>
-                  <div className="pt-2">
-                    <p className="text-[#C9A84C] font-mono text-xs tracking-widest uppercase font-bold mb-2">Impact</p>
-                    <p className="text-white font-bold text-lg">Intelligence reached command 40% faster.</p>
-                  </div>
-                </div>
+                <p className="text-silver/55 text-xs font-mono tracking-widest uppercase mt-1 truncate">Law Enforcement / Intelligence Architecture</p>
+                <div className="h-px bg-white/10 my-4"></div>
+                <p className="text-silver/85 font-light leading-relaxed text-sm">
+                  Government intelligence infrastructure was fragmented across disconnected systems with no single operational picture for frontline commanders — intelligence did not reach decision-makers at speed, and information silos prevented unified command.
+                </p>
+                <p className="text-white font-bold text-base mt-5">Intelligence reached command 40% faster.</p>
               </div>
             </div>
 
             {/* Case Study 04 */}
             <div className="relative group overflow-hidden">
               <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
-              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-10 md:p-12 h-full transition-all duration-500 group-hover:bg-white/12">
-                <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-[#C9A84C]/20 to-accent/10 rounded-full flex items-center justify-center group-hover:from-[#C9A84C]/30 group-hover:to-accent/20 transition-all duration-500">
-                  <span className="text-[#C9A84C] font-display font-bold text-xl">04</span>
+              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/20 group-hover:border-[#C9A84C]/40 rounded-2xl p-5 h-full transition-all duration-500 group-hover:bg-white/10">
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="font-display font-bold text-2xl md:text-3xl text-white leading-tight">National Retail Crime Intelligence</h3>
+                  <span className="text-[#C9A84C] font-display font-bold text-xl shrink-0">04</span>
                 </div>
-                <h3 className="font-display font-bold text-3xl text-white mb-2 pr-16 min-h-[5rem]">National Retail Crime Intelligence</h3>
-                <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-6">National Retail / Crime Intelligence</p>
-                <div className="space-y-6">
-                  <div className="pb-5 border-b border-accent/15">
-                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Situation</p>
-                    <p className="text-silver/85 font-light leading-relaxed text-sm">National retail group exposed to coordinated organised crime activity across stores, regions, and state lines. Incident response running well behind threat velocity.</p>
-                  </div>
-                  <div className="pb-5 border-b border-accent/15">
-                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Gap</p>
-                    <p className="text-silver/85 font-light leading-relaxed text-sm">Loss prevention operating reactively. No shared intelligence picture between store, regional, and national teams. Police engagement ad hoc.</p>
-                  </div>
-                  <div className="pb-5 border-b border-accent/15">
-                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-2">The Outcome</p>
-                    <p className="text-silver/85 font-light leading-relaxed text-sm">Intelligence-led loss prevention framework designed and embedded. National pattern detection in place. Structured law enforcement partnerships at state and federal level.</p>
-                  </div>
-                  <div className="pt-2">
-                    <p className="text-[#C9A84C] font-mono text-xs tracking-widest uppercase font-bold mb-2">Impact</p>
-                    <p className="text-white font-bold text-lg">Reactive posture replaced with detection capability.</p>
-                  </div>
-                </div>
+                <p className="text-silver/55 text-xs font-mono tracking-widest uppercase mt-1 truncate">National Retail / Crime Intelligence</p>
+                <div className="h-px bg-white/10 my-4"></div>
+                <p className="text-silver/85 font-light leading-relaxed text-sm">
+                  A national retail group was exposed to coordinated organised crime activity across stores, regions, and state lines with loss prevention running reactively, no shared intelligence picture between store, regional, and national teams, and ad hoc police engagement.
+                </p>
+                <p className="text-white font-bold text-base mt-5">Reactive posture replaced with detection capability.</p>
               </div>
             </div>
           </div>
