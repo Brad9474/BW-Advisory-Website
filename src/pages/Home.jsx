@@ -10,6 +10,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 const COMMAND_CENTRE_ENDPOINT = "https://command.bwadvisorysolutions.com.au/api/intake/contact";
 
+// Display labels users see → server enum value sent in payload.
+// Label is also prepended to objective so Brad sees the granular choice.
+const HELP_OPTIONS = [
+  { label: "AI Readiness & Process Optimisation", area: "smb_advisory" },
+  { label: "Security Hardening & Cyber Risk", area: "smb_advisory" },
+  { label: "Operational Resilience Diagnostic", area: "smb_advisory" },
+  { label: "Loss Intelligence & Investigations", area: "loss_intelligence" },
+  { label: "Strategic & Operational Advisory", area: "strategic_advisory" },
+  { label: "Not sure yet — I just know something needs to change", area: "both" },
+];
+
 const ConsultationForm = () => {
   const [values, setValues] = useState({
     name: "",
@@ -17,7 +28,9 @@ const ConsultationForm = () => {
     organisation: "",
     role: "",
     phone: "",
-    message: "",
+    objective: "",
+    constraint: "",
+    helpWith: "",
   });
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState("idle"); // 'idle' | 'success' | 'error'
@@ -32,6 +45,11 @@ const ConsultationForm = () => {
     if (submitting) return;
     setSubmitting(true);
     setStatus("idle");
+    const selected = HELP_OPTIONS.find((o) => o.label === values.helpWith);
+    const areaOfInterest = selected?.area ?? "smb_advisory";
+    const objective = selected
+      ? `[Interest: ${selected.label}]\n\n${values.objective.trim()}`
+      : values.objective.trim();
     try {
       const res = await fetch(COMMAND_CENTRE_ENDPOINT, {
         method: "POST",
@@ -42,9 +60,9 @@ const ConsultationForm = () => {
           organisation: values.organisation.trim(),
           role: values.role.trim(),
           phone: values.phone.trim(),
-          objective: values.message.trim(),
-          constraint: "",
-          areaOfInterest: "smb_advisory",
+          objective,
+          constraint: values.constraint.trim(),
+          areaOfInterest,
           source: "website_consultation",
           brand: "BW_ADVISORY",
         }),
@@ -76,55 +94,117 @@ const ConsultationForm = () => {
     "w-full bg-white/5 border border-white/15 focus:border-[#C9A84C]/70 focus:bg-white/10 rounded-lg px-4 py-3 text-white placeholder-silver/40 font-light text-base outline-none transition-colors";
   const labelClass =
     "block text-silver/70 font-mono text-[10px] tracking-[0.2em] uppercase font-bold mb-2";
+  const sectionLabelClass =
+    "text-accent font-mono tracking-[0.3em] uppercase text-[10px] font-bold";
 
   return (
-    <form onSubmit={onSubmit} className="space-y-5" noValidate>
-      <div>
-        <label htmlFor="cf-name" className={labelClass}>Name</label>
-        <input id="cf-name" name="name" type="text" required value={values.name} onChange={onChange} className={inputClass} autoComplete="name" />
-      </div>
-      <div>
-        <label htmlFor="cf-email" className={labelClass}>Email</label>
-        <input id="cf-email" name="email" type="email" required value={values.email} onChange={onChange} className={inputClass} autoComplete="email" />
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="cf-organisation" className={labelClass}>Organisation</label>
-          <input id="cf-organisation" name="organisation" type="text" required value={values.organisation} onChange={onChange} className={inputClass} autoComplete="organization" />
-        </div>
-        <div>
-          <label htmlFor="cf-role" className={labelClass}>Role</label>
-          <input id="cf-role" name="role" type="text" required value={values.role} onChange={onChange} className={inputClass} autoComplete="organization-title" />
-        </div>
-      </div>
-      <div>
-        <label htmlFor="cf-phone" className={labelClass}>Phone <span className="text-silver/40 font-normal lowercase tracking-normal">(optional)</span></label>
-        <input id="cf-phone" name="phone" type="tel" value={values.phone} onChange={onChange} className={inputClass} autoComplete="tel" />
-      </div>
-      <div>
-        <label htmlFor="cf-message" className={labelClass}>What you'd like to discuss</label>
-        <textarea id="cf-message" name="message" required rows={4} value={values.message} onChange={onChange} className={`${inputClass} resize-y min-h-[110px]`} />
-      </div>
-      {status === "error" && (
-        <p role="alert" className="text-sm text-[#F5A98C] font-light leading-relaxed">
-          Something went wrong — please email{" "}
-          <a href="mailto:brad@bwadvisorysolutions.com.au" className="underline decoration-[#F5A98C]/40 underline-offset-2">
-            brad@bwadvisorysolutions.com.au
-          </a>{" "}
-          directly.
+    <div className="space-y-8">
+      <div className="space-y-3">
+        <p className={sectionLabelClass}>BOOK A CONSULTATION</p>
+        <h3 className="font-display font-bold text-4xl text-white">
+          Thirty minutes. No pitch.
+        </h3>
+        <p className="text-silver/80 font-light text-lg leading-relaxed">
+          Tell us what's not working. This helps me prepare — so the call is about your situation, not introductions.
         </p>
-      )}
-      <button
-        type="submit"
-        disabled={submitting}
-        className="group/btn relative overflow-hidden bg-[#C9A84C] px-12 md:px-14 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-full cursor-pointer disabled:opacity-60 disabled:cursor-wait"
-      >
-        {submitting ? "Sending..." : "Schedule Call"}
-        {!submitting && (
-          <svg className="w-5 h-5 transform group-hover/btn:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+      </div>
+
+      <form onSubmit={onSubmit} className="space-y-5" noValidate>
+        <div>
+          <label htmlFor="cf-name" className={labelClass}>Name</label>
+          <input id="cf-name" name="name" type="text" required value={values.name} onChange={onChange} className={inputClass} autoComplete="name" />
+        </div>
+        <div>
+          <label htmlFor="cf-email" className={labelClass}>Email</label>
+          <input id="cf-email" name="email" type="email" required value={values.email} onChange={onChange} className={inputClass} autoComplete="email" />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label htmlFor="cf-organisation" className={labelClass}>Organisation</label>
+            <input id="cf-organisation" name="organisation" type="text" required value={values.organisation} onChange={onChange} className={inputClass} autoComplete="organization" />
+          </div>
+          <div>
+            <label htmlFor="cf-role" className={labelClass}>Role</label>
+            <input id="cf-role" name="role" type="text" required value={values.role} onChange={onChange} className={inputClass} autoComplete="organization-title" />
+          </div>
+        </div>
+        <div>
+          <label htmlFor="cf-phone" className={labelClass}>Phone <span className="text-silver/40 font-normal lowercase tracking-normal">(optional)</span></label>
+          <input id="cf-phone" name="phone" type="tel" value={values.phone} onChange={onChange} className={inputClass} autoComplete="tel" />
+        </div>
+
+        <div className="pt-2 space-y-5">
+          <p className={sectionLabelClass}>YOUR SITUATION</p>
+
+          <div>
+            <label htmlFor="cf-objective" className={labelClass}>What are you trying to fix or improve?</label>
+            <textarea
+              id="cf-objective"
+              name="objective"
+              required
+              rows={3}
+              value={values.objective}
+              onChange={onChange}
+              placeholder="What does better look like for your practice or business?"
+              className={`${inputClass} resize-y min-h-[90px]`}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="cf-constraint" className={labelClass}>What's getting in the way?</label>
+            <textarea
+              id="cf-constraint"
+              name="constraint"
+              required
+              rows={3}
+              value={values.constraint}
+              onChange={onChange}
+              placeholder="Time, systems, compliance, security — or something else?"
+              className={`${inputClass} resize-y min-h-[90px]`}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="cf-helpWith" className={labelClass}>What do you need help with?</label>
+            <select
+              id="cf-helpWith"
+              name="helpWith"
+              required
+              value={values.helpWith}
+              onChange={onChange}
+              className={`${inputClass} appearance-none cursor-pointer`}
+            >
+              <option value="" disabled>Select one</option>
+              {HELP_OPTIONS.map((o) => (
+                <option key={o.label} value={o.label} className="bg-[#0F172A] text-white">
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {status === "error" && (
+          <p role="alert" className="text-sm text-[#F5A98C] font-light leading-relaxed">
+            Something went wrong — please email{" "}
+            <a href="mailto:brad@bwadvisorysolutions.com.au" className="underline decoration-[#F5A98C]/40 underline-offset-2">
+              brad@bwadvisorysolutions.com.au
+            </a>{" "}
+            directly.
+          </p>
         )}
-      </button>
-    </form>
+        <button
+          type="submit"
+          disabled={submitting}
+          className="group/btn relative overflow-hidden bg-[#C9A84C] px-12 md:px-14 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-full cursor-pointer disabled:opacity-60 disabled:cursor-wait"
+        >
+          {submitting ? "Sending..." : "START THE CONVERSATION"}
+          {!submitting && (
+            <svg className="w-5 h-5 transform group-hover/btn:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+          )}
+        </button>
+      </form>
+    </div>
   );
 };
 
@@ -913,15 +993,7 @@ const Home = () => {
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-br from-accent/40 to-accent/0 rounded-3xl opacity-0 group-hover:opacity-60 transition-all duration-700 blur-xl"></div>
               <div className="relative bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-xl border border-accent/30 hover:border-accent/60 rounded-3xl p-12 lg:p-16 transition-all duration-500 group-hover:bg-white/12">
-                <div className="space-y-6">
-                  <h3 className="font-display font-bold text-4xl text-white">
-                    Schedule a Consultation
-                  </h3>
-                  <p className="text-silver/80 font-light text-lg leading-relaxed">
-                    A direct conversation about your challenge. We'll determine fit and what an engagement would involve.
-                  </p>
-                  <ConsultationForm />
-                </div>
+                <ConsultationForm />
               </div>
             </div>
           </div>
