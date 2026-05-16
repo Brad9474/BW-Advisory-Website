@@ -60,8 +60,8 @@ const groups = [
         audience: "LP Manager · Head of Security · Risk Manager",
         duration: "8 min · 10 questions",
         desc: "Assesses the integrity of the investigation lifecycle from signal collection to defensible documentation and outcome.",
-        href: "mailto:brad@bwadvisorysolutions.com.au?subject=Investigations%20Capability%20Diagnostic%20%E2%80%94%20register%20interest",
-        ctaLabel: "Register Interest"
+        comingSoon: true,
+        ctaLabel: "Coming 2026"
       },
     ]
   }
@@ -69,8 +69,10 @@ const groups = [
 
 const DiagnosticCardBody = ({ item }) => (
   <>
-    <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-3xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
-    <div className="relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 group-hover:border-[#C9A84C]/50 rounded-3xl p-10 md:p-14 lg:p-16 transition-all duration-500 group-hover:bg-white/14 flex flex-col h-full">
+    {!item.comingSoon && (
+      <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-3xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
+    )}
+    <div className={`relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 rounded-3xl p-10 md:p-14 lg:p-16 transition-all duration-500 flex flex-col h-full ${item.comingSoon ? 'opacity-70' : 'group-hover:border-[#C9A84C]/50 group-hover:bg-white/14'}`}>
       <div className="flex items-start justify-between mb-10">
         <div className="space-y-3">
           <p className="text-[#C9A84C] font-mono tracking-[0.2em] text-xs uppercase font-bold">{item.badge}</p>
@@ -84,12 +86,18 @@ const DiagnosticCardBody = ({ item }) => (
 
       <div className="flex items-end justify-between pt-8 border-t border-accent/15 mt-auto">
         <p className="text-silver/70 text-xs font-mono tracking-widest uppercase font-bold">{item.audience}</p>
-        <span className="flex items-center gap-3 text-[#C9A84C] font-bold text-sm tracking-[0.15em] uppercase group-hover:gap-4 transition-all duration-300">
-          <span>{item.ctaLabel || "Start"}</span>
-          <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
-        </span>
+        {item.comingSoon ? (
+          <span className="text-silver/60 font-mono text-xs tracking-[0.15em] uppercase font-bold">
+            {item.ctaLabel || "Coming 2026"}
+          </span>
+        ) : (
+          <span className="flex items-center gap-3 text-[#C9A84C] font-bold text-sm tracking-[0.15em] uppercase group-hover:gap-4 transition-all duration-300">
+            <span>{item.ctaLabel || "Start"}</span>
+            <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </span>
+        )}
       </div>
     </div>
   </>
@@ -97,6 +105,13 @@ const DiagnosticCardBody = ({ item }) => (
 
 const DiagnosticCard = ({ item }) => {
   const className = "group relative overflow-hidden h-full flex flex-col";
+  if (item.comingSoon) {
+    return (
+      <div className={className} aria-disabled="true">
+        <DiagnosticCardBody item={item} />
+      </div>
+    );
+  }
   if (item.internal) {
     return (
       <Link to={item.href} className={className}>

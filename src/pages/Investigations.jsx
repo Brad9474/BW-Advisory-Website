@@ -204,6 +204,20 @@ const Investigations = () => {
       </div>
     </section>
 
+    {/* ── LOSS INTELLIGENCE CONNECTION ── */}
+    <section className="py-32 px-8 w-full relative z-10 bg-primary border-t border-white/5">
+      <div className="max-w-[1400px] mx-auto">
+        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-10">Where Capability Gets Built</p>
+        <p className="text-2xl md:text-3xl text-silver/80 font-light leading-relaxed max-w-5xl mb-10">
+          PROVED governs every investigation run within a Loss Intelligence engagement. Loss Intelligence is where the capability gets built.
+        </p>
+        <Link to="/loss-intelligence" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.2em] uppercase font-bold transition-colors">
+          Read about Loss Intelligence
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+        </Link>
+      </div>
+    </section>
+
 {/* ── CTA ── */}
     <section className="py-48 px-8 w-full bg-[#0A1E3D] border-t border-white/5 relative z-10">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-16 md:gap-20">

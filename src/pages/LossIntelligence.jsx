@@ -37,6 +37,9 @@ const LossIntelligence = () => (
           <p className="text-2xl md:text-3xl text-silver/75 font-light leading-relaxed max-w-5xl mx-auto">
             Modern loss prevention is an <span className="text-white font-semibold">intelligence function</span>. I diagnose your current state, design and build the framework with your team, and hand over a fully operational intelligence capability that your organisation owns and controls.
           </p>
+          <p className="text-base md:text-lg text-silver/60 font-light leading-relaxed max-w-4xl mx-auto mt-8">
+            Brad Warburton — 30 years WA Police senior command, National Director of Law Enforcement Partnerships at Auror.
+          </p>
           <p className="text-lg md:text-xl text-silver/70 font-light leading-relaxed max-w-5xl mx-auto mt-10">
             Australian retail is operating in the most aggressive threat environment in a generation. Organised retail crime networks now coordinate across stores, regions, and state lines. Shrinkage has climbed sharply since 2022 and the gap between incident volume and frontline response capacity continues to widen. Intelligence-led prevention is no longer an aspiration — it is the only credible defence.
           </p>
@@ -46,6 +49,18 @@ const LossIntelligence = () => (
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
             </Link>
           </div>
+        </div>
+      </div>
+    </section>
+
+    {/* THE ENVIRONMENT */}
+    <section className="pb-32 px-8 w-full relative z-10 bg-primary">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="border-t border-white/10 pt-32">
+          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-10">The Environment</p>
+          <p className="text-2xl md:text-3xl text-silver/80 font-light leading-relaxed max-w-5xl">
+            Organised retail crime in Australia is not a store-level problem. It is a network-level problem. The offenders are coordinated. The methods are systematic. Most retail operations are running reactive — responding to what they can see. The loss they cannot see is significantly larger.
+          </p>
         </div>
       </div>
     </section>
@@ -86,6 +101,18 @@ const LossIntelligence = () => (
           </div>
         </div>
 
+        {/* PROVED CONNECTION */}
+        <div className="border-t border-white/10 pt-32 mb-44">
+          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-10">Investigations Standard</p>
+          <p className="text-2xl md:text-3xl text-silver/80 font-light leading-relaxed max-w-5xl mb-10">
+            Every investigation conducted within a Loss Intelligence engagement follows the PROVED framework — a six-stage protocol built on law enforcement evidentiary standards.
+          </p>
+          <Link to="/investigations" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.2em] uppercase font-bold transition-colors">
+            Read about PROVED
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+          </Link>
+        </div>
+
         {/* DIAGNOSTICS ENTRY POINT */}
         <div className="border-t border-white/10 pt-36 mb-4">
           <p className="text-[#C9A84C] font-bold tracking-[0.2em] text-xs mb-8 uppercase">Capability Assessment</p>
@@ -93,7 +120,7 @@ const LossIntelligence = () => (
             <h2 className="font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1] uppercase">Locate your organisational exposures.</h2>
           </div>
           <p className="text-2xl md:text-3xl text-silver/75 font-light leading-relaxed max-w-6xl mb-24">
-            Two specialised diagnostics. Eight minutes each. We assess your governance posture and your investigative capability to determine exactly where your operation would fail under scrutiny.
+            Two specialised diagnostics. Eight minutes each. We assess your governance posture and your investigative capability to identify where you're currently exposed — and where organised threat actors are already operating undetected.
           </p>
           <div className="flex flex-col sm:flex-row items-start gap-6 mb-20">
             <a
