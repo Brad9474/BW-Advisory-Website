@@ -582,7 +582,7 @@ const LeadCaptureForm = ({ values, onChange, onSubmit, submitting }) => {
           Your AI Readiness Score is ready.
         </h2>
         <p className="text-lg text-silver/75 font-light">
-          Enter your details to see your results and receive a personalised summary.
+          Your score appears on the next screen.
         </p>
       </div>
 
@@ -622,7 +622,7 @@ const LeadCaptureForm = ({ values, onChange, onSubmit, submitting }) => {
           required
           label={
             <>
-              I consent to BW Advisory Solutions collecting and using the personal information in this form for the purpose of providing my diagnostic results and following up about them, in line with the{' '}
+              I consent to BW Advisory Solutions collecting and using the personal information in this form for the purpose of responding to my enquiry and preparing for our conversation, in line with the{' '}
               <a href="/privacy" className="underline hover:text-[#C9A84C]">Privacy Policy</a> and the <em>Privacy Act 1988</em> (Cth).
             </>
           }
@@ -630,12 +630,7 @@ const LeadCaptureForm = ({ values, onChange, onSubmit, submitting }) => {
         <Checkbox
           checked={values.consentMarketing}
           onChange={(v) => onChange('consentMarketing', v)}
-          label={
-            <>
-              I'd also like to receive occasional insights, articles, and updates from BW Advisory Solutions. I understand I can unsubscribe at any time, and that my information is handled in line with the{' '}
-              <a href="/privacy" className="underline hover:text-[#C9A84C]">Privacy Policy</a>.
-            </>
-          }
+          label="I'd also like to receive occasional insights, articles, and updates from BW Advisory Solutions. I understand I can unsubscribe at any time."
         />
       </div>
 
@@ -723,9 +718,12 @@ const Checkbox = ({ checked, onChange, label, required }) => (
   </label>
 );
 
-const ResultsView = ({ score, band, priorities, organisation }) => {
+const ResultsView = ({ score, band, priorities, organisation, email, consentContact }) => {
   const subject = `AI Readiness Diagnostic — ${score} — ${organisation || 'your practice'}`;
   const mailto = `mailto:brad@bwadvisorysolutions.com.au?subject=${encodeURIComponent(subject)}`;
+  const deliveryMessage = consentContact
+    ? `Your results are on their way to ${email}.`
+    : 'Use the buttons below to save or share your results.';
   return (
     <div className="space-y-12">
       <div className="relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 rounded-3xl p-10 md:p-16 text-center space-y-6">
@@ -734,6 +732,9 @@ const ResultsView = ({ score, band, priorities, organisation }) => {
         <p className="text-[#C9A84C] font-display font-bold text-2xl md:text-3xl tracking-[0.1em]">{band.label}</p>
         <p className="text-lg md:text-xl text-silver/80 font-light leading-relaxed max-w-3xl mx-auto">
           {band.summary}
+        </p>
+        <p className="text-base md:text-lg text-silver/70 font-light pt-2">
+          {deliveryMessage}
         </p>
       </div>
 
@@ -941,6 +942,8 @@ const AIReadinessDiagnostic = () => {
               band={results.band}
               priorities={results.priorities}
               organisation={lead.organisation}
+              email={lead.email.trim()}
+              consentContact={!!lead.consentContact}
             />
           )}
         </div>
