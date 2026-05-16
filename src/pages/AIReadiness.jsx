@@ -977,8 +977,23 @@ const QuestionScreen = ({
 // Email capture screen
 // ─────────────────────────────────────────────────────────────────────────────
 
+const ConsentCheckbox = ({ checked, onChange, required, children }) => (
+  <label className="flex items-start gap-3 cursor-pointer group">
+    <input
+      type="checkbox"
+      checked={!!checked}
+      onChange={(e) => onChange(e.target.checked)}
+      className="mt-1 w-4 h-4 accent-[#C9A84C] cursor-pointer flex-shrink-0"
+    />
+    <span className="text-silver/85 font-light text-sm leading-relaxed group-hover:text-white transition-colors duration-300">
+      {children}{required && <span className="text-[#C9A84C]"> *</span>}
+    </span>
+  </label>
+);
+
 const EmailCaptureScreen = ({ lead, onChange, onSubmit, submitting }) => {
-  const valid = lead.name.trim().length > 1 && /\S+@\S+\.\S+/.test(lead.email.trim());
+  const fieldsValid = lead.name.trim().length > 1 && /\S+@\S+\.\S+/.test(lead.email.trim());
+  const valid = fieldsValid && !!lead.consentContact;
   return (
     <form
       onSubmit={(e) => {
@@ -992,7 +1007,7 @@ const EmailCaptureScreen = ({ lead, onChange, onSubmit, submitting }) => {
         Where should we send your results?
       </h2>
       <p className="text-silver/70 font-light text-base md:text-lg">
-        Your score appears on the next screen. We will also email you a copy.
+        Your score appears on the next screen.
       </p>
       <div className="space-y-4">
         <label className="flex flex-col gap-2">
@@ -1021,6 +1036,22 @@ const EmailCaptureScreen = ({ lead, onChange, onSubmit, submitting }) => {
           />
         </label>
       </div>
+      <div className="space-y-4 pt-2 border-t border-white/10 pt-6">
+        <ConsentCheckbox
+          checked={lead.consentContact}
+          onChange={(v) => onChange('consentContact', v)}
+          required
+        >
+          I consent to BW Advisory Solutions collecting and using the personal information in this form for the purpose of responding to my enquiry and preparing for our conversation, in line with the{' '}
+          <a href="/privacy" className="underline hover:text-[#C9A84C]">Privacy Policy</a> and the <em>Privacy Act 1988</em> (Cth).
+        </ConsentCheckbox>
+        <ConsentCheckbox
+          checked={lead.consentMarketing}
+          onChange={(v) => onChange('consentMarketing', v)}
+        >
+          I'd also like to receive occasional insights, articles, and updates from BW Advisory Solutions. I understand I can unsubscribe at any time.
+        </ConsentCheckbox>
+      </div>
       <div className="pt-4">
         <button
           type="submit"
@@ -1035,9 +1066,6 @@ const EmailCaptureScreen = ({ lead, onChange, onSubmit, submitting }) => {
           {submitting ? 'Calculating…' : 'Show My Results →'}
         </button>
       </div>
-      <p className="text-xs text-silver/50 font-light">
-        Handled in line with our <a href="/privacy" className="underline hover:text-[#C9A84C]">privacy policy</a>.
-      </p>
     </form>
   );
 };
@@ -1217,7 +1245,9 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
           </svg>
         </button>
         <p className="text-sm md:text-base text-silver/60 font-light">
-          We've also sent a copy to <span className="text-white">{lead.email}</span> for your records.
+          {lead.consentContact
+            ? <>Your results are on their way to <span className="text-white">{lead.email}</span>.</>
+            : 'Use the buttons below to save or share your results.'}
         </p>
       </div>
 
@@ -1310,7 +1340,7 @@ const AIReadiness = () => {
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState('forward');
   const [responses, setResponses] = useState({});
-  const [lead, setLead] = useState({ name: '', email: '' });
+  const [lead, setLead] = useState({ name: '', email: '', consentContact: false, consentMarketing: false });
   const [submitting, setSubmitting] = useState(false);
   const [finalResults, setFinalResults] = useState(null);
   const [referredBy, setReferredBy] = useState(null);
@@ -1403,6 +1433,8 @@ const AIReadiness = () => {
         riskAreas: riskAreas.map(({ id, label, severity }) => ({ id, label, severity })),
       },
       optInResearch: false,
+      consentContact: !!lead.consentContact,
+      consentMarketing: !!lead.consentMarketing,
       source: 'website_diagnostic',
       brand: 'BW_ADVISORY',
       sessionId,
