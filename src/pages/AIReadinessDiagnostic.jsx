@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import Footer from '../components/Footer';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -424,7 +424,9 @@ const computeResults = (practiceType, answers) => {
 // API submission
 // ─────────────────────────────────────────────────────────────────────────────
 
-const API_URL = 'https://command.bwadvisorysolutions.com.au/api/intake/diagnostic';
+const API_BASE = 'https://command.bwadvisorysolutions.com.au';
+const API_URL = `${API_BASE}/api/intake/diagnostic`;
+const RELEASE_URL = `${API_BASE}/api/intake/diagnostic/release`;
 
 const submitToCommandCentre = async (payload) => {
   try {
@@ -437,10 +439,36 @@ const submitToCommandCentre = async (payload) => {
       console.error('[ai-readiness] API responded', res.status, await res.text().catch(() => ''));
       return { ok: false };
     }
-    return { ok: true };
+    const data = await res.json().catch(() => ({}));
+    return { ok: true, intakeId: data?.intakeId ?? null, diagnosticId: data?.diagnosticId ?? null };
   } catch (err) {
     console.error('[ai-readiness] API submission failed', err);
     return { ok: false };
+  }
+};
+
+const releaseResults = async ({ intakeId, email, consentToContact, consentToMarketing }) => {
+  try {
+    const res = await fetch(RELEASE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ intakeId, email, consentToContact, consentToMarketing }),
+    });
+    if (res.status === 422) {
+      return { ok: false, error: 'Contact consent is required to continue.' };
+    }
+    if (!res.ok) {
+      console.error('[ai-readiness] release responded', res.status, await res.text().catch(() => ''));
+      return { ok: false, error: 'We could not retrieve your results. Please try again in a moment.' };
+    }
+    const data = await res.json().catch(() => null);
+    if (!data) {
+      return { ok: false, error: 'Unexpected response from the server.' };
+    }
+    return { ok: true, data };
+  } catch (err) {
+    console.error('[ai-readiness] release failed', err);
+    return { ok: false, error: 'Network error. Please check your connection and try again.' };
   }
 };
 
@@ -718,42 +746,160 @@ const Checkbox = ({ checked, onChange, label, required }) => (
   </label>
 );
 
-const ResultsView = ({ score, band, priorities, organisation, email, consentContact }) => {
-  const subject = `AI Readiness Diagnostic — ${score} — ${organisation || 'your practice'}`;
-  const mailto = `mailto:brad@bwadvisorysolutions.com.au?subject=${encodeURIComponent(subject)}`;
-  const deliveryMessage = consentContact
-    ? `Your results are on their way to ${email}.`
-    : 'Use the buttons below to save or share your results.';
+const GateScreen = ({ values, onChange, onSubmit, submitting, error }) => {
+  const emailOk = values.email && /\S+@\S+\.\S+/.test(values.email);
+  const canSubmit = emailOk && values.consentToContact && !submitting;
   return (
-    <div className="space-y-12">
-      <div className="relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 rounded-3xl p-10 md:p-16 text-center space-y-6">
-        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">Your Score</p>
-        <div className="font-display font-bold text-7xl md:text-9xl text-white leading-none">{score}</div>
-        <p className="text-[#C9A84C] font-display font-bold text-2xl md:text-3xl tracking-[0.1em]">{band.label}</p>
-        <p className="text-lg md:text-xl text-silver/80 font-light leading-relaxed max-w-3xl mx-auto">
-          {band.summary}
-        </p>
-        <p className="text-base md:text-lg text-silver/70 font-light pt-2">
-          {deliveryMessage}
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (!canSubmit) return;
+        onSubmit();
+      }}
+      className="relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 rounded-3xl p-10 md:p-14 space-y-8"
+    >
+      <div className="space-y-4">
+        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">Results gate</p>
+        <h2 className="font-display font-bold text-3xl md:text-4xl text-white leading-tight">
+          Your results are ready.
+        </h2>
+        <p className="text-lg text-silver/75 font-light">
+          Enter your details to see your AI Readiness Score and personalised gap analysis.
         </p>
       </div>
 
-      <div>
-        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-6">Priority Areas</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {priorities.map((p, i) => (
-            <div
-              key={p.id}
-              className="relative bg-gradient-to-br from-white/10 via-white/5 to-white/2 border border-white/15 rounded-2xl p-8"
-            >
-              <p className="text-silver/60 font-mono text-xs tracking-[0.15em] uppercase font-bold mb-3">
-                Priority 0{i + 1}
-              </p>
-              <p className="text-white font-display font-bold text-xl md:text-2xl leading-snug">{p.area}</p>
-            </div>
-          ))}
-        </div>
+      <div className="grid grid-cols-1 gap-5">
+        <Field
+          label="Email address"
+          type="email"
+          required
+          value={values.email}
+          onChange={(v) => onChange('email', v)}
+        />
       </div>
+
+      <div className="space-y-4 pt-2 border-t border-white/10 pt-6">
+        <Checkbox
+          checked={values.consentToContact}
+          onChange={(v) => onChange('consentToContact', v)}
+          required
+          label="I consent to BW Advisory Solutions contacting me to discuss my results."
+        />
+        <Checkbox
+          checked={values.consentToMarketing}
+          onChange={(v) => onChange('consentToMarketing', v)}
+          label="I would like to receive practical guides and insights from BW Advisory Solutions."
+        />
+      </div>
+
+      {error && (
+        <div className="rounded-lg border border-red-400/40 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+          {error}
+        </div>
+      )}
+
+      <div className="pt-2">
+        <button
+          type="submit"
+          disabled={!canSubmit}
+          className={[
+            'w-full md:w-auto px-12 py-5 rounded-lg font-bold text-sm tracking-[0.15em] uppercase transition-all duration-300 inline-flex items-center justify-center gap-3',
+            !canSubmit
+              ? 'bg-white/10 text-silver/40 cursor-not-allowed'
+              : 'bg-[#C9A84C] text-[#0F172A] hover:bg-[#E0BC60] cursor-pointer shadow-[0_8px_24px_rgba(201,168,76,0.3)]',
+          ].join(' ')}
+        >
+          {submitting ? 'Loading results...' : 'Show my results'}
+          {!submitting && (
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          )}
+        </button>
+      </div>
+    </form>
+  );
+};
+
+const ResultsView = ({ results, organisation }) => {
+  const { score, band, flags, opportunityEstimates, bespoke } = results;
+  const paragraphs = bespoke?.paragraphs ?? [];
+  const weeklyHoursLost = opportunityEstimates?.weeklyHoursLost ?? null;
+  const annualCostAud = opportunityEstimates?.annualCostAud ?? null;
+  const safeFlags = Array.isArray(flags) ? flags : [];
+  const subject = `AI Readiness Diagnostic — ${score ?? ''} — ${organisation || 'your practice'}`;
+  const mailto = `mailto:brad@bwadvisorysolutions.com.au?subject=${encodeURIComponent(subject)}`;
+
+  return (
+    <div className="space-y-12">
+      <div className="relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 rounded-3xl p-10 md:p-16 text-center space-y-6">
+        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">Your AI Readiness Score</p>
+        {score !== null && score !== undefined ? (
+          <div className="font-display font-bold text-7xl md:text-9xl text-white leading-none">{score}</div>
+        ) : (
+          <p className="text-silver/70 font-light">Your score is being finalised.</p>
+        )}
+        {band && (
+          <p className="text-[#C9A84C] font-display font-bold text-2xl md:text-3xl tracking-[0.1em]">{band}</p>
+        )}
+      </div>
+
+      {(weeklyHoursLost !== null || annualCostAud !== null) && (
+        <div>
+          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-6">Opportunity Estimate</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {weeklyHoursLost !== null && (
+              <div className="relative bg-gradient-to-br from-white/10 via-white/5 to-white/2 border border-white/15 rounded-2xl p-8">
+                <p className="text-silver/60 font-mono text-xs tracking-[0.15em] uppercase font-bold mb-3">
+                  Weekly hours lost
+                </p>
+                <p className="text-white font-display font-bold text-3xl md:text-4xl leading-snug">
+                  {weeklyHoursLost}
+                </p>
+              </div>
+            )}
+            {annualCostAud !== null && (
+              <div className="relative bg-gradient-to-br from-white/10 via-white/5 to-white/2 border border-white/15 rounded-2xl p-8">
+                <p className="text-silver/60 font-mono text-xs tracking-[0.15em] uppercase font-bold mb-3">
+                  Estimated annual cost
+                </p>
+                <p className="text-white font-display font-bold text-3xl md:text-4xl leading-snug">
+                  A${annualCostAud.toLocaleString('en-AU')}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {safeFlags.length > 0 && (
+        <div>
+          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-6">Flagged Areas</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {safeFlags.map((flag, i) => (
+              <div
+                key={`${flag}-${i}`}
+                className="relative bg-gradient-to-br from-white/10 via-white/5 to-white/2 border border-white/15 rounded-2xl px-6 py-4"
+              >
+                <p className="text-white font-light text-base md:text-lg leading-snug">{flag}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {paragraphs.length > 0 && (
+        <div>
+          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-6">Personalised Analysis</p>
+          <div className="relative bg-gradient-to-br from-white/10 via-white/5 to-white/2 border border-white/15 rounded-2xl p-8 md:p-10 space-y-5">
+            {paragraphs.map((p, i) => (
+              <p key={i} className="text-silver/85 font-light text-base md:text-lg leading-relaxed">
+                {p}
+              </p>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="relative group overflow-hidden">
         <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-3xl opacity-0 group-hover:opacity-60 transition-all duration-700 blur-xl"></div>
@@ -787,7 +933,7 @@ const ResultsView = ({ score, band, priorities, organisation, email, consentCont
 // ─────────────────────────────────────────────────────────────────────────────
 
 const AIReadinessDiagnostic = () => {
-  const [phase, setPhase] = useState('select'); // select | questions | lead | results
+  const [phase, setPhase] = useState('select'); // select | questions | lead | gate | results
   const [practiceType, setPracticeType] = useState(null);
   const [qIndex, setQIndex] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -804,15 +950,18 @@ const AIReadinessDiagnostic = () => {
     consentMarketing: false,
   });
   const [submitting, setSubmitting] = useState(false);
+  const [intakeId, setIntakeId] = useState(null);
+  const [gate, setGate] = useState({
+    email: '',
+    consentToContact: false,
+    consentToMarketing: false,
+  });
+  const [gateError, setGateError] = useState(null);
+  const [serverResults, setServerResults] = useState(null);
 
   const questions = practiceType ? PRACTICE_TYPES[practiceType].questions : [];
   const currentQ = questions[qIndex];
   const isLast = qIndex === questions.length - 1;
-
-  const results = useMemo(() => {
-    if (phase !== 'results' || !practiceType) return null;
-    return computeResults(practiceType, answers);
-  }, [phase, practiceType, answers]);
 
   const handleSelect = (key) => {
     setPracticeType(key);
@@ -848,9 +997,10 @@ const AIReadinessDiagnostic = () => {
   const handleLeadSubmit = async () => {
     setSubmitting(true);
     const { score } = computeResults(practiceType, answers);
+    const trimmedEmail = lead.email.trim();
     const payload = {
       name: lead.name.trim(),
-      email: lead.email.trim(),
+      email: trimmedEmail,
       organisation: lead.organisation.trim(),
       role: lead.role.trim(),
       phone: lead.phone.trim(),
@@ -865,9 +1015,48 @@ const AIReadinessDiagnostic = () => {
       source: 'website_diagnostic',
       brand: 'BW_ADVISORY',
     };
-    await submitToCommandCentre(payload);
+    const result = await submitToCommandCentre(payload);
     setSubmitting(false);
-    setPhase('results');
+    if (result.ok && result.intakeId) {
+      setIntakeId(result.intakeId);
+      setGate({
+        email: trimmedEmail,
+        consentToContact: !!lead.consentContact,
+        consentToMarketing: !!lead.consentMarketing,
+      });
+      setGateError(null);
+      setPhase('gate');
+    } else {
+      setGateError('We could not submit your responses. Please try again in a moment.');
+      setPhase('gate');
+    }
+  };
+
+  const handleGateChange = (field, value) => {
+    setGate((prev) => ({ ...prev, [field]: value }));
+    if (gateError) setGateError(null);
+  };
+
+  const handleGateSubmit = async () => {
+    if (!intakeId) {
+      setGateError('Your session has expired. Please refresh and try again.');
+      return;
+    }
+    setSubmitting(true);
+    setGateError(null);
+    const result = await releaseResults({
+      intakeId,
+      email: gate.email.trim(),
+      consentToContact: !!gate.consentToContact,
+      consentToMarketing: !!gate.consentToMarketing,
+    });
+    setSubmitting(false);
+    if (result.ok) {
+      setServerResults(result.data);
+      setPhase('results');
+    } else {
+      setGateError(result.error);
+    }
   };
 
   return (
@@ -936,14 +1125,20 @@ const AIReadinessDiagnostic = () => {
             />
           )}
 
-          {phase === 'results' && results && (
+          {phase === 'gate' && (
+            <GateScreen
+              values={gate}
+              onChange={handleGateChange}
+              onSubmit={handleGateSubmit}
+              submitting={submitting}
+              error={gateError}
+            />
+          )}
+
+          {phase === 'results' && serverResults && (
             <ResultsView
-              score={results.score}
-              band={results.band}
-              priorities={results.priorities}
+              results={serverResults}
               organisation={lead.organisation}
-              email={lead.email.trim()}
-              consentContact={!!lead.consentContact}
             />
           )}
         </div>
