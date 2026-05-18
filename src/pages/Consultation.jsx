@@ -42,8 +42,8 @@ const Consultation = () => {
     helpWith: "",
     biggestConcern: "",
     referralSource: "",
-    consentContact: false,
-    consentMarketing: false,
+    consentToContact: false,
+    consentToMarketing: false,
   });
   const [submitting, setSubmitting] = useState(false);
   const [errorVisible, setErrorVisible] = useState(false);
@@ -56,7 +56,7 @@ const Consultation = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (submitting) return;
-    if (!values.consentContact) return;
+    if (!values.consentToContact) return;
     setSubmitting(true);
     setErrorVisible(false);
 
@@ -81,8 +81,8 @@ const Consultation = () => {
           areaOfInterest: "smb_advisory",
           source: "website_consultation",
           brand: "BW_ADVISORY",
-          consentContact: values.consentContact,
-          consentMarketing: values.consentMarketing,
+          consentToContact: values.consentToContact,
+          consentToMarketing: values.consentToMarketing,
         }),
       });
       if (res.status === 201) {
@@ -298,10 +298,10 @@ const Consultation = () => {
 
                     <label className="flex items-start gap-3 cursor-pointer group">
                       <input
-                        id="cp-consentContact"
-                        name="consentContact"
+                        id="cp-consentToContact"
+                        name="consentToContact"
                         type="checkbox"
-                        checked={values.consentContact}
+                        checked={values.consentToContact}
                         onChange={onChange}
                         required
                         className="mt-1 w-4 h-4 accent-[#C9A84C] cursor-pointer flex-shrink-0"
@@ -314,10 +314,10 @@ const Consultation = () => {
 
                     <label className="flex items-start gap-3 cursor-pointer group">
                       <input
-                        id="cp-consentMarketing"
-                        name="consentMarketing"
+                        id="cp-consentToMarketing"
+                        name="consentToMarketing"
                         type="checkbox"
-                        checked={values.consentMarketing}
+                        checked={values.consentToMarketing}
                         onChange={onChange}
                         className="mt-1 w-4 h-4 accent-[#C9A84C] cursor-pointer flex-shrink-0"
                       />
@@ -339,7 +339,7 @@ const Consultation = () => {
 
                   <button
                     type="submit"
-                    disabled={submitting || !values.consentContact}
+                    disabled={submitting || !values.consentToContact}
                     className="group/btn relative overflow-hidden bg-[#C9A84C] px-12 md:px-14 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-full cursor-pointer disabled:opacity-60 disabled:cursor-wait disabled:hover:bg-[#C9A84C]"
                   >
                     {submitting ? "Sending..." : "START THE CONVERSATION"}
