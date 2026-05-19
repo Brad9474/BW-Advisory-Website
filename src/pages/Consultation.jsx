@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Footer from '../components/Footer';
 
 const COMMAND_CENTRE_ENDPOINT = "https://command.bwadvisorysolutions.com.au/api/intake/contact";
-const CALENDLY_URL = "https://calendly.com/brad-bwadvisorysolutions/30min";
+const CALENDLY_URL = "https://calendar.app.google/m5nPtDntM5vzigPx6";
 
 const HELP_OPTIONS = [
   "AI Readiness & Process Optimisation",
