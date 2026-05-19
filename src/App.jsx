@@ -14,6 +14,8 @@ const ScrollToTop = () => {
 };
 import Navbar from './components/Navbar';
 import NoiseOverlay from './components/NoiseOverlay';
+import PageCanvas from './components/PageCanvas';
+import IntelligenceCanvas from './components/IntelligenceCanvas';
 import Home from './pages/Home';
 import LossIntelligence from './pages/LossIntelligence';
 import Diagnostics from './pages/Diagnostics';
@@ -24,7 +26,10 @@ import Consultation from './pages/Consultation';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Layout = ({ children }) => (
+const Layout = ({ children }) => {
+  const { pathname } = useLocation();
+  const Canvas = pathname === '/loss-intelligence' ? IntelligenceCanvas : PageCanvas;
+  return (
   <div className="w-full min-h-screen selection:bg-accent/40 selection:text-surface font-sans text-textDark bg-primary relative overflow-x-hidden">
     <style>{`
       @keyframes shine-platinum {
@@ -55,14 +60,9 @@ const Layout = ({ children }) => (
 
     {/* Fixed background with living city movement */}
     <div className="fixed inset-0 z-0 bg-[#0D2247] overflow-hidden">
-      <img
-        src="/punchy.webp"
-        alt="Digital Network Cityscape"
-        className="w-full h-full object-cover object-center opacity-55"
-        style={{ animation: 'kenBurns 30s ease-in-out infinite' }}
-      />
-      <div className="absolute inset-0 bg-[#0D2247]/55 mix-blend-multiply"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0D2247]/30 via-[#0D2247]/50 to-[#0D2247]"></div>
+      <Canvas />
+      <div className="absolute inset-0 bg-[#0D2247]/40" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0D2247]/20 via-transparent to-[#0D2247]" />
     </div>
 
     <NoiseOverlay />
@@ -70,7 +70,8 @@ const Layout = ({ children }) => (
 
     {children}
   </div>
-);
+  );
+};
 
 const App = () => (
   <BrowserRouter>

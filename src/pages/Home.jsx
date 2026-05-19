@@ -5,6 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import TransparentShield from '../components/TransparentShield';
 import HowWeWorkTogether from '../components/HowWeWorkTogether';
 import Footer from '../components/Footer';
+import NoiseOverlay from '../components/NoiseOverlay';
+import NetworkCanvas from '../components/NetworkCanvas';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -297,6 +299,23 @@ const Home = () => {
         }, ">-0.4");
       });
 
+      gsap.utils.toArray('#advisory h2.font-display, #practice-areas h2.font-display, #why h2.font-display').forEach((heading) => {
+        gsap.fromTo(heading,
+          { opacity: 0, y: 50, filter: "blur(6px)" },
+          {
+            scrollTrigger: {
+              trigger: heading,
+              start: "top 85%",
+            },
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 1.1,
+            ease: "power3.out"
+          }
+        );
+      });
+
       gsap.from(".phil-elem", {
         scrollTrigger: {
           trigger: philRef.current,
@@ -337,9 +356,12 @@ const Home = () => {
             style={{
               backgroundImage: 'url("/hero-bg.webp")',
               backgroundPosition: 'center center',
-              animation: 'ken-burns 16s ease-in-out infinite'
+              filter: 'blur(2.5px)',
+              animation: 'ken-burns 20s ease-in-out infinite'
             }}
           ></div>
+
+          <NetworkCanvas />
 
           {/* Dark overlay — calibrated for this image */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#0A1E3D]/55 via-[#0F172A]/50 to-[#0A1520]/80"></div>
@@ -349,14 +371,16 @@ const Home = () => {
 
           {/* Bottom vignette */}
           <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#0A1520] via-[#0A1520]/60 to-transparent"></div>
+
+          <NoiseOverlay />
         </div>
 
         <style>{`
           @keyframes ken-burns {
-            0%   { transform: scale(1.05) translateX(0px) translateY(0px); }
-            33%  { transform: scale(1.09) translateX(-12px) translateY(-4px); }
-            66%  { transform: scale(1.07) translateX(8px) translateY(-2px); }
-            100% { transform: scale(1.05) translateX(0px) translateY(0px); }
+            0%   { transform: scale(1.03) translateX(0px) translateY(0px); }
+            33%  { transform: scale(1.07) translateX(-8px) translateY(-3px); }
+            66%  { transform: scale(1.05) translateX(5px) translateY(-2px); }
+            100% { transform: scale(1.03) translateX(0px) translateY(0px); }
           }
         `}</style>
 
@@ -366,7 +390,7 @@ const Home = () => {
           </div>
 
           <div className="flex flex-col items-center gap-10">
-            <h2 className="logo-letter font-display font-bold text-4xl md:text-5xl lg:text-6xl tracking-[0.02em] text-white leading-tight inline-block drop-shadow-[0_12px_40px_rgba(0,0,0,0.6)]">
+            <h2 className="logo-letter font-sans font-semibold text-4xl md:text-5xl lg:text-6xl tracking-[0.10em] text-white leading-tight inline-block drop-shadow-[0_12px_40px_rgba(0,0,0,0.6)]">
               BW ADVISORY
             </h2>
             <div className="flex items-center gap-8 w-full justify-center overflow-hidden">
@@ -380,7 +404,7 @@ const Home = () => {
         </div>
 
         <div className="w-full max-w-7xl mx-auto mt-16 relative z-20">
-          <h1 className="hero-elem font-display font-bold text-6xl md:text-8xl lg:text-[6.5rem] tracking-tight leading-[1.1] text-white drop-shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
+          <h1 className="hero-elem font-display font-bold text-6xl md:text-8xl lg:text-[6.5rem] tracking-tight leading-[1.1] text-white drop-shadow-[0_12px_40px_rgba(0,0,0,0.5)] [text-wrap:balance]">
             You Can't Fix What You Can't See.
             <span className="font-serif italic text-[#C9A84C] block mt-4 text-5xl md:text-7xl lg:text-6xl">Operational gaps. Security risks. Inefficient systems. All of it.</span>
           </h1>
@@ -466,7 +490,7 @@ const Home = () => {
             ].map((tile) => (
               <div key={tile.num} className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
-                <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/60 rounded-2xl p-10 md:p-12 h-full transition-all duration-500">
+                <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/60 rounded-2xl p-10 md:p-12 h-full transition-all duration-500 group-hover:-translate-y-1">
                   <div className="flex items-start justify-between mb-6">
                     <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">Service {tile.num}</p>
                     <p className="text-[#C9A84C] font-mono text-xs tracking-[0.15em] font-bold">{tile.price}</p>
@@ -488,7 +512,7 @@ const Home = () => {
       </section>
 
       {/* ── PRACTICE AREAS ── */}
-      <section className="py-32 w-full relative z-10 bg-primary">
+      <section id="practice-areas" className="py-32 w-full relative z-10 bg-primary">
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
           <div className="mb-24 max-w-4xl">
             <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">How I Close The Gap</p>
@@ -752,7 +776,7 @@ const Home = () => {
           </div>
           <div className="lg:col-span-7 order-2 space-y-8">
             <div>
-              <h2 className="font-light text-4xl lg:text-[3.2rem] text-primary leading-tight tracking-tight">
+              <h2 className="font-display font-light text-4xl lg:text-[3.2rem] text-primary leading-tight tracking-tight">
                 <span className="font-semibold block mb-2">Law enforcement precision.</span>
                 Private sector scalability.
               </h2>

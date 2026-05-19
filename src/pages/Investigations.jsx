@@ -75,7 +75,7 @@ const Investigations = () => {
     <section className="relative pt-48 pb-24 px-8 w-full z-10 text-center">
       <div className="max-w-7xl mx-auto space-y-14">
         <div className="mx-auto max-w-6xl">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1] mb-14">
+          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1] mb-14">
             Investigations that are<br />
             <span className="font-serif italic text-[#C9A84C] text-4xl md:text-5xl lg:text-6xl block mt-4">proven and defensible.</span>
           </h1>
@@ -83,7 +83,7 @@ const Investigations = () => {
             PROVED is BW Advisory Solutions' investigations framework. A <span className="text-white font-semibold">disciplined, six-stage protocol</span> designed to close the gap between strategic intent and frontline execution.
           </p>
           <div className="mt-10">
-            <Link to="/loss-intelligence" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.2em] uppercase font-bold transition-colors">
+            <Link to="/loss-intelligence" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.3em] uppercase font-bold transition-colors">
               See also: Loss Intelligence
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
             </Link>
@@ -97,20 +97,20 @@ const Investigations = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32 items-start">
 
-          <div className="space-y-12 text-white/70 font-light text-2xl leading-relaxed">
-            <p>
+          <div className="space-y-12 text-white/85 font-light text-2xl leading-relaxed">
+            <p className="drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
               Most retail risk functions are reactive — responding to incidents after the damage is done. PROVED changes the fundamental posture of the organisation from response to detection and prevention.
             </p>
-            <p>
+            <p className="drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
               Built on 30 years of operational command in law enforcement, this framework applies the same evidentiary rigour used in complex criminal investigations to the commercial context. It is about accuracy, accountability, and proven outcomes.
             </p>
-            <p>
+            <p className="drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
               By establishing a single, unified protocol, we ensure that every investigation is conducted to a standard that withstands civil, disciplinary, or police scrutiny.
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-white/6 via-white/3 to-white/1 rounded-lg border border-white/10 p-10 backdrop-blur-sm">
-            <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase mb-8 font-semibold">Systemic Failures We Address</p>
+          <div className="bg-white/15 rounded-lg border border-white/10 p-10 backdrop-blur-md">
+            <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase mb-8 font-bold">Systemic Failures We Address</p>
             <div className="space-y-6">
               {[
                 'Inconsistent investigation standards across the organisation',
@@ -121,7 +121,7 @@ const Investigations = () => {
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4">
                   <div className="w-1.5 h-1.5 bg-[#C9A84C] rounded-full flex-shrink-0 mt-2" />
-                  <p className="text-silver/80 font-light text-base leading-relaxed">{item}</p>
+                  <p className="text-silver/90 font-light text-base leading-relaxed">{item}</p>
                 </div>
               ))}
             </div>
@@ -142,10 +142,10 @@ const Investigations = () => {
             <div className="flex items-center gap-4">
               <span className="inline-flex items-center gap-2 bg-[#C9A84C]/10 border border-[#C9A84C]/30 rounded-full px-4 py-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] animate-pulse" />
-                <span className="text-[#C9A84C] font-mono text-[10px] tracking-[0.25em] uppercase font-bold">Proprietary Framework</span>
+                <span className="text-[#C9A84C] font-mono text-[10px] tracking-[0.3em] uppercase font-bold">Proprietary Framework</span>
               </span>
             </div>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[0.95]">
+            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[0.95]">
               The <span className="text-[#C9A84C]">PROVED</span> Model.
             </h2>
             <p className="text-silver/60 font-light text-lg max-w-xl leading-relaxed">
@@ -198,7 +198,7 @@ const Investigations = () => {
         </div>
 
         {/* Bottom note */}
-        <p className="mt-12 text-center text-silver/30 font-mono text-[10px] tracking-[0.2em] uppercase">
+        <p className="mt-12 text-center text-silver/30 font-mono text-[10px] tracking-[0.3em] uppercase">
           © BW Advisory Solutions — PROVED is a proprietary investigations framework
         </p>
       </div>
@@ -207,11 +207,11 @@ const Investigations = () => {
     {/* ── LOSS INTELLIGENCE CONNECTION ── */}
     <section className="py-32 px-8 w-full relative z-10 bg-primary border-t border-white/5">
       <div className="max-w-[1400px] mx-auto">
-        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-10">Where Capability Gets Built</p>
+        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold mb-10">Where Capability Gets Built</p>
         <p className="text-2xl md:text-3xl text-silver/80 font-light leading-relaxed max-w-5xl mb-10">
           PROVED governs every investigation run within a Loss Intelligence engagement. Loss Intelligence is where the capability gets built.
         </p>
-        <Link to="/loss-intelligence" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.2em] uppercase font-bold transition-colors">
+        <Link to="/loss-intelligence" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.3em] uppercase font-bold transition-colors">
           Read about Loss Intelligence
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
         </Link>

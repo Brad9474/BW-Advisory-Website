@@ -504,7 +504,7 @@ const ProgressBar = ({ index, total }) => {
   const pct = Math.round(((index + 1) / total) * 100);
   return (
     <div className="space-y-3">
-      <div className="flex items-center justify-between text-silver/70 text-xs font-mono tracking-[0.2em] uppercase font-bold">
+      <div className="flex items-center justify-between text-silver/70 text-xs font-mono tracking-[0.3em] uppercase font-bold">
         <span>Question {index + 1} of {total}</span>
         <span>{pct}%</span>
       </div>
@@ -605,7 +605,7 @@ const LeadCaptureForm = ({ values, onChange, onSubmit, submitting }) => {
       className="relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 rounded-3xl p-10 md:p-14 space-y-8"
     >
       <div className="space-y-4">
-        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">Last step</p>
+        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">Last step</p>
         <h2 className="font-display font-bold text-3xl md:text-4xl text-white leading-tight">
           Your AI Readiness Score is ready.
         </h2>
@@ -687,7 +687,7 @@ const LeadCaptureForm = ({ values, onChange, onSubmit, submitting }) => {
 
 const Field = ({ label, required, type = 'text', value, onChange, className = '' }) => (
   <label className={`flex flex-col gap-2 ${className}`}>
-    <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
+    <span className="text-silver/75 text-xs font-mono tracking-[0.3em] uppercase font-bold">
       {label} {required && <span className="text-[#C9A84C]">*</span>}
     </span>
     <input
@@ -702,7 +702,7 @@ const Field = ({ label, required, type = 'text', value, onChange, className = ''
 
 const Select = ({ label, required, value, onChange, options, className = '' }) => (
   <label className={`flex flex-col gap-2 ${className}`}>
-    <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
+    <span className="text-silver/75 text-xs font-mono tracking-[0.3em] uppercase font-bold">
       {label} {required && <span className="text-[#C9A84C]">*</span>}
     </span>
     <select
@@ -721,7 +721,7 @@ const Select = ({ label, required, value, onChange, options, className = '' }) =
 
 const TextareaField = ({ label, value, onChange, placeholder, className = '' }) => (
   <label className={`flex flex-col gap-2 ${className}`}>
-    <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">{label}</span>
+    <span className="text-silver/75 text-xs font-mono tracking-[0.3em] uppercase font-bold">{label}</span>
     <textarea
       value={value || ''}
       rows={3}
@@ -759,7 +759,7 @@ const GateScreen = ({ values, onChange, onSubmit, submitting, error }) => {
       className="relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 rounded-3xl p-10 md:p-14 space-y-8"
     >
       <div className="space-y-4">
-        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">Results gate</p>
+        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">Results gate</p>
         <h2 className="font-display font-bold text-3xl md:text-4xl text-white leading-tight">
           Your results are ready.
         </h2>
@@ -833,7 +833,7 @@ const ResultsView = ({ results, organisation }) => {
   return (
     <div className="space-y-12">
       <div className="relative bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 rounded-3xl p-10 md:p-16 text-center space-y-6">
-        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">Your AI Readiness Score</p>
+        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">Your AI Readiness Score</p>
         {score !== null && score !== undefined ? (
           <div className="font-display font-bold text-7xl md:text-9xl text-white leading-none">{score}</div>
         ) : (
@@ -846,11 +846,11 @@ const ResultsView = ({ results, organisation }) => {
 
       {(weeklyHoursLost !== null || annualCostAud !== null) && (
         <div>
-          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-6">Opportunity Estimate</p>
+          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold mb-6">Opportunity Estimate</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {weeklyHoursLost !== null && (
               <div className="relative bg-gradient-to-br from-white/10 via-white/5 to-white/2 border border-white/15 rounded-2xl p-8">
-                <p className="text-silver/60 font-mono text-xs tracking-[0.15em] uppercase font-bold mb-3">
+                <p className="text-silver/60 font-mono text-xs tracking-[0.3em] uppercase font-bold mb-3">
                   Weekly hours lost
                 </p>
                 <p className="text-white font-display font-bold text-3xl md:text-4xl leading-snug">
@@ -860,7 +860,7 @@ const ResultsView = ({ results, organisation }) => {
             )}
             {annualCostAud !== null && (
               <div className="relative bg-gradient-to-br from-white/10 via-white/5 to-white/2 border border-white/15 rounded-2xl p-8">
-                <p className="text-silver/60 font-mono text-xs tracking-[0.15em] uppercase font-bold mb-3">
+                <p className="text-silver/60 font-mono text-xs tracking-[0.3em] uppercase font-bold mb-3">
                   Estimated annual cost
                 </p>
                 <p className="text-white font-display font-bold text-3xl md:text-4xl leading-snug">
@@ -874,7 +874,7 @@ const ResultsView = ({ results, organisation }) => {
 
       {safeFlags.length > 0 && (
         <div>
-          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-6">Flagged Areas</p>
+          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold mb-6">Flagged Areas</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {safeFlags.map((flag, i) => (
               <div
@@ -890,7 +890,7 @@ const ResultsView = ({ results, organisation }) => {
 
       {paragraphs.length > 0 && (
         <div>
-          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-6">Personalised Analysis</p>
+          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold mb-6">Personalised Analysis</p>
           <div className="relative bg-gradient-to-br from-white/10 via-white/5 to-white/2 border border-white/15 rounded-2xl p-8 md:p-10 space-y-5">
             {paragraphs.map((p, i) => (
               <p key={i} className="text-silver/85 font-light text-base md:text-lg leading-relaxed">
@@ -1067,7 +1067,7 @@ const AIReadinessDiagnostic = () => {
         <div className="absolute bottom-0 left-1/2 w-[600px] h-[600px] bg-silver/5 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="max-w-5xl mx-auto space-y-8 relative z-10">
-          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">AI Readiness Diagnostic</p>
+          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Readiness Diagnostic</p>
           <h1 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1]">
             Find out where AI fits in your practice.
           </h1>
@@ -1083,7 +1083,7 @@ const AIReadinessDiagnostic = () => {
           {phase === 'select' && (
             <div className="space-y-10">
               <div className="space-y-4">
-                <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">Step 1 of 3</p>
+                <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">Step 1 of 3</p>
                 <h2 className="font-display font-bold text-3xl md:text-4xl text-white leading-tight">
                   Which one fits you?
                 </h2>

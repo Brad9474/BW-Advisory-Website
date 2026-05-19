@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ShieldLogo from './ShieldLogo';
@@ -19,6 +19,7 @@ const Navbar = () => {
   const navRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -26,7 +27,11 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const linkClass = "hover:text-gold transition-all duration-300 transform hover:translate-y-[-1px] whitespace-nowrap";
+  const isLinkActive = (to) => {
+    if (!to) return false;
+    if (to === '/') return pathname === '/';
+    return pathname === to || pathname.startsWith(`${to}/`);
+  };
 
   return (
     <>
@@ -47,7 +52,7 @@ const Navbar = () => {
           >
             <ShieldLogo className="w-11 h-11 drop-shadow-[0_0_16px_rgba(201,168,76,0.4)] group-hover:drop-shadow-[0_0_22px_rgba(201,168,76,0.7)] transition-all duration-300 flex-shrink-0" />
             <div className="hidden sm:flex flex-col justify-center leading-tight">
-              <span className="font-display font-bold text-[13px] tracking-[0.08em] text-white uppercase">
+              <span className="font-sans font-semibold text-[13px] tracking-[0.18em] text-white uppercase">
                 BW ADVISORY
               </span>
               <div className="flex items-center gap-1.5">
@@ -60,19 +65,38 @@ const Navbar = () => {
             </div>
           </Link>
 
-          <div className="hidden lg:flex items-center gap-10 font-sans text-[11px] tracking-[0.2em] uppercase text-silver/60 flex-1 justify-center px-8">
+          <div className="hidden lg:flex items-center gap-8 font-sans text-[11px] tracking-[0.2em] uppercase text-silver/60 flex-1 justify-center px-8">
             {navLinks.slice(0, 5).map((link) => {
-              const weightClass = link.name === 'AI Readiness' ? 'font-bold' : 'font-normal';
-              const colorClass = link.name === 'AI Readiness'
-                ? 'text-white/90 hover:text-white'
-                : 'text-silver/60 hover:text-white';
-              const className = `${weightClass} ${colorClass} transition-all duration-300`;
+              const active = isLinkActive(link.to);
+              const isCta = link.name === 'AI Readiness';
+
+              if (isCta) {
+                const ctaClass = `relative font-bold whitespace-nowrap px-4 py-1.5 rounded-full border transition-all duration-300 ${
+                  active
+                    ? 'bg-[#C9A84C]/20 border-[#C9A84C]/70 text-white shadow-[0_0_18px_rgba(201,168,76,0.18)]'
+                    : 'bg-transparent border-[#C9A84C]/40 text-[#C9A84C] hover:bg-[#C9A84C]/10 hover:border-[#C9A84C]/70 hover:text-[#E0BC60]'
+                }`;
+                return (
+                  <Link key={link.name} to={link.to} className={ctaClass}>
+                    {link.name}
+                  </Link>
+                );
+              }
+
+              const linkClass = `relative font-normal whitespace-nowrap transition-all duration-300 ${
+                active ? 'text-white' : 'text-silver/60 hover:text-white'
+              }`;
+              const underline = active && (
+                <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 h-[2px] w-6 bg-[#C9A84C] rounded-full" />
+              );
+
               return link.to ? (
-                <Link key={link.name} to={link.to} className={className}>
+                <Link key={link.name} to={link.to} className={linkClass}>
                   {link.name}
+                  {underline}
                 </Link>
               ) : (
-                <a key={link.name} href={link.href} className={className}>
+                <a key={link.name} href={link.href} className={linkClass}>
                   {link.name}
                 </a>
               );
@@ -110,17 +134,27 @@ const Navbar = () => {
           </svg>
         </button>
         <div className="h-full flex flex-col items-center justify-center gap-10 p-8 text-center">
-          {navLinks.map((link) => (
-            link.to ? (
-              <Link key={link.name} to={link.to} onClick={() => setIsMenuOpen(false)} className="text-3xl font-bold text-white/70 hover:text-gold uppercase tracking-[0.3em]">
+          {navLinks.map((link) => {
+            const active = isLinkActive(link.to);
+            const isCta = link.name === 'AI Readiness';
+            const base = 'text-3xl font-bold uppercase tracking-[0.3em] transition-colors';
+            const cls = isCta
+              ? `${base} px-6 py-2 rounded-full border ${
+                  active
+                    ? 'bg-[#C9A84C]/20 border-[#C9A84C]/70 text-white'
+                    : 'border-[#C9A84C]/40 text-[#C9A84C] hover:bg-[#C9A84C]/10 hover:text-[#E0BC60]'
+                }`
+              : `${base} ${active ? 'text-white' : 'text-white/70 hover:text-gold'}`;
+            return link.to ? (
+              <Link key={link.name} to={link.to} onClick={() => setIsMenuOpen(false)} className={cls}>
                 {link.name}
               </Link>
             ) : (
-              <a key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-3xl font-bold text-white/70 hover:text-gold uppercase tracking-[0.3em]">
+              <a key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className={cls}>
                 {link.name}
               </a>
-            )
-          ))}
+            );
+          })}
         </div>
       </div>
     </>

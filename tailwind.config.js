@@ -20,10 +20,10 @@ export default {
         'premium-light': '#1A3560',  // Lighter navy for contrast
       },
       fontFamily: {
-        display: ['"Poppins"', 'system-ui', 'sans-serif'],
-        sans: ['"Open Sans"', '"Freight Text Pro"', '"Inter"', 'system-ui', 'sans-serif'],
+        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
         serif: ['"Garamond Premier Pro"', '"Cormorant Garamond"', 'Georgia', 'serif'],
-        mono: ['Courier Prime', 'monospace'],
+        mono: ['"Courier Prime"', 'monospace'],
       }
     },
   },
