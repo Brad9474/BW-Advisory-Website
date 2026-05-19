@@ -9,7 +9,7 @@ export default function Privacy() {
         <div className="max-w-4xl mx-auto space-y-12">
           {/* Header */}
           <header className="space-y-6 mb-8">
-            <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">Privacy Policy</p>
+            <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">Privacy Policy</p>
             <h1 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[1.05] text-white">
               How we handle your information.
             </h1>
@@ -25,7 +25,7 @@ export default function Privacy() {
 
             {/* 1. Who we are */}
             <section className="space-y-4">
-              <h2 className="text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">1. Who we are</h2>
+              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">1. Who we are</h2>
               <p>
                 BW Advisory Solutions (ABN 11 892 244 979) is an Australian sole-trader consultancy based in Perth, Western Australia. We are bound by the <strong>Privacy Act 1988 (Cth)</strong> and the Australian Privacy Principles. The principal is Brad Warburton. The principal is the only person with access to your information.
               </p>
@@ -33,7 +33,7 @@ export default function Privacy() {
 
             {/* 2. What we collect — diagnostic tools */}
             <section className="space-y-4">
-              <h2 className="text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">2. Information we collect — diagnostic tools</h2>
+              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">2. Information we collect — diagnostic tools</h2>
               <p>
                 When you use a diagnostic on this website (for example the AI Readiness Diagnostic), we record a <strong>DiagnosticSession</strong> linked to the email and organisation details you supply at the end of the questionnaire. A DiagnosticSession contains:
               </p>
@@ -53,7 +53,7 @@ export default function Privacy() {
 
             {/* 3. What we collect — intake forms */}
             <section className="space-y-4">
-              <h2 className="text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">3. Information we collect — intake forms</h2>
+              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">3. Information we collect — intake forms</h2>
               <p>
                 When you submit a consultation request or a diagnostic intake, we collect the information you provide directly:
               </p>
@@ -73,7 +73,7 @@ export default function Privacy() {
 
             {/* 4. HubSpot CRM */}
             <section className="space-y-4">
-              <h2 className="text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">4. Where your information is stored — HubSpot CRM</h2>
+              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">4. Where your information is stored — HubSpot CRM</h2>
               <p>
                 Intake submissions and contact details are stored in our customer relationship management system, <strong>HubSpot</strong>. HubSpot is a United States-based service provider that we use to keep track of contacts, conversations, deals, and notes. We use HubSpot to:
               </p>
@@ -93,7 +93,7 @@ export default function Privacy() {
 
             {/* 5. Why we collect it */}
             <section className="space-y-4">
-              <h2 className="text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">5. Why we collect this information</h2>
+              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">5. Why we collect this information</h2>
               <ul className="space-y-2 list-disc list-outside pl-6">
                 <li>To understand your situation before our first conversation</li>
                 <li>To produce the scored diagnostic report you have requested</li>
@@ -109,7 +109,7 @@ export default function Privacy() {
 
             {/* 6. Retention */}
             <section className="space-y-4">
-              <h2 className="text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">6. How long we keep it</h2>
+              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">6. How long we keep it</h2>
               <ul className="space-y-3 list-disc list-outside pl-6">
                 <li><strong>Intake form submissions:</strong> retained in HubSpot for the duration of any active engagement, plus up to <strong>3 years</strong> after our last contact, then archived or deleted on request.</li>
                 <li><strong>Diagnostic sessions and responses:</strong> retained for up to <strong>3 years</strong> from completion, then archived or deleted on request.</li>
@@ -122,7 +122,7 @@ export default function Privacy() {
 
             {/* 7. Your rights */}
             <section className="space-y-4">
-              <h2 className="text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">7. Your rights under the Privacy Act</h2>
+              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">7. Your rights under the Privacy Act</h2>
               <p>
                 Under the Privacy Act 1988 (Cth) you have the right to:
               </p>
@@ -137,7 +137,7 @@ export default function Privacy() {
 
             {/* 8. How to request deletion */}
             <section className="space-y-4">
-              <h2 className="text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">8. How to request deletion or access</h2>
+              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">8. How to request deletion or access</h2>
               <p>
                 To request access, correction, or deletion of your information, email{" "}
                 <a href="mailto:brad@bwadvisorysolutions.com.au?subject=Privacy%20request" className="text-[#C9A84C] hover:underline">brad@bwadvisorysolutions.com.au</a>{" "}
@@ -156,7 +156,7 @@ export default function Privacy() {
 
             {/* 9. Security */}
             <section className="space-y-4">
-              <h2 className="text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">9. Security</h2>
+              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">9. Security</h2>
               <ul className="space-y-2 list-disc list-outside pl-6">
                 <li>All form submissions and API traffic are encrypted in transit over HTTPS</li>
                 <li>Data at rest in HubSpot and in our managed database is encrypted</li>
@@ -168,7 +168,7 @@ export default function Privacy() {
 
             {/* 10. Complaints */}
             <section className="space-y-4">
-              <h2 className="text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">10. Complaints</h2>
+              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">10. Complaints</h2>
               <p>
                 If you believe we have mishandled your personal information, contact us first at{" "}
                 <a href="mailto:brad@bwadvisorysolutions.com.au?subject=Privacy%20complaint" className="text-[#C9A84C] hover:underline">brad@bwadvisorysolutions.com.au</a>. We will respond within 14 days.
@@ -181,7 +181,7 @@ export default function Privacy() {
 
             {/* 11. Changes */}
             <section className="space-y-4">
-              <h2 className="text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">11. Changes to this policy</h2>
+              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">11. Changes to this policy</h2>
               <p>
                 We may update this policy from time to time. The effective date at the top of the page shows when it was last revised. Material changes will be notified by email to active contacts.
               </p>

@@ -84,9 +84,9 @@ const HowWeWorkTogether = () => {
 
       {/* Header */}
       <div className="px-6 max-w-[1400px] mx-auto xl:px-12 mb-20">
-        <p className="text-accent font-semibold tracking-[0.2em] uppercase text-lg mb-4">The Engagement</p>
+        <p className="text-accent font-mono font-bold tracking-[0.3em] uppercase text-xs mb-4">The Engagement</p>
         <div className="pl-6 border-l-2 border-accent">
-          <h2 className="font-light text-5xl lg:text-6xl text-surface tracking-tight mt-2">The engagement.</h2>
+          <h2 className="font-display font-light text-5xl lg:text-6xl text-surface tracking-tight mt-2">The engagement.</h2>
         </div>
       </div>
 
