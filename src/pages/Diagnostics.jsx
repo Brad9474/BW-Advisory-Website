@@ -237,7 +237,7 @@ const Diagnostics = () => (
             <div className="max-w-4xl space-y-6">
               <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">{group.label}</p>
               <h2 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white tracking-tight">{group.name}</h2>
-              <p className="text-xl md:text-2xl text-silver/75 font-light">{group.desc}</p>
+              <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">{group.desc}</p>
             </div>
 
             {/* Diagnostic Cards Grid */}
@@ -276,7 +276,7 @@ const Diagnostics = () => (
               <h3 className="font-display font-bold text-4xl md:text-6xl text-white">
                 Ready to Understand Your Exposure?
               </h3>
-              <p className="text-lg md:text-2xl text-silver/75 font-light">
+              <p className="text-lg md:text-2xl text-silver/75 font-light leading-relaxed">
                 Direct engagement. No proposal until we've talked.
               </p>
               <a

@@ -37,13 +37,13 @@ const LossIntelligence = () => (
           <p className="text-silver/70 font-mono font-bold text-xs tracking-[0.3em] uppercase mb-14" style={bodyShadow}>
             Brad Warburton — Principal Consultant, BW Advisory Solutions
           </p>
-          <p className="text-2xl md:text-3xl text-white/90 font-light leading-relaxed max-w-5xl mx-auto" style={bodyShadow}>
+          <p className="text-2xl md:text-3xl text-white/90 font-light leading-loose max-w-5xl mx-auto" style={bodyShadow}>
             Modern loss prevention is an <span className="text-white font-semibold">intelligence function</span>. I diagnose your current state, design and build the framework with your team, and hand over a fully operational intelligence capability that your organisation owns and controls.
           </p>
-          <p className="text-base md:text-lg text-white/90 font-light leading-relaxed max-w-4xl mx-auto mt-8" style={bodyShadow}>
+          <p className="text-base md:text-lg text-white/90 font-light leading-loose max-w-4xl mx-auto mt-8" style={bodyShadow}>
             Brad Warburton — 30 years law enforcement agencies senior command, National Director of Law Enforcement Partnerships, national retail crime intelligence sector.
           </p>
-          <p className="text-lg md:text-xl text-white/90 font-light leading-relaxed max-w-5xl mx-auto mt-10" style={bodyShadow}>
+          <p className="text-lg md:text-xl text-white/90 font-light leading-loose max-w-5xl mx-auto mt-10" style={bodyShadow}>
             Australian retail is operating in the most aggressive threat environment in a generation. Organised retail crime networks now coordinate across stores, regions, and state lines. Shrinkage has climbed sharply since 2022 and the gap between incident volume and frontline response capacity continues to widen. Intelligence-led prevention is no longer an aspiration — it is the only credible defence.
           </p>
           <div className="mt-10">
@@ -61,7 +61,7 @@ const LossIntelligence = () => (
       <div className="max-w-[1400px] mx-auto">
         <div className="border-t border-white/10 pt-32">
           <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold mb-10">The Environment</p>
-          <p className="text-2xl md:text-3xl text-white/90 font-light leading-relaxed max-w-5xl" style={bodyShadow}>
+          <p className="text-2xl md:text-3xl text-white/90 font-light leading-loose max-w-5xl" style={bodyShadow}>
             Organised retail crime in Australia is not a store-level problem. It is a network-level problem. The offenders are coordinated. The methods are systematic. Most retail operations are running reactive — responding to what they can see. The loss they cannot see is significantly larger.
           </p>
         </div>
@@ -77,7 +77,7 @@ const LossIntelligence = () => (
             <div className="bg-white/[0.04] rounded-lg border border-white/10 border-t-2 border-t-[#C9A84C] group-hover:border-white/15 group-hover:bg-white/[0.06] p-10 flex flex-col h-full transition-all duration-300">
               <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase mb-6 font-semibold">Phase 01</p>
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 uppercase tracking-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">Diagnose.</h3>
-              <p className="text-white/90 font-light text-base leading-[1.6] flex-grow" style={bodyShadow}>
+              <p className="text-white/90 font-light text-base leading-loose flex-grow" style={bodyShadow}>
                 Operational assessment across your loss landscape, risk governance, and intelligence pipeline. We identify the gaps where organised threat actors are currently operating undetected.
               </p>
             </div>
@@ -87,7 +87,7 @@ const LossIntelligence = () => (
             <div className="bg-white/[0.04] rounded-lg border border-white/10 border-t-2 border-t-[#C9A84C] group-hover:border-white/15 group-hover:bg-white/[0.06] p-10 flex flex-col h-full transition-all duration-300">
               <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase mb-6 font-semibold">Phase 02</p>
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 uppercase tracking-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">Design.</h3>
-              <p className="text-white/90 font-light text-base leading-[1.6] flex-grow" style={bodyShadow}>
+              <p className="text-white/90 font-light text-base leading-loose flex-grow" style={bodyShadow}>
                 Build the intelligence-led loss framework with you. We create the SOPs, analysis templates, decision trees, and signal collection protocols. You own the capability when we're done.
               </p>
             </div>
@@ -97,7 +97,7 @@ const LossIntelligence = () => (
             <div className="bg-white/[0.04] rounded-lg border border-white/10 border-t-2 border-t-[#C9A84C] group-hover:border-white/15 group-hover:bg-white/[0.06] p-10 flex flex-col h-full transition-all duration-300">
               <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase mb-6 font-semibold">Phase 03</p>
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 uppercase tracking-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">Embed.</h3>
-              <p className="text-white/90 font-light text-base leading-[1.6] flex-grow" style={bodyShadow}>
+              <p className="text-white/90 font-light text-base leading-loose flex-grow" style={bodyShadow}>
                 Embed the capability into your operation. We train your teams in intelligence analysis and investigation doctrine, align your leadership to the intelligence-led model, and hand over a fully independent intelligence function. Optional: ongoing advisory support for complex cases.
               </p>
             </div>
@@ -107,7 +107,7 @@ const LossIntelligence = () => (
         {/* PROVED CONNECTION */}
         <div className="border-t border-white/10 pt-32 mb-44">
           <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold mb-10">Investigations Standard</p>
-          <p className="text-2xl md:text-3xl text-white/90 font-light leading-relaxed max-w-5xl mb-10" style={bodyShadow}>
+          <p className="text-2xl md:text-3xl text-white/90 font-light leading-loose max-w-5xl mb-10" style={bodyShadow}>
             Every investigation conducted within a Loss Intelligence engagement follows the PROVED framework — a six-stage protocol built on law enforcement evidentiary standards.
           </p>
           <Link to="/investigations" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.3em] uppercase font-bold transition-colors">
@@ -122,7 +122,7 @@ const LossIntelligence = () => (
           <div className="mb-20">
             <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1] uppercase drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">Locate your organisational exposures.</h2>
           </div>
-          <p className="text-2xl md:text-3xl text-white/90 font-light leading-relaxed max-w-6xl mb-24" style={bodyShadow}>
+          <p className="text-2xl md:text-3xl text-white/90 font-light leading-loose max-w-6xl mb-24" style={bodyShadow}>
             Two specialised diagnostics. Eight minutes each. We assess your governance posture and your investigative capability to identify where you're currently exposed — and where organised threat actors are already operating undetected.
           </p>
           <div className="flex flex-col sm:flex-row items-start gap-6 mb-20">
@@ -147,7 +147,7 @@ const LossIntelligence = () => (
           <div className="pl-12 border-l-2 border-gold/30">
             <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight uppercase leading-[0.9] drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">Four Pillars of Intelligence-Led Loss Prevention.</h2>
           </div>
-          <p className="text-xl md:text-2xl text-white/90 font-light leading-relaxed max-w-4xl" style={bodyShadow}>
+          <p className="text-xl md:text-2xl text-white/90 font-light leading-loose max-w-4xl" style={bodyShadow}>
             The intelligence framework we design and embed has four core elements. Each is built into your operation during the engagement.
           </p>
         </div>
@@ -157,7 +157,7 @@ const LossIntelligence = () => (
             <div key={i} className="group h-full">
               <div className="bg-gradient-to-br from-white/8 via-white/4 to-white/2 rounded-lg border border-white/15 border-l-2 border-l-[#C9A84C] group-hover:border-white/25 group-hover:bg-gradient-to-br group-hover:from-white/10 group-hover:via-white/5 group-hover:to-white/3 p-10 flex flex-col h-full transition-all duration-300 backdrop-blur-sm">
                 <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase mb-6 font-semibold">{stage.name}</p>
-                <p className="text-white/90 font-light text-base leading-[1.6] flex-grow" style={bodyShadow}>{stage.desc}</p>
+                <p className="text-white/90 font-light text-base leading-loose flex-grow" style={bodyShadow}>{stage.desc}</p>
               </div>
             </div>
           ))}
