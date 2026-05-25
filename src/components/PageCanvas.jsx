@@ -357,10 +357,23 @@ export default function PageCanvas() {
 
     window.addEventListener('resize', resize);
     resize();
-    animId = requestAnimationFrame(render);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!animId) animId = requestAnimationFrame(render);
+        } else {
+          cancelAnimationFrame(animId);
+          animId = null;
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(CV);
 
     return () => {
       cancelAnimationFrame(animId);
+      observer.disconnect();
       window.removeEventListener('resize', resize);
     };
   }, []);

@@ -79,7 +79,7 @@ const Investigations = () => {
             Investigations that are<br />
             <span className="font-serif italic text-[#C9A84C] text-4xl md:text-5xl lg:text-6xl block mt-4">proven and defensible.</span>
           </h1>
-          <p className="text-2xl md:text-3xl text-silver/75 font-light leading-relaxed max-w-5xl mx-auto">
+          <p className="text-2xl md:text-3xl text-silver/75 font-light leading-loose max-w-5xl mx-auto">
             PROVED is BW Advisory Solutions' investigations framework. A <span className="text-white font-semibold">disciplined, six-stage protocol</span> designed to close the gap between strategic intent and frontline execution.
           </p>
           <div className="mt-10">
@@ -97,7 +97,7 @@ const Investigations = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32 items-start">
 
-          <div className="space-y-12 text-white/85 font-light text-2xl leading-relaxed">
+          <div className="space-y-12 text-white/85 font-light text-2xl leading-loose">
             <p className="drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
               Most retail risk functions are reactive — responding to incidents after the damage is done. PROVED changes the fundamental posture of the organisation from response to detection and prevention.
             </p>
@@ -121,7 +121,7 @@ const Investigations = () => {
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4">
                   <div className="w-1.5 h-1.5 bg-[#C9A84C] rounded-full flex-shrink-0 mt-2" />
-                  <p className="text-silver/90 font-light text-base leading-relaxed">{item}</p>
+                  <p className="text-silver/90 font-light text-base leading-loose">{item}</p>
                 </div>
               ))}
             </div>
@@ -148,7 +148,7 @@ const Investigations = () => {
             <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[0.95]">
               The <span className="text-[#C9A84C]">PROVED</span> Model.
             </h2>
-            <p className="text-silver/60 font-light text-lg max-w-xl leading-relaxed">
+            <p className="text-silver/60 font-light text-lg max-w-xl leading-loose">
               Six stages. One unified protocol. Every investigation conducted to a standard that withstands civil, disciplinary, or police scrutiny.
             </p>
           </div>
@@ -189,7 +189,7 @@ const Investigations = () => {
                 <div className="h-px bg-gradient-to-r from-[#C9A84C]/30 to-transparent mb-6 relative z-10" />
 
                 {/* Description */}
-                <p className="text-silver/70 font-light text-sm leading-relaxed flex-grow relative z-10 group-hover:text-silver/90 transition-colors duration-300">
+                <p className="text-silver/70 font-light text-sm leading-loose flex-grow relative z-10 group-hover:text-silver/90 transition-colors duration-300">
                   {stage.desc}
                 </p>
               </div>
@@ -208,7 +208,7 @@ const Investigations = () => {
     <section className="py-32 px-8 w-full relative z-10 bg-primary border-t border-white/5">
       <div className="max-w-[1400px] mx-auto">
         <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold mb-10">Where Capability Gets Built</p>
-        <p className="text-2xl md:text-3xl text-silver/80 font-light leading-relaxed max-w-5xl mb-10">
+        <p className="text-2xl md:text-3xl text-silver/80 font-light leading-loose max-w-5xl mb-10">
           PROVED governs every investigation run within a Loss Intelligence engagement. Loss Intelligence is where the capability gets built.
         </p>
         <Link to="/loss-intelligence" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.3em] uppercase font-bold transition-colors">
@@ -223,7 +223,7 @@ const Investigations = () => {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-16 md:gap-20">
         <div className="text-center md:text-left space-y-6">
           <h3 className="text-5xl md:text-6xl font-bold text-white tracking-tight uppercase">Ready to talk capability?</h3>
-          <p className="text-silver/75 text-xl md:text-2xl font-light">Direct engagement. No proposal until we have talked.</p>
+          <p className="text-silver/75 text-xl md:text-2xl font-light leading-loose">Direct engagement. No proposal until we have talked.</p>
         </div>
         <a
           href="https://portal.bwadvisorysolutions.com.au/intake.html"

@@ -1,5 +1,5 @@
+import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -16,13 +16,13 @@ import Navbar from './components/Navbar';
 import NoiseOverlay from './components/NoiseOverlay';
 import PageCanvas from './components/PageCanvas';
 import IntelligenceCanvas from './components/IntelligenceCanvas';
-import Home from './pages/Home';
-import LossIntelligence from './pages/LossIntelligence';
-import Diagnostics from './pages/Diagnostics';
-import Investigations from './pages/Investigations';
-import Privacy from './pages/Privacy';
-import AIReadiness from './pages/AIReadiness';
-import Consultation from './pages/Consultation';
+const Home = React.lazy(() => import('./pages/Home'));
+const LossIntelligence = React.lazy(() => import('./pages/LossIntelligence'));
+const Diagnostics = React.lazy(() => import('./pages/Diagnostics'));
+const Investigations = React.lazy(() => import('./pages/Investigations'));
+const Privacy = React.lazy(() => import('./pages/Privacy'));
+const AIReadiness = React.lazy(() => import('./pages/AIReadiness'));
+const Consultation = React.lazy(() => import('./pages/Consultation'));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -76,15 +76,17 @@ const Layout = ({ children }) => {
 const App = () => (
   <BrowserRouter>
     <ScrollToTop />
-    <Routes>
-      <Route path="/" element={<Layout><Home /></Layout>} />
-      <Route path="/loss-intelligence" element={<Layout><LossIntelligence /></Layout>} />
-      <Route path="/diagnostics" element={<Layout><Diagnostics /></Layout>} />
-      <Route path="/investigations" element={<Layout><Investigations /></Layout>} />
-      <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
-      <Route path="/ai-readiness" element={<Layout><AIReadiness /></Layout>} />
-      <Route path="/consultation" element={<Layout><Consultation /></Layout>} />
-    </Routes>
+    <Suspense fallback={<div className="min-h-screen bg-primary" />}>
+      <Routes>
+        <Route path="/" element={<Layout><Home /></Layout>} />
+        <Route path="/loss-intelligence" element={<Layout><LossIntelligence /></Layout>} />
+        <Route path="/diagnostics" element={<Layout><Diagnostics /></Layout>} />
+        <Route path="/investigations" element={<Layout><Investigations /></Layout>} />
+        <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
+        <Route path="/ai-readiness" element={<Layout><AIReadiness /></Layout>} />
+        <Route path="/consultation" element={<Layout><Consultation /></Layout>} />
+      </Routes>
+    </Suspense>
   </BrowserRouter>
 );
 

@@ -487,7 +487,7 @@ const PracticeCard = ({ title, blurb, onClick }) => (
       <h3 className="font-display font-bold text-3xl md:text-4xl text-white mb-6 leading-tight">
         {title}
       </h3>
-      <p className="text-silver/75 font-light text-lg md:text-xl flex-1">{blurb}</p>
+      <p className="text-silver/75 font-light text-lg md:text-xl leading-relaxed flex-1">{blurb}</p>
       <div className="flex items-end justify-end pt-8 border-t border-accent/15 mt-8">
         <span className="flex items-center gap-3 text-[#C9A84C] font-bold text-sm tracking-[0.15em] uppercase group-hover:gap-4 transition-all duration-300">
           <span>Select</span>
