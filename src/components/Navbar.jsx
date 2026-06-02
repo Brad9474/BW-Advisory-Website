@@ -124,7 +124,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 bg-primary/98 backdrop-blur-3xl z-[200] transition-all duration-500 lg:hidden ${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"}`}>
+      <div className={`fixed inset-0 bg-primary/98 backdrop-blur-3xl z-[200] transition-all duration-500 lg:hidden overflow-y-auto ${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"}`}>
         <button
           onClick={() => setIsMenuOpen(false)}
           className="absolute top-6 right-6 p-3 text-silver/60 hover:text-white transition-colors"
@@ -133,7 +133,7 @@ const Navbar = () => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <div className="h-full flex flex-col items-center justify-center gap-10 p-8 text-center">
+        <div className="min-h-full flex flex-col items-center justify-center gap-10 p-8 pt-20 text-center">
           {navLinks.map((link) => {
             const active = isLinkActive(link.to);
             const isCta = link.name === 'AI Readiness';
