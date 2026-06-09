@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm audit:*)"
+      "Bash(npm audit:*)",
+      "Bash(cd /c/repos/BW-Advisory-Website/src/pages && grep -n '<p' *.jsx | grep 'className=' | wc -l)",
+      "Read(//c/c/repos/BW-Advisory-Website/src/**)"
     ]
   }
 }

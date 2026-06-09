@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Footer from '../components/Footer';
 
 const COMMAND_CENTRE_ENDPOINT = "https://command.bwadvisorysolutions.com.au/api/intake/contact";
-const CALENDLY_URL = "https://calendly.com/brad-bwadvisorysolutions/30min";
+const CALENDLY_URL = "https://calendar.app.google/m5nPtDntM5vzigPx6";
 
 const HELP_OPTIONS = [
   "AI Readiness & Process Optimisation",
@@ -42,8 +42,8 @@ const Consultation = () => {
     helpWith: "",
     biggestConcern: "",
     referralSource: "",
-    consentContact: false,
-    consentMarketing: false,
+    consentToContact: false,
+    consentToMarketing: false,
   });
   const [submitting, setSubmitting] = useState(false);
   const [errorVisible, setErrorVisible] = useState(false);
@@ -53,10 +53,19 @@ const Consultation = () => {
     setValues((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
 
+  const isValid =
+    values.name.trim() !== "" &&
+    values.email.trim() !== "" &&
+    values.organisation.trim() !== "" &&
+    values.objective.trim() !== "" &&
+    values.practiceSize !== "" &&
+    values.constraint.trim() !== "" &&
+    values.consentToContact;
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (submitting) return;
-    if (!values.consentContact) return;
+    if (!isValid) return;
     setSubmitting(true);
     setErrorVisible(false);
 
@@ -81,8 +90,8 @@ const Consultation = () => {
           areaOfInterest: "smb_advisory",
           source: "website_consultation",
           brand: "BW_ADVISORY",
-          consentContact: values.consentContact,
-          consentMarketing: values.consentMarketing,
+          consentToContact: values.consentToContact,
+          consentToMarketing: values.consentToMarketing,
         }),
       });
       if (res.status === 201) {
@@ -145,26 +154,30 @@ const Consultation = () => {
               <div className="absolute -inset-1 bg-gradient-to-br from-accent/40 to-accent/0 rounded-3xl opacity-0 group-hover:opacity-60 transition-all duration-700 blur-xl"></div>
               <div className="relative bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-xl border border-accent/30 hover:border-accent/60 rounded-3xl p-8 md:p-10 lg:p-12 transition-all duration-500 group-hover:bg-white/12">
                 <form onSubmit={onSubmit} className="space-y-8" noValidate>
+                  <p className="text-silver/60 font-light text-xs leading-relaxed">
+                    Fields marked <span className="text-[#C9A84C]">*</span> are required to book your consultation.
+                  </p>
+
                   <section className="space-y-5">
                     <p className={sectionLabelClass}>YOUR INFORMATION</p>
 
                     <div>
-                      <label htmlFor="cp-name" className={labelClass}>Full Name</label>
+                      <label htmlFor="cp-name" className={labelClass}>Full Name <span className="text-[#C9A84C]">*</span></label>
                       <input id="cp-name" name="name" type="text" required value={values.name} onChange={onChange} className={inputClass} autoComplete="name" />
                     </div>
 
                     <div>
-                      <label htmlFor="cp-organisation" className={labelClass}>Organisation</label>
+                      <label htmlFor="cp-organisation" className={labelClass}>Organisation <span className="text-[#C9A84C]">*</span></label>
                       <input id="cp-organisation" name="organisation" type="text" required value={values.organisation} onChange={onChange} className={inputClass} autoComplete="organization" />
                     </div>
 
                     <div>
                       <label htmlFor="cp-role" className={labelClass}>Role</label>
-                      <input id="cp-role" name="role" type="text" required value={values.role} onChange={onChange} className={inputClass} autoComplete="organization-title" />
+                      <input id="cp-role" name="role" type="text" value={values.role} onChange={onChange} className={inputClass} autoComplete="organization-title" />
                     </div>
 
                     <div>
-                      <label htmlFor="cp-email" className={labelClass}>Email</label>
+                      <label htmlFor="cp-email" className={labelClass}>Email <span className="text-[#C9A84C]">*</span></label>
                       <input id="cp-email" name="email" type="email" required value={values.email} onChange={onChange} className={inputClass} autoComplete="email" />
                     </div>
 
@@ -185,7 +198,7 @@ const Consultation = () => {
                     </div>
 
                     <div>
-                      <label htmlFor="cp-practiceSize" className={labelClass}>Practice size</label>
+                      <label htmlFor="cp-practiceSize" className={labelClass}>Practice size <span className="text-[#C9A84C]">*</span></label>
                       <select
                         id="cp-practiceSize"
                         name="practiceSize"
@@ -208,7 +221,7 @@ const Consultation = () => {
                     <p className={sectionLabelClass}>YOUR SITUATION</p>
 
                     <div>
-                      <label htmlFor="cp-objective" className={labelClass}>What are you trying to fix or improve?</label>
+                      <label htmlFor="cp-objective" className={labelClass}>What are you trying to fix or improve? <span className="text-[#C9A84C]">*</span></label>
                       <textarea
                         id="cp-objective"
                         name="objective"
@@ -222,7 +235,7 @@ const Consultation = () => {
                     </div>
 
                     <div>
-                      <label htmlFor="cp-constraint" className={labelClass}>What's getting in the way?</label>
+                      <label htmlFor="cp-constraint" className={labelClass}>What's getting in the way? <span className="text-[#C9A84C]">*</span></label>
                       <textarea
                         id="cp-constraint"
                         name="constraint"
@@ -244,7 +257,6 @@ const Consultation = () => {
                       <select
                         id="cp-helpWith"
                         name="helpWith"
-                        required
                         value={values.helpWith}
                         onChange={onChange}
                         className={`${inputClass} appearance-none cursor-pointer`}
@@ -278,7 +290,6 @@ const Consultation = () => {
                       <select
                         id="cp-referralSource"
                         name="referralSource"
-                        required
                         value={values.referralSource}
                         onChange={onChange}
                         className={`${inputClass} appearance-none cursor-pointer`}
@@ -298,10 +309,10 @@ const Consultation = () => {
 
                     <label className="flex items-start gap-3 cursor-pointer group">
                       <input
-                        id="cp-consentContact"
-                        name="consentContact"
+                        id="cp-consentToContact"
+                        name="consentToContact"
                         type="checkbox"
-                        checked={values.consentContact}
+                        checked={values.consentToContact}
                         onChange={onChange}
                         required
                         className="mt-1 w-4 h-4 accent-[#C9A84C] cursor-pointer flex-shrink-0"
@@ -314,10 +325,10 @@ const Consultation = () => {
 
                     <label className="flex items-start gap-3 cursor-pointer group">
                       <input
-                        id="cp-consentMarketing"
-                        name="consentMarketing"
+                        id="cp-consentToMarketing"
+                        name="consentToMarketing"
                         type="checkbox"
-                        checked={values.consentMarketing}
+                        checked={values.consentToMarketing}
                         onChange={onChange}
                         className="mt-1 w-4 h-4 accent-[#C9A84C] cursor-pointer flex-shrink-0"
                       />
@@ -339,7 +350,7 @@ const Consultation = () => {
 
                   <button
                     type="submit"
-                    disabled={submitting || !values.consentContact}
+                    disabled={submitting || !isValid}
                     className="group/btn relative overflow-hidden bg-[#C9A84C] px-12 md:px-14 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-full cursor-pointer disabled:opacity-60 disabled:cursor-wait disabled:hover:bg-[#C9A84C]"
                   >
                     {submitting ? "Sending..." : "START THE CONVERSATION"}

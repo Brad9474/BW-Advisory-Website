@@ -16,7 +16,6 @@ export default function NetworkCanvas() {
     const CX = CV.getContext('2d');
     let W, H, animId, CABLES = [];
     let gPulse = 0;
-    let lastT = 0;
 
     // Shield centre — calibrated to wall shield in hero-bg.webp
     const TX_F = 0.20;
@@ -99,13 +98,16 @@ export default function NetworkCanvas() {
         CX.strokeStyle = rc(this.col, fop*.25);
         CX.lineWidth = this.lw*2.4; CX.stroke();
 
-        // Bright core — no shadowBlur for performance
+        // Bright core
+        CX.save();
+        CX.shadowBlur = 7; CX.shadowColor = rc(this.col,.78);
         CX.beginPath(); CX.moveTo(ox,oy);
         CX.bezierCurveTo(c1x,c1y,c2x,c2y,tx,ty);
-        CX.strokeStyle = rc(this.col, fop*.92);
+        CX.strokeStyle = rc(this.col, fop*.86);
         CX.lineWidth = this.lw; CX.stroke();
+        CX.restore();
 
-        // Data particles — simplified for performance (no radial gradients or shadowBlur)
+        // Data particles
         for (const p of this.pts) {
           p.prog += p.spd;
           if (p.prog > 1) p.prog = 0;
@@ -113,19 +115,29 @@ export default function NetworkCanvas() {
           const pInZone = pos.x>W*.26 && pos.x<W*.74 && pos.y>H*.20 && pos.y<H*.80;
           const pop = pInZone ? p.op*.40 : p.op;
 
-          // Core diamond
+          const g = CX.createRadialGradient(pos.x,pos.y,0,pos.x,pos.y,p.sz*4.2);
+          g.addColorStop(0, rc(p.col, pop*.80));
+          g.addColorStop(.4, rc(p.col, pop*.20));
+          g.addColorStop(1, 'transparent');
+          CX.beginPath(); CX.arc(pos.x,pos.y,p.sz*4.2,0,Math.PI*2);
+          CX.fillStyle = g; CX.fill();
+
           CX.save();
+          CX.shadowBlur = 10; CX.shadowColor = rc(p.col,.88);
           CX.translate(pos.x,pos.y); CX.rotate(Math.PI/4);
           const h = p.sz*.65;
-          CX.fillStyle = rc(p.col, pop);
-          CX.fillRect(-h,-h,h*2,h*2);
+          const gf = CX.createLinearGradient(-h,-h,h,h);
+          gf.addColorStop(0, rc([255,248,185], pop));
+          gf.addColorStop(1, rc(p.col, pop*.80));
+          CX.fillStyle = gf; CX.fillRect(-h,-h,h*2,h*2);
           CX.restore();
 
-          // Single trail dot
-          const bp = cbez(ox,oy,c1x,c1y,c2x,c2y,tx,ty,Math.max(0,p.prog-.022));
-          CX.beginPath(); CX.arc(bp.x,bp.y,p.sz*.7,0,Math.PI*2);
-          CX.fillStyle = rc(p.col, pInZone?p.op*.12:p.op*.20);
-          CX.fill();
+          for (let j=1; j<=2; j++) {
+            const bp = cbez(ox,oy,c1x,c1y,c2x,c2y,tx,ty,Math.max(0,p.prog-j*.022));
+            CX.beginPath(); CX.arc(bp.x,bp.y,p.sz*(1-j*.3),0,Math.PI*2);
+            CX.fillStyle = rc(p.col, (pInZone?p.op*.12:p.op*(1-j*.38)*.26));
+            CX.fill();
+          }
         }
       }
     }
@@ -153,9 +165,6 @@ export default function NetworkCanvas() {
 
     function render(t) {
       animId = requestAnimationFrame(render);
-      // throttle to ~40fps to reduce main-thread pressure on load
-      if (t - lastT < 25) return;
-      lastT = t;
       CX.clearRect(0,0,W,H);
       drawGlow();
       for (const c of CABLES) c.draw(t);
@@ -163,7 +172,7 @@ export default function NetworkCanvas() {
 
     function build() {
       CABLES = [];
-      for (let i=0; i<12; i++) CABLES.push(new Cable());
+      for (let i=0; i<20; i++) CABLES.push(new Cable());
     }
 
     function resize() {
@@ -199,7 +208,6 @@ export default function NetworkCanvas() {
     <canvas
       ref={cvRef}
       className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ willChange: 'transform', transform: 'translateZ(0)' }}
     />
   );
 }

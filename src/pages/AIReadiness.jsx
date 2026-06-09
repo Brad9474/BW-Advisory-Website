@@ -727,7 +727,7 @@ const ProgressBar = ({ current, total }) => {
   const pct = Math.round((current / total) * 100);
   return (
     <div className="space-y-2">
-      <div className="flex items-center justify-between text-silver/70 text-[11px] font-mono tracking-[0.2em] uppercase font-bold">
+      <div className="flex items-center justify-between text-silver/70 text-[11px] font-mono tracking-[0.3em] uppercase font-bold">
         <span>Question {current} of {total}</span>
         <span>{pct}%</span>
       </div>
@@ -743,10 +743,10 @@ const ProgressBar = ({ current, total }) => {
 
 const SectionHeader = ({ section, sectionNumber, totalSections, indexInSection, questionsInSection }) => (
   <div className="space-y-1">
-    <p className="text-[#C9A84C] font-mono text-[11px] tracking-[0.2em] uppercase font-bold">
+    <p className="text-[#C9A84C] font-mono text-[11px] tracking-[0.3em] uppercase font-bold">
       Section {sectionNumber} of {totalSections} — {section.title}
     </p>
-    <p className="text-silver/55 font-mono text-[11px] tracking-[0.15em] uppercase">
+    <p className="text-silver/55 font-mono text-[11px] tracking-[0.3em] uppercase">
       Question {indexInSection + 1} of {questionsInSection}
     </p>
   </div>
@@ -945,7 +945,7 @@ const QuestionScreen = ({
       {showHealthcareFollowUp && (
         <div ref={followUpRef} className="space-y-3 pt-4 border-t border-white/10">
           <label className="block">
-            <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
+            <span className="text-silver/75 text-xs font-mono tracking-[0.3em] uppercase font-bold">
               Tell us more — what type of practice?
             </span>
             <input
@@ -977,8 +977,23 @@ const QuestionScreen = ({
 // Email capture screen
 // ─────────────────────────────────────────────────────────────────────────────
 
+const ConsentCheckbox = ({ checked, onChange, required, children }) => (
+  <label className="flex items-start gap-3 cursor-pointer group">
+    <input
+      type="checkbox"
+      checked={!!checked}
+      onChange={(e) => onChange(e.target.checked)}
+      className="mt-1 w-4 h-4 accent-[#C9A84C] cursor-pointer flex-shrink-0"
+    />
+    <span className="text-silver/85 font-light text-sm leading-relaxed group-hover:text-white transition-colors duration-300">
+      {children}{required && <span className="text-[#C9A84C]"> *</span>}
+    </span>
+  </label>
+);
+
 const EmailCaptureScreen = ({ lead, onChange, onSubmit, submitting }) => {
-  const valid = lead.name.trim().length > 1 && /\S+@\S+\.\S+/.test(lead.email.trim());
+  const fieldsValid = lead.name.trim().length > 1 && /\S+@\S+\.\S+/.test(lead.email.trim());
+  const valid = fieldsValid && !!lead.consentContact;
   return (
     <form
       onSubmit={(e) => {
@@ -992,11 +1007,11 @@ const EmailCaptureScreen = ({ lead, onChange, onSubmit, submitting }) => {
         Where should we send your results?
       </h2>
       <p className="text-silver/70 font-light text-base md:text-lg">
-        Your score appears on the next screen. We will also email you a copy.
+        Your score appears on the next screen.
       </p>
       <div className="space-y-4">
         <label className="flex flex-col gap-2">
-          <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
+          <span className="text-silver/75 text-xs font-mono tracking-[0.3em] uppercase font-bold">
             Name <span className="text-[#C9A84C]">*</span>
           </span>
           <input
@@ -1009,7 +1024,7 @@ const EmailCaptureScreen = ({ lead, onChange, onSubmit, submitting }) => {
           />
         </label>
         <label className="flex flex-col gap-2">
-          <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
+          <span className="text-silver/75 text-xs font-mono tracking-[0.3em] uppercase font-bold">
             Email <span className="text-[#C9A84C]">*</span>
           </span>
           <input
@@ -1020,6 +1035,22 @@ const EmailCaptureScreen = ({ lead, onChange, onSubmit, submitting }) => {
             className="bg-white/5 border border-white/15 rounded-lg px-5 py-4 min-h-[48px] text-white text-base placeholder:text-silver/40 focus:outline-none focus:border-[#C9A84C] transition-colors duration-200"
           />
         </label>
+      </div>
+      <div className="space-y-4 pt-2 border-t border-white/10 pt-6">
+        <ConsentCheckbox
+          checked={lead.consentContact}
+          onChange={(v) => onChange('consentContact', v)}
+          required
+        >
+          I consent to BW Advisory Solutions collecting and using the personal information in this form for the purpose of responding to my enquiry and preparing for our conversation, in line with the{' '}
+          <a href="/privacy" className="underline hover:text-[#C9A84C]">Privacy Policy</a> and the <em>Privacy Act 1988</em> (Cth).
+        </ConsentCheckbox>
+        <ConsentCheckbox
+          checked={lead.consentMarketing}
+          onChange={(v) => onChange('consentMarketing', v)}
+        >
+          I'd also like to receive occasional insights, articles, and updates from BW Advisory Solutions. I understand I can unsubscribe at any time.
+        </ConsentCheckbox>
       </div>
       <div className="pt-4">
         <button
@@ -1035,9 +1066,6 @@ const EmailCaptureScreen = ({ lead, onChange, onSubmit, submitting }) => {
           {submitting ? 'Calculating…' : 'Show My Results →'}
         </button>
       </div>
-      <p className="text-xs text-silver/50 font-light">
-        Handled in line with our <a href="/privacy" className="underline hover:text-[#C9A84C]">privacy policy</a>.
-      </p>
     </form>
   );
 };
@@ -1127,7 +1155,7 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
     <div className="space-y-12">
       {/* Headline score */}
       <div className="bg-gradient-to-br from-white/12 via-white/6 to-white/3 backdrop-blur-sm border border-white/20 rounded-3xl p-8 md:p-14 text-center space-y-5">
-        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">
+        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">
           Your Result
         </p>
         <h1 className="font-display font-bold text-3xl md:text-5xl text-white leading-tight">
@@ -1141,7 +1169,7 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
 
       {/* Three-metric block */}
       <div>
-        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-6">
+        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold mb-6">
           The Cost
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1171,7 +1199,7 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
 
       {/* Risk-area breakdown */}
       <div>
-        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold mb-6">
+        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold mb-6">
           Risk Area Breakdown
         </p>
         <div className="grid grid-cols-1 gap-3">
@@ -1182,7 +1210,7 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
             >
               <p className="text-white font-display font-semibold text-lg">{a.label}</p>
               <span
-                className={`self-start md:self-auto text-[11px] font-mono font-bold tracking-[0.15em] uppercase px-3 py-1 rounded border ${SEVERITY_BADGE[a.severity]}`}
+                className={`self-start md:self-auto text-[11px] font-mono font-bold tracking-[0.3em] uppercase px-3 py-1 rounded border ${SEVERITY_BADGE[a.severity]}`}
               >
                 {a.severity}
               </span>
@@ -1193,7 +1221,7 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
 
       {/* Personal review */}
       <div className="bg-white/5 border border-white/15 rounded-2xl p-6 md:p-8 space-y-3">
-        <p className="text-silver/60 font-mono text-xs tracking-[0.2em] uppercase font-bold">
+        <p className="text-silver/60 font-mono text-xs tracking-[0.3em] uppercase font-bold">
           Here's what stood out in your responses
         </p>
         <p className="text-silver/85 font-light text-base md:text-lg leading-relaxed">
@@ -1217,7 +1245,9 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
           </svg>
         </button>
         <p className="text-sm md:text-base text-silver/60 font-light">
-          We've also sent a copy to <span className="text-white">{lead.email}</span> for your records.
+          {lead.consentContact
+            ? <>Your results are on their way to <span className="text-white">{lead.email}</span>.</>
+            : 'Use the buttons below to save or share your results.'}
         </p>
       </div>
 
@@ -1251,7 +1281,7 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
                 <p className="text-silver/80 font-light text-base">Who are you sharing this with?</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <label className="flex flex-col gap-2">
-                    <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
+                    <span className="text-silver/75 text-xs font-mono tracking-[0.3em] uppercase font-bold">
                       Name (optional)
                     </span>
                     <input
@@ -1262,7 +1292,7 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
                     />
                   </label>
                   <label className="flex flex-col gap-2">
-                    <span className="text-silver/75 text-xs font-mono tracking-[0.15em] uppercase font-bold">
+                    <span className="text-silver/75 text-xs font-mono tracking-[0.3em] uppercase font-bold">
                       Email (optional)
                     </span>
                     <input
@@ -1310,7 +1340,7 @@ const AIReadiness = () => {
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState('forward');
   const [responses, setResponses] = useState({});
-  const [lead, setLead] = useState({ name: '', email: '' });
+  const [lead, setLead] = useState({ name: '', email: '', consentContact: false, consentMarketing: false });
   const [submitting, setSubmitting] = useState(false);
   const [finalResults, setFinalResults] = useState(null);
   const [referredBy, setReferredBy] = useState(null);
@@ -1403,6 +1433,8 @@ const AIReadiness = () => {
         riskAreas: riskAreas.map(({ id, label, severity }) => ({ id, label, severity })),
       },
       optInResearch: false,
+      consentContact: !!lead.consentContact,
+      consentMarketing: !!lead.consentMarketing,
       source: 'website_diagnostic',
       brand: 'BW_ADVISORY',
       sessionId,
@@ -1542,7 +1574,7 @@ const AIReadiness = () => {
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#0369A1]/5 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-1/2 w-[600px] h-[600px] bg-silver/5 rounded-full blur-3xl pointer-events-none"></div>
         <div className="max-w-3xl mx-auto space-y-4 relative z-10">
-          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">
+          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">
             AI Readiness Diagnostic
           </p>
           <h1 className="font-display font-bold text-3xl md:text-5xl text-white tracking-tight leading-[1.1]">
