@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ShieldLogo from './ShieldLogo';
@@ -19,6 +19,7 @@ const Navbar = () => {
   const navRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -60,13 +61,12 @@ const Navbar = () => {
             </div>
           </Link>
 
-          <div className="hidden lg:flex items-center gap-10 font-sans text-[11px] tracking-[0.2em] uppercase text-silver/60 flex-1 justify-center px-8">
+          <div className="hidden lg:flex items-center gap-7 font-sans text-[12px] tracking-[0.12em] uppercase flex-1 justify-center px-6">
             {navLinks.slice(0, 5).map((link) => {
-              const weightClass = link.name === 'AI Readiness' ? 'font-bold' : 'font-normal';
-              const colorClass = link.name === 'AI Readiness'
-                ? 'text-white/90 hover:text-white'
-                : 'text-silver/60 hover:text-white';
-              const className = `${weightClass} ${colorClass} transition-all duration-300`;
+              const isActive = link.to === '/' ? pathname === '/' : link.to && pathname.startsWith(link.to);
+              const className = isActive
+                ? 'font-semibold text-white border-b border-[#C9A84C]/60 pb-px transition-all duration-300'
+                : 'font-normal text-white/60 hover:text-white transition-all duration-300';
               return link.to ? (
                 <Link key={link.name} to={link.to} className={className}>
                   {link.name}
@@ -82,7 +82,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4 flex-shrink-0">
             <a
               href="/consultation"
-              className="group relative overflow-hidden bg-[#C9A84C] px-8 lg:px-10 py-3.5 rounded-full text-primary font-bold text-[11px] tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 transform hover:scale-[1.05] shadow-lg shadow-[#C9A84C]/20 cursor-pointer whitespace-nowrap"
+              className="group relative overflow-hidden bg-[#C9A84C] px-8 lg:px-10 py-3.5 rounded-full text-primary font-bold text-[12px] tracking-[0.12em] uppercase hover:bg-[#E0BC60] transition-all duration-300 transform hover:scale-[1.05] shadow-lg shadow-[#C9A84C]/20 cursor-pointer whitespace-nowrap"
             >
               Consultation
             </a>
