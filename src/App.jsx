@@ -15,7 +15,6 @@ const ScrollToTop = () => {
 import Navbar from './components/Navbar';
 import NoiseOverlay from './components/NoiseOverlay';
 import PageCanvas from './components/PageCanvas';
-import IntelligenceCanvas from './components/IntelligenceCanvas';
 const Home = React.lazy(() => import('./pages/Home'));
 const LossIntelligence = React.lazy(() => import('./pages/LossIntelligence'));
 const Diagnostics = React.lazy(() => import('./pages/Diagnostics'));
@@ -28,48 +27,88 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Layout = ({ children }) => {
   const { pathname } = useLocation();
-  const Canvas = pathname === '/loss-intelligence' ? IntelligenceCanvas : PageCanvas;
+  const isHome = pathname === '/';
+  const isIntelligence = pathname === '/loss-intelligence';
+
   return (
-  <div className="w-full min-h-screen selection:bg-accent/40 selection:text-surface font-sans text-textDark bg-primary relative overflow-x-hidden">
-    <style>{`
-      @keyframes shine-platinum {
-        0% { background-position: -200% center; }
-        100% { background-position: 200% center; }
-      }
-      .platinum-text {
-        background: linear-gradient(110deg, #d8d8d8 20%, #ffffff 40%, #b2bcc9 50%, #ffffff 60%, #cbd2da 80%);
-        background-size: 200% auto;
-        color: transparent;
-        -webkit-background-clip: text;
-        background-clip: text;
-        animation: shine-platinum 6s linear infinite;
-      }
-      @keyframes dashReveal {
-        to { stroke-dashoffset: 0; }
-      }
-      @keyframes revealRight {
-        0% { width: 0; }
-        100% { width: 100%; }
-      }
-      @keyframes kenBurns {
-        0%   { transform: scale(1.05) translate(0, 0); }
-        50%  { transform: scale(1.12) translate(-1.5%, -1%); }
-        100% { transform: scale(1.05) translate(0, 0); }
-      }
-    `}</style>
+    <div className="w-full min-h-screen selection:bg-accent/40 selection:text-surface font-sans text-textDark bg-primary relative overflow-x-hidden">
+      <style>{`
+        @keyframes shine-platinum {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+        .platinum-text {
+          background: linear-gradient(110deg, #d8d8d8 20%, #ffffff 40%, #b2bcc9 50%, #ffffff 60%, #cbd2da 80%);
+          background-size: 200% auto;
+          color: transparent;
+          -webkit-background-clip: text;
+          background-clip: text;
+          animation: shine-platinum 6s linear infinite;
+        }
+        @keyframes dashReveal {
+          to { stroke-dashoffset: 0; }
+        }
+        @keyframes revealRight {
+          0% { width: 0; }
+          100% { width: 100%; }
+        }
+        @keyframes float-breathe {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-6px); }
+        }
+        .float-breathe {
+          animation: float-breathe 7s ease-in-out infinite;
+        }
+        @keyframes kenBurns {
+          0%   { transform: scale(1.05) translate(0, 0); }
+          50%  { transform: scale(1.12) translate(-1.5%, -1%); }
+          100% { transform: scale(1.05) translate(0, 0); }
+        }
+        @keyframes shine-shield {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+        .shield-shimmer-text {
+          background: linear-gradient(110deg, #C9A84C 4%, #7AAED6 16%, #B8D4EC 32%, #ffffff 50%, #6B9EC8 66%, #9BBCD8 82%, #C9A84C 96%);
+          background-size: 200% auto;
+          color: transparent;
+          -webkit-background-clip: text;
+          background-clip: text;
+          animation: shine-shield 5s linear infinite;
+        }
+      `}</style>
 
-    {/* Fixed background with living city movement */}
-    <div className="fixed inset-0 z-0 bg-[#0D2247] overflow-hidden">
-      <Canvas />
-      <div className="absolute inset-0 bg-[#0D2247]/40" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0D2247]/20 via-transparent to-[#0D2247]" />
+      <div className="fixed inset-0 z-0 bg-[#0F1929] overflow-hidden">
+        {isHome ? (
+          <>
+            <img
+              src="/punchy.webp"
+              alt="Digital Network Cityscape"
+              className="w-full h-full object-cover object-center opacity-70"
+              style={{ animation: 'kenBurns 30s ease-in-out infinite' }}
+            />
+            <div className="absolute inset-0 bg-[#0D2247]/35 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0D2247]/15 via-[#0D2247]/35 to-[#0D2247]/90" />
+          </>
+        ) : isIntelligence ? (
+          <>
+            <div className="absolute inset-0 bg-[#0F1929]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0F1929]/60 via-[#0F1929]/30 to-[#0D2247]/80" />
+          </>
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-[#0F1929]" />
+            <PageCanvas />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0F1929]/60 via-[#0F1929]/30 to-[#0D2247]/80" />
+          </>
+        )}
+      </div>
+
+      <NoiseOverlay />
+      <Navbar />
+
+      {children}
     </div>
-
-    <NoiseOverlay />
-    <Navbar />
-
-    {children}
-  </div>
   );
 };
 
