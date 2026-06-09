@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import IntelligenceCanvas from '../components/IntelligenceCanvas';
 
 const intelligenceStages = [
   {
@@ -21,7 +22,10 @@ const intelligenceStages = [
 ];
 
 const LossIntelligence = () => (
-  <div className="bg-primary min-h-screen">
+  <div className="min-h-screen">
+    <div className="fixed inset-0 z-[1] overflow-hidden pointer-events-none">
+      <IntelligenceCanvas />
+    </div>
     {/* PAGE HERO */}
     <section className="relative pt-48 pb-24 px-8 w-full z-10 text-center">
       <div className="max-w-7xl mx-auto space-y-14">
@@ -51,7 +55,7 @@ const LossIntelligence = () => (
     </section>
 
     {/* THREE PHASES */}
-    <section className="pb-44 px-8 w-full relative z-10 bg-primary">
+    <section className="pb-44 px-8 w-full relative z-10">
       <div className="max-w-[1400px] mx-auto">
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-44">
