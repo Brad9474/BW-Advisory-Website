@@ -94,7 +94,7 @@ const Investigations = () => {
     </section>
 
     {/* ── THE DIFFERENTIATOR ── */}
-    <section className="pb-44 px-8 w-full relative z-10 bg-primary">
+    <section className="pt-24 pb-44 px-8 w-full relative z-10 bg-primary">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32 items-start">
 
