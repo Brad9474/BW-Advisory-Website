@@ -80,7 +80,8 @@ const Investigations = () => {
             <span className="font-serif italic text-[#C9A84C] text-4xl md:text-5xl lg:text-6xl block mt-4">proven and defensible.</span>
           </h1>
           <p className="text-2xl md:text-3xl text-silver/75 font-light leading-loose max-w-5xl mx-auto">
-            PROVED is BW Advisory Solutions' investigations framework. A <span className="text-white font-semibold">disciplined, six-stage protocol</span> designed to close the gap between strategic intent and frontline execution.
+            PROVED is BW Advisory Solutions' investigations framework.<br />
+            <span className="text-white font-semibold">A disciplined, six-stage protocol</span> designed to close the gap between strategic intent and frontline execution.
           </p>
           <div className="mt-10">
             <Link to="/loss-intelligence" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.3em] uppercase font-bold transition-colors">
