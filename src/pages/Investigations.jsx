@@ -93,11 +93,11 @@ const Investigations = () => {
     </section>
 
     {/* ── THE DIFFERENTIATOR ── */}
-    <section className="pb-44 px-8 w-full relative z-10">
+    <section className="pb-44 px-8 w-full relative z-10 bg-primary">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32 items-start">
 
-          <div className="space-y-12 text-white/85 font-light text-2xl leading-loose">
+          <div className="space-y-8 text-white/85 font-light text-2xl leading-relaxed">
             <p className="drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
               Most retail risk functions are reactive — responding to incidents after the damage is done. PROVED changes the fundamental posture of the organisation from response to detection and prevention.
             </p>
@@ -110,8 +110,8 @@ const Investigations = () => {
           </div>
 
           <div className="bg-white/15 rounded-lg border border-white/10 p-10 backdrop-blur-md">
-            <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase mb-8 font-bold">Systemic Failures We Address</p>
-            <div className="space-y-6">
+            <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase mb-6 font-bold">Systemic Failures We Address</p>
+            <div className="space-y-4">
               {[
                 'Inconsistent investigation standards across the organisation',
                 'Intelligence siloing between disconnected systems',
@@ -121,7 +121,7 @@ const Investigations = () => {
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4">
                   <div className="w-1.5 h-1.5 bg-[#C9A84C] rounded-full flex-shrink-0 mt-2" />
-                  <p className="text-silver/90 font-light text-base leading-loose">{item}</p>
+                  <p className="text-silver/90 font-light text-base leading-normal">{item}</p>
                 </div>
               ))}
             </div>

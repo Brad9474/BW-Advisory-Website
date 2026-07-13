@@ -5,17 +5,19 @@ const groups = [
   {
     label: "Stream 01",
     name: "AI Readiness",
-    desc: "For allied health and healthcare practices, and professional services firms.",
+    desc: "For professional services firms and healthcare practices.",
     items: [
       {
+        id: "ai-readiness-diagnostic",
+        short: "AI Readiness",
         num: "01",
         badge: "AI Readiness Diagnostic",
-        audience: "Allied health and healthcare practices · Professional services firms",
+        audience: "Professional services firms · Allied health and healthcare practices",
         duration: "5 min · 5 sections · 28 questions",
         desc: "Five sections. Five minutes. A scored result covering AI readiness, process optimisation opportunities, and security posture — with an opportunity estimate of what your gaps are costing you.",
         href: "/ai-readiness",
         internal: true,
-        glyph: "neuralNet",
+        icon: "/ai-icon.svg",
       },
     ]
   },
@@ -25,6 +27,8 @@ const groups = [
     desc: "Identify the gap between intent and execution.",
     items: [
       {
+        id: "strategic-diagnostic",
+        short: "Strategic",
         num: "02",
         badge: "Strategic Diagnostic",
         audience: "CEO · Board · Senior Leadership",
@@ -33,6 +37,8 @@ const groups = [
         href: "https://portal.bwadvisorysolutions.com.au/diagnostic.html"
       },
       {
+        id: "operational-diagnostic",
+        short: "Operational",
         num: "03",
         badge: "Operational Diagnostic",
         audience: "GM · Head of Operations · Delivery Lead",
@@ -48,6 +54,8 @@ const groups = [
     desc: "Assess your retail crime defence and investigation capability.",
     items: [
       {
+        id: "loss-intelligence-diagnostic",
+        short: "Loss Intelligence",
         num: "04",
         badge: "Loss Intelligence Diagnostic",
         audience: "GM · CEO · CFO",
@@ -56,6 +64,8 @@ const groups = [
         href: "https://portal.bwadvisorysolutions.com.au/loss-intelligence-diagnostic.html"
       },
       {
+        id: "investigations-capability-diagnostic",
+        short: "Investigations",
         num: "05",
         badge: "Investigations Capability Diagnostic",
         audience: "LP Manager · Head of Security · Risk Manager",
@@ -68,68 +78,8 @@ const groups = [
   }
 ];
 
-const NeuralNetGlyph = () => (
-  <svg
-    className="w-24 h-14 text-[#C9A84C] shrink-0"
-    viewBox="0 0 80 48"
-    fill="none"
-    aria-hidden="true"
-  >
-    <style>{`
-      @keyframes nn-pulse-a {
-        0%, 100% { opacity: 0.45; }
-        50%      { opacity: 1; }
-      }
-      @keyframes nn-pulse-b {
-        0%, 100% { opacity: 0.45; }
-        50%      { opacity: 1; }
-      }
-      @keyframes nn-flow {
-        from { stroke-dashoffset: 12; }
-        to   { stroke-dashoffset: 0; }
-      }
-      .nn-out-a { animation: nn-pulse-a 2.4s ease-in-out infinite; }
-      .nn-out-b { animation: nn-pulse-b 2.4s ease-in-out 1.2s infinite; }
-      .nn-link  { stroke-dasharray: 2 4; animation: nn-flow 3s linear infinite; }
-    `}</style>
-    <g stroke="currentColor" strokeWidth="0.55" opacity="0.55" className="nn-link">
-      <line x1="8"  y1="10" x2="40" y2="6"  />
-      <line x1="8"  y1="10" x2="40" y2="18" />
-      <line x1="8"  y1="10" x2="40" y2="30" />
-      <line x1="8"  y1="10" x2="40" y2="42" />
-      <line x1="8"  y1="24" x2="40" y2="6"  />
-      <line x1="8"  y1="24" x2="40" y2="18" />
-      <line x1="8"  y1="24" x2="40" y2="30" />
-      <line x1="8"  y1="24" x2="40" y2="42" />
-      <line x1="8"  y1="38" x2="40" y2="6"  />
-      <line x1="8"  y1="38" x2="40" y2="18" />
-      <line x1="8"  y1="38" x2="40" y2="30" />
-      <line x1="8"  y1="38" x2="40" y2="42" />
-      <line x1="40" y1="6"  x2="72" y2="18" />
-      <line x1="40" y1="6"  x2="72" y2="32" />
-      <line x1="40" y1="18" x2="72" y2="18" />
-      <line x1="40" y1="18" x2="72" y2="32" />
-      <line x1="40" y1="30" x2="72" y2="18" />
-      <line x1="40" y1="30" x2="72" y2="32" />
-      <line x1="40" y1="42" x2="72" y2="18" />
-      <line x1="40" y1="42" x2="72" y2="32" />
-    </g>
-    <g fill="currentColor">
-      <circle cx="8"  cy="10" r="1.7" opacity="0.85" />
-      <circle cx="8"  cy="24" r="1.7" opacity="0.85" />
-      <circle cx="8"  cy="38" r="1.7" opacity="0.85" />
-      <circle cx="40" cy="6"  r="1.9" opacity="0.9" />
-      <circle cx="40" cy="18" r="1.9" opacity="0.9" />
-      <circle cx="40" cy="30" r="1.9" opacity="0.9" />
-      <circle cx="40" cy="42" r="1.9" opacity="0.9" />
-      <circle className="nn-out-a" cx="72" cy="18" r="2.6" />
-      <circle className="nn-out-b" cx="72" cy="32" r="2.6" />
-    </g>
-  </svg>
-);
-
 const cardGlyph = (item) => {
-  if (item.glyph === 'neuralNet') return <NeuralNetGlyph />;
+  if (item.icon) return <img src={item.icon} alt="" className="w-14 h-14 shrink-0" />;
   return null;
 };
 
@@ -171,23 +121,23 @@ const DiagnosticCardBody = ({ item }) => (
 );
 
 const DiagnosticCard = ({ item }) => {
-  const className = "group relative overflow-hidden h-full flex flex-col";
+  const className = "group relative overflow-hidden h-full flex flex-col scroll-mt-32";
   if (item.comingSoon) {
     return (
-      <div className={className} aria-disabled="true">
+      <div id={item.id} className={className} aria-disabled="true">
         <DiagnosticCardBody item={item} />
       </div>
     );
   }
   if (item.internal) {
     return (
-      <Link to={item.href} className={className}>
+      <Link id={item.id} to={item.href} className={className}>
         <DiagnosticCardBody item={item} />
       </Link>
     );
   }
   return (
-    <a href={item.href} className={className}>
+    <a id={item.id} href={item.href} className={className}>
       <DiagnosticCardBody item={item} />
     </a>
   );
@@ -224,6 +174,25 @@ const Diagnostics = () => (
             <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
             3 stream assessment
           </span>
+        </div>
+      </div>
+    </section>
+
+    {/* ── QUICK NAVIGATION ── */}
+    <section className="py-4 px-6 w-full relative z-10">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-wrap items-center gap-2 md:gap-3 bg-white/5 backdrop-blur-sm border border-accent/20 rounded-2xl px-5 py-4">
+          <span className="text-silver/50 font-mono text-[10px] tracking-[0.25em] uppercase font-bold mr-2 shrink-0">Jump to</span>
+          {groups.flatMap((group) => group.items).map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className="flex items-center gap-2 px-4 py-2 rounded-full border border-accent/20 hover:border-[#C9A84C]/60 hover:bg-white/5 text-silver/75 hover:text-[#C9A84C] transition-all duration-300 text-sm font-light"
+            >
+              <span className="font-mono text-[10px] text-[#C9A84C] font-bold">{item.num}</span>
+              {item.short}
+            </a>
+          ))}
         </div>
       </div>
     </section>

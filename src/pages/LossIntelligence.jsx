@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
-import IntelligenceCanvas from '../components/IntelligenceCanvas';
 
 const intelligenceStages = [
   {
@@ -23,9 +22,6 @@ const intelligenceStages = [
 
 const LossIntelligence = () => (
   <div className="min-h-screen">
-    <div className="fixed inset-0 z-[1] overflow-hidden pointer-events-none">
-      <IntelligenceCanvas />
-    </div>
     {/* PAGE HERO */}
     <section className="relative pt-48 pb-24 px-8 w-full z-10 text-center">
       <div className="max-w-7xl mx-auto space-y-14">
@@ -35,14 +31,8 @@ const LossIntelligence = () => (
             Build the capability to see,<br />
             <span className="font-serif italic text-[#C9A84C] text-4xl md:text-5xl lg:text-6xl block mt-4">investigate, and act.</span>
           </h1>
-          <p className="text-silver/70 font-light text-sm md:text-base tracking-[0.15em] uppercase mb-14">
-            Brad Warburton — Principal Consultant, BW Advisory Solutions
-          </p>
           <p className="text-2xl md:text-3xl text-silver/75 font-light leading-relaxed max-w-5xl mx-auto">
             Modern loss prevention is an <span className="text-white font-semibold">intelligence function</span>. I diagnose your current state, design and build the framework with your team, and hand over a fully operational intelligence capability that your organisation owns and controls.
-          </p>
-          <p className="text-lg md:text-xl text-silver/70 font-light leading-relaxed max-w-5xl mx-auto mt-10">
-            Australian retail is operating in the most aggressive threat environment in a generation. Organised retail crime networks now coordinate across stores, regions, and state lines. Shrinkage has climbed sharply since 2022 and the gap between incident volume and frontline response capacity continues to widen. Intelligence-led prevention is no longer an aspiration — it is the only credible defence.
           </p>
           <div className="mt-10">
             <Link to="/investigations" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.2em] uppercase font-bold transition-colors">
@@ -55,7 +45,7 @@ const LossIntelligence = () => (
     </section>
 
     {/* THREE PHASES */}
-    <section className="pb-44 px-8 w-full relative z-10">
+    <section className="pb-44 px-8 w-full relative z-10 bg-primary">
       <div className="max-w-[1400px] mx-auto">
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-44">
