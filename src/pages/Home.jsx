@@ -5,8 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import TransparentShield from '../components/TransparentShield';
 import HowWeWorkTogether from '../components/HowWeWorkTogether';
 import Footer from '../components/Footer';
-import NetworkCanvas from '../components/NetworkCanvas';
-import CityCrossfade from '../components/CityCrossfade';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -153,8 +151,6 @@ const Home = () => {
   const heroRef = useRef(null);
   const philRef = useRef(null);
   const [stickyDismissed, setStickyDismissed] = useState(false);
-  // TEMPORARY — design preview toggle, remove once a hero direction is chosen
-  const [heroVariant, setHeroVariant] = useState('video');
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -196,86 +192,28 @@ const Home = () => {
       {/* ── HERO ── */}
       <section ref={heroRef} className="relative min-h-[100dvh] w-full flex flex-col justify-center items-center pt-24 pb-16 px-8 z-10 text-center overflow-hidden bg-primary">
 
-        {/* TEMPORARY — hero design preview toggle, remove once a direction is chosen */}
-        <div className="absolute top-4 left-4 z-[100] flex gap-2 bg-black/60 backdrop-blur-sm rounded-lg p-1.5 border border-white/20">
-          <button
-            type="button"
-            onClick={() => setHeroVariant('office')}
-            className={`px-3 py-1.5 rounded text-[10px] font-mono uppercase tracking-wider transition-colors cursor-pointer ${heroVariant === 'office' ? 'bg-[#C9A84C] text-[#0F172A] font-bold' : 'text-white/70 hover:text-white'}`}
-          >
-            Office (lightened)
-          </button>
-          <button
-            type="button"
-            onClick={() => setHeroVariant('perth')}
-            className={`px-3 py-1.5 rounded text-[10px] font-mono uppercase tracking-wider transition-colors cursor-pointer ${heroVariant === 'perth' ? 'bg-[#C9A84C] text-[#0F172A] font-bold' : 'text-white/70 hover:text-white'}`}
-          >
-            City Stills
-          </button>
-          <button
-            type="button"
-            onClick={() => setHeroVariant('video')}
-            className={`px-3 py-1.5 rounded text-[10px] font-mono uppercase tracking-wider transition-colors cursor-pointer ${heroVariant === 'video' ? 'bg-[#C9A84C] text-[#0F172A] font-bold' : 'text-white/70 hover:text-white'}`}
-          >
-            Video (final)
-          </button>
-        </div>
-
         <div className="absolute inset-0 z-0">
-
-          {heroVariant === 'video' ? (
-            <>
-              {/* hero-mp4.mp4 — Perth → Sydney → Melbourne → Perth boardroom loop */}
-              <video
-                className="absolute inset-0 w-full h-full object-cover"
-                src="/hero-mp4.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                style={{ transform: 'scale(1.03)' }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#08101f]/30 via-[#0a1428]/18 to-[#08101f]/40 pointer-events-none" />
-              <div className="absolute bottom-0 left-0 right-0 h-[45%] bg-gradient-to-t from-[#08101f]/78 via-[#08101f]/32 to-transparent pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#08101f]/40 via-[#08101f]/10 to-transparent pointer-events-none" />
-              <div className="absolute top-0 left-0 right-0 h-[16%] bg-gradient-to-b from-[#08101f]/35 to-transparent pointer-events-none" />
-              {/* Wordmark vignette — extra depth behind shield/title/SOLUTIONS/tagline so they pop without heavier type */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: 'radial-gradient(ellipse 62% 56% at 50% 36%, rgba(5,10,20,0.58) 0%, rgba(5,10,20,0.32) 55%, transparent 85%)',
-                }}
-              />
-            </>
-          ) : heroVariant === 'office' ? (
-            <>
-              {/* hero-bg.webp — Gemini office image, lightened overlay */}
-              <div
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{
-                  backgroundImage: 'url("/hero-bg.webp")',
-                  backgroundPosition: 'center center',
-                  filter: 'blur(1px)',
-                  transform: 'scale(1.03)',
-                }}
-              />
-              {/* Animated network canvas — streams converging on wall shield */}
-              <NetworkCanvas />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#08101f]/35 via-[#0a1428]/22 to-[#08101f]/45 pointer-events-none" />
-              <div className="absolute bottom-0 left-0 right-0 h-[45%] bg-gradient-to-t from-[#08101f]/80 via-[#08101f]/35 to-transparent pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#08101f]/45 via-[#08101f]/12 to-transparent pointer-events-none" />
-              <div className="absolute top-0 left-0 right-0 h-[18%] bg-gradient-to-b from-[#08101f]/40 to-transparent pointer-events-none" />
-            </>
-          ) : (
-            <>
-              {/* Rotating boardroom-over-skyline shots — crossfades across cities as more are added */}
-              <CityCrossfade />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#08101f]/30 via-[#0a1428]/18 to-[#08101f]/40 pointer-events-none" />
-              <div className="absolute bottom-0 left-0 right-0 h-[45%] bg-gradient-to-t from-[#08101f]/78 via-[#08101f]/32 to-transparent pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#08101f]/40 via-[#08101f]/10 to-transparent pointer-events-none" />
-              <div className="absolute top-0 left-0 right-0 h-[16%] bg-gradient-to-b from-[#08101f]/35 to-transparent pointer-events-none" />
-            </>
-          )}
+          {/* hero-mp4.mp4 — Perth → Sydney → Melbourne → Perth boardroom loop */}
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            src="/hero-mp4.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{ transform: 'scale(1.03)' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#08101f]/30 via-[#0a1428]/18 to-[#08101f]/40 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-[45%] bg-gradient-to-t from-[#08101f]/78 via-[#08101f]/32 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#08101f]/40 via-[#08101f]/10 to-transparent pointer-events-none" />
+          <div className="absolute top-0 left-0 right-0 h-[16%] bg-gradient-to-b from-[#08101f]/35 to-transparent pointer-events-none" />
+          {/* Wordmark vignette — extra depth behind shield/title/SOLUTIONS/tagline so they pop without heavier type */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: 'radial-gradient(ellipse 62% 56% at 50% 36%, rgba(5,10,20,0.58) 0%, rgba(5,10,20,0.32) 55%, transparent 85%)',
+            }}
+          />
         </div>
 
         <div className="w-full max-w-[900px] mx-auto mb-12 relative flex flex-col items-center justify-center select-none pt-4 z-10">
