@@ -29,6 +29,8 @@ const Layout = ({ children }) => {
   const { pathname } = useLocation();
   const isHome = pathname === '/';
   const isIntelligence = pathname === '/loss-intelligence';
+  const isInvestigations = pathname === '/investigations';
+  const isPlainDiagnostic = pathname === '/diagnostics' || pathname === '/ai-readiness';
 
   return (
     <div className="w-full min-h-screen selection:bg-accent/40 selection:text-surface font-sans text-textDark bg-primary relative overflow-x-hidden">
@@ -91,6 +93,32 @@ const Layout = ({ children }) => {
             <div className="absolute inset-0 bg-gradient-to-b from-[#0D2247]/15 via-[#0D2247]/35 to-[#0D2247]/90" />
           </>
         ) : isIntelligence ? (
+          <>
+            <div className="absolute inset-0 bg-[#0F1929]" />
+            <video
+              className="absolute inset-0 w-full h-full object-cover opacity-40"
+              src="/investigations-network.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0F1929]/45 via-[#0F1929]/30 to-[#0D2247]/75" />
+          </>
+        ) : isInvestigations ? (
+          <>
+            <div className="absolute inset-0 bg-[#0F1929]" />
+            <video
+              className="absolute inset-0 w-full h-full object-cover opacity-40"
+              src="/investigation-board.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0F1929]/45 via-[#0F1929]/30 to-[#0D2247]/75" />
+          </>
+        ) : isPlainDiagnostic ? (
           <>
             <div className="absolute inset-0 bg-[#0F1929]" />
             <div className="absolute inset-0 bg-gradient-to-b from-[#0F1929]/60 via-[#0F1929]/30 to-[#0D2247]/80" />

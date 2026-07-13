@@ -6,7 +6,7 @@ const CALENDLY_URL = "https://calendar.app.google/m5nPtDntM5vzigPx6";
 
 const HELP_OPTIONS = [
   "AI Readiness & Process Optimisation",
-  "Security Hardening & Cyber Risk",
+  "Technology Matching & Security Hardening",
   "Operational Resilience Diagnostic",
   "Loss Intelligence & Investigations",
   "Strategic & Operational Advisory",
