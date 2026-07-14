@@ -121,6 +121,8 @@ const Layout = ({ children }) => {
         ) : isPlainDiagnostic ? (
           <>
             <div className="absolute inset-0 bg-[#0F1929]" />
+            <div className="absolute top-[-8%] right-[8%] w-[600px] h-[600px] bg-[#0369A1]/8 rounded-full blur-3xl float-breathe" />
+            <div className="absolute bottom-[-10%] left-[2%] w-[700px] h-[700px] bg-[#C9A84C]/5 rounded-full blur-3xl float-breathe" style={{ animationDelay: '2.5s' }} />
             <div className="absolute inset-0 bg-gradient-to-b from-[#0F1929]/60 via-[#0F1929]/30 to-[#0D2247]/80" />
           </>
         ) : (

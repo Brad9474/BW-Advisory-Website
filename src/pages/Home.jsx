@@ -162,19 +162,6 @@ const Home = () => {
       );
       gsap.from(".solutions-line", { scaleX: 0, opacity: 0, transformOrigin: "center", duration: 0.7, ease: "expo.out", delay: 1.5 });
       gsap.from(".hero-elem", { y: 20, opacity: 0, stagger: 0.1, duration: 0.9, ease: "power2.out", delay: 1.0 });
-      gsap.from(".feature-card", {
-        scrollTrigger: { trigger: "#framework", start: "top 80%" },
-        y: 30, opacity: 0, stagger: 0.15, duration: 1, ease: "power2.out"
-      });
-      const frameworkTl = gsap.timeline({ scrollTrigger: { trigger: "#framework", start: "top 65%" } });
-      gsap.utils.toArray('.framework-number').forEach((num, i) => {
-        frameworkTl
-          .fromTo(num,
-            { opacity: 0, y: 20, scale: 0.98, filter: "blur(4px)" },
-            { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.out" },
-            i * 0.8
-          );
-      });
       gsap.from(".phil-elem", {
         scrollTrigger: { trigger: philRef.current, start: "top 75%" },
         y: 20, opacity: 0, stagger: 0.2, duration: 1, ease: "power2.out"
@@ -237,8 +224,8 @@ const Home = () => {
         <div className="w-full max-w-7xl mx-auto mt-16 relative z-20">
           <div className="hero-elem mb-10 drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)]">
             <p className="font-sans italic font-semibold text-[#C9A84C] text-2xl md:text-3xl lg:text-4xl leading-snug">
-              Operational and cyber security gaps. Inefficient systems.{' '}
-              <span className="not-italic font-bold text-white">All of it.</span>
+              The gaps you can't see. The capability to close them.{' '}
+              <span className="not-italic font-bold text-white">I deliver both.</span>
             </p>
           </div>
           <div className="hero-elem relative mt-12 max-w-4xl mx-auto">
@@ -247,18 +234,18 @@ const Home = () => {
               <div className="space-y-5 text-center">
                 <p className="text-xs font-mono tracking-[0.35em] uppercase text-[#C9A84C] font-bold">Operational Reality</p>
                 <h2 className="font-display text-2xl md:text-3xl font-semibold text-white leading-tight">
-                  You can't fix what you can't see.
+                  Diagnose first. Build capability second. Guess never.
                 </h2>
                 <div className="w-12 h-px bg-gradient-to-r from-transparent via-[#C9A84C]/60 to-transparent mx-auto" />
                 <p className="text-base md:text-lg text-silver/85 font-light leading-relaxed max-w-3xl mx-auto">
-                  Businesses are losing value every day to operational gaps they haven't identified — and losing time to a technology market too crowded to navigate alone. I diagnose what's actually happening inside your operation, then identify and connect the technology built for it: best-in-class, vetted, and matched to how you already work. The return is measurable: reduced exposure, lower costs, and an operation running on the right tools, not just more of them.
+                  Businesses are losing value every day to operational gaps they haven't identified — and losing more to fixes that don't hold. I diagnose what's actually happening inside your operation, then build the capability to close it: redesigned process, embedded accountability, and — where the fix is a system, not a structure — technology that's vetted and matched to how you work. The return is measurable: reduced exposure, lower costs, and an operation running on capability, not patches.
                 </p>
               </div>
             </div>
           </div>
           <div className="hero-elem pt-16 flex flex-col sm:flex-row items-center justify-center gap-6">
             <a href="/consultation" className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-full text-[#0F172A] font-bold text-base md:text-lg hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase text-center flex items-center justify-center gap-3 shadow-[0_12px_32px_rgba(201,168,76,0.4)] hover:shadow-[0_16px_48px_rgba(201,168,76,0.6)] border border-white/10 hover:border-white/20 cursor-pointer min-w-[280px]">
-              Schedule Consultation
+              Request a Scoping Session
               <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
@@ -287,14 +274,8 @@ const Home = () => {
                   <h3 className="font-display font-semibold text-2xl md:text-3xl text-white leading-snug min-h-[5rem]">Operations</h3>
                 </div>
                 <p className="text-silver/85 font-light text-sm md:text-base leading-relaxed mb-8 flex-1">
-                  Organisations carrying operational risk and loss exposure across sites, stores, and supply chains — retail, logistics, and field operations among them. Built on three decades of law enforcement command: intelligence-led strategy, practically delivered.
+                  Organisations carrying operational risk and loss exposure across sites, stores, and supply chains — retail, logistics, and field operations among them. I built and ran some of Western Australia's largest, highest-stakes operational commands — that same capability, now available directly to your business.
                 </p>
-                <div className="mt-auto">
-                  <div className="flex items-center gap-3 text-[#C9A84C] font-bold text-sm tracking-[0.15em] uppercase group-hover:gap-4 transition-all duration-300">
-                    <span>Learn more</span>
-                    <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-                  </div>
-                </div>
               </div>
             </a>
             <a href="/#advisory" className="group relative overflow-hidden">
@@ -307,12 +288,6 @@ const Home = () => {
                 <p className="text-silver/85 font-light text-sm md:text-base leading-relaxed mb-8 flex-1">
                   Accounting, legal, financial advice, chiropractic, physiotherapy, dental, and GP practices — where operational pressure, compliance exposure, and client or patient data risk combine. Diagnostic-led, practically delivered, without disrupting how the practice runs.
                 </p>
-                <div className="mt-auto">
-                  <div className="flex items-center gap-3 text-[#C9A84C] font-bold text-sm tracking-[0.15em] uppercase group-hover:gap-4 transition-all duration-300">
-                    <span>Learn more</span>
-                    <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-                  </div>
-                </div>
               </div>
             </a>
             <a href="/#advisory" className="group relative overflow-hidden">
@@ -323,14 +298,8 @@ const Home = () => {
                   <h3 className="font-display font-semibold text-2xl md:text-3xl text-white leading-snug min-h-[5rem]">Technology Advisory</h3>
                 </div>
                 <p className="text-silver/85 font-light text-sm md:text-base leading-relaxed mb-8 flex-1">
-                  Cutting through an overcrowded technology market. I diagnose what your operation actually needs, then identify and connect best-in-class technology — vetted, matched, and integrated to how you already work.
+                  Cutting through an overcrowded technology market — as the end user who's needed these systems to work, not the vendor selling them. I diagnose what your operation actually needs, then identify and connect best-in-class technology: vetted, matched, and integrated to how you already work.
                 </p>
-                <div className="mt-auto">
-                  <div className="flex items-center gap-3 text-[#C9A84C] font-bold text-sm tracking-[0.15em] uppercase group-hover:gap-4 transition-all duration-300">
-                    <span>Learn more</span>
-                    <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-                  </div>
-                </div>
               </div>
             </a>
           </div>
@@ -341,7 +310,7 @@ const Home = () => {
       <section id="advisory" className="py-32 w-full relative z-10 bg-gradient-to-b from-primary via-[#0D1520] to-primary">
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
           <div className="mb-20 max-w-4xl">
-            <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">For operations, professional and healthcare practices, and small to medium businesses</p>
+            <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">For operations, professional services firms, and healthcare practices</p>
             <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight mb-8">
               Operational Resilience and Technology Capability
             </h2>
@@ -369,50 +338,25 @@ const Home = () => {
           </div>
           <div className="flex justify-center w-full">
             <a href="/consultation" className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer">
-              Book a Discovery Call
+              Request a Scoping Session
               <svg className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
             </a>
           </div>
         </div>
       </section>
 
-      {/* ── METHODOLOGY: THE APPROACH ── */}
-      <section id="framework" className="py-32 w-full relative z-10 bg-gradient-to-b from-[#0D1520] to-primary">
+      {/* ── DELIVERY ── */}
+      <section id="team" className="py-32 w-full relative z-10 bg-gradient-to-b from-[#0D1520] to-primary">
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
-          <div className="mb-24 max-w-3xl">
-            <p className="text-accent font-mono tracking-[0.3em] uppercase text-xs font-bold mb-6">
-              Proprietary Methodology
-              <Link to="/investigations" className="ml-1 text-[#C9A84C]/50 hover:text-[#C9A84C] transition-colors duration-200 text-[10px] align-super" title="PROVED — BW Advisory Solutions' proprietary investigations framework">*</Link>
-            </p>
-            <h2 className="font-display font-bold text-6xl md:text-7xl lg:text-8xl text-white tracking-tight mb-8">The Approach</h2>
-            <p className="text-xl md:text-2xl text-silver/80 font-light leading-relaxed">
-              Every engagement follows a disciplined three-stage protocol, from understanding your operational reality to closing the gap.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-            {[
-              { n: "01", title: "Identify.", sub: "Understand the reality", body: "Structured conversations reveal your true strategic intent, operational gaps, and the hidden friction undermining execution." },
-              { n: "02", title: "Strategise.", sub: "Design the solution", body: "With 30 years of law enforcement and private sector experience, I diagnose root cause and develop executable strategies with clear accountability." },
-              { n: "03", title: "Operationalise.", sub: "Embed the reality", body: "I remain accountable for outcomes. I embed change, align people, and measure what matters until execution closes the gap." },
-            ].map((s) => (
-              <div key={s.n} className="feature-card group relative">
-                <div className="absolute -inset-1 bg-gradient-to-br from-accent/40 to-accent/0 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
-                <div className="relative bg-white/3 backdrop-blur-sm border border-accent/20 hover:border-accent/40 rounded-2xl p-10 h-full transition-all duration-500 group-hover:bg-white/5">
-                  <div className="space-y-6">
-                    <div className="framework-number text-5xl md:text-6xl font-display font-bold text-white/15 leading-none select-none mb-2">{s.n}</div>
-                    <h3 className="font-display font-bold text-4xl text-white">{s.title}</h3>
-                    <p className="text-accent font-mono tracking-[0.2em] text-xs uppercase font-bold">{s.sub}</p>
-                    <p className="text-silver/80 leading-relaxed font-light text-lg">{s.body}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-center w-full pt-8">
-            <a href="/consultation" className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer">
-              Request a Scoping Session
-              <svg className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-            </a>
+          <div className="max-w-4xl">
+            <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">Delivery</p>
+            <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight mb-10">
+              Led by Brad. Specialists when required.
+            </h2>
+            <div className="space-y-6 text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
+              <p>Every engagement is led personally. The diagnostic, the client relationship, the strategic direction — all Brad. When the work requires deeper technical execution, it is delivered by best-in-class specialists drawn from cyber security, digital forensics, and IT infrastructure — practitioners at the top of their disciplines, matched to the specific need.</p>
+              <p>Most businesses are running at less than half the capability of the systems they already own. The right engagement pays for itself — through automation savings, reduced overhead, and the cost of a breach you never have to absorb.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -427,32 +371,31 @@ const Home = () => {
               Details remain confidential. The problems solved and outcomes delivered are not.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {[
               { num: "01", title: "Organisational Redesign", tag: "Law Enforcement / Organisational Command", situation: "Large operational unit with entrenched practices and persistent performance gaps despite adequate resourcing.", gap: "Investigative culture lagged behind intelligence capability. Tools existed. Practice did not.", outcome: "Workforce restructured, investigative practice modernised. Regional volume crime decreased measurably.", impact: "Investigative culture rebuilt. Crime rate fell." },
               { num: "02", title: "Digital Operations at Scale", tag: "Government / Large-Scale Border Operations", situation: "Government agency required digital screening at scale during crisis, replacing inadequate paper-based process.", gap: "No digital infrastructure. Large workforce needed real-time coordination across politically sensitive operation.", outcome: "Programme designed and commanded from ground up. Paper process eliminated entirely. Operation delivered without incident.", impact: "1M+ People Screened at Scale" },
               { num: "03", title: "Intelligence Architecture", tag: "Law Enforcement / Intelligence Architecture", situation: "Government intelligence infrastructure fragmented across disconnected systems. No single operational picture for frontline commanders.", gap: "Intelligence didn't reach decision-makers at speed. Information silos prevented unified command.", outcome: "Real-time intelligence environment deployed. Multiple sources aggregated into single actionable picture integrated with frontline systems.", impact: "Intelligence reached command 40% faster." },
-              { num: "04", title: "National Retail Crime Intelligence", tag: "National Retail / Crime Intelligence", situation: "National retail group exposed to coordinated organised crime activity across stores, regions, and state lines. Incident response running well behind threat velocity.", gap: "Loss prevention operating reactively. No shared intelligence picture between store, regional, and national teams. Police engagement ad hoc.", outcome: "Intelligence-led loss prevention framework designed and embedded. National pattern detection in place. Structured law enforcement partnerships at state and federal level.", impact: "Reactive posture replaced with detection capability." },
+              { num: "04", title: "National Retail Crime Intelligence", tag: "Retail Technology / Law Enforcement Partnerships", situation: "National retail group exposed to coordinated organised crime activity across stores, regions, and state lines. Incident response running well behind threat velocity.", gap: "Loss prevention operating reactively. No shared intelligence picture between store, regional, and national teams. Police engagement ad hoc.", outcome: "Intelligence-led loss prevention framework designed and embedded. National pattern detection in place. Structured law enforcement partnerships at state and federal level.", impact: "Reactive posture replaced with detection capability." },
+              { num: "05", title: "Capability Gap Diagnosis", tag: "Private Sector / Capability Diagnostic", situation: "A client held a genuine, hard-to-replicate data advantage, but couldn't yet prove it to investors or partners.", gap: "The capability wasn't the problem. The operating model was undocumented, governance was informal, and there was no investor-grade evidence base.", outcome: "Assessed capability across five dimensions — product quality, process and technology, external relationships, scalability, and commercial readiness — with a staged roadmap to close what was missing.", impact: "Confirmed the capability was real. Replaced guesswork with a costed, sequenced plan to prove it." },
             ].map((cs) => (
-              <div key={cs.num} className="relative group overflow-hidden">
-                <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
-                <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/50 rounded-2xl p-4 h-full transition-all duration-500 group-hover:bg-white/12">
-                  <div className="absolute top-6 right-6 w-14 h-14 bg-gradient-to-br from-[#C9A84C]/20 to-accent/10 rounded-full flex items-center justify-center group-hover:from-[#C9A84C]/30 group-hover:to-accent/20 transition-all duration-500">
-                    <span className="text-[#C9A84C] font-display font-bold text-xl">{cs.num}</span>
-                  </div>
-                  <h3 className="font-display font-bold text-3xl text-white mb-1 pr-16 min-h-[3rem]">{cs.title}</h3>
-                  <p className="text-[#C9A84C] text-xs font-mono tracking-widest uppercase font-bold mb-2">{cs.tag}</p>
-                  <div className="space-y-1">
+              <div key={cs.num} className="group relative h-full">
+                <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-60 transition-all duration-700 blur-lg"></div>
+                <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/60 rounded-2xl p-8 md:p-10 h-full flex flex-col transition-all duration-500 group-hover:bg-white/12">
+                  <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold mb-4">Case {cs.num}</p>
+                  <h3 className="font-display font-bold text-2xl md:text-3xl text-white mb-2 leading-tight">{cs.title}</h3>
+                  <p className="text-[#C9A84C]/70 text-xs font-mono tracking-widest uppercase font-bold mb-6">{cs.tag}</p>
+                  <div className="space-y-4 flex-1">
                     {[['The Situation', cs.situation], ['The Gap', cs.gap], ['The Outcome', cs.outcome]].map(([label, text]) => (
-                      <div key={label} className="pb-2 border-b border-accent/15">
-                        <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold mb-1">{label}</p>
-                        <p className="text-silver/85 font-light leading-relaxed text-sm">{text}</p>
+                      <div key={label}>
+                        <p className="text-accent/60 font-mono text-[10px] tracking-widest uppercase font-bold mb-1">{label}</p>
+                        <p className="text-silver/80 font-light leading-relaxed text-sm">{text}</p>
                       </div>
                     ))}
-                    <div className="pt-1">
-                      <p className="text-[#C9A84C] font-mono text-xs tracking-widest uppercase font-bold mb-1">Impact</p>
-                      <p className="text-white font-bold text-base">{cs.impact}</p>
-                    </div>
+                  </div>
+                  <div className="mt-6 pt-6 border-t border-[#C9A84C]/25">
+                    <p className="text-[#C9A84C] font-mono text-[10px] tracking-[0.3em] uppercase font-bold mb-2">Impact</p>
+                    <p className="text-white font-bold text-lg md:text-xl leading-snug">{cs.impact}</p>
                   </div>
                 </div>
               </div>
@@ -485,7 +428,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
           <div className="lg:col-span-5 order-1 flex flex-col gap-6">
             <div className="rounded-2xl overflow-hidden shadow-lg bg-background border border-silver/20">
-              <img src="/Brad_Professional_Shot_clean.webp" alt="Brad Warburton - Principal Advisor" className="w-full h-[450px] object-cover object-top grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/Brad_Professional_Shot_clean.webp" alt="Brad Warburton - Principal Advisor" className="w-full h-[320px] sm:h-[380px] lg:h-[450px] object-cover object-top grayscale hover:grayscale-0 transition-all duration-500" />
             </div>
             <div className="text-center">
               <p className="text-primary font-bold text-2xl tracking-wide">Brad Warburton</p>
@@ -506,19 +449,7 @@ const Home = () => {
               <p>He now brings that same discipline — blended with private sector technology experience and practical AI capability — to operations, professional services firms, and healthcare practices.</p>
               <p className="font-medium text-textDark">The problems look different. The fundamentals are the same.</p>
             </div>
-            <div className="flex flex-col gap-0 pt-6 border-t border-silver/20 mt-2">
-              {["AI Adoption & Process Automation","Operational Resilience & Security","Systems & Process Optimisation","Technology Integration & Capability Deployment","Retail Loss Intelligence & Investigations","Law Enforcement & Government Advisory"].map((skill, index) => (
-                <div key={index} className="group relative py-4 border-b border-silver/20 flex items-center justify-between overflow-hidden cursor-default transition-all duration-500">
-                  <div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-transparent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out pointer-events-none"></div>
-                  <div className="flex items-center gap-6 relative z-10 w-full transform group-hover:translate-x-3 transition-transform duration-500 ease-out">
-                    <div className="w-1.5 h-1.5 bg-primary/20 group-hover:bg-gold rotate-45 transform group-hover:rotate-90 group-hover:scale-125 transition-all duration-500 ease-out flex-shrink-0"></div>
-                    <span className="font-semibold text-primary text-[13px] md:text-[15px] tracking-[0.15em] group-hover:tracking-[0.18em] uppercase group-hover:text-accent transition-all duration-500 pr-4">{skill}</span>
-                  </div>
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-[1px] bg-accent group-hover:w-16 md:group-hover:w-28 transition-all duration-700 ease-out z-10 opacity-0 group-hover:opacity-100"></div>
-                </div>
-              ))}
-            </div>
-            <div className="pt-8">
+            <div className="pt-8 border-t border-silver/20 mt-2">
               <a href="/consultation" className="inline-block group relative overflow-hidden bg-[#C9A84C] px-12 py-4 rounded-full text-[#0F172A] font-bold text-sm hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase flex items-center justify-center gap-3 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-max cursor-pointer">
                 Request a Scoping Session
                 <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
@@ -527,6 +458,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* ── THE ENGAGEMENT ── */}
+      <HowWeWorkTogether />
 
       {/* ── WHY THIS PRACTICE EXISTS ── */}
       <section id="why" className="py-32 w-full relative z-10 bg-gradient-to-b from-surface via-background to-surface">
@@ -538,31 +472,12 @@ const Home = () => {
             </h2>
           </div>
           <div className="space-y-6 text-textDark/90 font-light text-xl leading-relaxed max-w-4xl">
-            <p>Operations, professional services firms, and healthcare practices are at a genuine inflection point. AI is available but confusing, and choosing the right technology from an overcrowded market costs time most businesses don't have. Cyber threats are escalating — health data, client records, and operational data are among the most targeted in Australia. Compliance obligations are tightening with no sign of reversal.</p>
+            <p>Operations, professional services firms, and healthcare practices are at a genuine inflection point. AI is available but confusing, and choosing the right technology from an overcrowded market costs time most businesses don't have. Operational risk and loss exposure are climbing just as fast — coordinated threats moving across sites, stores, and supply chains quicker than most response capability can match. Cyber threats are escalating — health data, client records, and operational data are among the most targeted in Australia. Compliance obligations are tightening with no sign of reversal.</p>
             <p>The practices that get clear on this in the next 12 to 18 months will have a structural advantage. The ones that don't will spend years cleaning up problems that were preventable.</p>
             <p className="font-medium text-textDark">Most have never had access to operational expertise at this level. That gap is what this practice exists to close.</p>
           </div>
         </div>
       </section>
-
-      {/* ── DELIVERY ── */}
-      <section id="team" className="py-32 w-full relative z-10 bg-gradient-to-b from-primary via-[#0D1520] to-primary">
-        <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
-          <div className="max-w-4xl">
-            <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">Delivery</p>
-            <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight mb-10">
-              Led by Brad. Specialists when required.
-            </h2>
-            <div className="space-y-6 text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
-              <p>Every engagement is led personally. The diagnostic, the client relationship, the strategic direction — all Brad. When the work requires deeper technical execution, it is delivered by best-in-class specialists drawn from cyber security, digital forensics, and IT infrastructure — practitioners at the top of their disciplines, matched to the specific need.</p>
-              <p>Most businesses are running at less than half the capability of the systems they already own. The right engagement pays for itself — through automation savings, reduced overhead, and the cost of a breach you never have to absorb.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── THE ENGAGEMENT ── */}
-      <HowWeWorkTogether />
 
       {/* ── DIAGNOSTICS PATHWAY ── */}
       <section className="py-32 w-full relative z-10 bg-gradient-to-b from-primary via-[#0D1520] to-primary overflow-hidden">

@@ -1,14 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
-  <title>AI Readiness Diagnostic — BW Advisory Solutions</title>
-  <circle cx="24" cy="24" r="23" fill="#0f2447" stroke="#B8971A" stroke-width="1.5"/>
-  <circle cx="24" cy="24" r="5" fill="#B8971A"/>
-  <circle cx="24" cy="8" r="3.5" fill="#ffffff" opacity="0.9"/>
-  <circle cx="11" cy="35" r="3.5" fill="#ffffff" opacity="0.9"/>
-  <circle cx="37" cy="35" r="3.5" fill="#ffffff" opacity="0.9"/>
-  <line x1="24" y1="24" x2="24" y2="11.5" stroke="#B8971A" stroke-width="1.2" opacity="0.8"/>
-  <line x1="24" y1="24" x2="13.5" y2="32" stroke="#B8971A" stroke-width="1.2" opacity="0.8"/>
-  <line x1="24" y1="24" x2="34.5" y2="32" stroke="#B8971A" stroke-width="1.2" opacity="0.8"/>
-  <line x1="24" y1="8" x2="13" y2="33" stroke="#ffffff" stroke-width="0.6" opacity="0.25"/>
-  <line x1="24" y1="8" x2="35" y2="33" stroke="#ffffff" stroke-width="0.6" opacity="0.25"/>
-  <line x1="13" y1="35" x2="35" y2="35" stroke="#ffffff" stroke-width="0.6" opacity="0.25"/>
+  <title>AI — BW Advisory Solutions</title>
+  <path d="M24,7 Q28.24,19.76 41,24 Q28.24,28.24 24,41 Q19.76,28.24 7,24 Q19.76,19.76 24,7 Z" fill="#C9A84C"/>
+  <path d="M40,4 Q41.13,6.87 44,8 Q41.13,9.13 40,12 Q38.87,9.13 36,8 Q38.87,6.87 40,4 Z" fill="#ffffff" opacity="0.85"/>
 </svg>

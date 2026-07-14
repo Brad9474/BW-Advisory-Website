@@ -974,6 +974,53 @@ const QuestionScreen = ({
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Intro / gate screen — shown before Question 1 so the diagnostic reads as
+// quick and low-friction before the question count is ever visible.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const IntroScreen = ({ onStart }) => (
+  <div className="space-y-8 text-center">
+    <div className="flex justify-center">
+      <div className="relative">
+        <div className="absolute inset-0 bg-[#C9A84C]/30 rounded-full blur-2xl" />
+        <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-[#C9A84C]/25 to-accent/15 border border-[#C9A84C]/40 flex items-center justify-center">
+          <img src="/ai-icon.svg" alt="" className="w-10 h-10" />
+        </div>
+      </div>
+    </div>
+    <div className="space-y-3">
+      <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI-Powered Diagnostic</p>
+      <h2 className="font-display font-bold text-2xl md:text-3xl text-white leading-snug">
+        Ready when you are.
+      </h2>
+      <p className="text-silver/75 font-light text-base md:text-lg leading-relaxed max-w-lg mx-auto">
+        No account, no download — just straight answers and a scored result the moment you finish.
+      </p>
+    </div>
+    <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-silver/70 text-sm font-light">
+      {['~5 minutes', 'One question at a time', 'Instant scored result'].map((t) => (
+        <span key={t} className="flex items-center gap-2">
+          <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
+          {t}
+        </span>
+      ))}
+    </div>
+    <div className="pt-4">
+      <button
+        type="button"
+        onClick={onStart}
+        className="inline-flex items-center justify-center gap-3 bg-[#C9A84C] px-10 md:px-12 py-5 min-h-[48px] rounded-lg text-[#0F172A] font-bold text-sm tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 shadow-[0_8px_24px_rgba(201,168,76,0.3)] cursor-pointer"
+      >
+        Start Diagnostic
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </button>
+    </div>
+  </div>
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Email capture screen
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -1326,6 +1373,7 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
 // ─────────────────────────────────────────────────────────────────────────────
 
 const TOTAL_QUESTIONS = QUESTIONS.length; // 28
+const STEP_INTRO = -1;
 const STEP_EMAIL = TOTAL_QUESTIONS;       // 28
 const STEP_RESULTS = TOTAL_QUESTIONS + 1; // 29
 
@@ -1337,7 +1385,7 @@ const isAnswerValid = (question, value) => {
 };
 
 const AIReadiness = () => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(STEP_INTRO);
   const [direction, setDirection] = useState('forward');
   const [responses, setResponses] = useState({});
   const [lead, setLead] = useState({ name: '', email: '', consentContact: false, consentMarketing: false });
@@ -1384,6 +1432,12 @@ const AIReadiness = () => {
         }
       });
     });
+  }, []);
+
+  const startDiagnostic = useCallback(() => {
+    setDirection('forward');
+    setStep(0);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
   const advance = useCallback(() => {
@@ -1479,6 +1533,10 @@ const AIReadiness = () => {
       if (e.key !== 'Enter') return;
       const tag = (e.target?.tagName || '').toLowerCase();
       if (tag === 'textarea' || tag === 'input' || tag === 'button') return;
+      if (step === STEP_INTRO) {
+        startDiagnostic();
+        return;
+      }
       if (step < TOTAL_QUESTIONS) {
         const q = QUESTIONS[step];
         if (isAnswerValid(q, responses[q.id])) advance();
@@ -1486,14 +1544,16 @@ const AIReadiness = () => {
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [step, responses, advance]);
+  }, [step, responses, advance, startDiagnostic]);
 
   // Determine which screen is rendered.
   let screenContent;
   let progressCurrent;
   let canGoNext = false;
 
-  if (step < TOTAL_QUESTIONS) {
+  if (step === STEP_INTRO) {
+    screenContent = <IntroScreen onStart={startDiagnostic} />;
+  } else if (step < TOTAL_QUESTIONS) {
     const q = QUESTIONS[step];
     progressCurrent = step + 1;
     canGoNext = isAnswerValid(q, responses[q.id]);
@@ -1544,7 +1604,7 @@ const AIReadiness = () => {
     ) : null;
   }
 
-  const showProgress = step <= STEP_EMAIL;
+  const showProgress = step >= 0 && step <= STEP_EMAIL;
   const showBack = step > 0 && step <= STEP_EMAIL;
   const currentQ = step < TOTAL_QUESTIONS ? QUESTIONS[step] : null;
   const singleNeedsNext =
