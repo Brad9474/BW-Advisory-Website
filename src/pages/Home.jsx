@@ -184,6 +184,9 @@ const Home = () => {
           <video
             className="absolute inset-0 w-full h-full object-cover"
             src="/hero-mp4.mp4"
+            poster="/hero-poster.webp"
+            preload="auto"
+            fetchPriority="high"
             autoPlay
             loop
             muted
@@ -428,7 +431,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
           <div className="lg:col-span-5 order-1 flex flex-col gap-6">
             <div className="rounded-2xl overflow-hidden shadow-lg bg-background border border-silver/20">
-              <img src="/Brad_Professional_Shot_clean.webp" alt="Brad Warburton - Principal Advisor" className="w-full h-[320px] sm:h-[380px] lg:h-[450px] object-cover object-top grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="/Brad_Professional_Shot_clean.webp" alt="Brad Warburton - Principal Advisor" loading="lazy" className="w-full h-[320px] sm:h-[380px] lg:h-[450px] object-cover object-top grayscale hover:grayscale-0 transition-all duration-500" />
             </div>
             <div className="text-center">
               <p className="text-primary font-bold text-2xl tracking-wide">Brad Warburton</p>
