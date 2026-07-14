@@ -271,7 +271,7 @@ const Home = () => {
               <div className="relative block bg-gradient-to-br from-[#1A3560]/80 via-[#0D1520]/60 to-[#051020]/80 border border-accent/40 group-hover:border-[#C9A84C]/60 rounded-3xl p-8 md:p-10 transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.2)] h-full flex flex-col">
                 <div className="mb-6">
                   <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-xs uppercase font-bold mb-4">Practice Area 01</p>
-                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-white leading-snug min-h-[5rem]">Operations</h3>
+                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-white leading-snug min-h-[5rem]">Operational Resilience</h3>
                 </div>
                 <p className="text-silver/85 font-light text-sm md:text-base leading-relaxed mb-8 flex-1">
                   Organisations carrying operational risk and loss exposure across sites, stores, and supply chains — retail, logistics, and field operations among them. I built and ran some of Western Australia's largest, highest-stakes operational commands — that same capability, now available directly to your business.
