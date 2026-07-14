@@ -61,11 +61,6 @@ const Layout = ({ children }) => {
         .float-breathe {
           animation: float-breathe 7s ease-in-out infinite;
         }
-        @keyframes kenBurns {
-          0%   { transform: scale(1.05) translate(0, 0); }
-          50%  { transform: scale(1.12) translate(-1.5%, -1%); }
-          100% { transform: scale(1.05) translate(0, 0); }
-        }
         @keyframes shine-shield {
           0% { background-position: -200% center; }
           100% { background-position: 200% center; }
@@ -83,14 +78,7 @@ const Layout = ({ children }) => {
       <div className="fixed inset-0 z-0 bg-[#0F1929] overflow-hidden">
         {isHome ? (
           <>
-            <img
-              src="/punchy.webp"
-              alt="Digital Network Cityscape"
-              className="w-full h-full object-cover object-center opacity-70"
-              style={{ animation: 'kenBurns 30s ease-in-out infinite' }}
-            />
-            <div className="absolute inset-0 bg-[#0D2247]/35 mix-blend-multiply" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0D2247]/15 via-[#0D2247]/35 to-[#0D2247]/90" />
+            <div className="absolute inset-0 bg-[#0D2247]/35" />
           </>
         ) : isIntelligence ? (
           <>
@@ -98,6 +86,8 @@ const Layout = ({ children }) => {
             <video
               className="absolute inset-0 w-full h-full object-cover opacity-40"
               src="/investigations-network.mp4"
+              poster="/investigations-network-poster.webp"
+              preload="auto"
               autoPlay
               loop
               muted
@@ -111,6 +101,8 @@ const Layout = ({ children }) => {
             <video
               className="absolute inset-0 w-full h-full object-cover opacity-40"
               src="/investigation-board.mp4"
+              poster="/investigation-board-poster.webp"
+              preload="auto"
               autoPlay
               loop
               muted
