@@ -40,7 +40,8 @@ const groups = [
         audience: "CEO · Board · Senior Leadership",
         duration: "8 min · 10 questions",
         desc: "Maps the systemic gap between leadership intent and organisational delivery. Focuses on alignment, execution, and risk posture.",
-        href: "https://portal.bwadvisorysolutions.com.au/diagnostic.html"
+        href: "/strategic-diagnostic",
+        internal: true,
       },
       {
         id: "operational-diagnostic",
@@ -50,7 +51,8 @@ const groups = [
         audience: "GM · Head of Operations · Delivery Lead",
         duration: "8 min · 10 questions",
         desc: "Surfaces the functional friction between tactical decisions and frontline capability across processes, systems, and accountability.",
-        href: "https://portal.bwadvisorysolutions.com.au/operational-diagnostic.html"
+        href: "/operational-diagnostic",
+        internal: true,
       },
     ]
   },
@@ -67,7 +69,8 @@ const groups = [
         audience: "GM · CEO · CFO",
         duration: "8 min · 10 questions",
         desc: "Assesses your capability to transform incident data into actionable loss intelligence. For leaders seeking to disrupt systemic retail crime and minimise exposure.",
-        href: "https://portal.bwadvisorysolutions.com.au/loss-intelligence-diagnostic.html"
+        href: "/loss-intelligence-diagnostic",
+        internal: true,
       },
       {
         id: "investigations-capability-diagnostic",
@@ -77,8 +80,8 @@ const groups = [
         audience: "LP Manager · Head of Security · Risk Manager",
         duration: "8 min · 10 questions",
         desc: "Assesses the integrity of the investigation lifecycle from signal collection to defensible documentation and outcome.",
-        comingSoon: true,
-        ctaLabel: "Coming 2026"
+        href: "/investigations-diagnostic",
+        internal: true,
       },
     ]
   }
@@ -350,13 +353,13 @@ const Diagnostics = () => {
               <p className="text-lg md:text-2xl text-silver/75 font-light leading-relaxed">
                 Direct engagement. No proposal until we've talked.
               </p>
-              <a
-                href="https://portal.bwadvisorysolutions.com.au/diagnostic.html"
+              <Link
+                to="/consultation"
                 className="group/btn relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer"
               >
                 Start Your Assessment
                 <svg className="w-5 h-5 transform group-hover/btn:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -22,6 +22,10 @@ const Investigations = React.lazy(() => import('./pages/Investigations'));
 const Privacy = React.lazy(() => import('./pages/Privacy'));
 const AIReadiness = React.lazy(() => import('./pages/AIReadiness'));
 const Consultation = React.lazy(() => import('./pages/Consultation'));
+const StrategicDiagnostic = React.lazy(() => import('./pages/StrategicDiagnostic'));
+const OperationalDiagnostic = React.lazy(() => import('./pages/OperationalDiagnostic'));
+const LossIntelligenceDiagnostic = React.lazy(() => import('./pages/LossIntelligenceDiagnostic'));
+const InvestigationsDiagnostic = React.lazy(() => import('./pages/InvestigationsDiagnostic'));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -146,6 +150,10 @@ const App = () => (
         <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
         <Route path="/ai-readiness" element={<Layout><AIReadiness /></Layout>} />
         <Route path="/consultation" element={<Layout><Consultation /></Layout>} />
+        <Route path="/strategic-diagnostic" element={<Layout><StrategicDiagnostic /></Layout>} />
+        <Route path="/operational-diagnostic" element={<Layout><OperationalDiagnostic /></Layout>} />
+        <Route path="/loss-intelligence-diagnostic" element={<Layout><LossIntelligenceDiagnostic /></Layout>} />
+        <Route path="/investigations-diagnostic" element={<Layout><InvestigationsDiagnostic /></Layout>} />
       </Routes>
     </Suspense>
   </BrowserRouter>
