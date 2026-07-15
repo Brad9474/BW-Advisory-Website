@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import posthog from 'posthog-js';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Footer from '../components/Footer';
@@ -144,6 +145,7 @@ const DiagnosticCardBody = ({ item }) => (
 
 const DiagnosticCard = ({ item }) => {
   const className = "diag-card group relative overflow-hidden h-full flex flex-col scroll-mt-32";
+  const handleClick = () => posthog.capture('diagnostic_card_clicked', { diagnostic: item.id, badge: item.badge });
   if (item.comingSoon) {
     return (
       <div id={item.id} className={className} aria-disabled="true">
@@ -153,13 +155,13 @@ const DiagnosticCard = ({ item }) => {
   }
   if (item.internal) {
     return (
-      <Link id={item.id} to={item.href} className={className}>
+      <Link id={item.id} to={item.href} onClick={handleClick} className={className}>
         <DiagnosticCardBody item={item} />
       </Link>
     );
   }
   return (
-    <a id={item.id} href={item.href} className={className}>
+    <a id={item.id} href={item.href} onClick={handleClick} className={className}>
       <DiagnosticCardBody item={item} />
     </a>
   );

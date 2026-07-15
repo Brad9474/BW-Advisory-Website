@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import posthog from 'posthog-js';
 import Footer from './Footer';
 
 const API_URL = 'https://command.bwadvisorysolutions.com.au/api/intake/diagnostic';
@@ -83,11 +84,19 @@ const ReviewedDiagnosticFlow = ({
         }),
       });
       if (res.ok) {
+        posthog.identify(contact.email.trim(), {
+          name: contact.name.trim(),
+          organisation: contact.organisation.trim(),
+          role: contact.role.trim(),
+        });
+        posthog.capture('diagnostic_completed', { diagnostic_type: diagnosticType });
         setStep(STEP_DONE);
       } else {
+        posthog.capture('diagnostic_submit_failed', { diagnostic_type: diagnosticType, status: res.status });
         setStep(STEP_ERROR);
       }
     } catch (err) {
+      posthog.captureException(err, { context: 'reviewed_diagnostic', diagnostic_type: diagnosticType });
       console.error(`[${diagnosticType.toLowerCase()}-diagnostic] submission failed`, err);
       setStep(STEP_ERROR);
     }
@@ -154,7 +163,7 @@ const ReviewedDiagnosticFlow = ({
               <p className="text-silver/75 text-lg md:text-xl font-light leading-relaxed max-w-2xl">{subtitle}</p>
               <button
                 type="button"
-                onClick={() => { setStep(STEP_CONTACT); window.scrollTo(0, 0); }}
+                onClick={() => { posthog.capture('diagnostic_started', { diagnostic_type: diagnosticType }); setStep(STEP_CONTACT); window.scrollTo(0, 0); }}
                 className="bg-[#C9A84C] hover:bg-[#E0BC60] text-[#0F172A] font-bold px-10 py-4 rounded-lg tracking-[0.15em] uppercase text-sm transition-all cursor-pointer"
               >
                 {beginLabel}

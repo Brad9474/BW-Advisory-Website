@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import posthog from 'posthog-js';
 import Footer from '../components/Footer';
 
 const COMMAND_CENTRE_ENDPOINT = "https://command.bwadvisorysolutions.com.au/api/intake/contact";
@@ -95,11 +96,24 @@ const Consultation = () => {
         }),
       });
       if (res.status === 201) {
+        posthog.identify(values.email.trim(), {
+          name: values.name.trim(),
+          organisation: values.organisation.trim(),
+          role: values.role.trim(),
+        });
+        posthog.capture('consultation_submitted', {
+          help_with: values.helpWith,
+          practice_size: values.practiceSize,
+          referral_source: values.referralSource,
+          consent_to_marketing: values.consentToMarketing,
+        });
         window.location.href = CALENDLY_URL;
         return;
       }
+      posthog.capture('consultation_submit_failed', { status: res.status });
       setErrorVisible(true);
     } catch (err) {
+      posthog.captureException(err, { context: 'consultation_form' });
       setErrorVisible(true);
     } finally {
       setSubmitting(false);

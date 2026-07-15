@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import posthog from 'posthog-js';
 import Footer from '../components/Footer';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -964,6 +965,7 @@ const AIReadinessDiagnostic = () => {
   const isLast = qIndex === questions.length - 1;
 
   const handleSelect = (key) => {
+    posthog.capture('ai_readiness_v2_started', { practice_type: key });
     setPracticeType(key);
     setQIndex(0);
     setAnswers({});
@@ -1053,6 +1055,16 @@ const AIReadinessDiagnostic = () => {
     setSubmitting(false);
     if (result.ok) {
       setServerResults(result.data);
+      posthog.identify(gate.email.trim(), {
+        organisation: lead.organisation.trim(),
+        role: lead.role.trim(),
+        name: lead.name.trim(),
+      });
+      posthog.capture('ai_readiness_v2_completed', {
+        practice_type: practiceType,
+        score: result.data?.score ?? null,
+        band: result.data?.band ?? null,
+      });
       setPhase('results');
     } else {
       setGateError(result.error);
