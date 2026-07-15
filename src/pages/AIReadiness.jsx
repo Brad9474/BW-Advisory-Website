@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import posthog from 'posthog-js';
 import Footer from '../components/Footer';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1283,7 +1284,7 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
         </p>
         <button
           type="button"
-          onClick={() => window.location.href = '/consultation'}
+          onClick={() => { posthog.capture('diagnostic_result_book_clicked', { score }); window.location.href = '/consultation'; }}
           className="inline-flex items-center justify-center gap-3 bg-[#C9A84C] px-10 md:px-12 py-5 min-h-[48px] rounded-lg text-[#0F172A] font-bold text-sm tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 shadow-[0_8px_24px_rgba(201,168,76,0.3)] cursor-pointer"
         >
           Book Your Diagnostic
@@ -1435,6 +1436,7 @@ const AIReadiness = () => {
   }, []);
 
   const startDiagnostic = useCallback(() => {
+    posthog.capture('ai_readiness_started');
     setDirection('forward');
     setStep(0);
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1502,6 +1504,12 @@ const AIReadiness = () => {
 
     completedRef.current = true;
     trackEvent({ sessionId, event: 'COMPLETE', score, diagnosticType });
+    posthog.identify(lead.email.trim(), { name: lead.name.trim() });
+    posthog.capture('ai_readiness_completed', {
+      score,
+      diagnostic_type: diagnosticType,
+      concern_count: computeRiskAreas(responses).filter((a) => a.severity !== 'MODERATE').length,
+    });
 
     setDirection('forward');
     setStep(STEP_RESULTS);

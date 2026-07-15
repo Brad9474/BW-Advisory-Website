@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import posthog from 'posthog-js';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import TransparentShield from '../components/TransparentShield';
@@ -54,9 +55,23 @@ const ConsultationForm = () => {
           source: "website_consultation", brand: "BW_ADVISORY",
         }),
       });
-      if (res.status === 201) { setStatus("success"); }
-      else { setStatus("error"); }
+      if (res.status === 201) {
+        posthog.identify(values.email.trim(), {
+          name: values.name.trim(),
+          organisation: values.organisation.trim(),
+          role: values.role.trim(),
+        });
+        posthog.capture('home_contact_submitted', {
+          area_of_interest: areaOfInterest,
+          help_with: values.helpWith,
+        });
+        setStatus("success");
+      } else {
+        posthog.capture('home_contact_submit_failed', { status: res.status });
+        setStatus("error");
+      }
     } catch (err) {
+      posthog.captureException(err, { context: 'home_contact_form' });
       setStatus("error");
     } finally {
       setSubmitting(false);
@@ -247,7 +262,7 @@ const Home = () => {
             </div>
           </div>
           <div className="hero-elem pt-16 flex flex-col sm:flex-row items-center justify-center gap-6">
-            <a href="/consultation" className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-full text-[#0F172A] font-bold text-base md:text-lg hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase text-center flex items-center justify-center gap-3 shadow-[0_12px_32px_rgba(201,168,76,0.4)] hover:shadow-[0_16px_48px_rgba(201,168,76,0.6)] border border-white/10 hover:border-white/20 cursor-pointer min-w-[280px]">
+            <a href="/consultation" onClick={() => posthog.capture('scoping_session_cta_clicked', { location: 'hero' })} className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-full text-[#0F172A] font-bold text-base md:text-lg hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase text-center flex items-center justify-center gap-3 shadow-[0_12px_32px_rgba(201,168,76,0.4)] hover:shadow-[0_16px_48px_rgba(201,168,76,0.6)] border border-white/10 hover:border-white/20 cursor-pointer min-w-[280px]">
               Request a Scoping Session
               <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -340,7 +355,7 @@ const Home = () => {
             ))}
           </div>
           <div className="flex justify-center w-full">
-            <a href="/consultation" className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer">
+            <a href="/consultation" onClick={() => posthog.capture('scoping_session_cta_clicked', { location: 'advisory_section' })} className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer">
               Request a Scoping Session
               <svg className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
             </a>
@@ -453,7 +468,7 @@ const Home = () => {
               <p className="font-medium text-textDark">The problems look different. The fundamentals are the same.</p>
             </div>
             <div className="pt-8 border-t border-silver/20 mt-2">
-              <a href="/consultation" className="inline-block group relative overflow-hidden bg-[#C9A84C] px-12 py-4 rounded-full text-[#0F172A] font-bold text-sm hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase flex items-center justify-center gap-3 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-max cursor-pointer">
+              <a href="/consultation" onClick={() => posthog.capture('scoping_session_cta_clicked', { location: 'about_section' })} className="inline-block group relative overflow-hidden bg-[#C9A84C] px-12 py-4 rounded-full text-[#0F172A] font-bold text-sm hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase flex items-center justify-center gap-3 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-max cursor-pointer">
                 Request a Scoping Session
                 <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
               </a>
