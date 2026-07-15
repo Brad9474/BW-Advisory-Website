@@ -5,7 +5,8 @@ import App from './App.jsx'
 import './index.css'
 
 posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
-  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  api_host: '/ph',
+  ui_host: 'https://us.posthog.com',
   defaults: '2026-05-30',
 })
 
