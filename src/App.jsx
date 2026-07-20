@@ -26,6 +26,7 @@ const StrategicDiagnostic = React.lazy(() => import('./pages/StrategicDiagnostic
 const OperationalDiagnostic = React.lazy(() => import('./pages/OperationalDiagnostic'));
 const LossIntelligenceDiagnostic = React.lazy(() => import('./pages/LossIntelligenceDiagnostic'));
 const InvestigationsDiagnostic = React.lazy(() => import('./pages/InvestigationsDiagnostic'));
+const Methodology = React.lazy(() => import('./pages/Methodology'));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -154,6 +155,7 @@ const App = () => (
         <Route path="/operational-diagnostic" element={<Layout><OperationalDiagnostic /></Layout>} />
         <Route path="/loss-intelligence-diagnostic" element={<Layout><LossIntelligenceDiagnostic /></Layout>} />
         <Route path="/investigations-diagnostic" element={<Layout><InvestigationsDiagnostic /></Layout>} />
+        <Route path="/methodology" element={<Layout><Methodology /></Layout>} />
       </Routes>
     </Suspense>
   </BrowserRouter>
