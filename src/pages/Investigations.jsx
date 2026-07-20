@@ -83,11 +83,7 @@ const Investigations = () => {
             PROVED is BW Advisory Solutions' investigations framework.<br />
             <span className="text-white font-semibold">A disciplined, six-stage protocol</span> designed to close the gap between strategic intent and frontline execution.
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-8">
-            <Link to="/methodology" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.3em] uppercase font-bold transition-colors">
-              PROVED Methodology
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-            </Link>
+          <div className="mt-10">
             <Link to="/loss-intelligence" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.3em] uppercase font-bold transition-colors">
               See also: Loss Intelligence
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
@@ -202,10 +198,19 @@ const Investigations = () => {
           ))}
         </div>
 
-        {/* Bottom note */}
-        <p className="mt-12 text-center text-silver/30 font-mono text-[10px] tracking-[0.3em] uppercase">
-          © BW Advisory Solutions — PROVED is a proprietary investigations framework
-        </p>
+        {/* Bottom note + methodology link */}
+        <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <p className="text-silver/30 font-mono text-[10px] tracking-[0.3em] uppercase">
+            © BW Advisory Solutions — PROVED is a proprietary investigations framework
+          </p>
+          <Link
+            to="/methodology"
+            className="inline-flex items-center gap-3 bg-white/6 hover:bg-[#C9A84C]/10 border border-white/10 hover:border-[#C9A84C]/30 rounded-full px-6 py-2.5 text-silver/60 hover:text-[#C9A84C] font-mono text-[10px] tracking-[0.25em] uppercase font-bold transition-all duration-300"
+          >
+            Read the full methodology
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+          </Link>
+        </div>
       </div>
     </section>
 

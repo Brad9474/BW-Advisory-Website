@@ -142,20 +142,20 @@ const Methodology = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
             <div className="space-y-7 text-white/85 font-light text-xl leading-relaxed">
               <p>
-                Most organisations don't lack investigation capability — they lack investigation discipline. Ad hoc responses, inconsistent standards, and undocumented decisions are the norm. PROVED replaces that with a protocol.
+                Most organisations have investigation capability. Few have investigation discipline. PROVED provides the protocol — applied consistently across every matter, every time.
               </p>
               <p>
-                The six-stage framework runs every matter through a consistent analytical process. Findings are evidence-based. Decisions are documented. Every outcome is defensible to a civil, disciplinary, or regulatory standard.
+                The six-stage framework governs how investigations are structured, scoped, and documented. Findings must be evidence-based. Decisions must be on the record. Every outcome must be defensible to a civil, disciplinary, or regulatory standard.
               </p>
               <p>
-                We don't take instructions that compromise independence, and we don't produce findings that aren't supported by the evidence. If you need an outcome-driven report, this isn't the right engagement.
+                Where PROVED is adopted, the methodology is non-negotiable. Independence and evidence are prerequisites — not options.
               </p>
             </div>
             <div className="bg-white/8 rounded-xl border border-white/10 p-10 backdrop-blur-sm">
-              <p className="text-[#C9A84C] font-mono text-[10px] tracking-[0.3em] uppercase mb-6 font-bold">What PROVED governs</p>
+              <p className="text-[#C9A84C] font-mono text-[10px] tracking-[0.3em] uppercase mb-6 font-bold">Where PROVED applies</p>
               <div className="space-y-4">
                 {[
-                  'Every formal investigation BW Advisory conducts',
+                  'Investigations and inquiries run under the PROVED protocol',
                   'Intelligence analysis and source assessment',
                   'Workplace inquiry and misconduct response',
                   'Loss investigation and fraud triage',
@@ -289,7 +289,7 @@ const Methodology = () => {
         <div className="max-w-[1400px] mx-auto">
           <p className="text-[#C9A84C] font-mono text-[10px] tracking-[0.3em] uppercase font-bold mb-10">Where PROVED operates</p>
           <p className="text-2xl md:text-3xl text-silver/80 font-light leading-loose max-w-5xl mb-10">
-            PROVED governs every investigation run within a Loss Intelligence engagement. It also applies to standalone investigations, workplace inquiries, and fraud matters.
+            PROVED is the governing methodology in every Loss Intelligence engagement BW Advisory designs. Organisations adopt it for standalone investigations, workplace inquiries, and fraud triage.
           </p>
           <div className="flex flex-col sm:flex-row gap-8">
             <Link to="/investigations" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.3em] uppercase font-bold transition-colors">
