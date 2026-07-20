@@ -256,28 +256,19 @@ const Methodology = () => {
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12 relative z-10">
           <div className="mb-20">
             <p className="text-[#C9A84C] font-mono text-[10px] tracking-[0.3em] uppercase font-bold mb-6">Where this differs from standard practice</p>
-            <h2 className="font-display text-5xl md:text-6xl font-bold text-white tracking-tight mb-6">
-              Four Structural Commitments.
+            <h2 className="font-display text-5xl md:text-6xl font-bold text-white tracking-tight">
+              Four commitments built into every engagement.
             </h2>
-            <p className="text-silver/60 font-light text-lg max-w-2xl leading-loose">
-              These aren't policies. They're design decisions baked into the methodology — present in every engagement, not applied selectively.
-            </p>
           </div>
-          <div className="diff-grid grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="diff-grid space-y-0 divide-y divide-white/5">
             {differentiators.map((d, i) => (
-              <div key={i} className="diff-card group">
-                <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 rounded-xl border border-white/10 p-10 h-full transition-all duration-500 hover:border-[#C9A84C]/30 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] backdrop-blur-sm">
-                  <div className="flex items-start gap-6 mb-6">
-                    <div className="w-10 h-10 rounded-lg bg-[#C9A84C]/10 border border-[#C9A84C]/20 flex items-center justify-center flex-shrink-0 group-hover:bg-[#C9A84C]/20 group-hover:border-[#C9A84C]/40 transition-all duration-300">
-                      <span className="text-[#C9A84C] font-mono text-xs font-bold">{String(i + 1).padStart(2, '0')}</span>
-                    </div>
-                    <h3 className="text-white font-bold text-xl leading-tight pt-1">{d.label}</h3>
-                  </div>
-                  <div className="h-px bg-gradient-to-r from-[#C9A84C]/20 to-transparent mb-6" />
-                  <p className="text-silver/70 font-light text-base leading-loose group-hover:text-silver/85 transition-colors duration-300">
-                    {d.desc}
-                  </p>
-                </div>
+              <div key={i} className="diff-card flex flex-col md:flex-row gap-8 md:gap-20 py-10">
+                <span className="text-[#C9A84C]/40 font-mono text-[10px] tracking-[0.3em] flex-shrink-0 pt-1">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p className="text-silver/80 font-light text-xl leading-relaxed">
+                  {d.desc}
+                </p>
               </div>
             ))}
           </div>
