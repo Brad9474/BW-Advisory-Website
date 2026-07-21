@@ -239,9 +239,14 @@ const Pricing = () => {
           <h1 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.05]">
             Two reports. Fixed prices.<br className="hidden md:block" /> No sales call required.
           </h1>
-          <p className="text-silver/75 font-light text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
-            An AI Readiness diagnostic, checked against BW Advisory's knowledge base at the moment of purchase. Every tool verified on the date your report generates. Every projection a range with its assumptions printed underneath. Built by Brad Warburton — 30 years in law enforcement command, National Director of Law Enforcement Partnerships at Auror, founder of BW Advisory Solutions.
-          </p>
+          <div className="space-y-5 max-w-3xl mx-auto text-left md:text-center">
+            <p className="text-silver/80 font-light text-xl md:text-2xl leading-relaxed">
+              Most operators know AI is relevant. Working out which tools actually fit your business — and which to ignore — is the part nobody has time for. The market is crowded, the demos are confusing, and every consultant wants a four-week engagement before they'll name a single tool.
+            </p>
+            <p className="text-silver/80 font-light text-xl md:text-2xl leading-relaxed">
+              We've done that work. These reports are the output: named tools matched to your specific workflows, verified pricing, a trust and safety check for each one, and a setup plan you can start the week the report lands. A clear implementation path — at a fixed price, without the discovery engagement.
+            </p>
+          </div>
           <p className="text-silver/50 text-sm font-light tracking-wide">All prices include GST.</p>
           {!PURCHASE_ENABLED && (
             <p className="text-amber-400/80 text-sm font-mono tracking-wide">
