@@ -6,10 +6,13 @@ import ShieldLogo from './ShieldLogo';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const PURCHASE_SURFACE_ENABLED = import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true';
+
 const navLinks = [
   { name: 'Home', to: '/' },
   { name: 'Diagnostics', to: '/diagnostics' },
   { name: 'AI Readiness', to: '/ai-readiness' },
+  ...(PURCHASE_SURFACE_ENABLED ? [{ name: 'Pricing', to: '/pricing' }] : []),
   { name: 'Loss Intelligence', to: '/loss-intelligence' },
   { name: 'Investigations', to: '/investigations' },
   { name: 'Contact', href: '/#contact' },
@@ -62,19 +65,15 @@ const Navbar = () => {
           </Link>
 
           <div className="hidden lg:flex items-center gap-7 font-sans text-[12px] tracking-[0.12em] uppercase flex-1 justify-center px-6">
-            {navLinks.slice(0, 5).map((link) => {
+            {navLinks.filter((l) => l.to).map((link) => {
               const isActive = link.to === '/' ? pathname === '/' : link.to && pathname.startsWith(link.to);
               const className = isActive
                 ? 'font-semibold text-white border-b border-[#C9A84C]/60 pb-px transition-all duration-300'
                 : 'font-normal text-white/60 hover:text-white transition-all duration-300';
-              return link.to ? (
+              return (
                 <Link key={link.name} to={link.to} className={className}>
                   {link.name}
                 </Link>
-              ) : (
-                <a key={link.name} href={link.href} className={className}>
-                  {link.name}
-                </a>
               );
             })}
           </div>

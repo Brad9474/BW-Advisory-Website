@@ -26,6 +26,9 @@ const StrategicDiagnostic = React.lazy(() => import('./pages/StrategicDiagnostic
 const OperationalDiagnostic = React.lazy(() => import('./pages/OperationalDiagnostic'));
 const LossIntelligenceDiagnostic = React.lazy(() => import('./pages/LossIntelligenceDiagnostic'));
 const InvestigationsDiagnostic = React.lazy(() => import('./pages/InvestigationsDiagnostic'));
+const Pricing = React.lazy(() => import('./pages/Pricing'));
+const PurchaseConfirmed = React.lazy(() => import('./pages/PurchaseConfirmed'));
+const PurchaseCancelled = React.lazy(() => import('./pages/PurchaseCancelled'));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,7 +37,7 @@ const Layout = ({ children }) => {
   const isHome = pathname === '/';
   const isIntelligence = pathname === '/loss-intelligence';
   const isInvestigations = pathname === '/investigations';
-  const isPlainDiagnostic = pathname === '/diagnostics' || pathname === '/ai-readiness';
+  const isPlainDiagnostic = pathname === '/diagnostics' || pathname === '/ai-readiness' || pathname === '/pricing';
 
   return (
     <div className="w-full min-h-screen selection:bg-accent/40 selection:text-surface font-sans text-textDark bg-primary relative overflow-x-hidden">
@@ -154,6 +157,9 @@ const App = () => (
         <Route path="/operational-diagnostic" element={<Layout><OperationalDiagnostic /></Layout>} />
         <Route path="/loss-intelligence-diagnostic" element={<Layout><LossIntelligenceDiagnostic /></Layout>} />
         <Route path="/investigations-diagnostic" element={<Layout><InvestigationsDiagnostic /></Layout>} />
+        <Route path="/pricing" element={<Layout><Pricing /></Layout>} />
+        <Route path="/purchase/confirmed" element={<Layout><PurchaseConfirmed /></Layout>} />
+        <Route path="/purchase/cancelled" element={<Layout><PurchaseCancelled /></Layout>} />
       </Routes>
     </Suspense>
   </BrowserRouter>

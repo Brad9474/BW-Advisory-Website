@@ -1299,6 +1299,59 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
         </p>
       </div>
 
+      {/* Paid tier ladder — shown when purchase surface is enabled */}
+      {import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true' && (
+        <div className="space-y-4 border-t border-white/10 pt-10">
+          <p className="text-silver/50 font-mono text-xs tracking-[0.3em] uppercase font-bold text-center">Want the full picture?</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="bg-white/5 border border-white/15 rounded-2xl p-6 md:p-8 space-y-4">
+              <div className="space-y-1">
+                <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Snapshot Report</p>
+                <p className="font-display font-bold text-2xl text-white">$497 <span className="text-sm text-silver/50 font-light font-sans">incl. GST</span></p>
+              </div>
+              <p className="text-silver/70 font-light text-sm leading-relaxed">
+                Automated, instant. Named tools checked against your existing software, verified pricing, trust and safety notes, and a 4-day setup plan per opportunity.
+              </p>
+              <p className="text-silver/45 text-xs font-light italic">
+                Automated — instant delivery. No human review at this tier.
+              </p>
+              <a
+                href="/pricing#snapshot"
+                onClick={() => posthog.capture('diagnostic_result_pricing_clicked', { score, tier: 'snapshot' })}
+                className="inline-flex items-center gap-2 text-[#C9A84C] text-sm font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50 rounded"
+              >
+                View pricing
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+            <div className="bg-gradient-to-br from-[#C9A84C]/8 to-white/2 border border-[#C9A84C]/25 rounded-2xl p-6 md:p-8 space-y-4">
+              <div className="space-y-1">
+                <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Solution Map</p>
+                <p className="font-display font-bold text-2xl text-white">$1,497 <span className="text-sm text-silver/50 font-light font-sans">incl. GST</span></p>
+              </div>
+              <p className="text-silver/70 font-light text-sm leading-relaxed">
+                Personally reviewed by Brad before delivery. Everything in the Snapshot, plus the patterns you didn't name. Includes a 30-minute call within 5 business days.
+              </p>
+              <p className="text-silver/45 text-xs font-light">
+                Your $497 Snapshot credit applies for 60 days from purchase.
+              </p>
+              <a
+                href="/pricing#solution-map"
+                onClick={() => posthog.capture('diagnostic_result_pricing_clicked', { score, tier: 'solution-map' })}
+                className="inline-flex items-center gap-2 text-[#C9A84C] text-sm font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50 rounded"
+              >
+                View pricing
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Share buttons */}
       <div className="space-y-4">
         <div className="flex flex-col md:flex-row gap-3">

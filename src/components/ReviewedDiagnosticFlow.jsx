@@ -236,17 +236,55 @@ const ReviewedDiagnosticFlow = ({
           )}
 
           {step === STEP_DONE && (
-            <div className="text-center space-y-8 py-16">
-              <div className="w-16 h-16 border border-[#C9A84C] rounded-full flex items-center justify-center text-[#C9A84C] mx-auto">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 13l4 4L19 7" /></svg>
+            <div className="space-y-10 py-16">
+              <div className="text-center space-y-6">
+                <div className="w-16 h-16 border border-[#C9A84C] rounded-full flex items-center justify-center text-[#C9A84C] mx-auto">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 13l4 4L19 7" /></svg>
+                </div>
+                <h2 className="font-display font-bold text-3xl text-white">Assessment received.</h2>
+                <p className="text-silver/70 font-light max-w-md mx-auto">
+                  Brad Warburton will review your responses personally and send your diagnostic report within 24 hours.
+                </p>
               </div>
-              <h2 className="font-display font-bold text-3xl text-white">Assessment received.</h2>
-              <p className="text-silver/70 font-light max-w-md mx-auto">
-                Brad Warburton will review your responses personally and send your diagnostic report within 24 hours.
-              </p>
-              <a href="/" className="inline-block border border-white/15 px-10 py-4 rounded-lg text-xs font-bold tracking-[0.25em] uppercase text-white hover:bg-white hover:text-[#0F172A] transition-all">
-                Return to homepage
-              </a>
+
+              <div className="border-t border-white/10 pt-10 space-y-6">
+                <p className="text-silver/50 font-mono text-xs tracking-[0.3em] uppercase font-bold text-center">Where to from here.</p>
+
+                <div className="text-center">
+                  <p className="text-silver/70 font-light text-base leading-relaxed max-w-lg mx-auto mb-5">
+                    If what's in this assessment is worth a conversation, book a discovery call. Thirty minutes, no cost, no obligation — we work out whether an engagement makes sense.
+                  </p>
+                  <a
+                    href="/consultation"
+                    className="inline-flex items-center gap-3 bg-[#C9A84C] px-10 py-4 rounded-lg text-[#0F172A] font-bold text-sm tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 shadow-[0_8px_24px_rgba(201,168,76,0.3)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60"
+                  >
+                    Book a discovery call
+                  </a>
+                </div>
+
+                {import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true' && (
+                  <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 space-y-4">
+                    <p className="text-silver/65 font-light text-sm leading-relaxed">
+                      Separately: if the AI and automation side of your operation is where the pressure is, the AI Snapshot Report ($497, GST inclusive) is a different instrument — an automated report that identifies your top workflow opportunities with named tools, verified pricing, and a setup plan for each. It isn't a substitute for the assessment above. It answers a narrower question, faster.
+                    </p>
+                    <a
+                      href="/pricing#snapshot"
+                      className="inline-flex items-center gap-2 text-[#C9A84C] text-sm font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50 rounded"
+                    >
+                      See the Snapshot Report
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  </div>
+                )}
+
+                <div className="text-center pt-4">
+                  <a href="/" className="inline-block border border-white/15 px-10 py-4 rounded-lg text-xs font-bold tracking-[0.25em] uppercase text-white hover:bg-white hover:text-[#0F172A] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30">
+                    Return to homepage
+                  </a>
+                </div>
+              </div>
             </div>
           )}
 
