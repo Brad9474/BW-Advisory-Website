@@ -78,16 +78,33 @@ const CheckoutModal = ({ tier, onClose }) => {
           </span>
         </label>
         <p className="text-silver/50 text-xs font-light">
-          By continuing you also agree to BW Advisory's{' '}
-          <a
-            href="/privacy"
-            className="text-[#C9A84C] hover:underline"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Privacy Policy
-          </a>
-          . Service Terms will be linked here once finalised by our solicitor.
+          {PURCHASE_ENABLED ? (
+            <>
+              By continuing you agree to BW Advisory's{' '}
+              <a
+                href="/privacy"
+                className="text-[#C9A84C] hover:underline"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Privacy Policy
+              </a>
+              .
+            </>
+          ) : (
+            <>
+              By continuing you also agree to BW Advisory's{' '}
+              <a
+                href="/privacy"
+                className="text-[#C9A84C] hover:underline"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Privacy Policy
+              </a>
+              . Service Terms will be linked here once finalised by our solicitor.
+            </>
+          )}
         </p>
         {error && (
           <p className="text-red-400 text-sm font-light">{error}</p>
@@ -246,13 +263,11 @@ const Pricing = () => {
             <p className="text-silver/80 font-light text-xl md:text-2xl leading-relaxed">
               We've done that work. These reports are the output: named tools matched to your specific workflows, verified pricing, a trust and safety check for each one, and a setup plan you can start the week the report lands. A clear implementation path — at a fixed price, without the discovery engagement.
             </p>
+            <p className="text-silver/65 font-light text-base md:text-lg leading-relaxed">
+              Built by Brad Warburton — 30 years in law enforcement command, National Director of Law Enforcement Partnerships at Auror, founder of BW Advisory Solutions.
+            </p>
           </div>
           <p className="text-silver/50 text-sm font-light tracking-wide">All prices include GST.</p>
-          {!PURCHASE_ENABLED && (
-            <p className="text-amber-400/80 text-sm font-mono tracking-wide">
-              Purchase not yet available — launching soon.
-            </p>
-          )}
         </div>
       </section>
 
@@ -296,6 +311,10 @@ const Pricing = () => {
               </p>
             </div>
 
+            <p className="text-silver/70 font-light text-sm leading-relaxed">
+              Your $497 counts in full toward the Solution Map for 60 days. Buying the Snapshot first costs you nothing extra.
+            </p>
+
             <div className="pt-4">
               <BuyButton tier="snapshot" label="Get the Snapshot Report — $497" onOpen={openModal} />
             </div>
@@ -313,7 +332,7 @@ const Pricing = () => {
                 <h2 className="font-display font-bold text-4xl md:text-5xl text-white">$1,497</h2>
                 <p className="text-silver/50 text-sm font-light">incl. GST</p>
               </div>
-              <p className="text-[#C9A84C] font-semibold text-lg md:text-xl max-w-xs md:text-right">Everything in the Snapshot, plus Brad's personal review.</p>
+              <p className="text-[#C9A84C] font-semibold text-lg md:text-xl max-w-xs md:text-right">Brad's personal review of your business, and 60 minutes with him on a call.</p>
             </div>
 
             <div className="space-y-5 text-silver/80 font-light text-base md:text-lg leading-relaxed max-w-3xl">
@@ -324,7 +343,7 @@ const Pricing = () => {
                 The Snapshot works from the problems you name. The Solution Map reads your whole intake for the patterns your answers show but didn't name — the workflows costing you time that you've stopped noticing. It carries deeper implementation detail on every opportunity: template structures, rollout sequences, team briefing notes, and a priority matrix that sequences all of it.
               </p>
               <p>
-                Brad reviews every Solution Map personally before delivery. Then you get 30 minutes with him on a video call, within 5 business days of your report arriving, to decide what to act on first.
+                Brad reviews every Solution Map personally before delivery. Then you get 60 minutes with him on a video call, within 5 business days of your report arriving, to work through the priority matrix and decide what to act on first.
               </p>
             </div>
 
@@ -366,7 +385,7 @@ const Pricing = () => {
                   ['Price (GST inclusive)', '$497', '$1,497'],
                   ['Method', 'Automated — generated from your intake by BW Advisory\'s diagnostic system', 'Automated draft plus Brad Warburton\'s personal review'],
                   ['Human review', 'None — stated plainly, here and in the report', 'Every report, before delivery'],
-                  ['Call', 'None', '30 minutes with Brad, within 5 business days of delivery'],
+                  ['Call', 'None', '60 minutes with Brad, within 5 business days of delivery'],
                   ['Opportunities covered', 'Your stated top pains', 'Your stated pains plus the under-recognised layer your intake shows'],
                   ['Implementation detail', '4-day DIY plan per tool', 'Full implementation plan per opportunity, plus sequencing across all of them'],
                   ['Intake', '13 questions, about 10 minutes', '19 questions — only 6 more if upgrading from the Snapshot'],
