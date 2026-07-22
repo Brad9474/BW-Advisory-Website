@@ -332,7 +332,7 @@ const Pricing = () => {
                 <h2 className="font-display font-bold text-4xl md:text-5xl text-white">$1,497</h2>
                 <p className="text-silver/50 text-sm font-light">incl. GST</p>
               </div>
-              <p className="text-[#C9A84C] font-semibold text-lg md:text-xl max-w-xs md:text-right">Brad's personal review of your business, and 60 minutes with him on a call.</p>
+              <p className="text-[#C9A84C] font-semibold text-lg md:text-xl md:text-right md:max-w-sm lg:max-w-none">Brad's personal review of your business, and 60 minutes with him on a call.</p>
             </div>
 
             <div className="space-y-5 text-silver/80 font-light text-base md:text-lg leading-relaxed max-w-3xl">
