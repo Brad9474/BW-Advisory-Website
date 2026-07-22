@@ -258,10 +258,10 @@ const Pricing = () => {
           </h1>
           <div className="space-y-5 max-w-3xl mx-auto text-left md:text-center">
             <p className="text-silver/80 font-light text-xl md:text-2xl leading-relaxed">
-              Most operators know AI is relevant. Working out which tools actually fit your business — and which to ignore — is the part nobody has time for. The market is crowded, the demos are confusing, and every consultant wants a four-week engagement before they'll name a single tool.
+              Most operators know AI matters. Working out which tools fit your business is the part nobody has time for. The market is crowded, and every consultant wants a four-week engagement before they'll name a single tool.
             </p>
             <p className="text-silver/80 font-light text-xl md:text-2xl leading-relaxed">
-              We've done that work. These reports are the output: named tools matched to your specific workflows, verified pricing, a trust and safety check for each one, and a setup plan you can start the week the report lands. A clear implementation path — at a fixed price, without the discovery engagement.
+              We've done that work. These reports are the output: named tools matched to your workflows, verified pricing, a trust and safety check on each one, and a setup plan you can start the week the report lands. A clear implementation path. Fixed price. No discovery engagement.
             </p>
             <p className="text-silver/65 font-light text-base md:text-lg leading-relaxed">
               Built by Brad Warburton — 30 years in law enforcement command, National Director of Law Enforcement Partnerships at Auror, founder of BW Advisory Solutions.
