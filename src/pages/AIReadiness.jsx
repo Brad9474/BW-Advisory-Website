@@ -82,6 +82,7 @@ const SECTION_A = {
         { label: 'Office manager' },
         { label: 'IT or systems administrator' },
         { label: 'Finance manager' },
+        { label: 'Operations, Loss Prevention & Investigations' },
         { label: 'Other' },
       ],
     },
@@ -121,6 +122,9 @@ const getSector = (a1Label) => {
 };
 
 const isHealthcare = (label) => HEALTHCARE_LABELS.has(label);
+
+const LP_ROLE = 'Operations, Loss Prevention & Investigations';
+const isLPVariant = (sector, role) => sector === 'retail' && role === LP_ROLE;
 
 const getDiagnosticType = (label) => {
   const map = {
@@ -736,23 +740,168 @@ const E23_SHARED = [
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Loss Prevention & Investigations variant — retail sector, LP role only
+// Replaces sector-specific questions (B1, B5, C2–C4, D1, D2, D6, E1).
+// Total question count stays at 28.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const B1_LP = {
+  id: 'B1',
+  text: 'Which loss prevention or retail security systems do you currently use?',
+  helper: 'Select all that apply.',
+  kind: 'multi',
+  allowOther: true,
+  options: [
+    'Auror (retail crime intelligence platform)',
+    'Checkpoint Systems (EAS / RFID)',
+    'Sensormatic / Tyco (EAS)',
+    'ORCA (retail intelligence)',
+    'iSyte (exception-based reporting)',
+    'In-house CCTV with video analytics',
+    'POS exception reporting (built into our POS)',
+    'Incident management software (e.g. Resolver, Noggin)',
+    'No dedicated LP systems — managed manually',
+    'Not sure what some of these are',
+  ].map((label) => ({ label })),
+};
+
+const B5_LP = {
+  id: 'B5',
+  text: 'Which tools does your LP or investigations team use to coordinate and communicate?',
+  helper: 'Select all that apply.',
+  kind: 'multi',
+  allowOther: true,
+  options: [
+    'Microsoft 365 (Outlook, Teams)',
+    'Google Workspace',
+    'Dedicated incident or case management platform',
+    'Shared spreadsheets or shared drives',
+    'WhatsApp or SMS group chats',
+    'Radio or in-store communication system',
+    'No structured coordination tools',
+    'Not sure',
+  ].map((label) => ({ label })),
+};
+
+const C234_LP = [
+  {
+    id: 'C2',
+    text: 'How do you currently measure and report shrinkage across your stores?',
+    kind: 'single',
+    options: [
+      { label: 'Real-time — shrinkage tracked continuously via integrated systems', gap: 0 },
+      { label: 'Regular stocktakes — results reviewed and reported to management', gap: 1 },
+      { label: 'Periodic stocktakes only — results not consistently actioned', gap: 2 },
+      { label: 'Estimated at year-end — we rely on the annual stock count', gap: 3 },
+      { label: "We don't systematically track shrinkage", gap: 4 },
+    ],
+  },
+  {
+    id: 'C3',
+    text: 'When a loss or theft incident is identified, how is the investigation handled?',
+    kind: 'single',
+    options: [
+      { label: 'Formal documented process — consistent steps followed every time', gap: 0 },
+      { label: 'Mostly consistent — some steps informal but generally followed', gap: 1 },
+      { label: 'Ad hoc — depends on who picks it up and their experience', gap: 3 },
+      { label: 'Reactive only — we respond but there is no defined process', gap: 4 },
+      { label: "We don't have a defined investigations process", gap: 4 },
+    ],
+  },
+  {
+    id: 'C4',
+    text: 'How do you log and manage incident records?',
+    kind: 'single',
+    options: [
+      { label: 'Dedicated incident or case management system — records centralised and searchable', gap: 0 },
+      { label: 'Combination of digital tools — not all in one place', gap: 2 },
+      { label: 'Spreadsheets or shared documents', gap: 3 },
+      { label: 'Paper-based or email — not consistently filed', gap: 4 },
+      { label: "We don't have a consistent way of logging incidents", gap: 4 },
+    ],
+  },
+];
+
+const D1_LP = {
+  id: 'D1',
+  text: 'How often does your team review POS exception reports to identify suspicious transaction patterns?',
+  kind: 'single',
+  options: [
+    { label: 'Daily or automated — alerts or reports reviewed consistently', gap: 0 },
+    { label: 'Weekly — reviewed regularly but not daily', gap: 1 },
+    { label: 'Occasionally — when time allows', gap: 3 },
+    { label: 'Rarely or never — exception reporting is not part of our routine', gap: 4 },
+  ],
+};
+
+const D2_LP = {
+  id: 'D2',
+  text: 'Have you had incidents where incomplete data, slow reporting, or manual processes prevented you from taking timely action?',
+  kind: 'single',
+  options: [
+    { label: "Not that I'm aware of", gap: 0 },
+    { label: 'Once or twice', gap: 1 },
+    { label: 'A handful of times', gap: 2 },
+    { label: "This happens regularly and we know it's limiting our outcomes", gap: 4 },
+  ],
+};
+
+const D6_LP = {
+  id: 'D6',
+  text: 'What is the biggest operational problem you are trying to solve right now?',
+  helper: 'Select all that apply.',
+  kind: 'multi',
+  options: [
+    'Too much time on manual data entry or report compilation',
+    'Inconsistent or incomplete incident documentation',
+    'Shrinkage data that is too slow to act on',
+    "Systems that don't talk to each other — LP, POS, and CCTV in silos",
+    'No clear picture of where loss is occurring or why',
+    'Investigations that take too long or are dropped before resolution',
+    'POS exception data not being reviewed consistently',
+    "We're growing but LP processes haven't kept up",
+    'Dependent on one or two people who know the LP systems',
+    'Compliance with investigation standards or chain of evidence requirements',
+    'Something else',
+  ].map((label) => ({ label })),
+};
+
+const E1_LP = {
+  id: 'E1',
+  text: "If you could recover 20% of your team's time from manual LP admin and reporting, what would you do with it?",
+  helper: 'Select all that apply.',
+  kind: 'multi',
+  options: [
+    'Increase proactive surveillance and exception monitoring',
+    'Run more thorough investigations — close more cases',
+    'Improve staff training and awareness programs',
+    'Reduce shrinkage rates through earlier intervention',
+    'Expand LP coverage to additional sites or product categories',
+    'Improve incident reporting quality and compliance',
+    'All of the above — any recovered time has value',
+    'Something else',
+  ].map((label) => ({ label })),
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Assemble complete section list for a given sector
 // All sectors: A(5) + B(7) + C(6) + D(7) + E(3) = 28 questions
 // ─────────────────────────────────────────────────────────────────────────────
 
-const buildSections = (sector) => {
+const buildSections = (sector, role) => {
   const s = sector ?? 'healthcare';
+  const lp = isLPVariant(s, role);
   return [
     SECTION_A,
     {
       id: 'B',
       title: 'Your Systems',
       questions: [
-        B1_BY_SECTOR[s] ?? B1_BY_SECTOR.healthcare,
+        lp ? B1_LP : (B1_BY_SECTOR[s] ?? B1_BY_SECTOR.healthcare),
         B_SHARED[0], // B2
         B_SHARED[1], // B3
         B_SHARED[2], // B4
-        B5_BY_SECTOR[s] ?? B5_BY_SECTOR.healthcare,
+        lp ? B5_LP : (B5_BY_SECTOR[s] ?? B5_BY_SECTOR.healthcare),
         B_SHARED[3], // B6
         B_SHARED[4], // B7
       ],
@@ -762,7 +911,7 @@ const buildSections = (sector) => {
       title: 'How You Work',
       questions: [
         C1_SHARED,
-        ...(C234_BY_SECTOR[s] ?? C234_BY_SECTOR.healthcare),
+        ...(lp ? C234_LP : (C234_BY_SECTOR[s] ?? C234_BY_SECTOR.healthcare)),
         ...C56_SHARED,
       ],
     },
@@ -770,10 +919,10 @@ const buildSections = (sector) => {
       id: 'D',
       title: 'What Is Breaking',
       questions: [
-        D1_BY_SECTOR[s] ?? D1_BY_SECTOR.healthcare,
-        D2_BY_SECTOR[s] ?? D2_BY_SECTOR.healthcare,
+        lp ? D1_LP : (D1_BY_SECTOR[s] ?? D1_BY_SECTOR.healthcare),
+        lp ? D2_LP : (D2_BY_SECTOR[s] ?? D2_BY_SECTOR.healthcare),
         ...D_SHARED_MID,
-        D6_BY_SECTOR[s] ?? D6_BY_SECTOR.healthcare,
+        lp ? D6_LP : (D6_BY_SECTOR[s] ?? D6_BY_SECTOR.healthcare),
         D7_SHARED,
       ],
     },
@@ -781,15 +930,15 @@ const buildSections = (sector) => {
       id: 'E',
       title: 'Your Goals',
       questions: [
-        E1_BY_SECTOR[s] ?? E1_BY_SECTOR.healthcare,
+        lp ? E1_LP : (E1_BY_SECTOR[s] ?? E1_BY_SECTOR.healthcare),
         ...E23_SHARED,
       ],
     },
   ];
 };
 
-const buildQuestions = (sector) => {
-  const sections = buildSections(sector);
+const buildQuestions = (sector, role) => {
+  const sections = buildSections(sector, role);
   return sections.flatMap((section, sectionIndex) =>
     section.questions.map((q, indexInSection) => ({
       ...q,
@@ -1299,8 +1448,7 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
       'I completed the BW Advisory AI Readiness Diagnostic.', '',
       `Score: ${score}/100`, '',
       `Estimated time lost per week: ${fmtHours(weeklyHours)} hours`,
-      `Estimated annual cost of lost time: ${fmtMoney(opportunity.timeLost.annualCost)}`,
-      `Estimated annual revenue at risk: ${fmtMoney(opportunity.revenueAtRisk)}`, '',
+      'A full cost breakdown with substantiated ranges and stated assumptions is available in the AI Snapshot Report.', '',
       'Risk areas:', riskLines, '',
       'Assessment completed at bwadvisorysolutions.com.au/ai-readiness',
     ].join('\n');
@@ -1339,19 +1487,13 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
 
       <div>
         <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold mb-6">The Cost</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {[
-            { label: 'Estimated time lost per week across your team', value: `${fmtHours(weeklyHours)} hours` },
-            { label: 'Estimated annual cost of that lost time', value: fmtMoney(opportunity.timeLost.annualCost) },
-            { label: 'Estimated annual revenue at risk', value: fmtMoney(opportunity.revenueAtRisk) },
-          ].map(({ label, value }) => (
-            <div key={label} className="bg-white/5 border border-white/15 rounded-2xl p-6 md:p-8 space-y-2">
-              <p className="text-silver/65 text-sm font-light">{label}</p>
-              <p className="text-[#C9A84C] font-display font-bold text-3xl md:text-4xl">{value}</p>
-            </div>
-          ))}
+        <div className="bg-white/5 border border-white/15 rounded-2xl p-6 md:p-8 space-y-2">
+          <p className="text-silver/65 text-sm font-light">Estimated time lost per week across your team</p>
+          <p className="text-[#C9A84C] font-display font-bold text-3xl md:text-4xl">{fmtHours(weeklyHours)} hours</p>
         </div>
-        <p className="text-xs text-silver/55 font-light mt-4">These are conservative estimates. The actual cost to your business is likely higher.</p>
+        <p className="text-silver/70 font-light text-sm leading-relaxed mt-4">
+          Your responses suggest meaningful time lost each week to workflows that could be simplified. The AI Snapshot Report quantifies this with substantiated ranges and stated assumptions.
+        </p>
       </div>
 
       <div>
@@ -1492,12 +1634,13 @@ const AIReadiness = () => {
   const stepRef        = useRef(0);
   const completedRef   = useRef(false);
   const prevA1Ref      = useRef(undefined);
+  const prevA5LPRef    = useRef(false);
 
   // Sector derived from A1 — drives which question bank is shown
   const sector = useMemo(() => getSector(responses.A1), [responses.A1]);
 
-  // Sector-specific question list (always 28 questions)
-  const activeQuestions = useMemo(() => buildQuestions(sector), [sector]);
+  // Sector-specific question list (always 28 questions); LP role swaps retail variant
+  const activeQuestions = useMemo(() => buildQuestions(sector, responses.A5), [sector, responses.A5]);
 
   // Question lookup map for scoring
   const activeQById = useMemo(
@@ -1516,6 +1659,18 @@ const AIReadiness = () => {
     }
     prevA1Ref.current = responses.A1;
   }, [responses.A1]);
+
+  // Reset B–E responses when LP role is toggled in a retail context
+  useEffect(() => {
+    const nowLP = isLPVariant(sector, responses.A5);
+    if (prevA5LPRef.current !== nowLP) {
+      setResponses((prev) => {
+        const { A1, A2, A3, A4, A5 } = prev;
+        return { A1, A2, A3, A4, A5 };
+      });
+    }
+    prevA5LPRef.current = nowLP;
+  }, [responses.A5, sector]);
 
   // Read inbound referral token
   useEffect(() => {
