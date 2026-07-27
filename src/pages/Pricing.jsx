@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 const COMMAND_CENTRE_URL = 'https://command.bwadvisorysolutions.com.au';
 const CONSENT_VERSION = 'v1-2026-07-21';
-const TERMS_VERSION = 'v1-2026-07-27';
+const TERMS_VERSION = 'v1.1-2026-07-27';
 const PURCHASE_ENABLED = import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true';
 
 // ─── Pre-checkout consent modal ───────────────────────────────────────────────

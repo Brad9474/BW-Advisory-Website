@@ -1,32 +1,11 @@
 import Footer from '../components/Footer';
 
 const EFFECTIVE_DATE = '27 July 2026';
-const TERMS_VERSION = 'v1';
+const TERMS_VERSION = 'v1.1';
 
-// Open decisions that Brad must resolve before going live — rendered as a
-// review banner visible while VITE_PURCHASE_SURFACE_ENABLED is false.
+// D2 closed (comma resolved per Reg 90). D3 closed (30-day notice adopted).
+// D1 deferred — business address/PO box still needed before publication.
 const PURCHASE_ENABLED = import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true';
-
-const OPEN_DECISIONS = [
-  {
-    id: 'D1',
-    clause: 'Clause 7 — warrantor details',
-    issue:
-      '"Perth, Western Australia" does not satisfy the reg 90(2) business-address particular. Provide a PO box or registered business address before publication.',
-  },
-  {
-    id: 'D2',
-    clause: 'Clause 7 — prescribed text comma',
-    issue:
-      'The comma in "If the failure does not amount to a major failure[,] you are entitled" is split two-to-two across four professional sources. Read reg 90 on legislation.gov.au and confirm before publication (five-minute task).',
-  },
-  {
-    id: 'D3',
-    clause: 'Clause 12 — retainer price-variation notice',
-    issue:
-      'Fable: COMPLIANT as drafted. Cross-check N4: ACL s 25(1)(d) exposure — price-change notice has no minimum while cancellation requires 14 days. Cross-check recommends "at least 30 days\' written notice" plus "If you cancel in response to a price change, the change does not apply to you."',
-  },
-];
 
 export default function Terms() {
   return (
@@ -34,24 +13,17 @@ export default function Terms() {
       <main className="relative z-10 pt-32 pb-24 px-6">
         <div className="max-w-4xl mx-auto space-y-12">
 
-          {/* Pre-launch review banner — hidden once purchase surface is live */}
+          {/* Draft notice — toned down now D2 and D3 are closed */}
           {!PURCHASE_ENABLED && (
-            <div className="bg-[#C9A84C]/10 border border-[#C9A84C]/40 rounded-2xl p-6 space-y-4">
-              <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">
-                Pre-launch review — do not publish until resolved
+            <div className="bg-white/5 border border-white/15 rounded-xl p-4 space-y-2">
+              <p className="text-silver/50 font-mono text-xs tracking-[0.3em] uppercase font-bold">
+                Draft — pending final legal advice
               </p>
-              <p className="text-silver/80 font-light text-sm leading-relaxed">
-                These terms are consolidated from an LLM cross-check (Fable 5 + Opus 4.8, July 2026) and are not yet solicitor-advised. Three open decisions must be resolved before VITE_PURCHASE_SURFACE_ENABLED is flipped to true on Netlify Production. See{' '}
-                <code className="text-[#C9A84C] text-xs">src/content/service-terms-v1.md</code> for the full annotated review document.
+              <p className="text-silver/65 font-light text-sm leading-relaxed">
+                Service Terms v1.1. One item deferred: [D1] a business address or PO box must be added to the Clause 7 warrantor details before publication. Two{' '}
+                <code className="text-silver/45 text-xs">[LAWYER TO CONFIRM]</code>{' '}
+                items remain open (Clause 8 s 64A fair-or-reasonable positioning; Clause 12 de-identification standard). Not yet solicitor-advised.
               </p>
-              <ul className="space-y-3">
-                {OPEN_DECISIONS.map((d) => (
-                  <li key={d.id} className="space-y-1">
-                    <p className="text-[#C9A84C] font-mono text-xs font-bold">[{d.id}] {d.clause}</p>
-                    <p className="text-silver/70 font-light text-sm leading-relaxed">{d.issue}</p>
-                  </li>
-                ))}
-              </ul>
             </div>
           )}
 
@@ -69,6 +41,18 @@ export default function Terms() {
             </p>
           </header>
 
+          {/* At a glance — top-of-doc executive summary */}
+          <div className="bg-white/5 border-l-4 border-[#C9A84C]/60 rounded-r-xl pl-5 pr-6 py-5 space-y-2">
+            <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold mb-3">At a glance</p>
+            <ul className="space-y-2 text-silver/75 font-light text-sm leading-relaxed list-none">
+              <li>BW Advisory supplies AI workflow reports — automated (Snapshot, $497) and personally reviewed (Solution Map, $1,497). These are business advisory reports, not legal, financial, tax or insurance advice.</li>
+              <li>Reports are built from your intake answers. Savings figures are estimates with stated assumptions, not guarantees.</li>
+              <li>If something is wrong, contact us: we correct it or refund you. Your Australian Consumer Law rights are never limited.</li>
+              <li>Retainers run month to month — at least 30 days&apos; written notice before any price change; 14 days&apos; notice to cancel, no lock-in.</li>
+              <li>Questions: <a href="mailto:brad@bwadvisorysolutions.com.au" className="text-[#C9A84C] hover:underline">brad@bwadvisorysolutions.com.au</a> · +61 407 779 474</li>
+            </ul>
+          </div>
+
           <div className="space-y-12 text-silver/85 font-light leading-relaxed">
 
             {/* Clause 1 */}
@@ -78,7 +62,7 @@ export default function Terms() {
                 These terms govern the AI Readiness diagnostic, the AI Snapshot Report, the AI Solution Map, implementation services and the AI Partner retainer supplied by Bradley Warburton trading as BW Advisory Solutions (ABN 11 892 244 979) (&ldquo;BW Advisory&rdquo;, &ldquo;we&rdquo;). &ldquo;You&rdquo; means the person or business ordering the service. By ordering a service you agree to these terms.
               </p>
               <p className="text-silver/50 text-sm font-light italic">
-                Version 1.0 — {EFFECTIVE_DATE}. The version you accept at checkout is the version that governs your purchase.
+                Version 1.1 — {EFFECTIVE_DATE}. The version you accept at checkout is the version that governs your purchase.
               </p>
             </section>
 
@@ -119,6 +103,12 @@ export default function Terms() {
                   </p>
                 </div>
               </div>
+              <p>
+                Our services do not include legal advice, tax advice, financial product advice, medical or psychological advice, or guarantees of specific commercial outcomes — clients should engage the relevant professional for those matters.
+              </p>
+              <p>
+                BW Advisory may decline or discontinue an engagement where it falls outside scope, requires professional advice we are not qualified to provide, involves subcontractor conflicts (see our published conflict register), or where continuing would be unsafe, unlawful, or inconsistent with our engagement standards.
+              </p>
             </section>
 
             {/* Clause 4 */}
@@ -184,6 +174,9 @@ export default function Terms() {
                   </ul>
                   <p>
                     You are also entitled to be compensated for any other reasonably foreseeable loss or damage. If the failure does not amount to a major failure you are entitled to have problems with the service rectified in a reasonable time and, if this is not done, to cancel your contract and obtain a refund for the unused portion of the contract.
+                  </p>
+                  <p>
+                    Clients remain responsible for their own commercial decisions, actions and outcomes. BW Advisory&apos;s advice and reports are inputs to those decisions, not substitutes for them.
                   </p>
                 </div>
               </div>
@@ -259,7 +252,7 @@ export default function Terms() {
                   <strong className="text-white">Intellectual property.</strong> We own our methodology, templates, questionnaires, knowledge base and report formats. On payment you receive a perpetual, non-transferable licence to use your report and deliverables within your business, including sharing it with your professional advisers. Content and data you provide remain yours; you licence us to use them to deliver the services and, in de-identified form, to improve our methodology.
                 </p>
                 <p>
-                  <strong className="text-white">Retainer.</strong> Retainers run month to month. We will give you written notice before any price change takes effect, and you may cancel at any time with 14 days&apos; notice without penalty. No automatic lock-in, no cancellation fee.
+                  <strong className="text-white">Retainer.</strong> Retainers run month to month. We will give you at least 30 days&apos; written notice before any price change takes effect. If you cancel your retainer in response to a price change, the change does not apply to you. You may cancel at any time with 14 days&apos; notice without penalty. No automatic lock-in, no cancellation fee.
                 </p>
                 <p>
                   <strong className="text-white">Order screening.</strong> We may decline an order, or cancel it and refund it in full before your report is generated, if we reasonably consider the service is not suitable for your business.

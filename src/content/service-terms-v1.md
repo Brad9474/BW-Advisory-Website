@@ -1,16 +1,26 @@
 # BW Advisory Solutions — Service Terms
 
-**Version:** v1  
+**Version:** v1.1  
 **Effective date:** 27 July 2026 (AWST)  
 **Entity:** Bradley Warburton trading as BW Advisory Solutions, ABN 11 892 244 979  
 **Contact:** brad@bwadvisorysolutions.com.au · +61 407 779 474  
-**Consolidation note:** This document merges the Part 2 draft from `legal-review-pack-v2.md` (22 July 2026 baseline) with `legal-review-pack-v2-fable-findings.md` (Fable 5 audit, 23 July 2026) and `legal-review-pack-v2-cross-check.md` (Opus 4.8 cross-check, 23 July 2026). Merge logic: changes recommended by both reviews are applied; cross-check-only refinements are applied where Fable does not contradict; where the reviews disagree the original wording is preserved and a `[BRAD DECISION NEEDED]` marker added; unaddressed `[LAWYER TO CONFIRM]` markers are retained. LLM audit only — not a substitute for professional legal advice.
+**Consolidation note:** This document merges the Part 2 draft from `legal-review-pack-v2.md` (22 July 2026 baseline) with `legal-review-pack-v2-fable-findings.md` (Fable 5 audit, 23 July 2026) and `legal-review-pack-v2-cross-check.md` (Opus 4.8 cross-check, 23 July 2026). Merge logic: changes recommended by both reviews are applied; cross-check-only refinements are applied where Fable does not contradict; where the reviews disagree the original wording is preserved and a `[BRAD DECISION NEEDED]` marker added; unaddressed `[LAWYER TO CONFIRM]` markers are retained. LLM audit only — not a substitute for professional legal advice. **v1.1 update (27 July 2026):** D2 punctuation resolved (no comma after "major failure" — confirmed against Reg 90, Competition and Consumer Regulations 2010); D3 accepted (30-day price-change notice plus buyer-exit-without-penalty applied per cross-check N4); four protective-content sections added in differentiated format (executive summary callout at top, liability-scope clarification and engagement-refusal clause inline in Clause 3, client-responsibility note appended to Clause 7 prescribed-text block).
+
+---
+
+> **At a glance**
+>
+> - BW Advisory supplies AI workflow reports — automated (Snapshot, $497) and personally reviewed (Solution Map, $1,497). These are business advisory reports, not legal, financial, tax or insurance advice.
+> - Reports are built from your intake answers. Savings figures are estimates with stated assumptions, not guarantees.
+> - If something is wrong, contact us: we correct it or refund you. Your Australian Consumer Law rights are never limited.
+> - Retainers run month to month — at least 30 days' written notice before any price change; 14 days' notice to cancel, no lock-in.
+> - Questions: brad@bwadvisorysolutions.com.au · +61 407 779 474
 
 ---
 
 ## Clause 1 — Parties and application
 
-> **Version 1.0 — 27 July 2026. The version you accept at checkout is the version that governs your purchase.**
+> **Version 1.1 — 27 July 2026. The version you accept at checkout is the version that governs your purchase.**
 >
 > These terms govern the AI Readiness diagnostic, the AI Snapshot Report, the AI Solution Map, implementation services and the AI Partner retainer supplied by Bradley Warburton trading as BW Advisory Solutions (ABN 11 892 244 979) ("BW Advisory", "we"). "You" means the person or business ordering the service. By ordering a service you agree to these terms.
 
@@ -22,7 +32,7 @@ _Merge note: version line and "You" definition confirmed NICE-TO-HAVE by both re
 
 > Our services come with guarantees that cannot be excluded under the Australian Consumer Law. Nothing in these terms excludes, restricts or modifies any consumer guarantee, right or remedy conferred by the Australian Consumer Law or any other law that cannot lawfully be excluded, restricted or modified. Every other clause of these terms is subject to this clause.
 
-`[LAWYER TO CONFIRM: mandatory-text requirements; ACL s 64 compliance of the overall structure. Note: both LLM reviews confirmed the carve-out wording is structurally correct and the reg 90 prescribed text has been incorporated into Clause 7. One punctuation item in the Clause 7 prescribed text remains outstanding pending a human read of legislation.gov.au reg 90 — see Clause 7 BRAD DECISION NEEDED markers.]`
+`[LAWYER TO CONFIRM: mandatory-text requirements; ACL s 64 compliance of the overall structure. Note: both LLM reviews confirmed the carve-out wording is structurally correct and the reg 90 prescribed text has been incorporated into Clause 7. The Clause 7 prescribed text is verified correct against Reg 90 (Competition and Consumer Regulations 2010) — no comma required after 'major failure', comma required after 'if this is not done'.]`
 
 ---
 
@@ -33,8 +43,12 @@ _Merge note: version line and "You" definition confirmed NICE-TO-HAVE by both re
 > **AI Solution Map ($1,497 incl. GST):** a report and adoption roadmap generated from your completed intake and personally reviewed by Brad Warburton before delivery, plus a 60-minute video call with Brad Warburton held within 5 business days of delivery or at a later time you choose.
 >
 > **Delivery:** your intake link is emailed within minutes of payment. The Snapshot Report is delivered on submission of your completed intake. The Solution Map is delivered within 3 business days of your completed intake. If your intake is not completed within 30 days of purchase, we will remind you. If it remains incomplete 14 days after that reminder, we will ask you to choose: we generate your report from the information available with the gaps noted, or we refund you in full. If we do not hear from you within a further 14 days, we will refund you in full. If we cannot meet a delivery time, we will tell you promptly and you may cancel for a full refund.
+>
+> Our services do not include legal advice, tax advice, financial product advice, medical or psychological advice, or guarantees of specific commercial outcomes — clients should engage the relevant professional for those matters.
+>
+> BW Advisory may decline or discontinue an engagement where it falls outside scope, requires professional advice we are not qualified to provide, involves subcontractor conflicts (see our published conflict register), or where continuing would be unsafe, unlawful, or inconsistent with our engagement standards.
 
-_Merge note — incomplete-intake clause: Baseline had "you may choose" giving the buyer the election. Fable §1 Cl 3 amendment 3 redrafted as "we may generate" (BW holds the election) — SHOULD-FIX. Cross-check N2 QUALIFIED Fable's redline: the BW-elects version carries ACL s 25(1)(d) exposure (significant imbalance, detriment). Cross-check proposed buyer-elects language plus a default-to-refund fallback. Since both reviews agree the buyer must make the election, the cross-check's more specific wording is applied. Call SLA ("held within 5 business days… or at a later time you choose") and delivery-failure valve ("If we cannot meet a delivery time…") both confirmed by both reviews; already in baseline._
+_Merge note — incomplete-intake clause: Baseline had "you may choose" giving the buyer the election. Fable §1 Cl 3 amendment 3 redrafted as "we may generate" (BW holds the election) — SHOULD-FIX. Cross-check N2 QUALIFIED Fable's redline: the BW-elects version carries ACL s 25(1)(d) exposure (significant imbalance, detriment). Cross-check proposed buyer-elects language plus a default-to-refund fallback. Since both reviews agree the buyer must make the election, the cross-check's more specific wording is applied. Call SLA ("held within 5 business days… or at a later time you choose") and delivery-failure valve ("If we cannot meet a delivery time…") both confirmed by both reviews; already in baseline. v1.1: liability-scope clarification (what we do not provide) and engagement-refusal clause added as inline prose, per structural differentiation brief._
 
 `[LAWYER TO CONFIRM: descriptions must match the sales page exactly — the marketing page controls (ACCC v TPG). Cross-check §5 consistency sweep found issues on the PAGE side (N1 guarantee-scope overstatement, N11 call-SLA page self-contradiction, N12 Line 1 verification-anchor error) — these require marketing page edits, not terms edits. The terms tier descriptions themselves were confirmed consistent with the locked decisions. Confirm the automated Snapshot description carries no residual review implication.]`
 
@@ -86,18 +100,18 @@ _Merge note: both reviews confirmed COMPLIANT. Cross-check §9.5 independently r
 > - to a refund for the unused portion, or to compensation for its reduced value.
 >
 > You are also entitled to be compensated for any other reasonably foreseeable loss or damage. If the failure does not amount to a major failure you are entitled to have problems with the service rectified in a reasonable time and, if this is not done, to cancel your contract and obtain a refund for the unused portion of the contract.
-
-`[BRAD DECISION NEEDED — reg 90 prescribed text comma: The sentence beginning "If the failure does not amount to a major failure" either does or does not have a comma after "major failure" — four professional sources were consulted and split two-to-two. Cross-check §1.2: confirmed the words are correct (four-source agreement) but the punctuation is unresolved. A human must read reg 90 on legislation.gov.au and confirm the comma before publication. This is a five-minute task.]`
+>
+> Clients remain responsible for their own commercial decisions, actions and outcomes. BW Advisory's advice and reports are inputs to those decisions, not substitutes for them.
 
 > **If you cancel before submitting your intake, we will refund you in full.** Because each report is generated for your business, we do not offer change-of-mind refunds once generation has begun. This does not affect your rights under the Australian Consumer Law.
 >
 > **Snapshot credit:** if you buy the AI Snapshot Report, the $497 you paid is credited in full against the AI Solution Map for 60 days from your Snapshot purchase. The credit is applied automatically at checkout through the upgrade link in your report and delivery email. It is not transferable, not redeemable for cash, and lapses after 60 days.
 
-_Merge note — all substantive amendments from both reviews already present in baseline: "20% or more" (Fable finding 2, cross-check confirmed); claim email address (Fable §1 Cl 7 amendment 4); "within 60 days of delivery" (both); "original payment method within 10 business days" (Fable amendment 3, cross-check confirmed); "If you cancel before submitting your intake, we will refund you in full" (Fable amendment 5, cross-check confirmed); reg 90 prescribed text with semicolon in the first entitlement limb (cross-check §1.2 divergence 1 — certain fix applied). Two items remain OUTSTANDING and are marked above._
+_Merge note — all substantive amendments from both reviews already present in baseline: "20% or more" (Fable finding 2, cross-check confirmed); claim email address (Fable §1 Cl 7 amendment 4); "within 60 days of delivery" (both); "original payment method within 10 business days" (Fable amendment 3, cross-check confirmed); "If you cancel before submitting your intake, we will refund you in full" (Fable amendment 5, cross-check confirmed); reg 90 prescribed text with semicolon in the first entitlement limb (cross-check §1.2 divergence 1 — certain fix applied). v1.1: D2 comma resolved (no comma after "major failure" confirmed against Reg 90, Competition and Consumer Regulations 2010); client-responsibility note appended to prescribed-text block._
 
 _Snapshot credit analysis: Cross-check §2 CONFIRMED the credit is not a gift card (ACL s 99A — not an article, not commonly known as a card/voucher, single-SKU, non-transferable) and QUALIFIED Fable's reasoning: the correct exclusion if the definition were somehow satisfied is reg 89C(a) (marketing promotion to the purchaser in connection with the purchase), not reg 89C(b) (donated promotional card). Two independent hooks. Lawful as drafted. Never call the credit a "voucher" or "gift card" on any surface — cross-check N10._
 
-`[LAWYER TO CONFIRM: (1) no "no refunds" phrasing anywhere (s 29(1)(m); Valve) — confirmed by both reviews; (2) re-supply-first posture for non-major failures aligns with s 267(2) — confirmed; (3) 60-day window operates as a limit on our additional contractual promise only, never on ACL rights — confirmed by both reviews (cross-check Q3: three independent structural features); (4) credit-forward mechanic — confirmed lawful by both reviews; (5) reg 90 compliance — prescribed text incorporated with all particulars except the business address (BRAD DECISION NEEDED above) and the unresolved comma (BRAD DECISION NEEDED above); cross-check §1.3 rates word-confidence HIGH and punctuation-confidence MODERATE pending the five-minute human read.]`
+`[LAWYER TO CONFIRM: (1) no "no refunds" phrasing anywhere (s 29(1)(m); Valve) — confirmed by both reviews; (2) re-supply-first posture for non-major failures aligns with s 267(2) — confirmed; (3) 60-day window operates as a limit on our additional contractual promise only, never on ACL rights — confirmed by both reviews (cross-check Q3: three independent structural features); (4) credit-forward mechanic — confirmed lawful by both reviews; (5) reg 90 compliance — prescribed text incorporated with all particulars except the business address (BRAD DECISION NEEDED above — D1 still open); the prescribed text comma has been verified correct per Reg 90: no comma after "major failure", comma after "if this is not done" — D2 closed in v1.1.]`
 
 ---
 
@@ -149,30 +163,30 @@ _Merge note: both reviews confirmed COMPLIANT. No change from baseline. Not exer
 
 > We own our methodology, templates, questionnaires, knowledge base and report formats. On payment you receive a perpetual, non-transferable licence to use your report and deliverables within your business, including sharing it with your professional advisers. Content and data you provide remain yours; you licence us to use them to deliver the services and, in de-identified form, to improve our methodology.
 >
-> Retainers run month to month. We will give you written notice before any price change takes effect `[BRAD DECISION NEEDED — Fable §1 Cl 12: rated COMPLIANT as drafted. Cross-check N4: finds this an ACL s 25(1)(d) unfair term — price-change notice has no specified minimum while cancellation requires 14 days; a price rise notified day 1 effective day 2 leaves the buyer paying the increased rate for at least 14 days with no exit. Cross-check recommends: "at least 30 days' written notice before any price change takes effect" plus adding "If you cancel in response to a price change, the change does not apply to you." Brad must decide: keep current wording (Fable: COMPLIANT) or adopt cross-check's amendment (N4: SHOULD-FIX).]`, and you may cancel at any time with 14 days' notice without penalty. No automatic lock-in, no cancellation fee.
+> Retainers run month to month. We will give you **at least 30 days'** written notice before any price change takes effect. **If you cancel your retainer in response to a price change, the change does not apply to you.** You may cancel at any time with 14 days' notice without penalty. No automatic lock-in, no cancellation fee.
 >
 > We may decline an order, or cancel it and refund it in full before your report is generated, if we reasonably consider the service is not suitable for your business.
 >
 > These terms are governed by the laws of Western Australia and the parties submit to the non-exclusive jurisdiction of its courts. Disputes: 14 days' good-faith negotiation before proceedings (nothing prevents either party seeking urgent relief or using small-claims processes). Notices by email. Neither party may assign without consent. If part of a clause is void, the rest survives.
 
-_Merge note — three changes:_
+_Merge note — three changes from baseline, one updated in v1.1:_
 _1. Adviser-sharing carve-out: "including sharing it with your professional advisers" — Fable §1 Cl 12 amendment 1, cross-check confirmed; already in baseline._
 _2. Decline/cancel right: Baseline had "We may cancel an order before delivery and refund it in full where the completed intake reveals the service cannot be delivered as described, or where we are required to do so by law." Fable §1 Cl 12 amendment 2 wanted "We may decline or cancel an order and refund it in full if we consider the service is not suitable for your business." Cross-check N3 QUALIFIED this — "if we consider" is a subjective (unreviewable) trigger; no temporal bound means BW could cancel after delivery. Cross-check's refinement: "We may decline an order, or cancel it and refund it in full before your report is generated, if we reasonably consider the service is not suitable for your business." Both reviews agree this provision should exist; cross-check's wording (objective standard, temporal bound) is applied._
-_3. Retainer price-variation (N4): Fable said COMPLIANT; cross-check said SHOULD-FIX. Disagreement → keep original wording with [BRAD DECISION NEEDED] marker._
+_3. Retainer price-variation (N4): v1.1 decision — cross-check amendment (N4: SHOULD-FIX) adopted. Wording updated to "at least 30 days' written notice before any price change takes effect" plus "If you cancel your retainer in response to a price change, the change does not apply to you." D3 closed._
 
-`[LAWYER TO CONFIRM: (1) de-identification standard for methodology improvement — noted by both reviews but not specifically resolved; (2) retainer mechanics against the ACCC auto-renewal and unilateral-variation UCT examples — see [BRAD DECISION NEEDED] above on the notice period; (3) no entire-agreement clause — confirmed correct by both reviews; (4) no foreign law or jurisdiction (s 67; Valve) — confirmed by both; (5) folding IP, retainer and general into one clause creates no construction problem — confirmed by both reviews (cross-check Q11); cross-check suggests internal sub-headings for readability.]`
+`[LAWYER TO CONFIRM: (1) de-identification standard for methodology improvement — noted by both reviews but not specifically resolved; (2) retainer mechanics against the ACCC auto-renewal and unilateral-variation UCT examples — 30-day notice period and buyer-exit-without-penalty applied per cross-check N4; (3) no entire-agreement clause — confirmed correct by both reviews; (4) no foreign law or jurisdiction (s 67; Valve) — confirmed by both; (5) folding IP, retainer and general into one clause creates no construction problem — confirmed by both reviews (cross-check Q11); cross-check suggests internal sub-headings for readability.]`
 
 ---
 
 ## Open decisions summary
 
-### `[BRAD DECISION NEEDED]` markers — 3 items requiring Brad's choice before publication
+### `[BRAD DECISION NEEDED]` markers — 1 item remaining
 
 | # | Location | Issue | Fable position | Cross-check position |
 |---|---|---|---|---|
 | **D1** | Clause 7 — warrantor details | "Perth, Western Australia" is not a business address for reg 90(2) purposes. Provide a PO box or registered business address. | Not flagged | N9: SHOULD-FIX — add real address |
-| **D2** | Clause 7 — prescribed text | The comma in "If the failure does not amount to a major failure[,] you are entitled" is split two-to-two across four professional sources. Confirm against legislation.gov.au reg 90. | Did not verify against compiled instrument | §1.2 OUTSTANDING — five-minute human read required |
-| **D3** | Clause 12 — retainer price-variation notice | Current wording: "We will give you written notice before any price change takes effect" — unspecified notice period against 14-day cancellation. | COMPLIANT as drafted | N4 SHOULD-FIX: add "at least 30 days'" plus "If you cancel in response to a price change, the change does not apply to you" |
+
+D2 closed: comma resolved — no comma after "major failure", comma after "if this is not done", confirmed against Reg 90 (Competition and Consumer Regulations 2010). D3 closed: cross-check amendment (N4: SHOULD-FIX) adopted — at least 30 days' written notice, buyer-exit-without-penalty applied.
 
 ### Unresolved `[LAWYER TO CONFIRM]` markers from baseline
 
@@ -188,15 +202,15 @@ All 12 `[LAWYER TO CONFIRM]` markers from the original Part 2 draft are retained
 | | Count |
 |---|---|
 | Total clauses | 12 |
-| Clauses changed from baseline (substantive) | 3 (Cls 3, 10, 12) |
-| Clauses unchanged (confirmed by both reviews) | 9 (Cls 1, 2, 4, 5, 6, 7*, 8, 9, 11) |
-| `[BRAD DECISION NEEDED]` markers | 3 |
+| Clauses changed from baseline (substantive) | 4 (Cls 3, 7, 10, 12) |
+| Clauses unchanged (confirmed by both reviews) | 8 (Cls 1, 2, 4, 5, 6, 8, 9, 11) |
+| `[BRAD DECISION NEEDED]` markers | 1 (D1 only — D2 closed, D3 closed in v1.1) |
 | `[LAWYER TO CONFIRM]` markers retained | 12 |
-| Open decisions (BRAD DECISION NEEDED) | 3 |
+| Open decisions (BRAD DECISION NEEDED) | 1 (D1 business address) |
 | Open decisions (LAWYER TO CONFIRM, unresolved) | 2 priority items (Cl 8 s 64A, Cl 12 de-identification) |
 
-*Clause 7 substantive content unchanged from baseline; two outstanding annotation markers added (D1 business address, D2 prescribed text comma).
+*Clause 3 expanded with liability-scope clarification and engagement-refusal clause (inline prose). Clause 7 client-responsibility paragraph added; D2 comma resolved. Clause 10 unchanged. Clause 12 retainer price-variation updated to 30 days; D3 closed.*
 
 ---
 
-*BW Advisory Solutions — Service Terms v1. 27 July 2026. Consolidated from: legal-review-pack-v2.md (22 July 2026 baseline), legal-review-pack-v2-fable-findings.md (Fable 5, 23 July 2026), legal-review-pack-v2-cross-check.md (Opus 4.8, 23 July 2026). LLM cross-check only — not solicitor advice. Terms not yet legally advised by a solicitor per Brad's decision (legal-review-pack-v2 changelog, 22 July 2026). Do not publish with BRAD DECISION NEEDED markers unresolved.*
+*BW Advisory Solutions — Service Terms v1.1. 27 July 2026. Consolidated from: legal-review-pack-v2.md (22 July 2026 baseline), legal-review-pack-v2-fable-findings.md (Fable 5, 23 July 2026), legal-review-pack-v2-cross-check.md (Opus 4.8, 23 July 2026). v1.1 update: D2 punctuation resolved, D3 adopted, four protective-content sections added. LLM cross-check only — not solicitor advice. D1 (business address) and 2 LAWYER TO CONFIRM items remain outstanding before publication.*
