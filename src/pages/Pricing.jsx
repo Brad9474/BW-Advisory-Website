@@ -324,6 +324,7 @@ const FAQItem = ({ q, a }) => {
 const Pricing = () => {
   const [modal, setModal] = useState(null);
   const [selected, setSelected] = useState('solution-map');
+  const [hovered, setHovered] = useState(null);
 
   const openModal = (tier) => setModal(tier);
   const closeModal = () => setModal(null);
@@ -364,12 +365,22 @@ const Pricing = () => {
             id="snapshot"
             className="order-2 lg:order-1 flex-1 flex flex-col rounded-2xl p-8 space-y-6 scroll-mt-28 cursor-pointer"
             onClick={() => setSelected('snapshot')}
+            onMouseEnter={() => setHovered('snapshot')}
+            onMouseLeave={() => setHovered(null)}
             style={{
               background: selected === 'snapshot'
                 ? 'linear-gradient(135deg, rgba(201,168,76,0.07) 0%, rgba(255,255,255,0.02) 100%)'
                 : 'rgba(255,255,255,0.04)',
-              border: selected === 'snapshot' ? '2px solid #C9A84C' : '1px solid rgba(255,255,255,0.10)',
-              boxShadow: selected === 'snapshot' ? '0 0 48px rgba(201,168,76,0.10), 0 24px 64px rgba(0,0,0,0.35)' : 'none',
+              border: selected === 'snapshot'
+                ? '2px solid #C9A84C'
+                : hovered === 'snapshot'
+                  ? '1px solid rgba(201,168,76,0.40)'
+                  : '1px solid rgba(255,255,255,0.10)',
+              boxShadow: selected === 'snapshot'
+                ? '0 0 48px rgba(201,168,76,0.10), 0 24px 64px rgba(0,0,0,0.35)'
+                : hovered === 'snapshot'
+                  ? '0 0 24px rgba(201,168,76,0.06)'
+                  : 'none',
               transition: 'border-color 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1), background 150ms cubic-bezier(0.16, 1, 0.3, 1)',
             }}
           >
@@ -484,10 +495,20 @@ const Pricing = () => {
             id="solution-map"
             className="order-1 lg:order-2 flex-1 flex flex-col rounded-2xl p-8 space-y-6 scroll-mt-28 cursor-pointer"
             onClick={() => setSelected('solution-map')}
+            onMouseEnter={() => setHovered('solution-map')}
+            onMouseLeave={() => setHovered(null)}
             style={{
               background: 'linear-gradient(135deg, rgba(201,168,76,0.07) 0%, rgba(255,255,255,0.02) 100%)',
-              border: selected === 'solution-map' ? '2px solid #C9A84C' : '1px solid rgba(255,255,255,0.10)',
-              boxShadow: selected === 'solution-map' ? '0 0 48px rgba(201,168,76,0.10), 0 24px 64px rgba(0,0,0,0.35)' : 'none',
+              border: selected === 'solution-map'
+                ? '2px solid #C9A84C'
+                : hovered === 'solution-map'
+                  ? '1px solid rgba(201,168,76,0.40)'
+                  : '1px solid rgba(255,255,255,0.10)',
+              boxShadow: selected === 'solution-map'
+                ? '0 0 48px rgba(201,168,76,0.10), 0 24px 64px rgba(0,0,0,0.35)'
+                : hovered === 'solution-map'
+                  ? '0 0 24px rgba(201,168,76,0.06)'
+                  : 'none',
               transition: 'border-color 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
             }}
           >
