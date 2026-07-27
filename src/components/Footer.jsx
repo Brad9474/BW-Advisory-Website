@@ -82,6 +82,9 @@ const Footer = () => (
               <Link to="/ai-readiness" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 AI Readiness
               </Link>
+              <Link to="/pricing" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
+                Pricing
+              </Link>
               <Link to="/loss-intelligence" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 Loss Intelligence
               </Link>
@@ -93,6 +96,9 @@ const Footer = () => (
               </a>
               <a href="/privacy" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 Privacy Policy
+              </a>
+              <a href="/terms" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
+                Service Terms
               </a>
             </nav>
           </div>
