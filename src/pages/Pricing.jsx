@@ -104,7 +104,7 @@ const CheckoutModal = ({ tier, onClose }) => {
             </>
           ) : (
             <>
-              By continuing you also agree to BW Advisory's{' '}
+              By continuing you also agree to BW Advisory&apos;s{' '}
               <a
                 href="/privacy"
                 className="text-[#C9A84C] hover:underline"
@@ -147,19 +147,16 @@ const CheckoutModal = ({ tier, onClose }) => {
   );
 };
 
-// ─── Buy button ───────────────────────────────────────────────────────────────
+// ─── Card CTA button ──────────────────────────────────────────────────────────
 
-const BuyButton = ({ tier, label, onOpen, className = '' }) => {
+const CardCTA = ({ tier, label, onOpen }) => {
   if (!PURCHASE_ENABLED) {
     return (
       <button
         type="button"
         disabled
         title="Purchase not yet available"
-        className={[
-          'w-full sm:w-auto px-10 py-4 rounded-full font-bold text-sm tracking-[0.15em] uppercase bg-white/10 text-silver/40 cursor-not-allowed border border-white/10',
-          className,
-        ].join(' ')}
+        className="w-full px-8 py-4 rounded-lg font-bold text-sm tracking-[0.15em] uppercase bg-white/8 text-silver/35 cursor-not-allowed border border-white/10"
       >
         {label}
       </button>
@@ -170,13 +167,87 @@ const BuyButton = ({ tier, label, onOpen, className = '' }) => {
     <button
       type="button"
       onClick={() => onOpen(tier)}
-      className={[
-        'w-full sm:w-auto px-10 py-4 rounded-full font-bold text-sm tracking-[0.15em] uppercase transition-all duration-300 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60 focus-visible:outline-none bg-[#C9A84C] text-[#0F172A] hover:bg-[#E0BC60] shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)]',
-        className,
-      ].join(' ')}
+      style={{ transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)' }}
+      className="w-full px-8 py-4 rounded-lg font-bold text-sm tracking-[0.15em] uppercase cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-4 focus-visible:ring-offset-[#0F172A] focus-visible:ring-[#C9A84C]/60 focus-visible:outline-none bg-[#C9A84C] text-[#0F172A] hover:bg-[#E0BC60] shadow-[0_8px_24px_rgba(201,168,76,0.25)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)]"
     >
       {label}
     </button>
+  );
+};
+
+// ─── Icons ────────────────────────────────────────────────────────────────────
+
+const CheckIcon = () => (
+  <svg
+    className="w-4 h-4 text-[#C9A84C] flex-shrink-0 mt-0.5"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+  </svg>
+);
+
+const ShieldIcon = () => (
+  <svg
+    className="w-3.5 h-3.5 text-[#C9A84C] flex-shrink-0"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+    />
+  </svg>
+);
+
+// ─── Accordion ────────────────────────────────────────────────────────────────
+
+const AccordionSection = ({ title, children }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border-t border-white/8">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className="w-full flex items-center justify-between gap-3 py-3 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50 focus-visible:ring-offset-2 rounded"
+      >
+        <span className="text-silver/50 font-mono text-xs tracking-[0.15em] uppercase font-bold">
+          {title}
+        </span>
+        <svg
+          className="w-4 h-4 text-[#C9A84C]/60 flex-shrink-0"
+          style={{
+            transition: 'transform 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+            transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+          }}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {/* Content always in DOM for SEO — visually toggled via max-height */}
+      <div
+        style={{
+          overflow: 'hidden',
+          maxHeight: open ? '600px' : '0px',
+          transition: 'max-height 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
+      >
+        <div className="pb-4 text-silver/60 font-light text-[13px] leading-relaxed">
+          {children}
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -185,7 +256,7 @@ const BuyButton = ({ tier, label, onOpen, className = '' }) => {
 const FAQ_ITEMS = [
   {
     q: 'Does Brad review my $497 report?',
-    a: 'No. The Snapshot is generated by our diagnostic system from your intake answers, instantly. Brad built the methodology and maintains the knowledge base it checks against, but no human reads your individual report before it reaches you. That is why it costs $497 and arrives in minutes. Brad personally reviews every Solution Map.',
+    a: "No. The Snapshot is generated by our diagnostic system from your intake answers, instantly. Brad built the methodology and maintains the knowledge base it checks against, but no human reads your individual report before it reaches you. That is why it costs $497 and arrives in minutes. Brad personally reviews every Solution Map.",
   },
   {
     q: 'How is this different from the free diagnostic?',
@@ -193,11 +264,11 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Are the savings figures guaranteed?',
-    a: 'No. They are projections, presented as ranges with the assumptions stated under every figure. We show the workings so you can test them against your own numbers. Anyone who promises you a specific dollar return from a tool they haven\'t seen you run is guessing.',
+    a: "No. They are projections, presented as ranges with the assumptions stated under every figure. We show the workings so you can test them against your own numbers. Anyone who promises you a specific dollar return from a tool they haven't seen you run is guessing.",
   },
   {
     q: 'Do you get a commission on the tools you recommend?',
-    a: 'No. BW Advisory receives no commission or referral fee from any vendor in any report. If that ever changed, we would disclose it at the point of recommendation. The recommendation stands on the evidence or it doesn\'t stand.',
+    a: "No. BW Advisory receives no commission or referral fee from any vendor in any report. If that ever changed, we would disclose it at the point of recommendation. The recommendation stands on the evidence or it doesn't stand.",
   },
   {
     q: 'What happens after I pay?',
@@ -211,7 +282,7 @@ const FAQ_ITEMS = [
     q: 'What do you do with my information?',
     a: (
       <>
-        Your intake answers are used to generate your report and are stored on Australian-hosted infrastructure. We don't sell your information and we don't pass it to anyone for a benefit without your consent. The full collection notice is on the intake form and our privacy policy is at{' '}
+        Your intake answers are used to generate your report and are stored on Australian-hosted infrastructure. We don&apos;t sell your information and we don&apos;t pass it to anyone for a benefit without your consent. The full collection notice is on the intake form and our privacy policy is at{' '}
         <Link to="/privacy" className="text-[#C9A84C] hover:underline">
           /privacy
         </Link>
@@ -251,7 +322,7 @@ const FAQItem = ({ q, a }) => {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 const Pricing = () => {
-  const [modal, setModal] = useState(null); // null | 'snapshot' | 'solution-map'
+  const [modal, setModal] = useState(null);
 
   const openModal = (tier) => setModal(tier);
   const closeModal = () => setModal(null);
@@ -261,121 +332,231 @@ const Pricing = () => {
       {modal && <CheckoutModal tier={modal} onClose={closeModal} />}
 
       {/* ── HERO ── */}
-      <section className="pt-40 md:pt-52 pb-20 px-6 w-full">
-        <div className="max-w-5xl mx-auto text-center space-y-6">
-          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">Pricing</p>
+      <section className="pt-40 md:pt-52 pb-10 px-6 w-full">
+        <div className="max-w-5xl mx-auto text-center space-y-5">
+          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">
+            TWO REPORTS
+          </p>
           <h1 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.05]">
-            Two reports. Fixed prices.<br className="hidden md:block" /> No sales call required.
+            Pick what fits.
           </h1>
-          <div className="space-y-5 max-w-3xl mx-auto text-left md:text-center">
-            <p className="text-silver/80 font-light text-xl md:text-2xl leading-relaxed">
-              Most operators know AI matters. Working out which tools fit your business is the part nobody has time for. The market is crowded, and every consultant wants a four-week engagement before they'll name a single tool.
-            </p>
-            <p className="text-silver/80 font-light text-xl md:text-2xl leading-relaxed">
-              We've done that work. These reports are the output: named tools matched to your workflows, verified pricing, a trust and safety check on each one, and a setup plan you can start the week the report lands. A clear implementation path. Fixed price. No discovery engagement.
-            </p>
-            <p className="text-silver/65 font-light text-base md:text-lg leading-relaxed">
-              Built by Brad Warburton — 30 years in law enforcement command, National Director of Law Enforcement Partnerships at Auror, founder of BW Advisory Solutions.
-            </p>
-          </div>
-          <p className="text-silver/50 text-sm font-light tracking-wide">All prices include GST.</p>
-        </div>
-      </section>
-
-      {/* ── SNAPSHOT TIER ── */}
-      <section id="snapshot" className="py-16 px-6 w-full scroll-mt-28">
-        <div className="max-w-5xl mx-auto">
-          <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-white/15 rounded-3xl p-8 md:p-14 space-y-8">
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-              <div className="space-y-2">
-                <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Snapshot Report</p>
-                <h2 className="font-display font-bold text-4xl md:text-5xl text-white">$497</h2>
-                <p className="text-silver/50 text-sm font-light">incl. GST</p>
-              </div>
-              <p className="text-[#C9A84C] font-semibold text-lg md:text-xl">Automated. Instant. Complete at its price.</p>
-            </div>
-
-            <div className="space-y-5 text-silver/80 font-light text-base md:text-lg leading-relaxed max-w-3xl">
-              <p>
-                The Snapshot takes your intake answers and identifies the workflow areas where automation is most likely to reduce administrative time in your business. For each one: a primary tool checked against the software you already run, the alternatives we considered, and a trust and safety note covering data residency, certifications, and what to switch off before any client data touches it. Each tool comes with a 4-day setup plan you can start the week the report lands. No IT department required.
-              </p>
-              <p>
-                The savings projections are ranges, not promises. Every figure carries its assumptions, its evidence rating, and the date the tool's pricing was verified. You see the workings. You decide what to act on.
-              </p>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5 md:p-6 space-y-2">
-              <p className="text-silver/50 font-mono text-xs tracking-[0.3em] uppercase font-bold">What it's not</p>
-              <p className="text-silver/75 font-light text-base leading-relaxed">
-                Nobody reviews this report by hand. The system generates it from your answers, using a methodology Brad Warburton built and maintains. If the report is wrong about your business, the guarantee below applies. If you want Brad's personal review of your business, that is the Solution Map.
-              </p>
-            </div>
-
-            <p className="text-silver/50 text-sm font-light italic">
-              The Snapshot Report is an automated assessment checked against BW Advisory's knowledge base at the moment of purchase. The verification date is printed in your report.
-            </p>
-
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5 md:p-6 space-y-2">
-              <p className="text-silver/50 font-mono text-xs tracking-[0.3em] uppercase font-bold">Delivery</p>
-              <p className="text-silver/75 font-light text-base">
-                Pay, and the intake link is in your inbox within a minute. The intake takes about ten minutes. Your report generates the moment you submit it.
-              </p>
-            </div>
-
-            <p className="text-silver/70 font-light text-sm leading-relaxed">
-              Your $497 counts in full toward the Solution Map for 60 days. Buying the Snapshot first costs you nothing extra.
-            </p>
-
-            <div className="pt-4">
-              <BuyButton tier="snapshot" label="Get the Snapshot Report — $497" onOpen={openModal} />
-            </div>
+          {/* ① Feature pills replacing subtitle paragraph */}
+          <div className="flex flex-wrap justify-center gap-3 pt-1">
+            {['TWO REPORTS', 'FIXED PRICES', 'NO SALES CALL REQUIRED'].map((label) => (
+              <span
+                key={label}
+                className="px-6 py-1.5 border border-[#C9A84C] rounded-full text-[#C9A84C] font-mono text-xs font-bold tracking-[0.15em] uppercase"
+              >
+                {label}
+              </span>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── SOLUTION MAP TIER ── */}
-      <section id="solution-map" className="py-16 px-6 w-full scroll-mt-28">
-        <div className="max-w-5xl mx-auto">
-          <div className="relative bg-gradient-to-br from-[#C9A84C]/8 via-white/4 to-white/2 backdrop-blur-sm border border-[#C9A84C]/20 rounded-3xl p-8 md:p-14 space-y-8">
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-              <div className="space-y-2">
-                <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Solution Map</p>
-                <h2 className="font-display font-bold text-4xl md:text-5xl text-white">$1,497</h2>
-                <p className="text-silver/50 text-sm font-light">incl. GST</p>
+      {/* ── PRICING CARDS ── */}
+      <section className="pb-20 px-6 w-full">
+        <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-6 items-stretch">
+
+          {/* AI Snapshot Report — desktop left, mobile second */}
+          <div
+            id="snapshot"
+            className="order-2 lg:order-1 flex-1 flex flex-col bg-white/[0.04] border border-white/10 rounded-2xl p-8 space-y-6 scroll-mt-28"
+          >
+            <div className="space-y-1.5">
+              <h2 className="font-display font-bold text-2xl text-white">AI Snapshot Report</h2>
+              <p className="text-silver/55 font-light text-sm leading-snug">
+                Automated. Instant. Complete at its price.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <p className="font-display font-bold text-6xl text-white tabular-nums leading-none">
+                $497
+              </p>
+              <p className="text-silver/45 text-xs font-light">incl. GST</p>
+              <span className="inline-flex items-center mt-2 px-3 py-1 rounded-full bg-[#C9A84C]/12 border border-[#C9A84C]/25 text-[#C9A84C] text-xs font-mono font-bold tracking-[0.15em] uppercase">
+                Delivered in minutes
+              </span>
+            </div>
+
+            <div className="space-y-3">
+              <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">
+                What you get
+              </p>
+              <ul className="space-y-2.5">
+                {/* ② Named tools, no specific count */}
+                <li className="flex items-start gap-2.5">
+                  <CheckIcon />
+                  <span className="text-silver/75 font-light text-sm leading-snug">
+                    Named tools matched to your priority workflows
+                  </span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <CheckIcon />
+                  <span className="text-silver/75 font-light text-sm leading-snug">
+                    Trust &amp; safety notes on each tool
+                  </span>
+                </li>
+                {/* ③ DIY setup plan as proposition */}
+                <li className="flex items-start gap-2.5">
+                  <CheckIcon />
+                  <span className="text-silver/75 font-light text-sm leading-snug">
+                    <strong className="font-semibold text-white">DIY setup plan</strong>{' '}
+                    &mdash; 4 days per tool, no IT team needed
+                  </span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <CheckIcon />
+                  <span className="text-silver/75 font-light text-sm leading-snug">
+                    Verified pricing with check date printed
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* ④ Reframe NOT INCLUDED as intentional design */}
+            <div className="pt-2 border-t border-white/8">
+              <p className="text-silver/55 font-light text-sm leading-relaxed">
+                <strong className="font-semibold text-white">Snapshot is 100% automated.</strong>{' '}
+                No human review, no call &mdash; this report generates directly from your intake.
+                Want Brad&apos;s eyes on your business?{' '}
+                <a
+                  href="#solution-map"
+                  style={{ transition: 'color 150ms cubic-bezier(0.16, 1, 0.3, 1)' }}
+                  className="text-[#C9A84C]/70 hover:text-[#C9A84C]"
+                >
+                  Upgrade to Solution Map &mdash; your $497 credits in full for 60 days &rarr;
+                </a>
+              </p>
+            </div>
+
+            <div className="flex-1" />
+
+            {/* ⑤ Accordions */}
+            <div>
+              <AccordionSection title="How the report is built">
+                The Snapshot is generated by our diagnostic system from your intake answers, instantly.
+                Brad built the methodology and maintains the knowledge base it checks against, but no human
+                reads your individual report before it reaches you. That is why it costs $497 and arrives
+                in minutes. Tool data is verified and the check date is printed in your report. BW Advisory
+                receives no commission or referral fee from any vendor we recommend &mdash; if that ever
+                changed, we would disclose it at the point of recommendation. The recommendation stands on
+                the evidence or it doesn&apos;t stand. Savings figures are projections, presented as ranges
+                with the assumptions stated under every figure, so you can test them against your own numbers.
+              </AccordionSection>
+              <AccordionSection title="Delivery &amp; what happens next">
+                Within a minute of purchase you get an email with your intake link. The Snapshot intake is
+                13 questions, about ten minutes. Your report generates the moment you submit it, with the
+                tool verification date printed in the report. Your $497 counts in full toward the Solution
+                Map for 60 days from purchase &mdash; you answer six additional questions and your original
+                thirteen are on file. After 60 days the Solution Map is full price.
+              </AccordionSection>
+            </div>
+
+            {/* ⑥⑦ Guarantee badge + CTA + risk reversal */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-center gap-1.5">
+                <ShieldIcon />
+                <span className="text-[#C9A84C] text-xs font-light tracking-wide">
+                  60-day guarantee &mdash; correct or refund
+                </span>
               </div>
-              <p className="text-[#C9A84C] font-semibold text-lg md:text-xl md:text-right md:max-w-sm lg:max-w-none">Brad's personal review of your business, and 60 minutes with him on a call.</p>
-            </div>
-
-            <div className="space-y-5 text-silver/80 font-light text-base md:text-lg leading-relaxed max-w-3xl">
-              <p>
-                Everything in the Snapshot, plus the analysis the intake alone can't reach. Personally reviewed by Brad before it leaves the building.
+              <CardCTA tier="snapshot" label="Get the Snapshot — $497" onOpen={openModal} />
+              <p className="text-center text-silver/40 font-light" style={{ fontSize: '12px' }}>
+                Nothing charged if you cancel before submitting your intake.
               </p>
-              <p>
-                The Snapshot works from the problems you name. The Solution Map reads your whole intake for the patterns your answers show but didn't name — the workflows costing you time that you've stopped noticing. It carries deeper implementation detail on every opportunity: template structures, rollout sequences, team briefing notes, and a priority matrix that sequences all of it.
-              </p>
-              <p>
-                Brad reviews every Solution Map personally before delivery. Then you get 60 minutes with him on a video call, within 5 business days of your report arriving, to work through the priority matrix and decide what to act on first.
-              </p>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5 md:p-6 space-y-2">
-              <p className="text-silver/50 font-mono text-xs tracking-[0.3em] uppercase font-bold">Delivery</p>
-              <p className="text-silver/75 font-light text-base">
-                Within 3 business days of your completed intake. The intake is 19 questions — or six, if you've already bought the Snapshot.
-              </p>
-            </div>
-
-            <div className="bg-[#C9A84C]/8 border border-[#C9A84C]/25 rounded-xl p-5 md:p-6 space-y-2">
-              <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">Already bought the Snapshot?</p>
-              <p className="text-silver/75 font-light text-base">
-                Your $497 counts in full toward the Solution Map for 60 days from purchase. You pay $1,000, answer six more questions, and your first thirteen answers are already on file.
-              </p>
-            </div>
-
-            <div className="pt-4">
-              <BuyButton tier="solution-map" label="Get the Solution Map — $1,497" onOpen={openModal} />
             </div>
           </div>
+
+          {/* AI Solution Map — desktop right, mobile first (flagship-first stack) */}
+          <div
+            id="solution-map"
+            className="order-1 lg:order-2 flex-1 flex flex-col rounded-2xl p-8 space-y-6 scroll-mt-28"
+            style={{
+              background: 'linear-gradient(135deg, rgba(201,168,76,0.07) 0%, rgba(255,255,255,0.02) 100%)',
+              border: '2px solid #C9A84C',
+              boxShadow: '0 0 48px rgba(201,168,76,0.10), 0 24px 64px rgba(0,0,0,0.35)',
+            }}
+          >
+            <div>
+              <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#C9A84C] text-[#0F172A] text-xs font-mono font-bold tracking-[0.15em] uppercase">
+                Personally reviewed by Brad
+              </span>
+            </div>
+
+            <div className="space-y-1.5">
+              <h2 className="font-display font-bold text-2xl text-white">AI Solution Map</h2>
+              <p className="text-silver/55 font-light text-sm leading-snug">
+                Brad&apos;s personal review of your business, and 60 minutes with him on a call.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <p className="font-display font-bold text-6xl text-white tabular-nums leading-none">
+                $1,497
+              </p>
+              <p className="text-silver/45 text-xs font-light">incl. GST</p>
+              <span className="inline-flex items-center mt-2 px-3 py-1 rounded-full bg-[#C9A84C]/12 border border-[#C9A84C]/25 text-[#C9A84C] text-xs font-mono font-bold tracking-[0.15em] uppercase">
+                Delivered in 3 business days
+              </span>
+            </div>
+
+            <div className="space-y-3">
+              <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">
+                What you get
+              </p>
+              <ul className="space-y-2.5">
+                {[
+                  'Everything in the Snapshot',
+                  "Brad’s personal review before delivery",
+                  'Deep implementation plan per opportunity',
+                  'Priority matrix across all opportunities',
+                  '60-min call with Brad (within 5 business days)',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5">
+                    <CheckIcon />
+                    <span className="text-silver/75 font-light text-sm leading-snug">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex-1" />
+
+            {/* ⑤ Accordions */}
+            <div>
+              <AccordionSection title="How the report is built">
+                The Solution Map starts with the same automated diagnostic as the Snapshot &mdash; your
+                intake runs through BW Advisory&apos;s diagnostic system, and Brad Warburton personally
+                reviews your report before it reaches you. Both reports carry the same discipline: verified
+                tool data with the check date printed, ranges with stated assumptions, no commissions from
+                any vendor we recommend. The difference is depth and Brad&apos;s personal involvement &mdash;
+                not quality of care.
+              </AccordionSection>
+              <AccordionSection title="Delivery &amp; what happens next">
+                Within a minute of purchase you get an email with your intake link. The Solution Map intake
+                is 19 questions &mdash; only 6 more if upgrading from the Snapshot, with your original
+                thirteen on file. Your report arrives within 3 business days of your completed intake. The
+                60-minute call with Brad is scheduled within 5 business days of delivery.
+              </AccordionSection>
+            </div>
+
+            {/* ⑥⑦ Guarantee badge + CTA + risk reversal */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-center gap-1.5">
+                <ShieldIcon />
+                <span className="text-[#C9A84C] text-xs font-light tracking-wide">
+                  60-day guarantee &mdash; correct or refund
+                </span>
+              </div>
+              <CardCTA tier="solution-map" label="Get the Solution Map — $1,497" onOpen={openModal} />
+              <p className="text-center text-silver/40 font-light" style={{ fontSize: '12px' }}>
+                Nothing charged if you cancel before submitting your intake.
+              </p>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -394,7 +575,7 @@ const Pricing = () => {
               <tbody className="divide-y divide-white/8">
                 {[
                   ['Price (GST inclusive)', '$497', '$1,497'],
-                  ['Method', 'Automated — generated from your intake by BW Advisory\'s diagnostic system', 'Automated draft plus Brad Warburton\'s personal review'],
+                  ['Method', "Automated — generated from your intake by BW Advisory’s diagnostic system", "Automated draft plus Brad Warburton’s personal review"],
                   ['Human review', 'None — stated plainly, here and in the report', 'Every report, before delivery'],
                   ['Call', 'None', '60 minutes with Brad, within 5 business days of delivery'],
                   ['Opportunities covered', 'Your stated top pains', 'Your stated pains plus the under-recognised layer your intake shows'],
@@ -415,11 +596,14 @@ const Pricing = () => {
           </div>
 
           <p className="text-silver/65 font-light text-base leading-relaxed">
-            Both reports carry the same discipline. Verified tool data with the check date printed. Ranges with stated assumptions. No commissions from any vendor we recommend. The difference is depth and Brad's personal involvement — not quality of care.
+            Both reports carry the same discipline. Verified tool data with the check date printed. Ranges
+            with stated assumptions. No commissions from any vendor we recommend. The difference is depth
+            and Brad&apos;s personal involvement &mdash; not quality of care.
           </p>
 
           <p className="text-silver/50 font-light text-sm italic">
-            Savings figures in both reports are estimates presented as ranges, based on your intake answers and stated assumptions. They are not guarantees. Actual results depend on implementation and adoption.
+            Savings figures in both reports are estimates presented as ranges, based on your intake answers
+            and stated assumptions. They are not guarantees. Actual results depend on implementation and adoption.
           </p>
         </div>
       </section>
@@ -430,7 +614,10 @@ const Pricing = () => {
           <div className="bg-gradient-to-br from-white/6 to-white/2 border border-white/15 rounded-2xl p-8 md:p-12 space-y-5">
             <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">Our guarantee</p>
             <p className="text-silver/85 font-light text-base md:text-lg leading-relaxed max-w-3xl">
-              If a primary recommended tool in your report had been discontinued, or its published price had materially increased, before your report was generated — tell us. You choose the remedy: we correct and reissue the report, or refund the fee in full. Change-of-mind refunds are not offered once generation begins. Your rights under the Australian Consumer Law are not affected.
+              If a primary recommended tool in your report had been discontinued, or its published price had
+              materially increased, before your report was generated &mdash; tell us. You choose the remedy:
+              we correct and reissue the report, or refund the fee in full. Change-of-mind refunds are not
+              offered once generation begins. Your rights under the Australian Consumer Law are not affected.
             </p>
           </div>
         </div>
@@ -440,10 +627,12 @@ const Pricing = () => {
       <section className="py-8 px-6 w-full">
         <div className="max-w-5xl mx-auto border-t border-white/8 pt-8 space-y-3">
           <p className="text-silver/45 font-light text-xs leading-relaxed">
-            The Snapshot Report is an automated assessment checked against BW Advisory's knowledge base at the moment of purchase. The verification date is printed in your report.
+            The Snapshot Report is an automated assessment checked against BW Advisory&apos;s knowledge base
+            at the moment of purchase. The verification date is printed in your report.
           </p>
           <p className="text-silver/45 font-light text-xs leading-relaxed">
-            Savings figures in both reports are estimates presented as ranges, based on your intake answers and stated assumptions. They are not guarantees. Actual results depend on implementation and adoption.
+            Savings figures in both reports are estimates presented as ranges, based on your intake answers
+            and stated assumptions. They are not guarantees. Actual results depend on implementation and adoption.
           </p>
           <p className="text-silver/45 font-light text-xs leading-relaxed">
             BW Advisory receives no commission or referral fee from any vendor recommended in your report.
@@ -469,7 +658,7 @@ const Pricing = () => {
             <Link to="/ai-readiness" className="text-[#C9A84C] hover:underline">
               Start with the free AI Readiness diagnostic
             </Link>{' '}
-            — scored result, no account required. Want a conversation first?{' '}
+            &mdash; scored result, no account required. Want a conversation first?{' '}
             <Link to="/consultation" className="text-[#C9A84C] hover:underline">
               Book a consultation.
             </Link>
