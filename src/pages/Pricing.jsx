@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import posthog from 'posthog-js';
 import Footer from '../components/Footer';
@@ -22,25 +22,92 @@ const ENDPOINTS = {
   'solution-map': `${COMMAND_CENTRE_URL}/api/checkout/solution-map`,
 };
 
+const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+
 const CheckoutModal = ({ tier, onClose }) => {
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [phone, setPhone] = useState('');
+  const [marketingOptIn, setMarketingOptIn] = useState(false);
   const [consented, setConsented] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const openedAt = useRef(Date.now());
+  const continuedClicked = useRef(false);
+
+  const canContinue = isValidEmail(email) && consented;
+
+  useEffect(() => {
+    posthog.capture('checkout_modal_opened', { tier });
+  }, [tier]);
+
+  const handleClose = () => {
+    if (!continuedClicked.current) {
+      posthog.capture('checkout_modal_closed_without_continue', {
+        tier,
+        email_entered: email.trim().length > 0,
+        time_open_ms: Date.now() - openedAt.current,
+      });
+    }
+    onClose();
+  };
+
+  const handleEmailBlur = () => {
+    if (email.trim() && !isValidEmail(email)) {
+      setEmailError('Please enter a valid email address.');
+    } else {
+      setEmailError('');
+    }
+    if (email.trim()) {
+      const domain = email.trim().split('@')[1] || '';
+      posthog.capture('checkout_email_entered', { tier, email_domain: domain });
+    }
+  };
+
+  const handlePhoneBlur = () => {
+    if (phone.trim()) {
+      posthog.capture('checkout_phone_entered', { tier });
+    }
+  };
+
+  const handleMarketingChange = (e) => {
+    const checked = e.target.checked;
+    setMarketingOptIn(checked);
+    posthog.capture(
+      checked ? 'checkout_marketing_consent_ticked' : 'checkout_marketing_consent_unticked',
+      { tier },
+    );
+  };
+
   const confirm = async () => {
-    if (!consented || loading) return;
+    if (!canContinue || loading) return;
+    if (!isValidEmail(email)) {
+      setEmailError('Please enter a valid email address.');
+      return;
+    }
+    continuedClicked.current = true;
+    posthog.capture('checkout_continue_clicked', {
+      tier,
+      has_phone: phone.trim().length > 0,
+      marketing_opt_in: marketingOptIn,
+    });
     setLoading(true);
     setError(null);
+    const body = {
+      email: email.trim(),
+      marketingOptIn,
+      consentVersion: CONSENT_VERSION,
+      termsVersion: TERMS_VERSION,
+      consentAt: new Date().toISOString(),
+      sourceSurface: 'pricing_page',
+    };
+    if (phone.trim()) body.phone = phone.trim().slice(0, 30);
     try {
       const res = await fetch(ENDPOINTS[tier], {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          consentVersion: CONSENT_VERSION,
-          termsVersion: TERMS_VERSION,
-          consentAt: new Date().toISOString(),
-          sourceSurface: 'pricing_page',
-        }),
+        body: JSON.stringify(body),
       });
       if (!res.ok) throw new Error(res.status);
       const { url } = await res.json();
@@ -52,6 +119,9 @@ const CheckoutModal = ({ tier, onClose }) => {
     }
   };
 
+  const inputBase =
+    'w-full bg-[#0A1120] border rounded-lg px-4 py-3 text-sm text-white placeholder:text-silver/30 focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/60 focus:border-[#C9A84C]/40';
+
   return (
     <div
       className="fixed inset-0 z-[300] flex items-center justify-center px-4"
@@ -61,43 +131,96 @@ const CheckoutModal = ({ tier, onClose }) => {
     >
       <div
         className="absolute inset-0 bg-primary/90 backdrop-blur-md"
-        onClick={onClose}
+        onClick={handleClose}
         aria-hidden="true"
       />
-      <div className="relative z-10 bg-[#0F1929] border border-white/15 rounded-2xl p-8 md:p-10 max-w-lg w-full space-y-6 shadow-2xl">
+      <div className="relative z-10 bg-[#0F1929] border border-white/15 rounded-2xl p-8 md:p-10 max-w-lg w-full space-y-5 shadow-2xl">
         <h2 id="checkout-modal-title" className="font-display font-bold text-xl text-white">
           Before you pay
         </h2>
+
+        {/* Email */}
+        <div className="space-y-1.5">
+          <label htmlFor="checkout-email" className="block text-silver/60 text-xs font-mono tracking-[0.12em] uppercase">
+            Where should we send your intake link?
+          </label>
+          <input
+            id="checkout-email"
+            type="email"
+            autoFocus
+            autoComplete="email"
+            value={email}
+            onChange={(e) => { setEmail(e.target.value); if (emailError) setEmailError(''); }}
+            onBlur={handleEmailBlur}
+            placeholder="you@yourbusiness.com.au"
+            maxLength={254}
+            style={{ transition: 'border-color 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1)' }}
+            className={`${inputBase} ${emailError ? 'border-red-500/60' : 'border-white/15'}`}
+          />
+          {emailError && (
+            <p className="text-red-400 text-xs font-light">{emailError}</p>
+          )}
+        </div>
+
+        {/* Phone */}
+        <div className="space-y-1.5">
+          <label htmlFor="checkout-phone" className="block text-silver/40 text-xs font-mono tracking-[0.12em] uppercase">
+            Phone <span className="normal-case tracking-normal font-light">(optional)</span>
+          </label>
+          <input
+            id="checkout-phone"
+            type="tel"
+            autoComplete="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value.slice(0, 30))}
+            onBlur={handlePhoneBlur}
+            placeholder="+61 4XX XXX XXX"
+            maxLength={30}
+            style={{ transition: 'border-color 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1)' }}
+            className={`${inputBase} border-white/10`}
+          />
+          <p className="text-silver/35 text-xs font-light leading-relaxed">
+            We may call this number about your unfinished purchase — not used for marketing.
+          </p>
+        </div>
+
+        {/* Marketing consent */}
+        <label className="flex items-start gap-3 cursor-pointer group">
+          <input
+            type="checkbox"
+            checked={marketingOptIn}
+            onChange={handleMarketingChange}
+            style={{ transition: 'opacity 150ms cubic-bezier(0.16, 1, 0.3, 1)' }}
+            className="mt-1 w-4 h-4 accent-[#C9A84C] cursor-pointer flex-shrink-0 focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60"
+          />
+          <span className="text-silver/55 font-light text-sm leading-relaxed group-hover:text-silver/80 transition-colors duration-150">
+            I&apos;d like to hear about future BW Advisory content, guides and offers by email. You can unsubscribe at any time.
+          </span>
+        </label>
+
+        {/* Terms consent */}
         <label className="flex items-start gap-3 cursor-pointer group">
           <input
             type="checkbox"
             checked={consented}
             onChange={(e) => setConsented(e.target.checked)}
+            style={{ transition: 'opacity 150ms cubic-bezier(0.16, 1, 0.3, 1)' }}
             className="mt-1 w-4 h-4 accent-[#C9A84C] cursor-pointer flex-shrink-0 focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60"
           />
-          <span className="text-silver/80 font-light text-sm leading-relaxed group-hover:text-white transition-colors duration-200">
+          <span className="text-silver/80 font-light text-sm leading-relaxed group-hover:text-white transition-colors duration-150">
             {CHECKBOX_COPY[tier]}
           </span>
         </label>
+
         <p className="text-silver/50 text-xs font-light">
           {PURCHASE_ENABLED ? (
             <>
               By continuing you agree to BW Advisory&apos;s{' '}
-              <a
-                href="/privacy"
-                className="text-[#C9A84C] hover:underline"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href="/privacy" className="text-[#C9A84C] hover:underline" target="_blank" rel="noreferrer">
                 Privacy Policy
               </a>
               {' '}and{' '}
-              <a
-                href="/terms"
-                className="text-[#C9A84C] hover:underline"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href="/terms" className="text-[#C9A84C] hover:underline" target="_blank" rel="noreferrer">
                 Service Terms
               </a>
               .
@@ -105,30 +228,28 @@ const CheckoutModal = ({ tier, onClose }) => {
           ) : (
             <>
               By continuing you also agree to BW Advisory&apos;s{' '}
-              <a
-                href="/privacy"
-                className="text-[#C9A84C] hover:underline"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href="/privacy" className="text-[#C9A84C] hover:underline" target="_blank" rel="noreferrer">
                 Privacy Policy
               </a>
               . Service Terms will be linked here once finalised by our solicitor.
             </>
           )}
         </p>
+
         {error && (
           <p className="text-red-400 text-sm font-light">{error}</p>
         )}
-        <div className="flex flex-col sm:flex-row gap-3 pt-2">
+
+        <div className="flex flex-col sm:flex-row gap-3 pt-1">
           <button
             type="button"
             onClick={confirm}
-            disabled={!consented || loading}
+            disabled={!canContinue || loading}
+            style={{ transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)' }}
             className={[
-              'flex-1 px-8 py-4 rounded-lg font-bold text-sm tracking-[0.15em] uppercase transition-all duration-300 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60 focus-visible:outline-none',
-              consented && !loading
-                ? 'bg-[#C9A84C] text-[#0F172A] hover:bg-[#E0BC60] shadow-[0_8px_24px_rgba(201,168,76,0.3)]'
+              'flex-1 px-8 py-4 rounded-lg font-bold text-sm tracking-[0.15em] uppercase focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60 focus-visible:outline-none',
+              canContinue && !loading
+                ? 'bg-[#C9A84C] text-[#0F172A] hover:bg-[#E0BC60] shadow-[0_8px_24px_rgba(201,168,76,0.3)] cursor-pointer'
                 : 'bg-white/10 text-silver/40 cursor-not-allowed',
             ].join(' ')}
           >
@@ -136,8 +257,9 @@ const CheckoutModal = ({ tier, onClose }) => {
           </button>
           <button
             type="button"
-            onClick={onClose}
-            className="px-8 py-4 rounded-lg border border-white/15 text-silver/60 text-sm font-bold tracking-[0.15em] uppercase hover:text-white hover:border-white/30 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:outline-none"
+            onClick={handleClose}
+            style={{ transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)' }}
+            className="px-8 py-4 rounded-lg border border-white/15 text-silver/60 text-sm font-bold tracking-[0.15em] uppercase hover:text-white hover:border-white/30 cursor-pointer focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:outline-none"
           >
             Cancel
           </button>
