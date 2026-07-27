@@ -38,7 +38,12 @@ const Layout = ({ children }) => {
   const isHome = pathname === '/';
   const isIntelligence = pathname === '/loss-intelligence';
   const isInvestigations = pathname === '/investigations';
-  const isPlainDiagnostic = pathname === '/diagnostics' || pathname === '/ai-readiness' || pathname === '/pricing';
+  const isPlainDiagnostic =
+    pathname === '/diagnostics' ||
+    pathname === '/ai-readiness' ||
+    pathname === '/pricing' ||
+    pathname === '/privacy' ||
+    pathname === '/terms';
 
   return (
     <div className="w-full min-h-screen selection:bg-accent/40 selection:text-surface font-sans text-textDark bg-primary relative overflow-x-hidden">
