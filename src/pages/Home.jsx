@@ -206,17 +206,17 @@ const Home = () => {
             loop
             muted
             playsInline
-            style={{ transform: 'scale(1.03)' }}
+            style={{ transform: 'scale(1.03)', filter: 'brightness(1.3) contrast(0.94) saturate(1.12)' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#08101f]/30 via-[#0a1428]/18 to-[#08101f]/40 pointer-events-none" />
-          <div className="absolute bottom-0 left-0 right-0 h-[45%] bg-gradient-to-t from-[#08101f]/78 via-[#08101f]/32 to-transparent pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#08101f]/40 via-[#08101f]/10 to-transparent pointer-events-none" />
-          <div className="absolute top-0 left-0 right-0 h-[16%] bg-gradient-to-b from-[#08101f]/35 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#08101f]/14 via-[#0a1428]/8 to-[#08101f]/20 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-[45%] bg-gradient-to-t from-[#08101f]/55 via-[#08101f]/18 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#08101f]/18 via-[#08101f]/5 to-transparent pointer-events-none" />
+          <div className="absolute top-0 left-0 right-0 h-[16%] bg-gradient-to-b from-[#08101f]/18 to-transparent pointer-events-none" />
           {/* Wordmark vignette — extra depth behind shield/title/SOLUTIONS/tagline so they pop without heavier type */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: 'radial-gradient(ellipse 62% 56% at 50% 36%, rgba(5,10,20,0.58) 0%, rgba(5,10,20,0.32) 55%, transparent 85%)',
+              background: 'radial-gradient(ellipse 62% 56% at 50% 36%, rgba(5,10,20,0.6) 0%, rgba(5,10,20,0.32) 55%, transparent 85%)',
             }}
           />
         </div>
@@ -226,12 +226,12 @@ const Home = () => {
             <TransparentShield />
           </div>
           <div className="flex flex-col items-center gap-10">
-            <h2 className="logo-letter float-breathe font-serif font-semibold text-5xl md:text-7xl lg:text-8xl tracking-[0.06em] leading-tight inline-block drop-shadow-[0_4px_40px_rgba(0,0,0,0.5)] platinum-text">
+            <h2 className="logo-letter float-breathe font-serif font-semibold text-5xl md:text-7xl lg:text-8xl tracking-[0.06em] leading-tight inline-block [filter:drop-shadow(0_2px_4px_rgba(0,0,0,0.9))_drop-shadow(0_8px_28px_rgba(0,0,0,0.65))] platinum-text">
               BW ADVISORY
             </h2>
             <div className="flex items-center gap-8 w-full justify-center overflow-hidden">
               <div className="solutions-line h-[1px] flex-grow max-w-[80px] bg-gradient-to-r from-transparent via-[#C9A84C]/40 to-[#C9A84C]/60"></div>
-              <p className="solutions-word font-sans font-semibold text-[#C9A84C] tracking-[0.3em] text-base md:text-xl uppercase drop-shadow-[0_0_16px_rgba(201,168,76,0.7)]">
+              <p className="solutions-word font-sans font-semibold text-[#C9A84C] tracking-[0.3em] text-base md:text-xl uppercase [filter:drop-shadow(0_1px_3px_rgba(0,0,0,0.9))_drop-shadow(0_0_16px_rgba(201,168,76,0.7))]">
                 SOLUTIONS
               </p>
               <div className="solutions-line h-[1px] flex-grow max-w-[80px] bg-gradient-to-l from-transparent via-[#C9A84C]/40 to-[#C9A84C]/60"></div>
@@ -240,7 +240,7 @@ const Home = () => {
         </div>
 
         <div className="w-full max-w-7xl mx-auto mt-16 relative z-20">
-          <div className="hero-elem mb-10 drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)]">
+          <div className="hero-elem mb-10 drop-shadow-[0_3px_14px_rgba(0,0,0,0.75)]">
             <p className="font-sans italic font-semibold text-[#C9A84C] text-2xl md:text-3xl lg:text-4xl leading-snug">
               The gaps you can't see. The capability to close them.{' '}
               <span className="not-italic font-bold text-white">I deliver both.</span>
@@ -248,7 +248,7 @@ const Home = () => {
           </div>
           <div className="hero-elem relative mt-12 max-w-4xl mx-auto">
             <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-[#C9A84C]/40 via-accent/20 to-[#C9A84C]/10 pointer-events-none" />
-            <div className="relative bg-white/8 backdrop-blur-sm border border-[#C9A84C]/30 rounded-3xl p-10 md:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.4),0_0_60px_rgba(201,168,76,0.08)]">
+            <div className="relative bg-[#050b14]/65 backdrop-blur-lg border border-[#C9A84C]/35 rounded-3xl p-10 md:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.4),0_0_60px_rgba(201,168,76,0.08)]">
               <div className="space-y-5 text-center">
                 <p className="text-xs font-mono tracking-[0.35em] uppercase text-[#C9A84C] font-bold">Operational Reality</p>
                 <h2 className="font-display text-2xl md:text-3xl font-semibold text-white leading-tight">
@@ -301,10 +301,10 @@ const Home = () => {
               <div className="relative block bg-gradient-to-br from-[#1A3560]/80 via-[#0D1520]/60 to-[#051020]/80 border border-accent/40 group-hover:border-[#C9A84C]/60 rounded-3xl p-8 md:p-10 transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.2)] h-full flex flex-col">
                 <div className="mb-6">
                   <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-xs uppercase font-bold mb-4">Practice Area 02</p>
-                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-white leading-snug min-h-[5rem]">Professional &amp; Healthcare Practices</h3>
+                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-white leading-snug min-h-[5rem]">Technology Advisory</h3>
                 </div>
                 <p className="text-silver/85 font-light text-sm md:text-base leading-relaxed mb-8 flex-1">
-                  Accounting, legal, financial advice, chiropractic, physiotherapy, dental, and GP practices — where operational pressure, compliance exposure, and client or patient data risk combine. Diagnostic-led, practically delivered, without disrupting how the practice runs.
+                  Cutting through an overcrowded technology market — as the end user who's needed these systems to work, not the vendor selling them. I diagnose what your operation actually needs, then identify and connect best-in-class technology: vetted, matched, and integrated to how you already work.
                 </p>
               </div>
             </a>
@@ -313,10 +313,10 @@ const Home = () => {
               <div className="relative block bg-gradient-to-br from-[#1A3560]/80 via-[#0D1520]/60 to-[#051020]/80 border border-accent/40 group-hover:border-[#C9A84C]/60 rounded-3xl p-8 md:p-10 transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.2)] h-full flex flex-col">
                 <div className="mb-6">
                   <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-xs uppercase font-bold mb-4">Practice Area 03</p>
-                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-white leading-snug min-h-[5rem]">Technology Advisory</h3>
+                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-white leading-snug min-h-[5rem]">Professional &amp; Healthcare Practices</h3>
                 </div>
                 <p className="text-silver/85 font-light text-sm md:text-base leading-relaxed mb-8 flex-1">
-                  Cutting through an overcrowded technology market — as the end user who's needed these systems to work, not the vendor selling them. I diagnose what your operation actually needs, then identify and connect best-in-class technology: vetted, matched, and integrated to how you already work.
+                  Accounting, legal, financial advice, chiropractic, physiotherapy, dental, and GP practices — where operational pressure, compliance exposure, and client or patient data risk combine. Diagnostic-led, practically delivered, without disrupting how the practice runs.
                 </p>
               </div>
             </a>
