@@ -321,6 +321,14 @@ const Diagnostics = () => {
                   <DiagnosticCard key={item.badge} item={item} />
                 ))}
               </div>
+
+              {/* Paid-tier note under Stream 01 only */}
+              {group.label === 'Stream 01' && import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true' && (
+                <p className="text-silver/50 font-light text-sm">
+                  Paid tiers from $497 incl. GST —{' '}
+                  <Link to="/pricing" className="text-[#C9A84C] hover:underline">see pricing</Link>.
+                </p>
+              )}
             </div>
           ))}
         </div>

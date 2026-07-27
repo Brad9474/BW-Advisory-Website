@@ -524,6 +524,39 @@ const Home = () => {
         </div>
       </section>
 
+      {/* ── PRICING STRIP ── (hidden until VITE_PURCHASE_SURFACE_ENABLED=true) */}
+      {import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true' && (
+        <section className="py-24 w-full relative z-10 bg-gradient-to-b from-primary via-[#0A1520] to-primary overflow-hidden">
+          <div className="max-w-5xl mx-auto px-6 space-y-10">
+            <div className="text-center space-y-3">
+              <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs font-bold">Paid Reports</p>
+              <h2 className="font-display font-semibold text-3xl md:text-4xl text-white tracking-tight">AI readiness reports. Fixed price. No call required.</h2>
+              <p className="text-silver/65 font-light text-base">Paid tiers from $497 incl. GST</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Link
+                to="/pricing#snapshot"
+                className="group block bg-gradient-to-br from-white/8 via-white/4 to-white/2 border border-white/15 hover:border-[#C9A84C]/40 rounded-2xl p-8 space-y-3 transition-all duration-300 hover:bg-white/10"
+              >
+                <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Snapshot Report</p>
+                <p className="font-display font-bold text-3xl text-white">$497 <span className="text-sm text-silver/50 font-light">incl. GST</span></p>
+                <p className="text-silver/70 font-light text-sm leading-relaxed">Automated — instant delivery. Named tools, verified pricing, and a 4-day setup plan per opportunity.</p>
+                <p className="text-[#C9A84C] text-sm font-semibold group-hover:underline">View pricing →</p>
+              </Link>
+              <Link
+                to="/pricing#solution-map"
+                className="group block bg-gradient-to-br from-[#C9A84C]/6 via-white/4 to-white/2 border border-[#C9A84C]/20 hover:border-[#C9A84C]/50 rounded-2xl p-8 space-y-3 transition-all duration-300 hover:bg-[#C9A84C]/8"
+              >
+                <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Solution Map</p>
+                <p className="font-display font-bold text-3xl text-white">$1,497 <span className="text-sm text-silver/50 font-light">incl. GST</span></p>
+                <p className="text-silver/70 font-light text-sm leading-relaxed">Personally reviewed by Brad. Everything in the Snapshot, plus deeper analysis, sequencing, and a 30-min call.</p>
+                <p className="text-[#C9A84C] text-sm font-semibold group-hover:underline">View pricing →</p>
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── ENGAGEMENT: THE CONVERSATION ── */}
       <section id="contact" className="py-32 px-6 w-full bg-gradient-to-b from-[#0D1520] via-primary to-primary relative z-10">
         <div className="max-w-5xl mx-auto">
