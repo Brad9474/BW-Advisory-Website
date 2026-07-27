@@ -1524,8 +1524,8 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="bg-white/5 border border-white/15 rounded-2xl p-6 md:p-8 space-y-4">
             <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Snapshot Report — $497</p>
-            <p className="text-silver/55 font-light text-xs uppercase tracking-wider">Delivered in minutes, automatically.</p>
-            <p className="text-silver/70 font-light text-sm leading-relaxed">A focused look at your top opportunities. For each one, you get the specific tool to use and step-by-step DIY instructions so you can implement it yourself. Fewer opportunities, faster delivery.</p>
+            <p className="text-silver/55 font-light text-xs uppercase tracking-wider">Delivered in minutes, automated.</p>
+            <p className="text-silver/70 font-light text-sm leading-relaxed">A focused report on your priority opportunities. For each: the specific tool to use and step-by-step DIY instructions so you can implement it yourself.</p>
             {import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true' && (
               <a href="/pricing#snapshot" onClick={() => posthog.capture('diagnostic_result_pricing_clicked', { score, tier: 'snapshot' })}
                 className="inline-flex items-center gap-2 text-[#C9A84C] text-sm font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50 rounded">
@@ -1536,7 +1536,7 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
           <div className="bg-gradient-to-br from-[#C9A84C]/8 to-white/2 border border-[#C9A84C]/25 rounded-2xl p-6 md:p-8 space-y-4">
             <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Solution Map — $1,497 <span className="text-silver/50 font-normal normal-case tracking-normal">(recommended)</span></p>
             <p className="text-silver/55 font-light text-xs uppercase tracking-wider">Personally reviewed by Brad.</p>
-            <p className="text-silver/70 font-light text-sm leading-relaxed">A strategic walkthrough of your entire operation. More opportunities analysed in more depth, each with tool recommendations and detailed implementation steps. Plus Brad's personal review of your business context, priority-ordered next steps, and a 60-minute strategy call to walk through everything.</p>
+            <p className="text-silver/70 font-light text-sm leading-relaxed">A strategic walkthrough of your entire operation. Tool recommendations and detailed implementation steps across your workflow, plus Brad's personal review of your business context, priority-ordered next steps, and a 60-minute strategy call to walk through everything.</p>
             {import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true' && (
               <a href="/pricing#solution-map" onClick={() => posthog.capture('diagnostic_result_pricing_clicked', { score, tier: 'solution-map' })}
                 className="inline-flex items-center gap-2 text-[#C9A84C] text-sm font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50 rounded">
