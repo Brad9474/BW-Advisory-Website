@@ -1635,6 +1635,8 @@ const AIReadiness = () => {
   const completedRef   = useRef(false);
   const prevA1Ref      = useRef(undefined);
   const prevA5LPRef    = useRef(false);
+  const sectorRef      = useRef('retail');
+  const responsesRef   = useRef({});
 
   // Sector derived from A1 — drives which question bank is shown
   const sector = useMemo(() => getSector(responses.A1), [responses.A1]);
@@ -1647,6 +1649,10 @@ const AIReadiness = () => {
     () => Object.fromEntries(activeQuestions.map((q) => [q.id, q])),
     [activeQuestions]
   );
+
+  // Keep refs current each render so stable callbacks always see latest values.
+  sectorRef.current    = sector;
+  responsesRef.current = responses;
 
   // Reset sector-specific responses when A1 changes
   useEffect(() => {
@@ -1697,7 +1703,7 @@ const AIReadiness = () => {
   }, []);
 
   const startDiagnostic = useCallback(() => {
-    posthog.capture('ai_readiness_started');
+    posthog.capture('ai_readiness_started', { path: window.location.pathname });
     setDirection('forward');
     setStep(0);
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1707,6 +1713,19 @@ const AIReadiness = () => {
     if (advanceLockRef.current) return;
     advanceLockRef.current = true;
     setDirection('forward');
+    const s = stepRef.current;
+    if (s >= 0 && s < TOTAL_QUESTIONS) {
+      const qs = buildQuestions(sectorRef.current, responsesRef.current.A5);
+      const q = qs[s];
+      if (q && typeof posthog?.capture === 'function') {
+        posthog.capture('ai_readiness_question_answered', {
+          question_id:    q.id,
+          question_index: s,
+          sector:         sectorRef.current,
+          answer_value:   q.kind !== 'text' ? responsesRef.current[q.id] : undefined,
+        });
+      }
+    }
     setStep((s) => {
       const next = Math.min(s + 1, STEP_RESULTS);
       trackEvent({ sessionId, event: 'ADVANCE', questionIndex: next });
@@ -1763,8 +1782,8 @@ const AIReadiness = () => {
 
     completedRef.current = true;
     trackEvent({ sessionId, event: 'COMPLETE', score, diagnosticType });
-    posthog.identify(lead.email.trim(), { name: lead.name.trim() });
-    posthog.capture('ai_readiness_completed', { score, diagnostic_type: diagnosticType, concern_count: riskAreas.filter((a) => a.severity !== 'MODERATE').length });
+    posthog.identify(lead.email.trim(), { name: lead.name.trim(), sector });
+    posthog.capture('ai_readiness_completed', { sector, score, diagnostic_type: diagnosticType, concern_count: riskAreas.filter((a) => a.severity !== 'MODERATE').length });
 
     setDirection('forward');
     setStep(STEP_RESULTS);
@@ -1773,13 +1792,28 @@ const AIReadiness = () => {
 
   useEffect(() => {
     stepRef.current = step;
-    if (step === STEP_EMAIL) trackEvent({ sessionId, event: 'EMAIL_CAPTURE' });
-  }, [step, sessionId]);
+    if (step === STEP_EMAIL) {
+      trackEvent({ sessionId, event: 'EMAIL_CAPTURE' });
+      if (typeof posthog?.capture === 'function') {
+        posthog.capture('ai_readiness_email_gate_reached', {
+          sector,
+          questions_answered: Object.keys(responses).filter((k) => !k.endsWith('_other')).length,
+        });
+      }
+    }
+  }, [step, sessionId, sector, responses]);
 
   useEffect(() => {
     const handler = () => {
       if (completedRef.current || !startFiredRef.current) return;
       trackEvent({ sessionId, event: 'ABANDON', questionIndex: stepRef.current });
+      if (typeof posthog?.capture === 'function') {
+        posthog.capture('ai_readiness_abandoned', {
+          current_question_index: stepRef.current,
+          sector:                 sectorRef.current,
+          questions_answered:     Object.keys(responsesRef.current).filter((k) => !k.endsWith('_other')).length,
+        });
+      }
     };
     window.addEventListener('beforeunload', handler);
     return () => window.removeEventListener('beforeunload', handler);
