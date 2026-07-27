@@ -43,7 +43,8 @@ const Layout = ({ children }) => {
     pathname === '/ai-readiness' ||
     pathname === '/pricing' ||
     pathname === '/privacy' ||
-    pathname === '/terms';
+    pathname === '/terms' ||
+    pathname === '/consultation';
 
   return (
     <div className="w-full min-h-screen selection:bg-accent/40 selection:text-surface font-sans text-textDark bg-primary relative overflow-x-hidden">
