@@ -147,19 +147,16 @@ const CheckoutModal = ({ tier, onClose }) => {
   );
 };
 
-// ─── Buy button ───────────────────────────────────────────────────────────────
+// ─── Card CTA button ──────────────────────────────────────────────────────────
 
-const BuyButton = ({ tier, label, onOpen, className = '' }) => {
+const CardCTA = ({ tier, label, onOpen }) => {
   if (!PURCHASE_ENABLED) {
     return (
       <button
         type="button"
         disabled
         title="Purchase not yet available"
-        className={[
-          'w-full sm:w-auto px-10 py-4 rounded-full font-bold text-sm tracking-[0.15em] uppercase bg-white/10 text-silver/40 cursor-not-allowed border border-white/10',
-          className,
-        ].join(' ')}
+        className="w-full px-8 py-4 rounded-lg font-bold text-sm tracking-[0.15em] uppercase bg-white/8 text-silver/35 cursor-not-allowed border border-white/10"
       >
         {label}
       </button>
@@ -170,15 +167,39 @@ const BuyButton = ({ tier, label, onOpen, className = '' }) => {
     <button
       type="button"
       onClick={() => onOpen(tier)}
-      className={[
-        'w-full sm:w-auto px-10 py-4 rounded-full font-bold text-sm tracking-[0.15em] uppercase transition-all duration-300 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60 focus-visible:outline-none bg-[#C9A84C] text-[#0F172A] hover:bg-[#E0BC60] shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)]',
-        className,
-      ].join(' ')}
+      style={{ transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)' }}
+      className="w-full px-8 py-4 rounded-lg font-bold text-sm tracking-[0.15em] uppercase cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-4 focus-visible:ring-offset-[#0F172A] focus-visible:ring-[#C9A84C]/60 focus-visible:outline-none bg-[#C9A84C] text-[#0F172A] hover:bg-[#E0BC60] shadow-[0_8px_24px_rgba(201,168,76,0.25)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)]"
     >
       {label}
     </button>
   );
 };
+
+// ─── Icons ────────────────────────────────────────────────────────────────────
+
+const CheckIcon = () => (
+  <svg
+    className="w-4 h-4 text-[#C9A84C] flex-shrink-0 mt-0.5"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+  </svg>
+);
+
+const XIcon = () => (
+  <svg
+    className="w-4 h-4 text-silver/25 flex-shrink-0 mt-0.5"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 18L18 6M6 6l12 12" />
+  </svg>
+);
 
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 
@@ -251,7 +272,7 @@ const FAQItem = ({ q, a }) => {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 const Pricing = () => {
-  const [modal, setModal] = useState(null); // null | 'snapshot' | 'solution-map'
+  const [modal, setModal] = useState(null);
 
   const openModal = (tier) => setModal(tier);
   const closeModal = () => setModal(null);
@@ -261,121 +282,154 @@ const Pricing = () => {
       {modal && <CheckoutModal tier={modal} onClose={closeModal} />}
 
       {/* ── HERO ── */}
-      <section className="pt-40 md:pt-52 pb-20 px-6 w-full">
-        <div className="max-w-5xl mx-auto text-center space-y-6">
-          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">Pricing</p>
+      <section className="pt-40 md:pt-52 pb-10 px-6 w-full">
+        <div className="max-w-5xl mx-auto text-center space-y-5">
+          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">
+            TWO REPORTS
+          </p>
           <h1 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.05]">
-            Two reports. Fixed prices.<br className="hidden md:block" /> No sales call required.
+            Pick what fits.
           </h1>
-          <div className="space-y-5 max-w-3xl mx-auto text-left md:text-center">
-            <p className="text-silver/80 font-light text-xl md:text-2xl leading-relaxed">
-              Most operators know AI matters. Working out which tools fit your business is the part nobody has time for. The market is crowded, and every consultant wants a four-week engagement before they'll name a single tool.
-            </p>
-            <p className="text-silver/80 font-light text-xl md:text-2xl leading-relaxed">
-              We've done that work. These reports are the output: named tools matched to your workflows, verified pricing, a trust and safety check on each one, and a setup plan you can start the week the report lands. A clear implementation path. Fixed price. No discovery engagement.
-            </p>
-            <p className="text-silver/65 font-light text-base md:text-lg leading-relaxed">
-              Built by Brad Warburton — 30 years in law enforcement command, National Director of Law Enforcement Partnerships at Auror, founder of BW Advisory Solutions.
-            </p>
-          </div>
-          <p className="text-silver/50 text-sm font-light tracking-wide">All prices include GST.</p>
+          <p className="text-silver/80 font-light text-xl md:text-2xl max-w-lg mx-auto leading-snug">
+            Two reports. Fixed prices. No sales call required.
+          </p>
         </div>
       </section>
 
-      {/* ── SNAPSHOT TIER ── */}
-      <section id="snapshot" className="py-16 px-6 w-full scroll-mt-28">
-        <div className="max-w-5xl mx-auto">
-          <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-white/15 rounded-3xl p-8 md:p-14 space-y-8">
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-              <div className="space-y-2">
-                <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Snapshot Report</p>
-                <h2 className="font-display font-bold text-4xl md:text-5xl text-white">$497</h2>
-                <p className="text-silver/50 text-sm font-light">incl. GST</p>
-              </div>
-              <p className="text-[#C9A84C] font-semibold text-lg md:text-xl">Automated. Instant. Complete at its price.</p>
-            </div>
+      {/* ── PRICING CARDS ── */}
+      <section className="pb-20 px-6 w-full">
+        <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-6 items-stretch">
 
-            <div className="space-y-5 text-silver/80 font-light text-base md:text-lg leading-relaxed max-w-3xl">
-              <p>
-                The Snapshot takes your intake answers and identifies the workflow areas where automation is most likely to reduce administrative time in your business. For each one: a primary tool checked against the software you already run, the alternatives we considered, and a trust and safety note covering data residency, certifications, and what to switch off before any client data touches it. Each tool comes with a 4-day setup plan you can start the week the report lands. No IT department required.
-              </p>
-              <p>
-                The savings projections are ranges, not promises. Every figure carries its assumptions, its evidence rating, and the date the tool's pricing was verified. You see the workings. You decide what to act on.
+          {/* AI Snapshot Report — desktop left, mobile second */}
+          <div
+            id="snapshot"
+            className="order-2 lg:order-1 flex-1 flex flex-col bg-white/[0.04] border border-white/10 rounded-2xl p-8 space-y-6 scroll-mt-28"
+          >
+            <div className="space-y-1.5">
+              <h2 className="font-display font-bold text-2xl text-white">AI Snapshot Report</h2>
+              <p className="text-silver/55 font-light text-sm leading-snug">
+                Automated. Instant. Complete at its price.
               </p>
             </div>
 
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5 md:p-6 space-y-2">
-              <p className="text-silver/50 font-mono text-xs tracking-[0.3em] uppercase font-bold">What it's not</p>
-              <p className="text-silver/75 font-light text-base leading-relaxed">
-                Nobody reviews this report by hand. The system generates it from your answers, using a methodology Brad Warburton built and maintains. If the report is wrong about your business, the guarantee below applies. If you want Brad's personal review of your business, that is the Solution Map.
+            <div className="space-y-2">
+              <p className="font-display font-bold text-6xl text-white tabular-nums leading-none">
+                $497
+              </p>
+              <p className="text-silver/45 text-xs font-light">incl. GST</p>
+              <span className="inline-flex items-center mt-2 px-3 py-1 rounded-full bg-[#C9A84C]/12 border border-[#C9A84C]/25 text-[#C9A84C] text-xs font-mono font-bold tracking-[0.15em] uppercase">
+                Delivered in minutes
+              </span>
+            </div>
+
+            <div className="space-y-3">
+              <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">
+                What you get
+              </p>
+              <ul className="space-y-2.5">
+                {[
+                  '8–12 tools matched to your workflows',
+                  'Trust & safety notes on each tool',
+                  '4-day setup plan per tool',
+                  'Verified pricing with check date printed',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5">
+                    <CheckIcon />
+                    <span className="text-silver/75 font-light text-sm leading-snug">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="space-y-3 pt-2 border-t border-white/8">
+              <p className="text-silver/35 font-mono text-xs tracking-[0.2em] uppercase font-bold">
+                Not included
+              </p>
+              <ul className="space-y-2.5">
+                {[
+                  "Brad's personal review of your business",
+                  '60-min call with Brad',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5">
+                    <XIcon />
+                    <span className="text-silver/30 font-light text-sm leading-snug">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-xs">
+                <a
+                  href="#solution-map"
+                  style={{ transition: 'color 150ms cubic-bezier(0.16, 1, 0.3, 1)' }}
+                  className="text-[#C9A84C]/60 hover:text-[#C9A84C]"
+                >
+                  Upgrade to the Solution Map — your $497 credits in full for 60 days →
+                </a>
               </p>
             </div>
 
-            <p className="text-silver/50 text-sm font-light italic">
-              The Snapshot Report is an automated assessment checked against BW Advisory's knowledge base at the moment of purchase. The verification date is printed in your report.
-            </p>
+            <div className="flex-1" />
 
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5 md:p-6 space-y-2">
-              <p className="text-silver/50 font-mono text-xs tracking-[0.3em] uppercase font-bold">Delivery</p>
-              <p className="text-silver/75 font-light text-base">
-                Pay, and the intake link is in your inbox within a minute. The intake takes about ten minutes. Your report generates the moment you submit it.
-              </p>
-            </div>
-
-            <p className="text-silver/70 font-light text-sm leading-relaxed">
-              Your $497 counts in full toward the Solution Map for 60 days. Buying the Snapshot first costs you nothing extra.
-            </p>
-
-            <div className="pt-4">
-              <BuyButton tier="snapshot" label="Get the Snapshot Report — $497" onOpen={openModal} />
-            </div>
+            <CardCTA tier="snapshot" label="Get the Snapshot — $497" onOpen={openModal} />
           </div>
-        </div>
-      </section>
 
-      {/* ── SOLUTION MAP TIER ── */}
-      <section id="solution-map" className="py-16 px-6 w-full scroll-mt-28">
-        <div className="max-w-5xl mx-auto">
-          <div className="relative bg-gradient-to-br from-[#C9A84C]/8 via-white/4 to-white/2 backdrop-blur-sm border border-[#C9A84C]/20 rounded-3xl p-8 md:p-14 space-y-8">
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-              <div className="space-y-2">
-                <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Solution Map</p>
-                <h2 className="font-display font-bold text-4xl md:text-5xl text-white">$1,497</h2>
-                <p className="text-silver/50 text-sm font-light">incl. GST</p>
-              </div>
-              <p className="text-[#C9A84C] font-semibold text-lg md:text-xl md:text-right md:max-w-sm lg:max-w-none">Brad's personal review of your business, and 60 minutes with him on a call.</p>
+          {/* AI Solution Map — desktop right, mobile first (flagship-first stack) */}
+          <div
+            id="solution-map"
+            className="order-1 lg:order-2 flex-1 flex flex-col rounded-2xl p-8 space-y-6 scroll-mt-28"
+            style={{
+              background: 'linear-gradient(135deg, rgba(201,168,76,0.07) 0%, rgba(255,255,255,0.02) 100%)',
+              border: '2px solid #C9A84C',
+              boxShadow: '0 0 48px rgba(201,168,76,0.10), 0 24px 64px rgba(0,0,0,0.35)',
+            }}
+          >
+            <div>
+              <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#C9A84C] text-[#0F172A] text-xs font-mono font-bold tracking-[0.15em] uppercase">
+                Personally reviewed by Brad
+              </span>
             </div>
 
-            <div className="space-y-5 text-silver/80 font-light text-base md:text-lg leading-relaxed max-w-3xl">
-              <p>
-                Everything in the Snapshot, plus the analysis the intake alone can't reach. Personally reviewed by Brad before it leaves the building.
-              </p>
-              <p>
-                The Snapshot works from the problems you name. The Solution Map reads your whole intake for the patterns your answers show but didn't name — the workflows costing you time that you've stopped noticing. It carries deeper implementation detail on every opportunity: template structures, rollout sequences, team briefing notes, and a priority matrix that sequences all of it.
-              </p>
-              <p>
-                Brad reviews every Solution Map personally before delivery. Then you get 60 minutes with him on a video call, within 5 business days of your report arriving, to work through the priority matrix and decide what to act on first.
+            <div className="space-y-1.5">
+              <h2 className="font-display font-bold text-2xl text-white">AI Solution Map</h2>
+              <p className="text-silver/55 font-light text-sm leading-snug">
+                Brad&apos;s personal review of your business, and 60 minutes with him on a call.
               </p>
             </div>
 
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5 md:p-6 space-y-2">
-              <p className="text-silver/50 font-mono text-xs tracking-[0.3em] uppercase font-bold">Delivery</p>
-              <p className="text-silver/75 font-light text-base">
-                Within 3 business days of your completed intake. The intake is 19 questions — or six, if you've already bought the Snapshot.
+            <div className="space-y-2">
+              <p className="font-display font-bold text-6xl text-white tabular-nums leading-none">
+                $1,497
               </p>
+              <p className="text-silver/45 text-xs font-light">incl. GST</p>
+              <span className="inline-flex items-center mt-2 px-3 py-1 rounded-full bg-[#C9A84C]/12 border border-[#C9A84C]/25 text-[#C9A84C] text-xs font-mono font-bold tracking-[0.15em] uppercase">
+                Delivered in 3 business days
+              </span>
             </div>
 
-            <div className="bg-[#C9A84C]/8 border border-[#C9A84C]/25 rounded-xl p-5 md:p-6 space-y-2">
-              <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">Already bought the Snapshot?</p>
-              <p className="text-silver/75 font-light text-base">
-                Your $497 counts in full toward the Solution Map for 60 days from purchase. You pay $1,000, answer six more questions, and your first thirteen answers are already on file.
+            <div className="space-y-3">
+              <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">
+                What you get
               </p>
+              <ul className="space-y-2.5">
+                {[
+                  'Everything in the Snapshot',
+                  "Brad's personal review before delivery",
+                  'Deep implementation plan per opportunity',
+                  'Priority matrix across all opportunities',
+                  '60-min call with Brad (within 5 business days)',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5">
+                    <CheckIcon />
+                    <span className="text-silver/75 font-light text-sm leading-snug">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <div className="pt-4">
-              <BuyButton tier="solution-map" label="Get the Solution Map — $1,497" onOpen={openModal} />
-            </div>
+            <div className="flex-1" />
+
+            <CardCTA tier="solution-map" label="Get the Solution Map — $1,497" onOpen={openModal} />
           </div>
+
         </div>
       </section>
 
