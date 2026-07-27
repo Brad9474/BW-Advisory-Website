@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 
 const COMMAND_CENTRE_URL = 'https://command.bwadvisorysolutions.com.au';
 const CONSENT_VERSION = 'v1-2026-07-21';
+const TERMS_VERSION = 'v1-2026-07-27';
 const PURCHASE_ENABLED = import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true';
 
 // ─── Pre-checkout consent modal ───────────────────────────────────────────────
@@ -36,6 +37,7 @@ const CheckoutModal = ({ tier, onClose }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           consentVersion: CONSENT_VERSION,
+          termsVersion: TERMS_VERSION,
           consentAt: new Date().toISOString(),
           sourceSurface: 'pricing_page',
         }),
@@ -80,7 +82,7 @@ const CheckoutModal = ({ tier, onClose }) => {
         <p className="text-silver/50 text-xs font-light">
           {PURCHASE_ENABLED ? (
             <>
-              By continuing you agree to BW Advisory's{' '}
+              By continuing you agree to BW Advisory&apos;s{' '}
               <a
                 href="/privacy"
                 className="text-[#C9A84C] hover:underline"
@@ -88,6 +90,15 @@ const CheckoutModal = ({ tier, onClose }) => {
                 rel="noreferrer"
               >
                 Privacy Policy
+              </a>
+              {' '}and{' '}
+              <a
+                href="/terms"
+                className="text-[#C9A84C] hover:underline"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Service Terms
               </a>
               .
             </>

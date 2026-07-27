@@ -20,6 +20,7 @@ const LossIntelligence = React.lazy(() => import('./pages/LossIntelligence'));
 const Diagnostics = React.lazy(() => import('./pages/Diagnostics'));
 const Investigations = React.lazy(() => import('./pages/Investigations'));
 const Privacy = React.lazy(() => import('./pages/Privacy'));
+const Terms = React.lazy(() => import('./pages/Terms'));
 const AIReadiness = React.lazy(() => import('./pages/AIReadiness'));
 const Consultation = React.lazy(() => import('./pages/Consultation'));
 const StrategicDiagnostic = React.lazy(() => import('./pages/StrategicDiagnostic'));
@@ -151,6 +152,7 @@ const App = () => (
         <Route path="/diagnostics" element={<Layout><Diagnostics /></Layout>} />
         <Route path="/investigations" element={<Layout><Investigations /></Layout>} />
         <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
+        <Route path="/terms" element={<Layout><Terms /></Layout>} />
         <Route path="/ai-readiness" element={<Layout><AIReadiness /></Layout>} />
         <Route path="/consultation" element={<Layout><Consultation /></Layout>} />
         <Route path="/strategic-diagnostic" element={<Layout><StrategicDiagnostic /></Layout>} />
