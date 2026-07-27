@@ -4,12 +4,29 @@ const TransparentShield = () => {
   const canvasRef = useRef(null);
   const [rotationY, setRotationY] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [hasEntered, setHasEntered] = useState(false);
   const isDragging = useRef(false);
   const lastX = useRef(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsAnimating(true);
+      setRotationY(360);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleEntranceEnd = () => {
+    if (!hasEntered) {
+      setHasEntered(true);
+      setIsAnimating(false);
+    }
+  };
 
   const handlePointerDown = (e) => {
     isDragging.current = true;
     setIsAnimating(false);
+    setHasEntered(true);
     lastX.current = e.clientX;
     if (canvasRef.current) canvasRef.current.style.cursor = 'grabbing';
     e.target.setPointerCapture(e.pointerId);
@@ -98,12 +115,15 @@ const TransparentShield = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="shield-elem w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(27,110,194,0.3)] touch-none"
+      className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(27,110,194,0.3)] touch-none"
       style={{
         transform: `rotateY(${rotationY}deg)`,
         cursor: 'grab',
-        transition: isAnimating ? 'transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)' : 'none'
+        transition: isAnimating
+          ? (hasEntered ? 'transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)' : 'transform 1.8s cubic-bezier(0.16, 1, 0.3, 1)')
+          : 'none'
       }}
+      onTransitionEnd={handleEntranceEnd}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
