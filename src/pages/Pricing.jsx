@@ -323,6 +323,7 @@ const FAQItem = ({ q, a }) => {
 
 const Pricing = () => {
   const [modal, setModal] = useState(null);
+  const [selected, setSelected] = useState('solution-map');
 
   const openModal = (tier) => setModal(tier);
   const closeModal = () => setModal(null);
@@ -361,7 +362,16 @@ const Pricing = () => {
           {/* AI Snapshot Report — desktop left, mobile second */}
           <div
             id="snapshot"
-            className="order-2 lg:order-1 flex-1 flex flex-col bg-white/[0.04] border border-white/10 rounded-2xl p-8 space-y-6 scroll-mt-28"
+            className="order-2 lg:order-1 flex-1 flex flex-col rounded-2xl p-8 space-y-6 scroll-mt-28 cursor-pointer"
+            onClick={() => setSelected('snapshot')}
+            style={{
+              background: selected === 'snapshot'
+                ? 'linear-gradient(135deg, rgba(201,168,76,0.07) 0%, rgba(255,255,255,0.02) 100%)'
+                : 'rgba(255,255,255,0.04)',
+              border: selected === 'snapshot' ? '2px solid #C9A84C' : '1px solid rgba(255,255,255,0.10)',
+              boxShadow: selected === 'snapshot' ? '0 0 48px rgba(201,168,76,0.10), 0 24px 64px rgba(0,0,0,0.35)' : 'none',
+              transition: 'border-color 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1), background 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+            }}
           >
             <div className="space-y-1.5">
               <h2 className="font-display font-bold text-2xl text-white">AI Snapshot Report</h2>
@@ -472,11 +482,13 @@ const Pricing = () => {
           {/* AI Solution Map — desktop right, mobile first (flagship-first stack) */}
           <div
             id="solution-map"
-            className="order-1 lg:order-2 flex-1 flex flex-col rounded-2xl p-8 space-y-6 scroll-mt-28"
+            className="order-1 lg:order-2 flex-1 flex flex-col rounded-2xl p-8 space-y-6 scroll-mt-28 cursor-pointer"
+            onClick={() => setSelected('solution-map')}
             style={{
               background: 'linear-gradient(135deg, rgba(201,168,76,0.07) 0%, rgba(255,255,255,0.02) 100%)',
-              border: '2px solid #C9A84C',
-              boxShadow: '0 0 48px rgba(201,168,76,0.10), 0 24px 64px rgba(0,0,0,0.35)',
+              border: selected === 'solution-map' ? '2px solid #C9A84C' : '1px solid rgba(255,255,255,0.10)',
+              boxShadow: selected === 'solution-map' ? '0 0 48px rgba(201,168,76,0.10), 0 24px 64px rgba(0,0,0,0.35)' : 'none',
+              transition: 'border-color 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
             }}
           >
             <div>
