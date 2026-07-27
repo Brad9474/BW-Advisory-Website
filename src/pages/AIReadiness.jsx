@@ -1513,49 +1513,45 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
         <p className="text-silver/85 font-light text-base md:text-lg leading-relaxed">{review}</p>
       </div>
 
-      <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-xl border border-[#C9A84C]/30 rounded-3xl p-8 md:p-14 text-center space-y-6">
-        <p className="text-base md:text-lg text-silver/85 font-light leading-relaxed max-w-3xl mx-auto">
-          The next step is a BW Advisory Operational Resilience Diagnostic. Most clients recover the cost of the diagnostic within the first month of implementation.
-        </p>
-        <button type="button" onClick={() => { posthog.capture('diagnostic_result_book_clicked', { score }); window.location.href = '/consultation'; }}
-          className="inline-flex items-center justify-center gap-3 bg-[#C9A84C] px-10 md:px-12 py-5 min-h-[48px] rounded-lg text-[#0F172A] font-bold text-sm tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 shadow-[0_8px_24px_rgba(201,168,76,0.3)] cursor-pointer">
-          Book Your Diagnostic
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-        </button>
-        <p className="text-sm md:text-base text-silver/60 font-light">
-          {lead.consentContact ? <>Your results are on their way to <span className="text-white">{lead.email}</span>.</> : 'Use the buttons below to save or share your results.'}
-        </p>
-      </div>
+      <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-xl border border-[#C9A84C]/30 rounded-3xl p-8 md:p-14 space-y-8">
+        <div className="text-center space-y-2">
+          <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">Ready for a full analysis?</p>
+          <p className="text-sm md:text-base text-silver/60 font-light">
+            {lead.consentContact ? <>Your results are on their way to <span className="text-white">{lead.email}</span>.</> : 'Use the buttons below to save or share your results.'}
+          </p>
+        </div>
 
-      {import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true' && (
-        <div className="space-y-4 border-t border-white/10 pt-10">
-          <p className="text-silver/50 font-mono text-xs tracking-[0.3em] uppercase font-bold text-center">Want the full picture?</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div className="bg-white/5 border border-white/15 rounded-2xl p-6 md:p-8 space-y-4">
-              <div className="space-y-1">
-                <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Snapshot Report</p>
-              </div>
-              <p className="text-silver/70 font-light text-sm leading-relaxed">Automated, instant. Named tools checked against your existing software, verified pricing, trust and safety notes, and a 4-day setup plan per opportunity.</p>
-              <p className="text-silver/45 text-xs font-light italic">Automated — instant delivery. No human review at this tier.</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="bg-white/5 border border-white/15 rounded-2xl p-6 md:p-8 space-y-4">
+            <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Snapshot Report — $497</p>
+            <p className="text-silver/70 font-light text-sm leading-relaxed">Automated deep-dive on the risk areas above. Substantiated cost ranges with stated assumptions. Specific tool recommendations. Delivered as a full report to your inbox in minutes.</p>
+            {import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true' && (
               <a href="/pricing#snapshot" onClick={() => posthog.capture('diagnostic_result_pricing_clicked', { score, tier: 'snapshot' })}
                 className="inline-flex items-center gap-2 text-[#C9A84C] text-sm font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50 rounded">
                 View pricing <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
               </a>
-            </div>
-            <div className="bg-gradient-to-br from-[#C9A84C]/8 to-white/2 border border-[#C9A84C]/25 rounded-2xl p-6 md:p-8 space-y-4">
-              <div className="space-y-1">
-                <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Solution Map</p>
-              </div>
-              <p className="text-silver/70 font-light text-sm leading-relaxed">Personally reviewed by Brad before delivery. Everything in the Snapshot, plus the patterns you didn't name. Includes a 30-minute call within 5 business days.</p>
-              <p className="text-silver/45 text-xs font-light">Your Snapshot credit applies for 60 days from purchase.</p>
+            )}
+          </div>
+          <div className="bg-gradient-to-br from-[#C9A84C]/8 to-white/2 border border-[#C9A84C]/25 rounded-2xl p-6 md:p-8 space-y-4">
+            <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Solution Map — $1,497 <span className="text-silver/50 font-normal normal-case tracking-normal">(recommended)</span></p>
+            <p className="text-silver/70 font-light text-sm leading-relaxed">Everything in the Snapshot, plus Brad's personal review of your business context, priority-ordered next steps, and a 60-minute strategy call to walk through implementation.</p>
+            {import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true' && (
               <a href="/pricing#solution-map" onClick={() => posthog.capture('diagnostic_result_pricing_clicked', { score, tier: 'solution-map' })}
                 className="inline-flex items-center gap-2 text-[#C9A84C] text-sm font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50 rounded">
                 View pricing <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
               </a>
-            </div>
+            )}
           </div>
         </div>
-      )}
+
+        <div className="text-center">
+          <button type="button" onClick={() => { posthog.capture('diagnostic_result_book_clicked', { score }); window.location.href = '/consultation'; }}
+            className="inline-flex items-center justify-center gap-3 bg-[#C9A84C] px-10 md:px-12 py-5 min-h-[48px] rounded-lg text-[#0F172A] font-bold text-sm tracking-[0.15em] uppercase hover:bg-[#E0BC60] transition-all duration-300 shadow-[0_8px_24px_rgba(201,168,76,0.3)] cursor-pointer">
+            Book a call with Brad first
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+          </button>
+        </div>
+      </div>
 
       <div className="space-y-4">
         <div className="flex flex-col md:flex-row gap-3">
