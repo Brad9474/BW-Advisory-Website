@@ -763,6 +763,149 @@ const Pricing = () => {
         </div>
       </section>
 
+      {/* ── WHY WE DON'T BUILD ── */}
+      <section className="py-12 px-6 w-full">
+        <div className="max-w-5xl mx-auto">
+          <div className="border-l-2 border-[#C9A84C]/40 pl-6 space-y-2 max-w-3xl">
+            <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">How we're different</p>
+            <p className="text-silver/80 font-light text-base leading-relaxed">
+              Some AI advisory firms deliver a report then sell you the implementation. We don't. Our recommendations are the recommendations — not a sales funnel into build work we then charge for. That means no incentive to inflate scope, and no conflict when we tell you not to buy something.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── COMPETITOR COMPARISON TABLE ── */}
+      <section className="py-16 px-6 w-full">
+        <div className="max-w-6xl mx-auto space-y-6">
+          <div className="space-y-2">
+            <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">How we compare</p>
+            <p className="text-silver/55 font-light text-xs leading-relaxed max-w-2xl">
+              Competitor data sourced from publicly available information. "Not stated" means the information was not published at the time this page was last updated. BW Advisory receives no benefit from how this table is presented.
+            </p>
+          </div>
+          <div className="overflow-x-auto rounded-2xl border border-white/10">
+            <table className="w-full min-w-[900px] text-sm">
+              <thead>
+                <tr className="border-b border-white/10 bg-white/3">
+                  <th className="text-left px-5 py-4 text-silver/50 font-mono text-xs tracking-[0.15em] uppercase font-bold w-[16%]"></th>
+                  <th className="text-left px-5 py-4 text-[#C9A84C] font-mono text-xs tracking-[0.15em] uppercase font-bold">BW Snapshot<br /><span className="font-light normal-case tracking-normal text-[#C9A84C]/70">$497</span></th>
+                  <th className="text-left px-5 py-4 text-[#C9A84C] font-mono text-xs tracking-[0.15em] uppercase font-bold">BW Solution Map<br /><span className="font-light normal-case tracking-normal text-[#C9A84C]/70">$1,497</span></th>
+                  <th className="text-left px-5 py-4 text-silver/50 font-mono text-xs tracking-[0.15em] uppercase font-bold">AIReady Starter<br /><span className="font-light normal-case tracking-normal text-silver/40">$497</span></th>
+                  <th className="text-left px-5 py-4 text-silver/50 font-mono text-xs tracking-[0.15em] uppercase font-bold">AIReady Business<br /><span className="font-light normal-case tracking-normal text-silver/40">$997</span></th>
+                  <th className="text-left px-5 py-4 text-silver/50 font-mono text-xs tracking-[0.15em] uppercase font-bold">Growthsmith<br /><span className="font-light normal-case tracking-normal text-silver/40">$1,500</span></th>
+                  <th className="text-left px-5 py-4 text-silver/50 font-mono text-xs tracking-[0.15em] uppercase font-bold">Corey Ganim<br /><span className="font-light normal-case tracking-normal text-silver/40">US$999</span></th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/8">
+                {[
+                  [
+                    'Price',
+                    '$497 AUD incl. GST',
+                    '$1,497 AUD incl. GST',
+                    '$497 AUD',
+                    '$997 AUD',
+                    '$1,500 AUD',
+                    'US$999',
+                  ],
+                  [
+                    'Questions asked',
+                    '13 questions',
+                    '19 questions (13 + 6 additional)',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                  ],
+                  [
+                    'Delivery time',
+                    'Instant on intake submission',
+                    '3 business days',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                  ],
+                  [
+                    'Opportunities identified',
+                    'Named tools matched to priority workflows',
+                    'Stated pains plus under-recognised layer',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                  ],
+                  [
+                    'Named reviewer / methodology owner',
+                    'Brad Warburton (built and maintains methodology; no per-report human review)',
+                    'Brad Warburton — personal review of every report before delivery',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                  ],
+                  [
+                    'Per-tool verification',
+                    'Yes — check date printed in report',
+                    'Yes — check date printed in report',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                  ],
+                  [
+                    'Structural conflict',
+                    'None — no vendor commissions, ever',
+                    'None — no vendor commissions, ever',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                  ],
+                  [
+                    'Guarantee',
+                    '60-day — correct or refund',
+                    '60-day — correct or refund',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                  ],
+                  [
+                    'Q&A window',
+                    'None',
+                    '60-min call with Brad within 5 business days of delivery',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                  ],
+                  [
+                    'Target buyer',
+                    'SMB owner wanting named tools and verified pricing fast',
+                    'SMB owner wanting personal review and a strategy call',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                    'Not stated',
+                  ],
+                ].map(([label, bwSnap, bwMap, airStarter, airBiz, gs, cg]) => (
+                  <tr key={label} className="hover:bg-white/3 transition-colors duration-150">
+                    <td className="px-5 py-4 text-silver/60 font-light text-xs leading-snug">{label}</td>
+                    <td className="px-5 py-4 text-white font-light text-xs leading-snug">{bwSnap}</td>
+                    <td className="px-5 py-4 text-white font-light text-xs leading-snug">{bwMap}</td>
+                    <td className="px-5 py-4 text-silver/45 font-light text-xs leading-snug italic">{airStarter}</td>
+                    <td className="px-5 py-4 text-silver/45 font-light text-xs leading-snug italic">{airBiz}</td>
+                    <td className="px-5 py-4 text-silver/45 font-light text-xs leading-snug italic">{gs}</td>
+                    <td className="px-5 py-4 text-silver/45 font-light text-xs leading-snug italic">{cg}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       {/* ── GUARANTEE ── */}
       <section className="py-16 px-6 w-full">
         <div className="max-w-5xl mx-auto">
