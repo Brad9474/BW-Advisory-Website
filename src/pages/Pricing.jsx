@@ -806,103 +806,106 @@ const Pricing = () => {
                     '$497 AUD',
                     '$997 AUD',
                     '$1,500 AUD',
-                    'US$999',
+                    'US$999 (~AUD $1,530 at current rates)',
                   ],
                   [
                     'Questions asked',
                     '13 questions',
                     '19 questions (13 + 6 additional)',
-                    'Not stated',
-                    'Not stated',
-                    'Not stated',
-                    'Not stated',
+                    'Operations questionnaire, 20–30 min',
+                    'Extended questionnaire across 5 domains: operations, sales, finance, customer service, HR',
+                    '60-min discovery call (Day 1)',
+                    '45-min discovery call with business owner',
                   ],
                   [
                     'Delivery time',
                     'Instant on intake submission',
                     '3 business days',
-                    'Not stated',
-                    'Not stated',
-                    'Not stated',
+                    '5 business days',
+                    '7 business days',
+                    '5 days from engagement to delivery',
                     'Not stated',
                   ],
                   [
                     'Opportunities identified',
                     'Named tools matched to priority workflows',
                     'Stated pains plus under-recognised layer',
-                    'Not stated',
-                    'Not stated',
-                    'Not stated',
-                    'Not stated',
+                    'Up to 8 prioritised opportunities',
+                    'Up to 15 opportunities with Effort vs Impact Matrix',
+                    '3–5 ranked from 5–8 surfaced across workflows',
+                    '5–7 pain points in 8-page deliverable',
                   ],
                   [
                     'Named reviewer / methodology owner',
-                    'Brad Warburton (built and maintains methodology; no per-report human review)',
-                    'Brad Warburton — personal review of every report before delivery',
-                    'Not stated',
-                    'Not stated',
-                    'Not stated',
-                    'Not stated',
+                    "Built by Brad Warburton's methodology",
+                    'Personally reviewed by Brad Warburton + 60-minute call + 30-day email Q&A window',
+                    'Unnamed — "quality-checked before delivery"; no reviewer named, no credentials published anywhere on site',
+                    'Unnamed (same claim as Starter)',
+                    'Unnamed team',
+                    'Corey Ganim',
                   ],
                   [
                     'Per-tool verification',
-                    'Yes — check date printed in report',
-                    'Yes — check date printed in report',
-                    'Not stated',
-                    'Not stated',
-                    'Not stated',
-                    'Not stated',
+                    'Yes — price, AU residency, retention policy, check date printed in report',
+                    'Yes — price, AU residency, retention policy, check date printed in report',
+                    'Not claimed — "tool recommendations with pricing" only',
+                    'Not claimed — "tool recommendations with integration notes" only',
+                    'Not claimed',
+                    'Not claimed',
                   ],
                   [
                     'Structural conflict',
-                    'None — no vendor commissions, ever',
-                    'None — no vendor commissions, ever',
-                    'Not stated',
-                    'Not stated',
-                    'Not stated',
-                    'Not stated',
+                    'None — advisory only, no commissions, no build work',
+                    'None — advisory only, no commissions, no build work',
+                    'None apparent',
+                    'None apparent',
+                    'Yes — $1,500 assessment fee credits against own AI automation build invoice if proceeding within 60 days',
+                    'None apparent',
                   ],
                   [
                     'Guarantee',
-                    '60-day — correct or refund',
-                    '60-day — correct or refund',
-                    'Not stated',
-                    'Not stated',
-                    'Not stated',
-                    'Not stated',
+                    'If any tool price, hosting location, retention policy or compliance statement in your report is wrong on the date we published it, tell us and we will refund you in full.',
+                    'If any tool price, hosting location, retention policy or compliance statement in your report is wrong on the date we published it, tell us and we will refund you in full.',
+                    'Outcome: if the report doesn\'t give you at least 3 clear, actionable AI opportunities you didn\'t already know about — refund in full',
+                    'Outcome: same guarantee as Starter',
+                    'Outcome: if we don\'t identify at least 3 production-ready AI opportunities with positive ROI inside the deliverable — refund $1,500',
+                    'Outcome: if Corey cannot find at least 5 hours per week of time savings within 30 days — 100% refund (never issued per site)',
                   ],
                   [
                     'Q&A window',
                     'None',
-                    '60-min call with Brad within 5 business days of delivery',
-                    'Not stated',
-                    'Not stated',
+                    '60-min call within 5 business days of delivery + 30-day email Q&A',
+                    'None',
+                    '30-day email Q&A',
                     'Not stated',
                     'Not stated',
                   ],
                   [
                     'Target buyer',
-                    'SMB owner wanting named tools and verified pricing fast',
-                    'SMB owner wanting personal review and a strategy call',
-                    'Not stated',
-                    'Not stated',
-                    'Not stated',
-                    'Not stated',
+                    'AU SMB wanting named tools and verified pricing fast',
+                    'AU SMB with budget and decision-making authority',
+                    'AU SMB, any sector',
+                    'AU SMB wanting more depth',
+                    'AU SMB ready to act immediately',
+                    'Global SMB (US-focused)',
                   ],
                 ].map(([label, bwSnap, bwMap, airStarter, airBiz, gs, cg]) => (
                   <tr key={label} className="hover:bg-white/3 transition-colors duration-150">
                     <td className="px-5 py-4 text-silver/60 font-light text-xs leading-snug">{label}</td>
                     <td className="px-5 py-4 text-white font-light text-xs leading-snug">{bwSnap}</td>
                     <td className="px-5 py-4 text-white font-light text-xs leading-snug">{bwMap}</td>
-                    <td className="px-5 py-4 text-silver/45 font-light text-xs leading-snug italic">{airStarter}</td>
-                    <td className="px-5 py-4 text-silver/45 font-light text-xs leading-snug italic">{airBiz}</td>
-                    <td className="px-5 py-4 text-silver/45 font-light text-xs leading-snug italic">{gs}</td>
-                    <td className="px-5 py-4 text-silver/45 font-light text-xs leading-snug italic">{cg}</td>
+                    <td className="px-5 py-4 text-silver/65 font-light text-xs leading-snug">{airStarter}</td>
+                    <td className="px-5 py-4 text-silver/65 font-light text-xs leading-snug">{airBiz}</td>
+                    <td className="px-5 py-4 text-silver/65 font-light text-xs leading-snug">{gs}</td>
+                    <td className="px-5 py-4 text-silver/65 font-light text-xs leading-snug">{cg}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+          <p className="text-silver/40 font-light text-xs leading-relaxed">
+            Competitor data verified 28 July 2026 against public sources — see BW Advisory competitive intelligence memo.
+          </p>
         </div>
       </section>
 
