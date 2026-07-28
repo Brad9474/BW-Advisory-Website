@@ -448,9 +448,17 @@ const Home = () => {
             <div className="rounded-2xl overflow-hidden shadow-lg bg-background border border-silver/20">
               <img src="/Brad_Professional_Shot_clean.webp" alt="Brad Warburton - Principal Advisor" loading="lazy" className="w-full h-[320px] sm:h-[380px] lg:h-[450px] object-cover object-top grayscale hover:grayscale-0 transition-all duration-500" />
             </div>
-            <div className="text-center">
+            <div className="text-center space-y-1">
               <p className="text-primary font-bold text-2xl tracking-wide">Brad Warburton</p>
-              <p className="text-accent font-bold tracking-[0.2em] text-xs uppercase mt-2">Principal Advisor</p>
+              <p className="text-accent font-bold tracking-[0.2em] text-xs uppercase">Principal, BW Advisory Solutions</p>
+              <a
+                href="https://linkedin.com/in/bradwarburton"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-block text-[#C9A84C]/60 hover:text-[#C9A84C] font-mono text-[10px] tracking-[0.2em] uppercase transition-colors duration-200 mt-1"
+              >
+                LinkedIn ↗
+              </a>
             </div>
           </div>
           <div className="lg:col-span-7 order-2 space-y-8">
