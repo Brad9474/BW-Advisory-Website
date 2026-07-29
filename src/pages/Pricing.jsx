@@ -394,11 +394,11 @@ const FAQ_ITEMS = [
   },
   {
     q: 'What happens after I pay?',
-    a: 'Within a minute you get an email with your intake link. The Snapshot intake is 13 questions, about ten minutes. Your report generates the moment you submit it. For the Solution Map, the report arrives within 3 business days of your completed intake and the call is scheduled within 5 business days of delivery.',
+    a: 'Within a minute you get an email with your intake link. The Snapshot intake is 22 questions, about ten minutes. Your report generates the moment you submit it. For the Solution Map, the report arrives within 3 business days of your completed intake and the call is scheduled within 5 business days of delivery.',
   },
   {
     q: 'Can I buy the Snapshot now and upgrade later?',
-    a: 'Yes. Your $497 counts in full toward the Solution Map for 60 days from purchase. You answer six additional questions — your original thirteen are on file. After 60 days the Solution Map is full price.',
+    a: 'Yes. Your $497 counts in full toward the Solution Map for 60 days from purchase. You answer fifteen additional questions — your original 22 are on file. After 60 days the Solution Map is full price.',
   },
   {
     q: 'What do you do with my information?',
@@ -590,10 +590,10 @@ const Pricing = () => {
               </AccordionSection>
               <AccordionSection title="Delivery &amp; what happens next">
                 Within a minute of purchase you get an email with your intake link. The Snapshot intake is
-                13 questions, about ten minutes. Your report generates the moment you submit it, with the
+                22 questions, about ten minutes. Your report generates the moment you submit it, with the
                 tool verification date printed in the report. Your $497 counts in full toward the Solution
-                Map for 60 days from purchase &mdash; you answer six additional questions and your original
-                thirteen are on file. After 60 days the Solution Map is full price.
+                Map for 60 days from purchase &mdash; you answer fifteen additional questions and your original
+                22 are on file. After 60 days the Solution Map is full price.
               </AccordionSection>
             </div>
 
@@ -691,8 +691,8 @@ const Pricing = () => {
               </AccordionSection>
               <AccordionSection title="Delivery &amp; what happens next">
                 Within a minute of purchase you get an email with your intake link. The Solution Map intake
-                is 19 questions &mdash; only 6 more if upgrading from the Snapshot, with your original
-                thirteen on file. Your report arrives within 3 business days of your completed intake. The
+                is 37 questions &mdash; only 15 more if upgrading from the Snapshot, with your original
+                22 on file. Your report arrives within 3 business days of your completed intake. The
                 60-minute call with Brad is scheduled within 5 business days of delivery.
               </AccordionSection>
             </div>
@@ -735,7 +735,7 @@ const Pricing = () => {
                   ['Call', 'None', '60 minutes with Brad, within 5 business days of delivery'],
                   ['Opportunities covered', 'Your stated top pains', 'Your stated pains plus the under-recognised layer your intake shows'],
                   ['Implementation detail', '4-day DIY plan per tool', 'Full implementation plan per opportunity, plus sequencing across all of them'],
-                  ['Intake', '13 questions, about 10 minutes', '19 questions — only 6 more if upgrading from the Snapshot'],
+                  ['Intake', '22 questions, about 10 minutes', '37 questions — 15 more if upgrading from the Snapshot'],
                   ['Delivery', 'Instant on intake submission', 'Within 3 business days of completed intake'],
                   ['Complete at its price', 'Yes', 'Yes'],
                   ['Credit toward the other tier', '$497 credits in full toward the Solution Map within 60 days', '—'],
@@ -810,8 +810,8 @@ const Pricing = () => {
                   ],
                   [
                     'Questions asked',
-                    '13 questions',
-                    '19 questions (13 + 6 additional)',
+                    '22 questions',
+                    '37 questions (22 + 15 additional)',
                     'Operations questionnaire, 20–30 min',
                     'Extended questionnaire across 5 domains: operations, sales, finance, customer service, HR',
                     '60-min discovery call (Day 1)',
