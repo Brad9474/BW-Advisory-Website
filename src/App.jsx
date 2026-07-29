@@ -30,6 +30,7 @@ const InvestigationsDiagnostic = React.lazy(() => import('./pages/Investigations
 const Pricing = React.lazy(() => import('./pages/Pricing'));
 const PurchaseConfirmed = React.lazy(() => import('./pages/PurchaseConfirmed'));
 const PurchaseCancelled = React.lazy(() => import('./pages/PurchaseCancelled'));
+const SolutionMap = React.lazy(() => import('./pages/SolutionMap'));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,6 +43,7 @@ const Layout = ({ children }) => {
     pathname === '/diagnostics' ||
     pathname === '/ai-readiness' ||
     pathname === '/pricing' ||
+    pathname === '/solution-map' ||
     pathname === '/privacy' ||
     pathname === '/terms' ||
     pathname === '/consultation';
@@ -166,6 +168,7 @@ const App = () => (
         <Route path="/loss-intelligence-diagnostic" element={<Layout><LossIntelligenceDiagnostic /></Layout>} />
         <Route path="/investigations-diagnostic" element={<Layout><InvestigationsDiagnostic /></Layout>} />
         <Route path="/pricing" element={<Layout><Pricing /></Layout>} />
+        <Route path="/solution-map" element={<Layout><SolutionMap /></Layout>} />
         <Route path="/purchase/confirmed" element={<Layout><PurchaseConfirmed /></Layout>} />
         <Route path="/purchase/cancelled" element={<Layout><PurchaseCancelled /></Layout>} />
       </Routes>
