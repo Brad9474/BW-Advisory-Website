@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { afterEach, test } from "node:test";
 
-import posthogProxy from "./posthog-proxy.ts";
+import posthogProxy from "../netlify/edge-functions/posthog-proxy.ts";
 
 const originalFetch = globalThis.fetch;
 

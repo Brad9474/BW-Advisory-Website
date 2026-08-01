@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "test": "node --test netlify/edge-functions/posthog-proxy.test.mjs",
+    "test": "node --test tests/posthog-proxy.test.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },
