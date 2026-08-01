@@ -14,6 +14,11 @@ export default async (request: Request, context: Context) => {
 
   const proxiedPath = url.pathname.replace(/^\/ph/, "") || "/";
   const targetUrl = new URL(proxiedPath + url.search, posthogHost);
+  const expectedOrigin = new URL(posthogHost).origin;
+
+  if (targetUrl.origin !== expectedOrigin) {
+    return new Response("Bad request", { status: 400 });
+  }
 
   const headers = new Headers(request.headers);
   headers.set("host", new URL(posthogHost).hostname);
