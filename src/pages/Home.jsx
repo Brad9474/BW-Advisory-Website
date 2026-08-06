@@ -280,7 +280,7 @@ const Home = () => {
             <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">How I Close The Gap</p>
             <h2 className="font-display font-bold text-6xl md:text-7xl lg:text-8xl text-white tracking-tight mb-8">Practice Areas.</h2>
             <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
-              Every engagement is tailored to your challenge. These are the areas where I deliver measurable outcomes and lasting operational change.
+              Most of my work is with retailers and multi-site operators carrying loss and operational risk. The same capability applies wherever an operation has outgrown the structure holding it together.
             </p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -289,10 +289,10 @@ const Home = () => {
               <div className="relative block bg-gradient-to-br from-[#1A3560]/80 via-[#0D1520]/60 to-[#051020]/80 border border-accent/40 group-hover:border-[#C9A84C]/60 rounded-3xl p-8 md:p-10 transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.2)] h-full flex flex-col">
                 <div className="mb-6">
                   <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-xs uppercase font-bold mb-4">Practice Area 01</p>
-                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-white leading-snug min-h-[5rem]">Operational Resilience</h3>
+                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-white leading-snug min-h-[5rem]">Loss Intelligence</h3>
                 </div>
                 <p className="text-silver/85 font-light text-sm md:text-base leading-relaxed mb-8 flex-1">
-                  Organisations carrying operational risk and loss exposure across sites, stores, and supply chains — retail, logistics, and field operations among them. I built and ran some of Western Australia's largest, highest-stakes operational commands — that same capability, now available directly to your business.
+                  Retailers and multi-site operators losing value to theft, organised crime, and process failure — usually without a clear picture of where, or how much. I've worked both sides of this: running large-scale operational commands, then building the intelligence partnerships between retailers and law enforcement. I build that detection capability inside your business, so your team owns and runs it.
                 </p>
               </div>
             </a>
@@ -313,10 +313,10 @@ const Home = () => {
               <div className="relative block bg-gradient-to-br from-[#1A3560]/80 via-[#0D1520]/60 to-[#051020]/80 border border-accent/40 group-hover:border-[#C9A84C]/60 rounded-3xl p-8 md:p-10 transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.2)] h-full flex flex-col">
                 <div className="mb-6">
                   <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-xs uppercase font-bold mb-4">Practice Area 03</p>
-                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-white leading-snug min-h-[5rem]">Professional &amp; Healthcare Practices</h3>
+                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-white leading-snug min-h-[5rem]">Operational Resilience</h3>
                 </div>
                 <p className="text-silver/85 font-light text-sm md:text-base leading-relaxed mb-8 flex-1">
-                  Accounting, legal, financial advice, chiropractic, physiotherapy, dental, and GP practices — where operational pressure, compliance exposure, and client or patient data risk combine. Diagnostic-led, practically delivered, without disrupting how the practice runs.
+                  Operations that have grown faster than the structure holding them together — where operational pressure, compliance exposure, and client or patient data risk start to compound. I map what the operation actually does, find where it breaks, and rebuild the parts that don't hold. Delivered without disrupting how you run day to day.
                 </p>
               </div>
             </a>
