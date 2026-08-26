@@ -105,13 +105,10 @@ const Investigations = () => {
             <p className="drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
               Built on 30 years of operational command in law enforcement, this framework applies the same evidentiary rigour used in complex criminal investigations to the commercial context.
             </p>
-            <p className="drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-              A single protocol means every investigation is conducted to a standard that withstands civil, disciplinary, or police scrutiny.
-            </p>
           </div>
 
           <div className="bg-white/15 rounded-lg border border-white/10 p-10 backdrop-blur-md">
-            <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase mb-6 font-bold">Systemic Failures We Address</p>
+            <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase mb-6 font-bold">Systemic Failures I Address</p>
             <div className="space-y-4">
               {[
                 'Inconsistent investigation standards across the organisation',
@@ -132,19 +129,19 @@ const Investigations = () => {
     </section>
 
     {/* ── THE PROVED MODEL ── */}
-    <section className="py-44 w-full relative z-10 bg-[#0A1E3D] border-t border-white/5 overflow-hidden">
+    <section className="py-28 w-full relative z-10 bg-primary border-t border-white/5 overflow-hidden">
       {/* Ambient gold glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#C9A84C]/3 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-[1400px] mx-auto px-6 xl:px-12 relative z-10">
         {/* Section Header */}
-        <div className="proved-header mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+        <div className="proved-header mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           <div className="space-y-6">
             <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[0.95]">
               The <span className="text-[#C9A84C]">PROVED</span> Model.
             </h2>
             <p className="text-silver/60 font-light text-lg max-w-xl leading-loose">
-              Six stages. One unified protocol, built on 30 years of operational command in law enforcement.
+              Six stages. One unified protocol. Every investigation conducted to a standard that withstands civil, disciplinary, or police scrutiny.
             </p>
           </div>
           {/* Acronym display */}
@@ -158,17 +155,17 @@ const Investigations = () => {
         </div>
 
         {/* Cards */}
-        <div className="proved-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="proved-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {provedStages.map((stage, i) => (
             <div key={stage.letter} className="proved-card group h-full">
-              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 rounded-xl border border-white/10 border-t-2 border-t-[#C9A84C]/60 group-hover:border-t-[#C9A84C] group-hover:border-white/20 p-8 flex flex-col h-full transition-all duration-500 backdrop-blur-sm overflow-hidden group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+              <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 rounded-xl border border-white/10 border-t-2 border-t-[#C9A84C]/60 group-hover:border-t-[#C9A84C] group-hover:border-white/20 p-6 flex flex-col h-full transition-all duration-500 backdrop-blur-sm overflow-hidden group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
                 {/* Ghost letter background */}
                 <span className="absolute -bottom-4 -right-2 text-[9rem] font-display font-bold text-white/[0.04] group-hover:text-[#C9A84C]/[0.07] leading-none select-none transition-all duration-500 pointer-events-none">
                   {stage.letter}
                 </span>
 
                 {/* Stage number + name */}
-                <div className="flex items-start justify-between mb-6 relative z-10">
+                <div className="flex items-start justify-between mb-3 relative z-10">
                   <div>
                     <p className="text-[#C9A84C]/50 font-mono text-[10px] tracking-[0.3em] uppercase mb-2">
                       Stage {String(i + 1).padStart(2, '0')}
@@ -181,7 +178,7 @@ const Investigations = () => {
                 </div>
 
                 {/* Divider */}
-                <div className="h-px bg-gradient-to-r from-[#C9A84C]/30 to-transparent mb-6 relative z-10" />
+                <div className="h-px bg-gradient-to-r from-[#C9A84C]/30 to-transparent mb-3 relative z-10" />
 
                 {/* Description */}
                 <p className="text-silver/70 font-light text-sm leading-loose flex-grow relative z-10 group-hover:text-silver/90 transition-colors duration-300">

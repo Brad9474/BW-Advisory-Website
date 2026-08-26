@@ -45,7 +45,8 @@ const fieldLabelClass = 'block text-[rgba(240,244,248,0.65)] font-mono text-[9px
 const fieldClass =
   'w-full bg-white/5 border border-white/15 focus:border-[#C9A84C]/70 focus:bg-white/10 rounded-lg px-3.5 py-3 text-white placeholder-silver/35 font-light text-sm outline-none transition-colors';
 
-const BookingSection = () => {
+const BookingSection = ({ variant = 'section' }) => {
+  const isPage = variant === 'page';
   const tz = useMemo(getTimeZone, []);
   const tzLabel = useMemo(() => getTimeZoneLabel(tz), [tz]);
 
@@ -133,14 +134,25 @@ const BookingSection = () => {
       {/* ── LEFT: what happens ── */}
       <div className="space-y-8">
         <div className="space-y-4">
-          <p className="text-accent font-mono tracking-[0.3em] uppercase text-xs font-bold">Let's Talk</p>
-          <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight">The Gap Closes with Conversation</h2>
+          <p className={isPage ? 'text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs font-bold' : 'text-accent font-mono tracking-[0.3em] uppercase text-xs font-bold'}>
+            {isPage ? 'Book a Consultation' : "Let's Talk"}
+          </p>
+          {isPage ? (
+            <h1 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight">Thirty minutes. No pitch.</h1>
+          ) : (
+            <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight">The Gap Closes with Conversation</h2>
+          )}
         </div>
         <p className="text-xl text-silver/80 font-light leading-relaxed">
-          Thirty minutes is enough. I'll understand your challenge. You'll understand my approach. No proposal until we've talked.
+          {isPage
+            ? "I'll understand your challenge. You'll understand my approach. No proposal until we've talked."
+            : "Thirty minutes is enough. I'll understand your challenge. You'll understand my approach. No proposal until we've talked."}
         </p>
 
         <div className="space-y-6 pt-8 border-t border-accent/20">
+          {isPage && (
+            <p className="font-mono text-[10px] font-bold tracking-[0.24em] uppercase text-[rgba(201,168,76,0.85)]">What happens</p>
+          )}
           {WHAT_HAPPENS.map((item) => (
             <div key={item.n} className="flex items-start gap-4">
               <span className="font-mono text-[11px] font-bold text-[rgba(27,110,194,0.9)] flex-shrink-0 mt-0.5">{item.n}</span>
@@ -149,23 +161,32 @@ const BookingSection = () => {
           ))}
         </div>
 
-        <p className="text-base text-silver/55 font-light leading-relaxed">
-          Working outside these sectors? The fundamentals apply everywhere —{' '}
-          <a href="mailto:brad@bwadvisorysolutions.com.au" className="text-silver/70 hover:text-accent underline decoration-silver/30 hover:decoration-accent/60 underline-offset-4 transition-colors duration-300">get in touch</a>.
-        </p>
+        {isPage ? (
+          <div className="space-y-2 pt-2">
+            <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold">Direct</p>
+            <a href="mailto:brad@bwadvisorysolutions.com.au" className="text-silver/80 hover:text-accent transition-colors font-light text-lg">brad@bwadvisorysolutions.com.au</a>
+          </div>
+        ) : (
+          <>
+            <p className="text-base text-silver/55 font-light leading-relaxed">
+              Working outside these sectors? The fundamentals apply everywhere —{' '}
+              <a href="mailto:brad@bwadvisorysolutions.com.au" className="text-silver/70 hover:text-accent underline decoration-silver/30 hover:decoration-accent/60 underline-offset-4 transition-colors duration-300">get in touch</a>.
+            </p>
 
-        <div className="space-y-6 pt-2">
-          {[
-            { label: 'Email', href: 'mailto:brad@bwadvisorysolutions.com.au', text: 'brad@bwadvisorysolutions.com.au' },
-            { label: 'Phone', href: 'tel:+61407779474', text: '+61 407 779 474' },
-            { label: 'LinkedIn', href: 'https://linkedin.com/in/bradwarburton', text: 'linkedin.com/in/bradwarburton', external: true },
-          ].map(({ label, href, text, external }) => (
-            <div key={label} className="space-y-2">
-              <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold">{label}</p>
-              <a href={href} {...(external ? { target: '_blank', rel: 'noreferrer' } : {})} className="text-silver/80 hover:text-accent transition-colors font-light text-lg">{text}</a>
+            <div className="space-y-6 pt-2">
+              {[
+                { label: 'Email', href: 'mailto:brad@bwadvisorysolutions.com.au', text: 'brad@bwadvisorysolutions.com.au' },
+                { label: 'Phone', href: 'tel:+61407779474', text: '+61 407 779 474' },
+                { label: 'LinkedIn', href: 'https://linkedin.com/in/bradwarburton', text: 'linkedin.com/in/bradwarburton', external: true },
+              ].map(({ label, href, text, external }) => (
+                <div key={label} className="space-y-2">
+                  <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold">{label}</p>
+                  <a href={href} {...(external ? { target: '_blank', rel: 'noreferrer' } : {})} className="text-silver/80 hover:text-accent transition-colors font-light text-lg">{text}</a>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
       </div>
 
       {/* ── RIGHT: booking card ── */}
