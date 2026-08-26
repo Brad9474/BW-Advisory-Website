@@ -79,12 +79,12 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-4 flex-shrink-0">
-            <a
-              href="/consultation"
-              className="group relative overflow-hidden bg-[#C9A84C] px-8 lg:px-10 py-3.5 rounded-full text-primary font-bold text-[12px] tracking-[0.12em] uppercase hover:bg-[#E0BC60] transition-all duration-300 transform hover:scale-[1.05] shadow-lg shadow-[#C9A84C]/20 cursor-pointer whitespace-nowrap"
+            <Link
+              to="/#contact"
+              className="group relative overflow-hidden bg-[#C9A84C] px-4 sm:px-6 lg:px-10 py-3.5 rounded-full text-primary font-bold text-[10px] sm:text-[12px] tracking-[0.1em] sm:tracking-[0.12em] uppercase hover:bg-[#E0BC60] transition-all duration-300 transform hover:scale-[1.05] shadow-lg shadow-[#C9A84C]/20 cursor-pointer whitespace-nowrap"
             >
-              Consultation
-            </a>
+              Request a Scoping Session
+            </Link>
             <button
               onClick={() => setIsMenuOpen(true)}
               className="lg:hidden p-2 text-silver/60 hover:text-white transition-colors"

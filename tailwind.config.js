@@ -23,10 +23,10 @@ export default {
         'premium-light': '#1A3560',  // Lighter navy for contrast
       },
       fontFamily: {
-        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-        serif: ['"Garamond Premier Pro"', '"Cormorant Garamond"', 'Georgia', 'serif'],
-        mono: ['"Courier Prime"', 'monospace'],
+        display: ['Poppins', 'system-ui', 'sans-serif'],
+        sans: ['"Open Sans"', 'system-ui', 'sans-serif'],
+        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       }
     },
   },

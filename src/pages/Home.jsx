@@ -4,195 +4,141 @@ import posthog from 'posthog-js';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import TransparentShield from '../components/TransparentShield';
-import HowWeWorkTogether from '../components/HowWeWorkTogether';
+import TheEngagement from '../components/TheEngagement';
+import BookingSection from '../components/BookingSection';
 import Footer from '../components/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const COMMAND_CENTRE_ENDPOINT = "https://command.bwadvisorysolutions.com.au/api/intake/contact";
-
-const HELP_OPTIONS = [
-  { label: "AI Readiness & Process Optimisation", area: "smb_advisory" },
-  { label: "Technology Matching & Security Hardening", area: "smb_advisory" },
-  { label: "Operational Resilience Diagnostic", area: "smb_advisory" },
-  { label: "Loss Intelligence & Investigations", area: "loss_intelligence" },
-  { label: "Strategic & Operational Advisory", area: "strategic_advisory" },
-  { label: "Not sure yet — I just know something needs to change", area: "both" },
+const APPLIED_WORK = [
+  {
+    num: '01',
+    title: 'Organisational Redesign',
+    tag: 'Law Enforcement / Organisational Command',
+    situation: 'A large operational command, adequately resourced, with performance that would not move.',
+    gap: 'Intelligence capability had outrun investigative culture. Tools existed. Practice did not.',
+    outcome: 'I restructured the workforce and rebuilt investigative practice around it. Regional volume crime fell.',
+    impact: 'Practice caught up with capability.',
+  },
+  {
+    num: '02',
+    title: 'Digital Operations at Scale',
+    tag: 'Government / Large-Scale Border Operations',
+    situation: 'A national border operation running on paper, at a volume paper could not carry.',
+    gap: 'No digital infrastructure, and a large workforce needing real-time coordination under political scrutiny.',
+    outcome: 'I designed and commanded the programme from nothing. Paper was eliminated entirely and the operation ran without incident.',
+    impact: 'More than a million people screened.',
+  },
+  {
+    num: '03',
+    title: 'Intelligence Architecture',
+    tag: 'Law Enforcement / Intelligence Architecture',
+    situation: 'Intelligence spread across disconnected systems, with no single picture for the commanders who needed one.',
+    gap: 'Information reached decision-makers too late to act on. Silos held it up.',
+    outcome: 'I built a real-time environment that pulled every source into one actionable picture, wired into frontline systems.',
+    impact: 'Intelligence reached command 40 per cent faster.',
+  },
+  {
+    num: '04',
+    title: 'National Retail Crime Intelligence',
+    tag: 'Retail Technology / Law Enforcement Partnerships',
+    situation: 'A national retail group facing organised crime that moved across stores, regions and state lines faster than it could respond.',
+    gap: 'Loss prevention was reactive. Store, regional and national teams each held a different picture. Police engagement was ad hoc.',
+    outcome: 'I designed and embedded an intelligence-led framework, with national pattern detection and structured partnerships at state and federal level.',
+    impact: 'Reaction replaced with detection.',
+  },
+  {
+    num: '05',
+    title: 'Capability Gap Diagnosis',
+    tag: 'Private Sector / Capability Diagnostic',
+    situation: 'A client with a genuine, hard-to-replicate data advantage and no way to prove it to investors.',
+    gap: 'The capability was real. The operating model was undocumented, governance informal, and the evidence base absent.',
+    outcome: 'I assessed capability across five dimensions — product, process and technology, relationships, scalability and commercial readiness — then staged a roadmap for what was missing.',
+    impact: 'Guesswork replaced with a costed, sequenced plan.',
+  },
 ];
 
-const ConsultationForm = () => {
-  const [values, setValues] = useState({
-    name: "", email: "", organisation: "", role: "",
-    phone: "", objective: "", constraint: "", helpWith: "",
-  });
-  const [submitting, setSubmitting] = useState(false);
-  const [status, setStatus] = useState("idle");
-
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setValues((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (submitting) return;
-    setSubmitting(true);
-    setStatus("idle");
-    const selected = HELP_OPTIONS.find((o) => o.label === values.helpWith);
-    const areaOfInterest = selected?.area ?? "smb_advisory";
-    const objective = selected
-      ? `[Interest: ${selected.label}]\n\n${values.objective.trim()}`
-      : values.objective.trim();
-    try {
-      const res = await fetch(COMMAND_CENTRE_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: values.name.trim(), email: values.email.trim(),
-          organisation: values.organisation.trim(), role: values.role.trim(),
-          phone: values.phone.trim(), objective,
-          constraint: values.constraint.trim(), areaOfInterest,
-          source: "website_consultation", brand: "BW_ADVISORY",
-        }),
-      });
-      if (res.status === 201) {
-        posthog.identify(values.email.trim(), {
-          name: values.name.trim(),
-          organisation: values.organisation.trim(),
-          role: values.role.trim(),
-        });
-        posthog.capture('home_contact_submitted', {
-          area_of_interest: areaOfInterest,
-          help_with: values.helpWith,
-        });
-        setStatus("success");
-      } else {
-        posthog.capture('home_contact_submit_failed', { status: res.status });
-        setStatus("error");
-      }
-    } catch (err) {
-      posthog.captureException(err, { context: 'home_contact_form' });
-      setStatus("error");
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  if (status === "success") {
-    return (
-      <div className="space-y-6 text-center">
-        <h3 className="font-display font-bold text-4xl text-white">Thank you</h3>
-        <p className="text-silver/85 font-light text-lg leading-relaxed">
-          Thanks — we'll be in touch within one business day.
-        </p>
-      </div>
-    );
-  }
-
-  const inputClass = "w-full bg-white/5 border border-white/15 focus:border-[#C9A84C]/70 focus:bg-white/10 rounded-lg px-4 py-3 text-white placeholder-silver/40 font-light text-base outline-none transition-colors";
-  const labelClass = "block text-silver/70 font-mono text-[10px] tracking-[0.2em] uppercase font-bold mb-2";
-  const sectionLabelClass = "text-accent font-mono tracking-[0.3em] uppercase text-[10px] font-bold";
-
-  return (
-    <div className="space-y-8">
-      <div className="space-y-3">
-        <p className={sectionLabelClass}>BOOK A CONSULTATION</p>
-        <h3 className="font-display font-bold text-4xl text-white">Thirty minutes. No pitch.</h3>
-        <p className="text-silver/80 font-light text-lg leading-relaxed">
-          Tell us what's not working. This helps me prepare — so the call is about your situation, not introductions.
-        </p>
-      </div>
-      <form onSubmit={onSubmit} className="space-y-5" noValidate>
-        <div>
-          <label htmlFor="cf-name" className={labelClass}>Name</label>
-          <input id="cf-name" name="name" type="text" required value={values.name} onChange={onChange} className={inputClass} autoComplete="name" />
-        </div>
-        <div>
-          <label htmlFor="cf-email" className={labelClass}>Email</label>
-          <input id="cf-email" name="email" type="email" required value={values.email} onChange={onChange} className={inputClass} autoComplete="email" />
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="cf-organisation" className={labelClass}>Organisation</label>
-            <input id="cf-organisation" name="organisation" type="text" required value={values.organisation} onChange={onChange} className={inputClass} autoComplete="organization" />
-          </div>
-          <div>
-            <label htmlFor="cf-role" className={labelClass}>Role</label>
-            <input id="cf-role" name="role" type="text" required value={values.role} onChange={onChange} className={inputClass} autoComplete="organization-title" />
-          </div>
-        </div>
-        <div>
-          <label htmlFor="cf-phone" className={labelClass}>Phone <span className="text-silver/40 font-normal lowercase tracking-normal">(optional)</span></label>
-          <input id="cf-phone" name="phone" type="tel" value={values.phone} onChange={onChange} className={inputClass} autoComplete="tel" />
-        </div>
-        <div className="pt-2 space-y-5">
-          <p className={sectionLabelClass}>YOUR SITUATION</p>
-          <div>
-            <label htmlFor="cf-objective" className={labelClass}>What are you trying to fix or improve?</label>
-            <textarea id="cf-objective" name="objective" required rows={3} value={values.objective} onChange={onChange} placeholder="What does better look like for your practice or business?" className={`${inputClass} resize-y min-h-[90px]`} />
-          </div>
-          <div>
-            <label htmlFor="cf-constraint" className={labelClass}>What's getting in the way?</label>
-            <textarea id="cf-constraint" name="constraint" required rows={3} value={values.constraint} onChange={onChange} placeholder="Time, systems, compliance, security — or something else?" className={`${inputClass} resize-y min-h-[90px]`} />
-          </div>
-          <div>
-            <label htmlFor="cf-helpWith" className={labelClass}>What do you need help with?</label>
-            <select id="cf-helpWith" name="helpWith" required value={values.helpWith} onChange={onChange} className={`${inputClass} appearance-none cursor-pointer`}>
-              <option value="" disabled>Select one</option>
-              {HELP_OPTIONS.map((o) => (
-                <option key={o.label} value={o.label} className="bg-[#0F172A] text-white">{o.label}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-        {status === "error" && (
-          <p role="alert" className="text-sm text-[#F5A98C] font-light leading-relaxed">
-            Something went wrong — please email{" "}
-            <a href="mailto:brad@bwadvisorysolutions.com.au" className="underline decoration-[#F5A98C]/40 underline-offset-2">brad@bwadvisorysolutions.com.au</a>{" "}directly.
-          </p>
-        )}
-        <button type="submit" disabled={submitting} className="group/btn relative overflow-hidden bg-[#C9A84C] px-12 md:px-14 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-full cursor-pointer disabled:opacity-60 disabled:cursor-wait">
-          {submitting ? "Sending..." : "START THE CONVERSATION"}
-          {!submitting && (
-            <svg className="w-5 h-5 transform group-hover/btn:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-          )}
-        </button>
-      </form>
-    </div>
-  );
-};
+const AW_PAGE_SIZE = 3;
+const AW_PAGE_COUNT = Math.ceil(APPLIED_WORK.length / AW_PAGE_SIZE);
 
 const Home = () => {
   const heroRef = useRef(null);
   const philRef = useRef(null);
   const [stickyDismissed, setStickyDismissed] = useState(false);
+  const [heroPassed, setHeroPassed] = useState(false);
+  const [awPage, setAwPage] = useState(0);
+  const [awVisible, setAwVisible] = useState(true);
+  const awPausedRef = useRef(false);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      gsap.from(".logo-letter", { y: 60, opacity: 0, stagger: 0.03, duration: 0.8, ease: "power3.out", delay: 0.1 });
-      gsap.from(".shield-elem", { y: -50, opacity: 0, scale: 0.95, duration: 0.9, ease: "power2.out", delay: 0.1 });
-      gsap.fromTo(".solutions-word",
-        { y: 32, opacity: 0, clipPath: "inset(100% 0 0 0)", filter: "blur(4px)" },
-        { y: 0, opacity: 1, clipPath: "inset(0% 0 0 0)", filter: "blur(0px)", duration: 0.9, ease: "power4.out", delay: 0.9 }
+      gsap.from('.shield-elem', { y: -50, opacity: 0, scale: 0.95, duration: 0.9, ease: 'power2.out', delay: 0 });
+      gsap.from('.logo-letter', { y: 60, opacity: 0, stagger: 0.03, duration: 0.8, ease: 'power3.out', delay: 0.1 });
+      gsap.fromTo(
+        '.solutions-word',
+        { y: 32, opacity: 0, clipPath: 'inset(100% 0 0 0)', filter: 'blur(4px)' },
+        { y: 0, opacity: 1, clipPath: 'inset(0% 0 0 0)', filter: 'blur(0px)', duration: 0.9, ease: 'power4.out', delay: 0.35 }
       );
-      gsap.from(".solutions-line", { scaleX: 0, opacity: 0, transformOrigin: "center", duration: 0.7, ease: "expo.out", delay: 1.5 });
-      gsap.from(".hero-elem", { y: 20, opacity: 0, stagger: 0.1, duration: 0.9, ease: "power2.out", delay: 1.0 });
-      gsap.from(".phil-elem", {
-        scrollTrigger: { trigger: philRef.current, start: "top 75%" },
-        y: 20, opacity: 0, stagger: 0.2, duration: 1, ease: "power2.out"
+      gsap.from('.solutions-line', { scaleX: 0, opacity: 0, transformOrigin: 'center', duration: 0.7, ease: 'expo.out', delay: 0.45 });
+      gsap.from('.hero-elem', { y: 20, opacity: 0, stagger: 0.1, duration: 0.9, ease: 'power2.out', delay: 0.55 });
+      gsap.from('.practice-card', {
+        scrollTrigger: { trigger: '.practice-card', start: 'top 85%' },
+        y: 50, opacity: 0, stagger: 0.12, duration: 0.8, ease: 'power3.out',
       });
-      gsap.from(".footer-tagline", {
-        scrollTrigger: { trigger: ".footer-tagline", start: "top 90%", toggleActions: "play none none reverse" },
-        x: -50, opacity: 0, duration: 1.5, ease: "power3.out"
+      gsap.from('.phil-elem', {
+        scrollTrigger: { trigger: philRef.current, start: 'top 75%' },
+        y: 20, opacity: 0, stagger: 0.2, duration: 1, ease: 'power2.out',
+      });
+      gsap.from('.footer-tagline', {
+        scrollTrigger: { trigger: '.footer-tagline', start: 'top 90%', toggleActions: 'play none none reverse' },
+        x: -50, opacity: 0, duration: 1.5, ease: 'power3.out',
       });
     });
     return () => ctx.revert();
   }, []);
 
+  // Sticky bar's whole justification was a CTA nobody could see without scrolling —
+  // now that the hero button is above the fold, only surface it once the hero has passed.
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setHeroPassed(!entry.isIntersecting),
+      { rootMargin: '-100px 0px 0px 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Applied Work rotates through cases 3 at a time (never a partial last row),
+  // auto-advancing and pausing while the visitor's cursor is over the cards.
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (awPausedRef.current) return;
+      setAwVisible(false);
+      setTimeout(() => {
+        setAwPage((p) => (p + 1) % AW_PAGE_COUNT);
+        setAwVisible(true);
+      }, 900);
+    }, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const goToAwPage = (i) => {
+    if (i === awPage) return;
+    setAwVisible(false);
+    setTimeout(() => {
+      setAwPage(i);
+      setAwVisible(true);
+    }, 900);
+  };
+
+  const awCards = Array.from({ length: AW_PAGE_SIZE }, (_, i) => APPLIED_WORK[(awPage * AW_PAGE_SIZE + i) % APPLIED_WORK.length]);
+
   return (
     <>
       {/* ── HERO ── */}
-      <section ref={heroRef} className="relative min-h-[100dvh] w-full flex flex-col justify-center items-center pt-24 pb-16 px-8 z-10 text-center overflow-hidden bg-primary">
+      <section ref={heroRef} className="relative min-h-[100dvh] w-full flex flex-col justify-center items-center z-10 text-center overflow-hidden bg-primary">
 
         <div className="absolute inset-0 z-0">
           {/* hero-mp4.mp4 — Perth → Sydney → Melbourne → Perth boardroom loop */}
@@ -219,55 +165,106 @@ const Home = () => {
               background: 'radial-gradient(ellipse 62% 56% at 50% 36%, rgba(5,10,20,0.6) 0%, rgba(5,10,20,0.32) 55%, transparent 85%)',
             }}
           />
+          {/* Lower vignette — same soft, edgeless treatment behind the support line and kicker */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: 'radial-gradient(ellipse 60% 38% at 50% 78%, rgba(5,10,20,0.55) 0%, rgba(5,10,20,0.3) 55%, transparent 85%)',
+            }}
+          />
         </div>
 
-        <div className="w-full max-w-[900px] mx-auto mb-12 relative flex flex-col items-center justify-center select-none pt-4 z-10">
-          <div className="shield-elem mb-16 w-28 h-32 md:w-40 md:h-44 relative z-20 mx-auto drop-shadow-[0_0_60px_rgba(3,105,161,0.6)] hover:drop-shadow-[0_0_80px_rgba(3,105,161,0.8)] transition-all duration-500">
-            <TransparentShield />
-          </div>
-          <div className="flex flex-col items-center gap-10">
-            <h2 className="logo-letter float-breathe font-serif font-semibold text-5xl md:text-7xl lg:text-8xl tracking-[0.06em] leading-tight inline-block [filter:drop-shadow(0_2px_4px_rgba(0,0,0,0.9))_drop-shadow(0_8px_28px_rgba(0,0,0,0.65))] platinum-text">
-              BW ADVISORY
-            </h2>
-            <div className="flex items-center gap-8 w-full justify-center overflow-hidden">
-              <div className="solutions-line h-[1px] flex-grow max-w-[80px] bg-gradient-to-r from-transparent via-[#C9A84C]/40 to-[#C9A84C]/60"></div>
-              <p className="solutions-word font-sans font-semibold text-[#C9A84C] tracking-[0.3em] text-base md:text-xl uppercase [filter:drop-shadow(0_1px_3px_rgba(0,0,0,0.9))_drop-shadow(0_0_16px_rgba(201,168,76,0.7))]">
+        <div
+          className="relative z-10 w-full flex flex-col items-center"
+          style={{ gap: '12px', padding: '28px 32px 14px', maxWidth: '900px', margin: '0 auto' }}
+        >
+          {/* 1 — Lockup */}
+          <div className="float-breathe flex flex-col items-center" style={{ gap: '12px' }}>
+            <div className="flex flex-col items-center" style={{ gap: '12px' }}>
+              <div className="shield-elem w-[130px] h-[143px] sm:w-[160px] sm:h-[176px] md:w-[190px] md:h-[209px] drop-shadow-[0_0_40px_rgba(3,105,161,0.6)]">
+                <TransparentShield />
+              </div>
+              <h2
+                className="logo-letter platinum-text font-serif font-semibold uppercase inline-block text-[46px] sm:text-[60px] md:text-[76px]"
+                style={{
+                  letterSpacing: '0.06em',
+                  lineHeight: 1.2,
+                  filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.9)) drop-shadow(0 8px 28px rgba(0,0,0,0.65))',
+                }}
+              >
+                BW ADVISORY
+              </h2>
+            </div>
+            <div className="flex items-center justify-center" style={{ gap: '22px' }}>
+              <div className="solutions-line h-px" style={{ width: '64px', background: 'linear-gradient(to right, transparent, rgba(201,168,76,0.4))' }} />
+              <p
+                className="solutions-word font-sans font-semibold uppercase text-[14px] sm:text-[17px] md:text-[20px]"
+                style={{
+                  color: '#C9A84C',
+                  letterSpacing: '0.3em',
+                  filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.9)) drop-shadow(0 0 16px rgba(201,168,76,0.7))',
+                }}
+              >
                 SOLUTIONS
               </p>
-              <div className="solutions-line h-[1px] flex-grow max-w-[80px] bg-gradient-to-l from-transparent via-[#C9A84C]/40 to-[#C9A84C]/60"></div>
+              <div className="solutions-line h-px" style={{ width: '64px', background: 'linear-gradient(to left, transparent, rgba(201,168,76,0.6))' }} />
             </div>
           </div>
-        </div>
 
-        <div className="w-full max-w-7xl mx-auto mt-16 relative z-20">
-          <div className="hero-elem mb-10 drop-shadow-[0_3px_14px_rgba(0,0,0,0.75)]">
-            <p className="font-sans italic font-semibold text-[#C9A84C] text-2xl md:text-3xl lg:text-4xl leading-snug">
-              The gaps you can't see. The capability to close them.{' '}
-              <span className="not-italic font-bold text-white">I deliver both.</span>
+          {/* 2 — Headline */}
+          <div className="hero-elem flex flex-col items-center" style={{ gap: '14px', filter: 'drop-shadow(0 4px 18px rgba(0,0,0,0.8))' }}>
+            <h1
+              className="font-display font-bold text-white text-center text-[32px] sm:text-[42px] md:text-[52px] lg:text-[60px] md:whitespace-nowrap"
+              style={{ lineHeight: 1.06, letterSpacing: '-0.02em', maxWidth: '1000px' }}
+            >
+              The gaps you can't see.<br />The capability to close them.
+            </h1>
+            <p className="font-serif italic font-medium text-[24px] sm:text-[32px] md:text-[40px] lg:text-[46px]" style={{ color: '#C9A84C', lineHeight: 1.1 }}>
+              I deliver both.
             </p>
           </div>
-          <div className="hero-elem relative mt-12 max-w-4xl mx-auto">
-            <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-[#C9A84C]/40 via-accent/20 to-[#C9A84C]/10 pointer-events-none" />
-            <div className="relative bg-[#050b14]/65 backdrop-blur-lg border border-[#C9A84C]/35 rounded-3xl p-10 md:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.4),0_0_60px_rgba(201,168,76,0.08)]">
-              <div className="space-y-5 text-center">
-                <p className="text-xs font-mono tracking-[0.35em] uppercase text-[#C9A84C] font-bold">Operational Reality</p>
-                <h2 className="font-display text-2xl md:text-3xl font-semibold text-white leading-tight">
-                  Diagnose first. Build capability second. Guess never.
-                </h2>
-                <div className="w-12 h-px bg-gradient-to-r from-transparent via-[#C9A84C]/60 to-transparent mx-auto" />
-                <p className="text-base md:text-lg text-silver/85 font-light leading-relaxed max-w-3xl mx-auto">
-                  Businesses are losing value every day to operational gaps they haven't identified — and losing more to fixes that don't hold. I diagnose what's actually happening inside your operation, then build the capability to close it: redesigned process, embedded accountability, and — where the fix is a system, not a structure — technology that's vetted and matched to how you work. The return is measurable: reduced exposure, lower costs, and an operation running on capability, not patches.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="hero-elem pt-16 flex flex-col sm:flex-row items-center justify-center gap-6">
-            <a href="/consultation" onClick={() => posthog.capture('scoping_session_cta_clicked', { location: 'hero' })} className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-full text-[#0F172A] font-bold text-base md:text-lg hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase text-center flex items-center justify-center gap-3 shadow-[0_12px_32px_rgba(201,168,76,0.4)] hover:shadow-[0_16px_48px_rgba(201,168,76,0.6)] border border-white/10 hover:border-white/20 cursor-pointer min-w-[280px]">
+
+          {/* 3 — Support line */}
+          <p
+            className="hero-elem font-sans font-light text-[16px] md:text-[19px]"
+            style={{
+              lineHeight: 1.65,
+              color: 'rgba(240,244,248,0.94)',
+              maxWidth: '680px',
+              textWrap: 'pretty',
+              textShadow: '0 2px 6px rgba(0,0,0,0.85), 0 1px 14px rgba(0,0,0,0.6)',
+            }}
+          >
+            I find what is actually happening inside your operation, then close the gap — with capability you own, or technology I have already vetted.
+          </p>
+
+          {/* 4 — Kicker + CTA */}
+          <div className="hero-elem flex flex-col items-center" style={{ gap: '24px' }}>
+            <p
+              className="font-mono font-bold uppercase text-[10px] md:text-[12px] text-center"
+              style={{
+                letterSpacing: '0.3em',
+                color: '#E4C978',
+                textShadow: '0 2px 6px rgba(0,0,0,0.9), 0 1px 12px rgba(0,0,0,0.65)',
+              }}
+            >
+              Diagnose first. Build capability second. Guess never.
+            </p>
+            <Link
+              to="/#contact"
+              onClick={() => posthog.capture('scoping_session_cta_clicked', { location: 'hero' })}
+              className="group relative overflow-hidden bg-[#C9A84C] rounded-full text-[#0F172A] font-bold hover:bg-[#E0BC60] transition-all duration-300 uppercase text-center flex items-center justify-center gap-3 border border-white/10 hover:border-white/20 cursor-pointer px-10 py-4 md:px-16 text-sm md:text-[18px]"
+              style={{
+                minWidth: '280px',
+                letterSpacing: '0.15em',
+                boxShadow: '0 12px 32px rgba(201,168,76,0.4)',
+              }}
+            >
               Request a Scoping Session
               <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -283,43 +280,128 @@ const Home = () => {
               Every engagement is tailored to your challenge. These are the areas where I deliver measurable outcomes and lasting operational change.
             </p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <a href="/loss-intelligence" className="group relative overflow-hidden">
-              <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/30 rounded-3xl opacity-0 group-hover:opacity-70 transition-all duration-700 blur-xl"></div>
-              <div className="relative block bg-gradient-to-br from-[#1A3560]/80 via-[#0D1520]/60 to-[#051020]/80 border border-accent/40 group-hover:border-[#C9A84C]/60 rounded-3xl p-8 md:p-10 transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.2)] h-full flex flex-col">
-                <div className="mb-6">
-                  <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-xs uppercase font-bold mb-4">Practice Area 01</p>
-                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-white leading-snug min-h-[5rem]">Operational Resilience</h3>
+          <div className="grid grid-cols-1 lg:grid-cols-2" style={{ gap: '36px' }}>
+            {/* Card 01 — Loss Intelligence */}
+            <a href="/loss-intelligence" className="practice-card group relative">
+              <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/30 rounded-3xl opacity-0 group-hover:opacity-60 transition-all duration-700 blur-md"></div>
+              <div
+                className="relative block rounded-3xl h-full flex flex-col border border-[#0369A1]/40 group-hover:border-[#C9A84C] transition-all duration-300 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.25)] group-hover:-translate-y-1"
+                style={{
+                  padding: '40px 42px',
+                  background: 'linear-gradient(140deg, rgba(26,53,96,0.8), rgba(13,21,32,0.6), rgba(5,16,32,0.8))',
+                }}
+              >
+                <div style={{ gap: '20px' }} className="flex flex-col flex-1">
+                  <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-[11px] uppercase font-bold">Practice Area 01</p>
+                  <h3 className="font-display font-semibold text-3xl text-white leading-tight">Operational Resilience</h3>
+                  <p className="text-[rgba(192,200,208,0.85)] font-light text-base leading-[1.7]" style={{ textWrap: 'pretty' }}>
+                    Organisations carrying operational risk and loss exposure across sites, stores, and supply chains — retail, logistics, and field operations among them. I built and ran some of Western Australia's largest, highest-stakes operational commands — that same capability, now available directly to your business.
+                  </p>
                 </div>
-                <p className="text-silver/85 font-light text-sm md:text-base leading-relaxed mb-8 flex-1">
-                  Organisations carrying operational risk and loss exposure across sites, stores, and supply chains — retail, logistics, and field operations among them. I built and ran some of Western Australia's largest, highest-stakes operational commands — that same capability, now available directly to your business.
-                </p>
               </div>
             </a>
-            <a href="/#advisory" className="group relative overflow-hidden">
-              <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/30 rounded-3xl opacity-0 group-hover:opacity-70 transition-all duration-700 blur-xl"></div>
-              <div className="relative block bg-gradient-to-br from-[#1A3560]/80 via-[#0D1520]/60 to-[#051020]/80 border border-accent/40 group-hover:border-[#C9A84C]/60 rounded-3xl p-8 md:p-10 transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.2)] h-full flex flex-col">
-                <div className="mb-6">
-                  <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-xs uppercase font-bold mb-4">Practice Area 02</p>
-                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-white leading-snug min-h-[5rem]">Technology Advisory</h3>
+
+            {/* Card 02 — Technology Advisory */}
+            <a href="/#advisory" className="practice-card group relative">
+              <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/30 rounded-3xl opacity-0 group-hover:opacity-60 transition-all duration-700 blur-md"></div>
+              <div
+                className="relative block rounded-3xl h-full flex flex-col border border-[#0369A1]/40 group-hover:border-[#C9A84C] transition-all duration-300 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.25)] group-hover:-translate-y-1"
+                style={{
+                  padding: '40px 42px',
+                  background: 'linear-gradient(140deg, rgba(26,53,96,0.8), rgba(13,21,32,0.6), rgba(5,16,32,0.8))',
+                }}
+              >
+                <div style={{ gap: '20px' }} className="flex flex-col flex-1">
+                  <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-[11px] uppercase font-bold">Practice Area 02</p>
+                  <h3 className="font-display font-semibold text-3xl text-white leading-tight">Technology Advisory</h3>
+                  <p className="text-[rgba(192,200,208,0.85)] font-light text-base leading-[1.7] flex-1" style={{ textWrap: 'pretty' }}>
+                    Cutting through an overcrowded technology market — as the end user who's needed these systems to work, not the vendor selling them. I diagnose what your operation actually needs, then bring you providers I have already tested — on privacy, on security, on what the product actually does with your data, and on whether the AI claim survives a question. Matched to how you work, not to how they sell.
+                  </p>
+                  <div className="pt-[18px] border-t border-white/[0.12]">
+                    <p className="text-[rgba(192,200,208,0.7)] font-light text-sm leading-[1.65]">
+                      Where I hold a commercial arrangement with a provider, you hear it from me before you hear their name.
+                    </p>
+                  </div>
                 </div>
-                <p className="text-silver/85 font-light text-sm md:text-base leading-relaxed mb-8 flex-1">
-                  Cutting through an overcrowded technology market — as the end user who's needed these systems to work, not the vendor selling them. I diagnose what your operation actually needs, then identify and connect best-in-class technology: vetted, matched, and integrated to how you already work.
-                </p>
               </div>
             </a>
-            <a href="/#advisory" className="group relative overflow-hidden">
-              <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/30 rounded-3xl opacity-0 group-hover:opacity-70 transition-all duration-700 blur-xl"></div>
-              <div className="relative block bg-gradient-to-br from-[#1A3560]/80 via-[#0D1520]/60 to-[#051020]/80 border border-accent/40 group-hover:border-[#C9A84C]/60 rounded-3xl p-8 md:p-10 transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.2)] h-full flex flex-col">
-                <div className="mb-6">
-                  <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-xs uppercase font-bold mb-4">Practice Area 03</p>
-                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-white leading-snug min-h-[5rem]">Professional &amp; Healthcare Practices</h3>
+
+            {/* Card 03 — Professional & Healthcare Practices */}
+            <a href="/#advisory" className="practice-card group relative">
+              <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/30 rounded-3xl opacity-0 group-hover:opacity-60 transition-all duration-700 blur-md"></div>
+              <div
+                className="relative block rounded-3xl h-full flex flex-col border border-[#0369A1]/40 group-hover:border-[#C9A84C] transition-all duration-300 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.25)] group-hover:-translate-y-1"
+                style={{
+                  padding: '40px 42px',
+                  background: 'linear-gradient(140deg, rgba(26,53,96,0.8), rgba(13,21,32,0.6), rgba(5,16,32,0.8))',
+                }}
+              >
+                <div style={{ gap: '20px' }} className="flex flex-col flex-1">
+                  <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-[11px] uppercase font-bold">Practice Area 03</p>
+                  <h3 className="font-display font-semibold text-3xl text-white leading-tight">Professional &amp; Healthcare Practices</h3>
+                  <p className="text-[rgba(192,200,208,0.85)] font-light text-base leading-[1.7]" style={{ textWrap: 'pretty' }}>
+                    Accounting, legal, financial advice, chiropractic, physiotherapy, dental, and GP practices — where operational pressure, compliance exposure, and client data risk combine. Diagnostic-led, practically delivered, without disrupting how the practice runs.
+                  </p>
                 </div>
-                <p className="text-silver/85 font-light text-sm md:text-base leading-relaxed mb-8 flex-1">
-                  Accounting, legal, financial advice, chiropractic, physiotherapy, dental, and GP practices — where operational pressure, compliance exposure, and client or patient data risk combine. Diagnostic-led, practically delivered, without disrupting how the practice runs.
-                </p>
               </div>
             </a>
+
+            {/* Card 04 — Privacy Advisory Support (new) */}
+            <a href="/#advisory" className="practice-card group relative">
+              <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/30 rounded-3xl opacity-0 group-hover:opacity-60 transition-all duration-700 blur-md"></div>
+              <div
+                className="relative block rounded-3xl h-full flex flex-col border border-[#0369A1]/40 group-hover:border-[#C9A84C] transition-all duration-300 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.25)] group-hover:-translate-y-1"
+                style={{
+                  padding: '40px 42px',
+                  background: 'linear-gradient(140deg, rgba(26,53,96,0.8), rgba(13,21,32,0.6), rgba(5,16,32,0.8))',
+                }}
+              >
+                <div style={{ gap: '20px' }} className="flex flex-col flex-1">
+                  <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-[11px] uppercase font-bold">Practice Area 04</p>
+                  <h3 className="font-display font-semibold text-3xl text-white leading-tight">Privacy Advisory Support</h3>
+                  <p className="font-serif italic font-medium" style={{ color: '#C9A84C', fontSize: '22px', lineHeight: 1.3 }}>
+                    I don't write the assessment. I make sure it asks the right questions.
+                  </p>
+                  <p className="text-[rgba(192,200,208,0.85)] font-light text-base leading-[1.7]" style={{ textWrap: 'pretty' }}>
+                    Surveillance, analytics and AI tools collect more than most organisations realise, and more than most vendors can explain. I work alongside your privacy officer, your counsel or your external assessor — framing the operational questions, pressing the vendor on what the system actually does with personal information, and translating what comes back into something your board can decide on.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── THE INDEPENDENT SEAT ── */}
+      <section id="seat" className="relative w-full z-10" style={{ background: '#0A1520', borderTop: '1px solid rgba(255,255,255,0.06)', padding: '120px 56px' }}>
+        <div className="absolute bottom-0 left-0 pointer-events-none" style={{ width: '640px', height: '640px', background: 'rgba(3,105,161,0.09)', filter: 'blur(150px)' }} />
+        <div className="relative z-10 mx-auto flex flex-col" style={{ maxWidth: '1000px', gap: '30px' }}>
+          <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs font-bold">The Independent Seat</p>
+          <h2 className="font-display font-bold text-white" style={{ fontSize: '54px', lineHeight: 1.06, letterSpacing: '-0.02em' }}>
+            I sit on both sides of the table.
+          </h2>
+          <p className="font-serif italic font-medium" style={{ color: '#C9A84C', fontSize: '38px', lineHeight: 1.15 }}>
+            That is why my vetting means something.
+          </p>
+          <p className="font-sans font-light" style={{ fontSize: '19px', lineHeight: 1.7, color: 'rgba(240,244,248,0.85)', maxWidth: '74ch' }}>
+            Organisations ask me what to buy. Technology providers ask me what buyers will actually accept. I do both, which means I have seen the same product fail procurement and then sat with the vendor rewriting it until it passes.
+          </p>
+          <p className="font-sans font-light" style={{ fontSize: '19px', lineHeight: 1.7, color: 'rgba(240,244,248,0.85)', maxWidth: '74ch' }}>
+            The market is noise. AI claims that do not survive a question, privacy exposure nobody costed, vendors who cannot complete a security questionnaire. I have already done the cutting through. By the time a provider reaches you, I have tested them on privacy, security, trust and safety — and I say no far more often than yes.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 pt-8 mt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+            <div className="pt-8 md:pr-10 space-y-3">
+              <p className="font-mono font-bold uppercase" style={{ fontSize: '13px', letterSpacing: '0.2em', color: '#5FB4F0' }}>If you are buying</p>
+              <p className="font-sans font-normal" style={{ fontSize: '18px', color: 'rgba(240,244,248,0.92)' }}>
+                You get a shortlist that has already been through the questions your board will ask, and a plain answer on what the technology does with data.
+              </p>
+            </div>
+            <div className="pt-8 md:pl-10 space-y-3 md:border-l" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+              <p className="font-mono font-bold uppercase" style={{ fontSize: '13px', letterSpacing: '0.2em', color: '#5FB4F0' }}>If you are building</p>
+              <p className="font-sans font-normal" style={{ fontSize: '18px', color: 'rgba(240,244,248,0.92)' }}>
+                You find out what your buyer's privacy, security and trust requirements really are before you lose a deal discovering them.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -328,7 +410,7 @@ const Home = () => {
       <section id="advisory" className="py-32 w-full relative z-10 bg-gradient-to-b from-primary via-[#0D1520] to-primary">
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
           <div className="mb-20 max-w-4xl">
-            <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">For operations, professional services firms, and healthcare practices</p>
+            <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">For operations and professional services firms</p>
             <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight mb-8">
               Operational Resilience and Technology Capability
             </h2>
@@ -338,9 +420,9 @@ const Home = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {[
-              { num: "01", name: "Operational Resilience Diagnostic", desc: "Structured assessment of where the business is exposed — operationally, financially, and from a security and compliance standpoint. Delivered as a prioritised action plan." },
-              { num: "02", name: "Process Automation and AI Integration", desc: "Identify the manual, repetitive, error-prone work consuming partner and staff time. Replace it with automation and AI-assisted workflows that match how the business already operates." },
-              { num: "03", name: "Technology Matching", desc: "The market is crowded and everyone's short on time. I do the diligence most businesses can't — evaluating the technology landscape and connecting you with best-in-class solutions, vetted and matched to how you operate." },
+              { num: '01', name: 'Operational Resilience Diagnostic', desc: 'Structured assessment of where the business is exposed — operationally, financially, and from a security and compliance standpoint. Delivered as a prioritised action plan.' },
+              { num: '02', name: 'Process Automation and AI Integration', desc: 'Identify the manual, repetitive, error-prone work consuming partner and staff time. Replace it with automation and AI-assisted workflows that match how the business already operates.' },
+              { num: '03', name: 'Technology Matching', desc: "The market is crowded and everyone's short on time. I do the diligence most businesses can't — evaluating the technology landscape and connecting you with what actually fits, vetted and matched to how you operate." },
             ].map((tile) => (
               <div key={tile.num} className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
@@ -355,10 +437,10 @@ const Home = () => {
             ))}
           </div>
           <div className="flex justify-center w-full">
-            <a href="/consultation" onClick={() => posthog.capture('scoping_session_cta_clicked', { location: 'advisory_section' })} className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer">
+            <Link to="/#contact" onClick={() => posthog.capture('scoping_session_cta_clicked', { location: 'advisory_section' })} className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer">
               Request a Scoping Session
               <svg className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -372,9 +454,36 @@ const Home = () => {
               Led by Brad. Specialists when required.
             </h2>
             <div className="space-y-6 text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
-              <p>Every engagement is led personally. The diagnostic, the client relationship, the strategic direction — all Brad. When the work requires deeper technical execution, it is delivered by best-in-class specialists drawn from cyber security, digital forensics, and IT infrastructure — practitioners at the top of their disciplines, matched to the specific need.</p>
-              <p>Most businesses are running at less than half the capability of the systems they already own. The right engagement pays for itself — through automation savings, reduced overhead, and the cost of a breach you never have to absorb.</p>
+              <p>Every engagement is led personally. The diagnostic, the client relationship, the strategic direction — all Brad. When the work requires deeper technical execution, it is delivered by specialists drawn from cyber security, digital forensics, and IT infrastructure — matched to the specific need.</p>
+              <p>Most operations are running a fraction of the capability they already own. The saving is in what you stop paying for: duplicated tools, manual hours, and the breach you never have to absorb.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── DIAGNOSTICS PATHWAY ── */}
+      <section className="py-32 w-full relative z-10 bg-gradient-to-b from-primary via-[#0D1520] to-primary overflow-hidden">
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10 space-y-8">
+          <div className="space-y-4">
+            <p className="font-mono tracking-[0.3em] uppercase text-sm font-bold" style={{ color: '#5FB4F0' }}>Diagnostic Assessment</p>
+            <h2 className="font-display font-semibold text-4xl md:text-5xl lg:text-6xl text-white tracking-tight">Know Your Exposure</h2>
+            <p className="text-xl md:text-2xl text-silver/80 font-light leading-relaxed">
+              Start with what's true. Five diagnostics across three streams. Four of them come to me — I read every answer and write the assessment myself. The AI Readiness report is fully automated and comes back instantly.
+            </p>
+          </div>
+          <div className="pt-8 flex flex-col items-center gap-8">
+            <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-white/90 font-normal text-base">
+              {['Four written by Brad, within 24 hours', 'One automated, returned instantly', 'Eight minutes each'].map((t) => (
+                <span key={t} className="flex items-center gap-2">
+                  <svg className="w-4 h-4 flex-shrink-0" style={{ color: '#5FB4F0' }} fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
+                  {t}
+                </span>
+              ))}
+            </div>
+            <Link to="/diagnostics" className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10">
+              Access All Diagnostics
+              <svg className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+            </Link>
           </div>
         </div>
       </section>
@@ -389,35 +498,49 @@ const Home = () => {
               Details remain confidential. The problems solved and outcomes delivered are not.
             </p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {[
-              { num: "01", title: "Organisational Redesign", tag: "Law Enforcement / Organisational Command", situation: "Large operational unit with entrenched practices and persistent performance gaps despite adequate resourcing.", gap: "Investigative culture lagged behind intelligence capability. Tools existed. Practice did not.", outcome: "Workforce restructured, investigative practice modernised. Regional volume crime decreased measurably.", impact: "Investigative culture rebuilt. Crime rate fell." },
-              { num: "02", title: "Digital Operations at Scale", tag: "Government / Large-Scale Border Operations", situation: "Government agency required digital screening at scale during crisis, replacing inadequate paper-based process.", gap: "No digital infrastructure. Large workforce needed real-time coordination across politically sensitive operation.", outcome: "Programme designed and commanded from ground up. Paper process eliminated entirely. Operation delivered without incident.", impact: "1M+ People Screened at Scale" },
-              { num: "03", title: "Intelligence Architecture", tag: "Law Enforcement / Intelligence Architecture", situation: "Government intelligence infrastructure fragmented across disconnected systems. No single operational picture for frontline commanders.", gap: "Intelligence didn't reach decision-makers at speed. Information silos prevented unified command.", outcome: "Real-time intelligence environment deployed. Multiple sources aggregated into single actionable picture integrated with frontline systems.", impact: "Intelligence reached command 40% faster." },
-              { num: "04", title: "National Retail Crime Intelligence", tag: "Retail Technology / Law Enforcement Partnerships", situation: "National retail group exposed to coordinated organised crime activity across stores, regions, and state lines. Incident response running well behind threat velocity.", gap: "Loss prevention operating reactively. No shared intelligence picture between store, regional, and national teams. Police engagement ad hoc.", outcome: "Intelligence-led loss prevention framework designed and embedded. National pattern detection in place. Structured law enforcement partnerships at state and federal level.", impact: "Reactive posture replaced with detection capability." },
-              { num: "05", title: "Capability Gap Diagnosis", tag: "Private Sector / Capability Diagnostic", situation: "A client held a genuine, hard-to-replicate data advantage, but couldn't yet prove it to investors or partners.", gap: "The capability wasn't the problem. The operating model was undocumented, governance was informal, and there was no investor-grade evidence base.", outcome: "Assessed capability across five dimensions — product quality, process and technology, external relationships, scalability, and commercial readiness — with a staged roadmap to close what was missing.", impact: "Confirmed the capability was real. Replaced guesswork with a costed, sequenced plan to prove it." },
-            ].map((cs) => (
-              <div key={cs.num} className="group relative h-full">
-                <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-60 transition-all duration-700 blur-lg"></div>
-                <div className="relative bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-sm border border-accent/30 group-hover:border-[#C9A84C]/60 rounded-2xl p-8 md:p-10 h-full flex flex-col transition-all duration-500 group-hover:bg-white/12">
-                  <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold mb-4">Case {cs.num}</p>
-                  <h3 className="font-display font-bold text-2xl md:text-3xl text-white mb-2 leading-tight">{cs.title}</h3>
-                  <p className="text-[#C9A84C]/70 text-xs font-mono tracking-widest uppercase font-bold mb-6">{cs.tag}</p>
-                  <div className="space-y-4 flex-1">
-                    {[['The Situation', cs.situation], ['The Gap', cs.gap], ['The Outcome', cs.outcome]].map(([label, text]) => (
-                      <div key={label}>
-                        <p className="text-accent/60 font-mono text-[10px] tracking-widest uppercase font-bold mb-1">{label}</p>
-                        <p className="text-silver/80 font-light leading-relaxed text-sm">{text}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-6 pt-6 border-t border-[#C9A84C]/25">
-                    <p className="text-[#C9A84C] font-mono text-[10px] tracking-[0.3em] uppercase font-bold mb-2">Impact</p>
-                    <p className="text-white font-bold text-lg md:text-xl leading-snug">{cs.impact}</p>
+          <div
+            onMouseEnter={() => { awPausedRef.current = true; }}
+            onMouseLeave={() => { awPausedRef.current = false; }}
+          >
+          <div className={`grid grid-cols-1 lg:grid-cols-3 gap-6 transition-all duration-[900ms] ease-out ${awVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
+            {awCards.map((cs) => (
+              <div key={cs.num} className="group relative lg:grid lg:[grid-row:span_7] lg:[grid-template-rows:subgrid] lg:gap-y-0">
+                <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/20 to-accent/15 rounded-2xl opacity-0 group-hover:opacity-20 transition-all duration-700 blur-md pointer-events-none lg:col-span-full lg:row-span-full"></div>
+                <div
+                  className="relative bg-white/[0.045] backdrop-blur-sm border border-[#0369A1]/[0.28] group-hover:border-[#C9A84C]/40 rounded-2xl transition-all duration-400 lg:col-span-full lg:grid lg:row-span-full lg:[grid-template-rows:subgrid]"
+                  style={{ padding: '32px 32px 30px' }}
+                >
+                  <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold" style={{ paddingBottom: '14px' }}>Case {cs.num}</p>
+                  <h3 className="font-display font-bold text-[26px] text-white leading-[1.2] tracking-[-0.01em]" style={{ paddingBottom: '10px' }}>{cs.title}</h3>
+                  <p className="text-[rgba(201,168,76,0.75)] font-mono font-bold uppercase leading-[1.5] text-xs" style={{ letterSpacing: '0.14em', paddingBottom: '22px' }}>{cs.tag}</p>
+                  {[['Situation', cs.situation], ['Gap', cs.gap], ['Outcome', cs.outcome]].map(([label, text]) => (
+                    <div key={label} style={{ paddingBottom: '16px' }}>
+                      <p className="text-[#5FB4F0] font-mono font-bold uppercase mb-1.5 text-xs" style={{ letterSpacing: '0.14em' }}>{label}</p>
+                      <p className="text-[rgba(210,216,224,0.92)] font-normal leading-[1.6] text-base" style={{ textWrap: 'pretty' }}>{text}</p>
+                    </div>
+                  ))}
+                  <div style={{ paddingTop: '20px', borderTop: '1px solid rgba(201,168,76,0.28)' }}>
+                    <p className="font-mono font-bold uppercase text-xs" style={{ letterSpacing: '0.22em', color: '#E4C978', marginBottom: '10px' }}>Impact</p>
+                    <p className="text-white font-semibold text-xl leading-[1.3]">{cs.impact}</p>
                   </div>
                 </div>
               </div>
             ))}
+          </div>
+          {AW_PAGE_COUNT > 1 && (
+            <div className="flex justify-center gap-3 mt-12">
+              {Array.from({ length: AW_PAGE_COUNT }).map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => goToAwPage(i)}
+                  aria-label={`Show Applied Work cases, page ${i + 1}`}
+                  aria-current={awPage === i}
+                  className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${awPage === i ? 'w-8 bg-[#C9A84C]' : 'w-2.5 bg-white/20 hover:bg-white/35'}`}
+                />
+              ))}
+            </div>
+          )}
           </div>
         </div>
       </section>
@@ -429,7 +552,7 @@ const Home = () => {
         <div className="relative z-10 w-full max-w-5xl mx-auto px-6 flex flex-col items-center justify-center text-center">
           <div className="mb-8 flex items-center justify-center gap-3">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-accent"></div>
-            <p className="text-accent font-mono tracking-[0.3em] text-xs uppercase font-bold">Operational Doctrine</p>
+            <p className="font-mono tracking-[0.3em] text-sm uppercase font-bold" style={{ color: '#5FB4F0' }}>Operational Doctrine</p>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-accent"></div>
           </div>
           <h2 className="phil-elem font-display font-semibold text-4xl md:text-5xl lg:text-6xl text-white leading-tight tracking-tight mb-6">
@@ -469,65 +592,36 @@ const Home = () => {
               </h2>
             </div>
             <div className="space-y-6 text-textDark/90 leading-relaxed text-xl font-light">
-              <p>Brad built operational systems for large-scale law enforcement organisations long before digital tools existed to support them. Running some of Western Australia's largest operational units, he developed the systems, processes, and disciplines that made complex operations function — not because technology enabled it, but because the operational thinking was sound.</p>
-              <p>When a national health crisis required border management systems built from scratch, he led the design and command of the operation — processing over one million travellers with no existing infrastructure and no tolerance for failure. He then delivered intelligence capability through a state-level command environment, building the information architecture that enabled frontline operators to work effectively across high-pressure, high-stakes conditions.</p>
-              <p>He moved into the private sector to lead law enforcement partnerships for a retail intelligence technology company — building the bridge between what law enforcement needs and what a technology business can deliver, proved across every Australian state and territory.</p>
-              <p>He now brings that same discipline — blended with private sector technology experience and practical AI capability — to operations, professional services firms, and healthcare practices.</p>
+              <p>I built operational systems for large-scale law enforcement long before digital tools existed to support them. Some of Western Australia's largest operational commands ran on processes and disciplines I wrote — not because technology enabled them, but because the thinking underneath was sound.</p>
+              <p>When a national health crisis required border management built from scratch, I designed and commanded it: more than a million travellers screened, no existing infrastructure, no tolerance for failure. The intelligence architecture that came next, inside a state-level command environment, existed so frontline operators could act on information while it still mattered.</p>
+              <p>Then the private sector, leading law enforcement partnerships for a retail intelligence technology company — sitting between what police need and what a technology business can actually deliver, proved across every Australian state and territory.</p>
+              <p>That order matters. Operational practice came first, before the tools existed. Then a seat inside a technology business, watching which products got used and which got bought and shelved. It is why I test a vendor the way I do — not on the demonstration, but on whether the practice around it will hold.</p>
               <p className="font-medium text-textDark">The problems look different. The fundamentals are the same.</p>
-            </div>
-            <div className="pt-8 border-t border-silver/20 mt-2">
-              <a href="/consultation" onClick={() => posthog.capture('scoping_session_cta_clicked', { location: 'about_section' })} className="inline-block group relative overflow-hidden bg-[#C9A84C] px-12 py-4 rounded-full text-[#0F172A] font-bold text-sm hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase flex items-center justify-center gap-3 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 w-max cursor-pointer">
-                Request a Scoping Session
-                <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-              </a>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── THE ENGAGEMENT ── */}
-      <HowWeWorkTogether />
+      <TheEngagement />
 
       {/* ── WHY THIS PRACTICE EXISTS ── */}
       <section id="why" className="py-32 w-full relative z-10 bg-gradient-to-b from-surface via-background to-surface">
         <div className="max-w-5xl mx-auto px-6 xl:px-12">
-          <div className="mb-12">
-            <p className="text-accent font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">Why This Practice Exists</p>
-            <h2 className="font-display font-semibold text-4xl md:text-5xl lg:text-6xl text-primary tracking-tight leading-tight mb-10">
-              Most have never had access to operational expertise at this level.
+          <div className="mb-12 space-y-6">
+            <p className="text-accent font-mono tracking-[0.3em] uppercase text-xs mb-2 font-bold">Why This Practice Exists</p>
+            <h2 className="font-display font-semibold text-primary tracking-tight leading-[1.08]" style={{ fontSize: '52px' }}>
+              This discipline was never available at your size.
             </h2>
-          </div>
-          <div className="space-y-6 text-textDark/90 font-light text-xl leading-relaxed max-w-4xl">
-            <p>Operations, professional services firms, and healthcare practices are at a genuine inflection point. AI is available but confusing, and choosing the right technology from an overcrowded market costs time most businesses don't have. Operational risk and loss exposure are climbing just as fast — coordinated threats moving across sites, stores, and supply chains quicker than most response capability can match. Cyber threats are escalating — health data, client records, and operational data are among the most targeted in Australia. Compliance obligations are tightening with no sign of reversal.</p>
-            <p>The practices that get clear on this in the next 12 to 18 months will have a structural advantage. The ones that don't will spend years cleaning up problems that were preventable.</p>
-            <p className="font-medium text-textDark">Most have never had access to operational expertise at this level. That gap is what this practice exists to close.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── DIAGNOSTICS PATHWAY ── */}
-      <section className="py-32 w-full relative z-10 bg-gradient-to-b from-primary via-[#0D1520] to-primary overflow-hidden">
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10 space-y-8">
-          <div className="space-y-4">
-            <p className="text-accent font-mono tracking-[0.3em] uppercase text-xs font-bold">Diagnostic Assessment</p>
-            <h2 className="font-display font-semibold text-4xl md:text-5xl lg:text-6xl text-white tracking-tight">Know Your Exposure</h2>
-            <p className="text-xl md:text-2xl text-silver/80 font-light leading-relaxed">
-              Start with what's true. Five diagnostics across three streams — each result reviewed by Brad, never automated.
+            <p className="font-serif italic font-medium" style={{ color: '#1B6EC2', fontSize: '36px', lineHeight: 1.15 }}>
+              Now it is.
             </p>
           </div>
-          <div className="pt-8 flex flex-col items-center gap-8">
-            <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-silver/70 font-light text-sm">
-              {["5 proprietary diagnostics","Personally reviewed","3 stream assessment"].map(t => (
-                <span key={t} className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
-                  {t}
-                </span>
-              ))}
-            </div>
-            <Link to="/diagnostics" className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10">
-              Access All Diagnostics
-              <svg className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-            </Link>
+          <div className="space-y-6 font-light max-w-4xl" style={{ fontSize: '20px', lineHeight: 1.7, color: 'rgba(26,53,96,0.9)' }}>
+            <p>Two things are happening at once. Technology is arriving faster than any operation can absorb it, and choosing well takes diligence most businesses cannot spare. At the same time organised loss is moving across sites, stores and supply chains faster than most response capability can match.</p>
+            <p>Both problems have the same cause. Capability is being bought instead of built.</p>
+            <p>The organisations that get clear on this in the next twelve to eighteen months will hold a structural advantage. The rest will spend years unpicking decisions that were preventable.</p>
+            <p className="font-medium text-textDark" style={{ fontSize: '20px' }}>Large organisations solve this with a standing intelligence and operations function. Most businesses cannot carry one. That is the gap this practice exists to close.</p>
           </div>
         </div>
       </section>
@@ -568,47 +662,20 @@ const Home = () => {
       {/* ── ENGAGEMENT: THE CONVERSATION ── */}
       <section id="contact" className="py-32 px-6 w-full bg-gradient-to-b from-[#0D1520] via-primary to-primary relative z-10">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <p className="text-accent font-mono tracking-[0.3em] uppercase text-xs font-bold">Let's Talk</p>
-                <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight">The Gap Closes with Conversation</h2>
-              </div>
-              <p className="text-xl text-silver/80 font-light leading-relaxed">Thirty minutes is enough. I'll understand your challenge. You'll understand my approach. No proposal until we've talked.</p>
-              <p className="text-base text-silver/55 font-light leading-relaxed">Working outside these sectors? The fundamentals apply everywhere — <a href="mailto:brad@bwadvisorysolutions.com.au" className="text-silver/70 hover:text-accent underline decoration-silver/30 hover:decoration-accent/60 underline-offset-4 transition-colors duration-300">get in touch</a>.</p>
-              <div className="space-y-6 pt-8 border-t border-accent/20">
-                {[
-                  { label: "Email", href: "mailto:brad@bwadvisorysolutions.com.au", text: "brad@bwadvisorysolutions.com.au" },
-                  { label: "Phone", href: "tel:+61407779474", text: "+61 407 779 474" },
-                  { label: "LinkedIn", href: "https://linkedin.com/in/bradwarburton", text: "linkedin.com/in/bradwarburton", external: true },
-                ].map(({ label, href, text, external }) => (
-                  <div key={label} className="space-y-3">
-                    <p className="text-accent/70 font-mono text-xs tracking-widest uppercase font-bold">{label}</p>
-                    <a href={href} {...(external ? { target: "_blank", rel: "noreferrer" } : {})} className="text-silver/80 hover:text-accent transition-colors font-light text-lg">{text}</a>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-br from-accent/40 to-accent/0 rounded-3xl opacity-0 group-hover:opacity-60 transition-all duration-700 blur-xl"></div>
-              <div className="relative bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-xl border border-accent/30 hover:border-accent/60 rounded-3xl p-12 lg:p-16 transition-all duration-500 group-hover:bg-white/12">
-                <ConsultationForm />
-              </div>
-            </div>
-          </div>
+          <BookingSection />
         </div>
       </section>
 
       <Footer />
 
       {/* ── STICKY CTA BAR ── */}
-      {!stickyDismissed && (
+      {heroPassed && !stickyDismissed && (
         <div role="region" aria-label="Diagnostic call to action" className="fixed bottom-0 left-0 right-0 z-[90] bg-[#0F172A]/95 backdrop-blur-md border-t border-[#C9A84C]/30 shadow-[0_-8px_24px_rgba(0,0,0,0.35)]">
           <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
             <p className="text-white font-light text-sm md:text-base flex-1 text-center sm:text-left leading-snug">Find out what your gaps are costing you.</p>
             <div className="flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-auto">
               <Link to="/ai-readiness" className="bg-[#C9A84C] hover:bg-[#E0BC60] text-[#0F172A] font-bold text-xs md:text-sm tracking-[0.15em] uppercase px-6 py-3 rounded-lg transition-all duration-300 inline-flex items-center gap-2 shadow-[0_4px_12px_rgba(201,168,76,0.3)] hover:shadow-[0_6px_16px_rgba(201,168,76,0.4)] cursor-pointer whitespace-nowrap">
-                See Where You're Exposed
+                Know Your Exposure
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
               </Link>
               <button type="button" onClick={() => setStickyDismissed(true)} aria-label="Dismiss" className="text-silver/50 hover:text-white p-2 transition-colors duration-200 cursor-pointer flex-shrink-0">

@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-textDark antialiased;
+    @apply bg-primary text-textLight antialiased;
   }
 }
 
@@ -51,10 +51,10 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #F5F4F0;
+  background: #0A1520;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C0C8D0;
+  background: #1A3560;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {

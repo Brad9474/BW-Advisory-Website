@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -32,7 +33,7 @@ const phases = [
   }
 ];
 
-const HowWeWorkTogether = () => {
+const TheEngagement = () => {
   useEffect(() => {
     let ctx = gsap.context(() => {
       // Horizontal line fill — scrub with scroll
@@ -56,9 +57,9 @@ const HowWeWorkTogether = () => {
         },
         scale: 0,
         opacity: 0,
-        duration: 0.5,
-        stagger: 0.12,
-        ease: "back.out(2)",
+        duration: 0.8,
+        stagger: 0.3,
+        ease: "back.out(1.4)",
       });
 
       // Phase content stagger in
@@ -70,9 +71,9 @@ const HowWeWorkTogether = () => {
         },
         y: 24,
         opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
+        duration: 1.3,
+        stagger: 0.3,
+        ease: "power2.out",
       });
     });
 
@@ -121,7 +122,7 @@ const HowWeWorkTogether = () => {
                     {phase.title}
                   </h3>
                   <div className="w-6 h-px bg-accent/40 mb-5" />
-                  <p className="text-surface/55 font-light text-sm xl:text-[15px] leading-relaxed">
+                  <p className="text-surface/70 font-light text-sm xl:text-[15px] leading-relaxed">
                     {phase.desc}
                   </p>
                 </div>
@@ -144,7 +145,7 @@ const HowWeWorkTogether = () => {
                 <div className="absolute -left-[37px] top-1 w-3 h-3 rounded-full bg-primary border-2 border-accent" />
                 <p className="text-accent/60 font-bold tracking-[0.2em] text-xs uppercase mb-3">Phase {phase.step}</p>
                 <h3 className="font-light text-2xl text-surface tracking-tight mb-3 leading-tight">{phase.title}</h3>
-                <p className="text-surface/55 font-light text-sm leading-relaxed">{phase.desc}</p>
+                <p className="text-surface/70 font-light text-sm leading-relaxed">{phase.desc}</p>
               </div>
             ))}
           </div>
@@ -153,19 +154,19 @@ const HowWeWorkTogether = () => {
 
       {/* CTA */}
       <div className="flex justify-center w-full relative z-10 px-6">
-        <a
-          href="/consultation"
-          className="group relative overflow-hidden bg-accent px-12 py-4 md:py-5 rounded-full text-white font-bold text-sm md:text-base hover:bg-[#155A9E] border border-white/20 transition-all duration-500 tracking-[0.2em] uppercase text-center flex items-center justify-center gap-4 shadow-[0_4px_16px_rgba(27,110,194,0.25)] hover:shadow-[0_6px_24px_rgba(27,110,194,0.4)] ring-1 ring-accent/50 group-hover:ring-accent w-full md:w-auto"
+        <Link
+          to="/#contact"
+          className="group relative overflow-hidden bg-[#C9A84C] px-12 py-4 md:py-5 rounded-full text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] border border-white/10 transition-all duration-300 tracking-[0.15em] uppercase text-center flex items-center justify-center gap-4 shadow-[0_12px_32px_rgba(201,168,76,0.4)] hover:shadow-[0_16px_48px_rgba(201,168,76,0.6)] w-full md:w-auto"
         >
           Request a Scoping Session
           <svg className="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
-        </a>
+        </Link>
       </div>
 
     </section>
   );
 };
 
-export default HowWeWorkTogether;
+export default TheEngagement;

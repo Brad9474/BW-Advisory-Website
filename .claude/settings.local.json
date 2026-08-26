@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npm audit:*)",
       "Bash(cd /c/repos/BW-Advisory-Website/src/pages && grep -n '<p' *.jsx | grep 'className=' | wc -l)",
-      "Read(//c/c/repos/BW-Advisory-Website/src/**)"
+      "Read(//c/c/repos/BW-Advisory-Website/src/**)",
+      "Bash(git fetch *)",
+      "Bash(git rev-list *)"
     ]
   }
 }

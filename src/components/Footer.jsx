@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import ShieldLogo from './ShieldLogo';
 
+const PURCHASE_SURFACE_ENABLED = import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true';
+
 const Footer = () => (
   <footer className="bg-gradient-to-b from-primary to-[#051020] pt-24 pb-12 px-6 border-t border-[#C9A84C]/20 relative z-10 overflow-hidden">
     <div className="max-w-7xl mx-auto">
@@ -24,8 +26,8 @@ const Footer = () => (
                 </div>
               </div>
             </div>
-            <p className="text-silver/60 font-light text-sm leading-relaxed">
-              Efficiency and security, built for how your business actually works.
+            <p className="footer-tagline text-silver/60 font-light text-sm leading-relaxed">
+              Closing the gap between leadership intent and frontline execution.
             </p>
           </div>
 
@@ -82,9 +84,11 @@ const Footer = () => (
               <Link to="/ai-readiness" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 AI Readiness
               </Link>
-              <Link to="/pricing" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
-                Pricing
-              </Link>
+              {PURCHASE_SURFACE_ENABLED && (
+                <Link to="/pricing" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
+                  Pricing
+                </Link>
+              )}
               <Link to="/loss-intelligence" className="text-silver/70 hover:text-[#C9A84C] transition-colors font-light text-sm">
                 Loss Intelligence
               </Link>
@@ -110,7 +114,7 @@ const Footer = () => (
 
       {/* Bottom Section */}
       <div className="flex flex-col md:flex-row items-center justify-center pt-6">
-        <p className="text-silver/40 font-light text-xs tracking-widest text-center">
+        <p className="text-silver/70 font-light text-xs tracking-widest text-center">
           &copy; {new Date().getFullYear()} BW Advisory Solutions ABN 11 892 244 979. All rights reserved.
         </p>
       </div>

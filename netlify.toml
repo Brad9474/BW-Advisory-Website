@@ -1,3 +1,16 @@
 [[edge_functions]]
   function = "posthog-proxy"
   path = "/ph/*"
+
+[functions]
+  directory = "netlify/functions"
+
+[[redirects]]
+  from = "/api/booking/slots"
+  to = "/.netlify/functions/calcom-slots"
+  status = 200
+
+[[redirects]]
+  from = "/api/booking/confirm"
+  to = "/.netlify/functions/calcom-bookings"
+  status = 200

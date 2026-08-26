@@ -11,16 +11,16 @@ const groups = [
   {
     label: "Stream 01",
     name: "AI Readiness",
-    desc: "For professional services firms and healthcare practices.",
+    desc: "For professional services firms.",
     items: [
       {
         id: "ai-readiness-diagnostic",
         short: "AI Readiness",
         num: "01",
         badge: "AI Readiness Diagnostic",
-        audience: "Professional services firms · Allied health and healthcare practices",
+        audience: "Owner-managed businesses and professional services firms with manual work they suspect could be automated",
         duration: "5 min · 5 sections · 28 questions",
-        desc: "Five sections. Five minutes. A scored result covering AI readiness, process optimisation opportunities, and security posture — with an opportunity estimate of what your gaps are costing you.",
+        desc: "Five sections. Five minutes. A scored result covering AI readiness, process optimisation opportunities, and security posture — with an opportunity estimate of what your gaps are costing you. Fully automated — your result is generated and returned instantly.",
         href: "/ai-readiness",
         internal: true,
         icon: "/ai-icon.svg",
@@ -259,7 +259,7 @@ const Diagnostics = () => {
           </span>
           <span className="flex items-center gap-2">
             <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
-            Personally reviewed
+            4 personally reviewed, 1 automated
           </span>
           <span className="flex items-center gap-2">
             <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
@@ -341,11 +341,11 @@ const Diagnostics = () => {
         <div className="space-y-6">
           <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">Rigorous Process</p>
           <h2 className="font-display font-bold text-5xl md:text-7xl text-white tracking-tight">
-            Every Assessment is Reviewed Personally
+            Every assessment is reviewed personally.
           </h2>
         </div>
         <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
-          No automated output. No templated responses. Each diagnostic receives a specific, written capability assessment delivered within 24 hours by Brad — <span className="text-white font-semibold">not a machine.</span>
+          Four of the five diagnostics are read and written by Brad, not a machine — a specific, written capability assessment delivered within 24 hours. <span className="text-white font-semibold">The AI Readiness diagnostic is the exception:</span> it's fully automated, and your result is generated and returned instantly.
         </p>
       </div>
     </section>
@@ -358,7 +358,7 @@ const Diagnostics = () => {
           <div className="relative bg-gradient-to-br from-white/15 via-white/12 to-white/10 backdrop-blur-xl border border-accent/30 group-hover:border-[#C9A84C]/60 rounded-3xl p-14 lg:p-20 transition-all duration-500 group-hover:bg-white/20">
             <div className="space-y-8 text-center">
               <h3 className="font-display font-bold text-4xl md:text-6xl text-white">
-                Ready to Understand Your Exposure?
+                Know Your Exposure
               </h3>
               <p className="text-lg md:text-2xl text-silver/75 font-light leading-relaxed">
                 Direct engagement. No proposal until we've talked.
@@ -367,7 +367,7 @@ const Diagnostics = () => {
                 to="/consultation"
                 className="group/btn relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer"
               >
-                Start Your Assessment
+                Request a Scoping Session
                 <svg className="w-5 h-5 transform group-hover/btn:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
               </Link>
             </div>
