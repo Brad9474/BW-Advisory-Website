@@ -5,12 +5,5 @@
 [functions]
   directory = "netlify/functions"
 
-[[redirects]]
-  from = "/api/booking/slots"
-  to = "/.netlify/functions/calcom-slots"
-  status = 200
-
-[[redirects]]
-  from = "/api/booking/confirm"
-  to = "/.netlify/functions/calcom-bookings"
-  status = 200
+# /api/booking/* redirects live in public/_redirects, not here — netlify.toml
+# redirects were not taking priority over the SPA catch-all on production.
