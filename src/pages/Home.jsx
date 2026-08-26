@@ -277,7 +277,7 @@ const Home = () => {
             <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">How I Close The Gap</p>
             <h2 className="font-display font-bold text-6xl md:text-7xl lg:text-8xl text-white tracking-tight mb-8">Practice Areas.</h2>
             <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
-              Every engagement is tailored to your challenge. These are the areas where I deliver measurable outcomes and lasting operational change.
+              Most of my work is with retailers and multi-site operators carrying loss and operational risk. The same capability applies wherever an operation has outgrown the structure holding it together.
             </p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2" style={{ gap: '36px' }}>
@@ -293,9 +293,9 @@ const Home = () => {
               >
                 <div style={{ gap: '20px' }} className="flex flex-col flex-1">
                   <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-[11px] uppercase font-bold">Practice Area 01</p>
-                  <h3 className="font-display font-semibold text-3xl text-white leading-tight">Operational Resilience</h3>
+                  <h3 className="font-display font-semibold text-3xl text-white leading-tight">Loss Intelligence</h3>
                   <p className="text-[rgba(192,200,208,0.85)] font-light text-base leading-[1.7]" style={{ textWrap: 'pretty' }}>
-                    Organisations carrying operational risk and loss exposure across sites, stores, and supply chains — retail, logistics, and field operations among them. I built and ran some of Western Australia's largest, highest-stakes operational commands — that same capability, now available directly to your business.
+                    Retailers and multi-site operators losing value to theft, organised crime, and process failure — usually without a clear picture of where, or how much. I've worked both sides of this: running large-scale operational commands, then building the intelligence partnerships between retailers and law enforcement. I build that detection capability inside your business, so your team owns and runs it.
                   </p>
                 </div>
               </div>
@@ -326,7 +326,7 @@ const Home = () => {
               </div>
             </a>
 
-            {/* Card 03 — Professional & Healthcare Practices */}
+            {/* Card 03 — Operational Resilience */}
             <a href="/#advisory" className="practice-card group relative">
               <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/30 rounded-3xl opacity-0 group-hover:opacity-60 transition-all duration-700 blur-md"></div>
               <div
@@ -338,9 +338,9 @@ const Home = () => {
               >
                 <div style={{ gap: '20px' }} className="flex flex-col flex-1">
                   <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-[11px] uppercase font-bold">Practice Area 03</p>
-                  <h3 className="font-display font-semibold text-3xl text-white leading-tight">Professional &amp; Healthcare Practices</h3>
+                  <h3 className="font-display font-semibold text-3xl text-white leading-tight">Operational Resilience</h3>
                   <p className="text-[rgba(192,200,208,0.85)] font-light text-base leading-[1.7]" style={{ textWrap: 'pretty' }}>
-                    Accounting, legal, financial advice, chiropractic, physiotherapy, dental, and GP practices — where operational pressure, compliance exposure, and client data risk combine. Diagnostic-led, practically delivered, without disrupting how the practice runs.
+                    Operations that have grown faster than the structure holding them together — where operational pressure, compliance exposure, and client or patient data risk start to compound. I map what the operation actually does, find where it breaks, and rebuild the parts that don't hold. Delivered without disrupting how you run day to day.
                   </p>
                 </div>
               </div>
