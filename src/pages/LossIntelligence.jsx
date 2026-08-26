@@ -52,7 +52,7 @@ const LossIntelligence = () => (
           <div className="group h-full">
             <div className="bg-white/[0.04] rounded-lg border border-white/10 border-t-2 border-t-[#C9A84C] group-hover:border-white/15 group-hover:bg-white/[0.06] p-10 flex flex-col h-full transition-all duration-300">
               <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase mb-6 font-semibold">Phase 01</p>
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 uppercase tracking-tight">Diagnose.</h3>
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">Diagnose.</h3>
               <p className="text-silver/80 font-light text-base leading-[1.6] flex-grow">
                 Operational assessment across your loss landscape, risk governance, and intelligence pipeline. I identify the gaps where organised threat actors are operating undetected.
               </p>
@@ -62,7 +62,7 @@ const LossIntelligence = () => (
           <div className="group h-full">
             <div className="bg-white/[0.04] rounded-lg border border-white/10 border-t-2 border-t-[#C9A84C] group-hover:border-white/15 group-hover:bg-white/[0.06] p-10 flex flex-col h-full transition-all duration-300">
               <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase mb-6 font-semibold">Phase 02</p>
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 uppercase tracking-tight">Design.</h3>
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">Design.</h3>
               <p className="text-silver/80 font-light text-base leading-[1.6] flex-grow">
                 I build the intelligence-led loss framework with you: the SOPs, analysis templates, decision trees, and signal collection protocols. You own the capability when I'm done.
               </p>
@@ -72,7 +72,7 @@ const LossIntelligence = () => (
           <div className="group h-full">
             <div className="bg-white/[0.04] rounded-lg border border-white/10 border-t-2 border-t-[#C9A84C] group-hover:border-white/15 group-hover:bg-white/[0.06] p-10 flex flex-col h-full transition-all duration-300">
               <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase mb-6 font-semibold">Phase 03</p>
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 uppercase tracking-tight">Embed.</h3>
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">Embed.</h3>
               <p className="text-silver/80 font-light text-base leading-[1.6] flex-grow">
                 Embed the capability into your operation. I train your teams in intelligence analysis and investigation doctrine, align leadership to the intelligence-led model, and hand over an independent intelligence function. Ongoing advisory support for complex cases is available.
               </p>
@@ -87,19 +87,19 @@ const LossIntelligence = () => (
             <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1]">Locate your organisational exposures.</h2>
           </div>
           <p className="text-2xl md:text-3xl text-silver/75 font-light leading-relaxed max-w-6xl mb-24">
-            Two specialised diagnostics. Eight minutes each. I assess your governance posture and your investigative capability to determine exactly where your operation would fail under scrutiny.
+            Two diagnostics. Eight minutes each. I assess your governance posture and your investigative capability to find where your operation would fail under scrutiny.
           </p>
           <div className="flex flex-col sm:flex-row items-start gap-6 mb-20">
             <Link
               to="/loss-intelligence-diagnostic"
-              className="group relative overflow-hidden bg-[#C9A84C] px-14 py-5 rounded-lg text-[#0F172A] font-bold text-sm hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase flex items-center justify-center gap-3 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer"
+              className="group relative overflow-hidden bg-white/5 border border-white/15 hover:border-[#C9A84C] hover:bg-[#C9A84C] px-14 py-5 rounded-lg text-white hover:text-[#0F172A] font-bold text-sm transition-all duration-200 tracking-[0.15em] uppercase flex items-center justify-center gap-3 cursor-pointer"
             >
               Loss Intelligence Diagnostic
               <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
             </Link>
             <Link
               to="/investigations-diagnostic"
-              className="group relative overflow-hidden bg-white/5 border border-white/15 hover:border-[#C9A84C]/50 px-14 py-5 rounded-lg text-white font-bold text-sm hover:bg-white/10 transition-all duration-300 tracking-[0.15em] uppercase flex items-center justify-center gap-3 cursor-pointer"
+              className="group relative overflow-hidden bg-white/5 border border-white/15 hover:border-[#C9A84C] hover:bg-[#C9A84C] px-14 py-5 rounded-lg text-white hover:text-[#0F172A] font-bold text-sm transition-all duration-200 tracking-[0.15em] uppercase flex items-center justify-center gap-3 cursor-pointer"
             >
               Investigations Capability Diagnostic
               <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
@@ -111,7 +111,7 @@ const LossIntelligence = () => (
     </section>
 
     {/* ── THE INTELLIGENCE SYSTEM ── */}
-    <section className="py-44 w-full relative z-10 bg-[#0A1E3D] border-t border-white/5">
+    <section className="py-44 w-full relative z-10 bg-primary border-t border-white/5">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
         <div className="mb-32 space-y-8">
           <p className="text-gold font-semibold tracking-[0.4em] uppercase text-xs">What You'll Build</p>
@@ -119,7 +119,7 @@ const LossIntelligence = () => (
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[0.9]">Four pillars of intelligence-led loss prevention.</h2>
           </div>
           <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed max-w-4xl">
-            The intelligence framework we design and embed has four core elements. Each is built into your operation during the engagement.
+            The framework has four elements. Each is built into your operation during the engagement.
           </p>
         </div>
 

@@ -1,2 +1,4 @@
+/api/booking/slots    /.netlify/functions/calcom-slots    200
+/api/booking/confirm  /.netlify/functions/calcom-bookings  200
 /q/*  https://command.bwadvisorysolutions.com.au/q/:splat  200!
 /* /index.html 200

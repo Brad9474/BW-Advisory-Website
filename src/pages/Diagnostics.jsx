@@ -345,7 +345,7 @@ const Diagnostics = () => {
           </h2>
         </div>
         <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
-          Four of the five diagnostics are read and written by Brad, not a machine — a specific, written capability assessment delivered within 24 hours. <span className="text-white font-semibold">The AI Readiness diagnostic is the exception:</span> it's fully automated, and your result is generated and returned instantly.
+          Four of the five diagnostics receive a specific, written capability assessment delivered within 24 hours by Brad — not a machine. <span className="text-white font-semibold">The AI Readiness report is the exception:</span> it is fully automated and returned instantly, which is what makes it the fastest way to get a first read.
         </p>
       </div>
     </section>
@@ -358,7 +358,7 @@ const Diagnostics = () => {
           <div className="relative bg-gradient-to-br from-white/15 via-white/12 to-white/10 backdrop-blur-xl border border-accent/30 group-hover:border-[#C9A84C]/60 rounded-3xl p-14 lg:p-20 transition-all duration-500 group-hover:bg-white/20">
             <div className="space-y-8 text-center">
               <h3 className="font-display font-bold text-4xl md:text-6xl text-white">
-                Know Your Exposure
+                Know where you're exposed.
               </h3>
               <p className="text-lg md:text-2xl text-silver/75 font-light leading-relaxed">
                 Direct engagement. No proposal until we've talked.
