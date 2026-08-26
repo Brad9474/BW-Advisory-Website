@@ -176,7 +176,7 @@ const Home = () => {
 
         <div
           className="relative z-10 w-full flex flex-col items-center"
-          style={{ gap: '12px', padding: '28px 32px 14px', maxWidth: '900px', margin: '0 auto' }}
+          style={{ gap: '12px', padding: '190px 32px 14px', maxWidth: '900px', margin: '0 auto' }}
         >
           {/* 1 — Lockup */}
           <div className="float-breathe flex flex-col items-center" style={{ gap: '12px' }}>
