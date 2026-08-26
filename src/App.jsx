@@ -1,15 +1,34 @@
 import React, { Suspense, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+const PURCHASE_SURFACE_ENABLED = import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true';
+
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
+    if (hash) {
+      // Route content is lazy-loaded, so the target element may not exist yet —
+      // poll briefly instead of assuming it's mounted on the next frame.
+      const id = hash.slice(1);
+      let attempts = 0;
+      const tryScroll = () => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'instant', block: 'start' });
+          return;
+        }
+        attempts += 1;
+        if (attempts < 40) setTimeout(tryScroll, 50);
+      };
+      tryScroll();
+      return;
+    }
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     // Fallback for document element
     document.documentElement.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-  }, [pathname]);
+  }, [pathname, hash]);
   return null;
 };
 import Navbar from './components/Navbar';
@@ -27,10 +46,13 @@ const StrategicDiagnostic = React.lazy(() => import('./pages/StrategicDiagnostic
 const OperationalDiagnostic = React.lazy(() => import('./pages/OperationalDiagnostic'));
 const LossIntelligenceDiagnostic = React.lazy(() => import('./pages/LossIntelligenceDiagnostic'));
 const InvestigationsDiagnostic = React.lazy(() => import('./pages/InvestigationsDiagnostic'));
-const Pricing = React.lazy(() => import('./pages/Pricing'));
 const PurchaseConfirmed = React.lazy(() => import('./pages/PurchaseConfirmed'));
 const PurchaseCancelled = React.lazy(() => import('./pages/PurchaseCancelled'));
-const SolutionMap = React.lazy(() => import('./pages/SolutionMap'));
+const NotFound = React.lazy(() => import('./pages/NotFound'));
+// Purchase surface not yet released: gated at build time (not just render time) so the
+// Pricing/SolutionMap chunks — and the prices in them — never ship in this build at all.
+const Pricing = import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true' ? React.lazy(() => import('./pages/Pricing')) : null;
+const SolutionMap = import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true' ? React.lazy(() => import('./pages/SolutionMap')) : null;
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -167,10 +189,11 @@ const App = () => (
         <Route path="/operational-diagnostic" element={<Layout><OperationalDiagnostic /></Layout>} />
         <Route path="/loss-intelligence-diagnostic" element={<Layout><LossIntelligenceDiagnostic /></Layout>} />
         <Route path="/investigations-diagnostic" element={<Layout><InvestigationsDiagnostic /></Layout>} />
-        <Route path="/pricing" element={<Layout><Pricing /></Layout>} />
-        <Route path="/solution-map" element={<Layout><SolutionMap /></Layout>} />
+        <Route path="/pricing" element={<Layout>{PURCHASE_SURFACE_ENABLED ? <Pricing /> : <Navigate to="/" replace />}</Layout>} />
+        <Route path="/solution-map" element={<Layout>{PURCHASE_SURFACE_ENABLED ? <SolutionMap /> : <Navigate to="/" replace />}</Layout>} />
         <Route path="/purchase/confirmed" element={<Layout><PurchaseConfirmed /></Layout>} />
         <Route path="/purchase/cancelled" element={<Layout><PurchaseCancelled /></Layout>} />
+        <Route path="*" element={<Layout><NotFound /></Layout>} />
       </Routes>
     </Suspense>
   </BrowserRouter>

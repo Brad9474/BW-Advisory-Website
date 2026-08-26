@@ -80,7 +80,7 @@ const Investigations = () => {
             <span className="font-serif italic text-[#C9A84C] text-4xl md:text-5xl lg:text-6xl block mt-4">proven and defensible.</span>
           </h1>
           <p className="text-2xl md:text-3xl text-silver/75 font-light leading-loose max-w-5xl mx-auto">
-            PROVED is BW Advisory Solutions' investigations framework.<br />
+            PROVED is my investigations framework.<br />
             <span className="text-white font-semibold">A disciplined, six-stage protocol</span> designed to close the gap between strategic intent and frontline execution.
           </p>
           <div className="mt-10">
@@ -103,10 +103,10 @@ const Investigations = () => {
               Most retail risk functions are reactive — responding to incidents after the damage is done. PROVED changes the fundamental posture of the organisation from response to detection and prevention.
             </p>
             <p className="drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-              Built on 30 years of operational command in law enforcement, this framework applies the same evidentiary rigour used in complex criminal investigations to the commercial context. It is about accuracy, accountability, and proven outcomes.
+              Built on 30 years of operational command in law enforcement, this framework applies the same evidentiary rigour used in complex criminal investigations to the commercial context.
             </p>
             <p className="drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-              By establishing a single, unified protocol, we ensure that every investigation is conducted to a standard that withstands civil, disciplinary, or police scrutiny.
+              A single protocol means every investigation is conducted to a standard that withstands civil, disciplinary, or police scrutiny.
             </p>
           </div>
 
@@ -140,17 +140,11 @@ const Investigations = () => {
         {/* Section Header */}
         <div className="proved-header mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           <div className="space-y-6">
-            <div className="flex items-center gap-4">
-              <span className="inline-flex items-center gap-2 bg-[#C9A84C]/10 border border-[#C9A84C]/30 rounded-full px-4 py-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] animate-pulse" />
-                <span className="text-[#C9A84C] font-mono text-[10px] tracking-[0.3em] uppercase font-bold">Proprietary Framework</span>
-              </span>
-            </div>
             <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[0.95]">
               The <span className="text-[#C9A84C]">PROVED</span> Model.
             </h2>
             <p className="text-silver/60 font-light text-lg max-w-xl leading-loose">
-              Six stages. One unified protocol. Every investigation conducted to a standard that withstands civil, disciplinary, or police scrutiny.
+              Six stages. One unified protocol, built on 30 years of operational command in law enforcement.
             </p>
           </div>
           {/* Acronym display */}
@@ -197,11 +191,6 @@ const Investigations = () => {
             </div>
           ))}
         </div>
-
-        {/* Bottom note */}
-        <p className="mt-12 text-center text-silver/30 font-mono text-[10px] tracking-[0.3em] uppercase">
-          © BW Advisory Solutions — PROVED is a proprietary investigations framework
-        </p>
       </div>
     </section>
 
@@ -223,16 +212,16 @@ const Investigations = () => {
     <section className="py-48 px-8 w-full bg-[#0A1E3D] border-t border-white/5 relative z-10">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-16 md:gap-20">
         <div className="text-center md:text-left space-y-6">
-          <h3 className="text-5xl md:text-6xl font-bold text-white tracking-tight uppercase">Ready to talk capability?</h3>
+          <h3 className="font-display text-5xl md:text-6xl font-bold text-white tracking-tight">Let's talk capability.</h3>
           <p className="text-silver/75 text-xl md:text-2xl font-light leading-loose">Direct engagement. No proposal until we have talked.</p>
         </div>
-        <a
-          href="https://portal.bwadvisorysolutions.com.au/intake.html"
+        <Link
+          to="/consultation"
           className="group relative overflow-hidden bg-[#C9A84C] px-14 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase flex items-center justify-center gap-3 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 whitespace-nowrap cursor-pointer"
         >
-          Request Scoping Session
+          Request a Scoping Session
           <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-        </a>
+        </Link>
       </div>
     </section>
 

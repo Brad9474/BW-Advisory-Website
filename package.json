@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/generate-sitemap.mjs",
     "test": "node --test tests/posthog-proxy.test.mjs",
     "build": "vite build",
     "preview": "vite preview"
