@@ -359,9 +359,6 @@ const Home = () => {
                 <div style={{ gap: '20px' }} className="flex flex-col flex-1">
                   <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-[11px] uppercase font-bold">Practice Area 04</p>
                   <h3 className="font-display font-semibold text-3xl text-white leading-tight">Privacy Advisory Support</h3>
-                  <p className="font-serif italic font-medium" style={{ color: '#C9A84C', fontSize: '22px', lineHeight: 1.3 }}>
-                    I don't write the assessment. I make sure it asks the right questions.
-                  </p>
                   <p className="text-[rgba(192,200,208,0.85)] font-light text-base leading-[1.7]" style={{ textWrap: 'pretty' }}>
                     Surveillance, analytics and AI tools collect more than most organisations realise, and more than most vendors can explain. I work alongside your privacy officer, your counsel or your external assessor — framing the operational questions, pressing the vendor on what the system actually does with personal information, and translating what comes back into something your board can decide on.
                   </p>

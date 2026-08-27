@@ -21,12 +21,27 @@ const navLinks = [
 const Navbar = () => {
   const navRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
+    let lastY = window.scrollY;
+    const handleScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 50);
+      // Slide the pill nav out of the way while scrolling down through content,
+      // reveal it again on any upward scroll (or near the top) so it's never
+      // sitting on top of the thing you're trying to read. A small dead-zone
+      // avoids flicker from the sub-pixel scroll events GSAP's ScrollTrigger
+      // fires during pinned/animated sections.
+      const delta = y - lastY;
+      if (Math.abs(delta) > 5) {
+        setHidden(delta > 0 && y > 140);
+        lastY = y;
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -34,7 +49,13 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[95%] max-w-7xl pointer-events-none">
+      <div
+        className={`
+          fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[95%] max-w-7xl pointer-events-none
+          transition-transform duration-500 ease-out
+          ${hidden && !isMenuOpen ? '-translate-y-[calc(100%+1.5rem)]' : 'translate-y-0'}
+        `}
+      >
         <nav
           ref={navRef}
           className={`
@@ -81,7 +102,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4 flex-shrink-0">
             <Link
               to="/#contact"
-              className="group relative overflow-hidden bg-[#C9A84C] px-4 sm:px-6 lg:px-10 py-3.5 rounded-full text-primary font-bold text-[10px] sm:text-[12px] tracking-[0.1em] sm:tracking-[0.12em] uppercase hover:bg-[#E0BC60] transition-all duration-300 transform hover:scale-[1.05] shadow-lg shadow-[#C9A84C]/20 cursor-pointer whitespace-nowrap"
+              className="hidden lg:inline-flex group relative overflow-hidden bg-[#C9A84C] px-10 py-3.5 rounded-full text-primary font-bold text-[12px] tracking-[0.12em] uppercase hover:bg-[#E0BC60] transition-all duration-300 transform hover:scale-[1.05] shadow-lg shadow-[#C9A84C]/20 cursor-pointer whitespace-nowrap"
             >
               Request a Scoping Session
             </Link>
@@ -108,7 +129,7 @@ const Navbar = () => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <div className="h-full flex flex-col items-center justify-center gap-10 p-8 text-center">
+        <div className="h-full flex flex-col items-center justify-center gap-8 p-8 text-center overflow-y-auto">
           {navLinks.map((link) => (
             link.to ? (
               <Link key={link.name} to={link.to} onClick={() => setIsMenuOpen(false)} className="text-3xl font-bold text-white/70 hover:text-gold uppercase tracking-[0.3em]">
@@ -120,6 +141,13 @@ const Navbar = () => {
               </a>
             )
           ))}
+          <Link
+            to="/#contact"
+            onClick={() => setIsMenuOpen(false)}
+            className="mt-4 bg-[#C9A84C] text-primary px-10 py-4 rounded-full font-bold text-sm uppercase tracking-[0.15em] hover:bg-[#E0BC60] transition-all duration-300"
+          >
+            Request a Scoping Session
+          </Link>
         </div>
       </div>
     </>
