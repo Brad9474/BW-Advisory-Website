@@ -34,6 +34,7 @@ const ScrollToTop = () => {
 import Navbar from './components/Navbar';
 import NoiseOverlay from './components/NoiseOverlay';
 import PageCanvas from './components/PageCanvas';
+import usePageMeta from './hooks/usePageMeta';
 const Home = React.lazy(() => import('./pages/Home'));
 const LossIntelligence = React.lazy(() => import('./pages/LossIntelligence'));
 const Diagnostics = React.lazy(() => import('./pages/Diagnostics'));
@@ -58,6 +59,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Layout = ({ children }) => {
   const { pathname } = useLocation();
+  usePageMeta(pathname);
   const isHome = pathname === '/';
   const isIntelligence = pathname === '/loss-intelligence';
   const isInvestigations = pathname === '/investigations';
