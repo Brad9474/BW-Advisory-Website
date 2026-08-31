@@ -1,10 +1,10 @@
 # BW Advisory Solutions — Service Terms
 
-**Version:** v1.1  
-**Effective date:** 27 July 2026 (AWST)  
-**Entity:** Bradley Warburton trading as BW Advisory Solutions, ABN 11 892 244 979  
+**Version:** v1.2  
+**Effective date:** 31 August 2026 (AWST)  
+**Entity:** BW Advisory Solutions Pty Ltd, ABN 32 701 834 513  
 **Contact:** brad@bwadvisorysolutions.com.au · +61 407 779 474  
-**Consolidation note:** This document merges the Part 2 draft from `legal-review-pack-v2.md` (22 July 2026 baseline) with `legal-review-pack-v2-fable-findings.md` (Fable 5 audit, 23 July 2026) and `legal-review-pack-v2-cross-check.md` (Opus 4.8 cross-check, 23 July 2026). Merge logic: changes recommended by both reviews are applied; cross-check-only refinements are applied where Fable does not contradict; where the reviews disagree the original wording is preserved and a `[BRAD DECISION NEEDED]` marker added; unaddressed `[LAWYER TO CONFIRM]` markers are retained. LLM audit only — not a substitute for professional legal advice. **v1.1 update (27 July 2026):** D2 punctuation resolved (no comma after "major failure" — confirmed against Reg 90, Competition and Consumer Regulations 2010); D3 accepted (30-day price-change notice plus buyer-exit-without-penalty applied per cross-check N4); four protective-content sections added in differentiated format (executive summary callout at top, liability-scope clarification and engagement-refusal clause inline in Clause 3, client-responsibility note appended to Clause 7 prescribed-text block).
+**Consolidation note:** This document merges the Part 2 draft from `legal-review-pack-v2.md` (22 July 2026 baseline) with `legal-review-pack-v2-fable-findings.md` (Fable 5 audit, 23 July 2026) and `legal-review-pack-v2-cross-check.md` (Opus 4.8 cross-check, 23 July 2026). Merge logic: changes recommended by both reviews are applied; cross-check-only refinements are applied where Fable does not contradict; where the reviews disagree the original wording is preserved and a `[BRAD DECISION NEEDED]` marker added; unaddressed `[LAWYER TO CONFIRM]` markers are retained. LLM audit only — not a substitute for professional legal advice. **v1.1 update (27 July 2026):** D2 punctuation resolved (no comma after "major failure" — confirmed against Reg 90, Competition and Consumer Regulations 2010); D3 accepted (30-day price-change notice plus buyer-exit-without-penalty applied per cross-check N4); four protective-content sections added in differentiated format (executive summary callout at top, liability-scope clarification and engagement-refusal clause inline in Clause 3, client-responsibility note appended to Clause 7 prescribed-text block). **v1.2 update (31 August 2026):** Contracting entity changed from Bradley Warburton trading as BW Advisory Solutions (sole trader, ABN 11 892 244 979) to BW Advisory Solutions Pty Ltd (ABN 32 701 834 513), reflecting Brad's incorporation. Mechanical update only — not yet solicitor-reviewed; flagged as a new open item below since the contracting-party and guarantor identity in Clause 1 and Clause 7 have real legal substance (limited-liability entity now contracts, not personal capacity) beyond a name swap.
 
 ---
 
@@ -20,9 +20,9 @@
 
 ## Clause 1 — Parties and application
 
-> **Version 1.1 — 27 July 2026. The version you accept at checkout is the version that governs your purchase.**
+> **Version 1.2 — 31 August 2026. The version you accept at checkout is the version that governs your purchase.**
 >
-> These terms govern the AI Readiness diagnostic, the AI Snapshot Report, the AI Solution Map, implementation services and the AI Partner retainer supplied by Bradley Warburton trading as BW Advisory Solutions (ABN 11 892 244 979) ("BW Advisory", "we"). "You" means the person or business ordering the service. By ordering a service you agree to these terms.
+> These terms govern the AI Readiness diagnostic, the AI Snapshot Report, the AI Solution Map, implementation services and the AI Partner retainer supplied by BW Advisory Solutions Pty Ltd (ABN 32 701 834 513) ("BW Advisory", "we"). "You" means the person or business ordering the service. By ordering a service you agree to these terms.
 
 _Merge note: version line and "You" definition confirmed NICE-TO-HAVE by both reviews; already present in baseline. Date inserted: 27 July 2026._
 
@@ -92,7 +92,7 @@ _Merge note: both reviews confirmed COMPLIANT. Cross-check §9.5 independently r
 >
 > **Our guarantee**
 >
-> If a primary recommended tool in your report had been discontinued, or its published price had increased by 20% or more, before your report was generated — contact us by email to brad@bwadvisorysolutions.com.au within 60 days of delivery. You choose the remedy: we correct and reissue the report within 5 business days, or refund the fee in full to your original payment method within 10 business days. Claiming costs you nothing. This guarantee is given by Bradley Warburton trading as BW Advisory Solutions (ABN 11 892 244 979), **[BRAD DECISION NEEDED — N9: provide a business address or PO box here; "Perth, Western Australia" does not satisfy the reg 90(2) address particular]**, +61 407 779 474, brad@bwadvisorysolutions.com.au. The benefits under this guarantee are in addition to other rights and remedies you have under law.
+> If a primary recommended tool in your report had been discontinued, or its published price had increased by 20% or more, before your report was generated — contact us by email to brad@bwadvisorysolutions.com.au within 60 days of delivery. You choose the remedy: we correct and reissue the report within 5 business days, or refund the fee in full to your original payment method within 10 business days. Claiming costs you nothing. This guarantee is given by BW Advisory Solutions Pty Ltd (ABN 32 701 834 513), **[BRAD DECISION NEEDED — N9: provide a business address or PO box here; "Perth, Western Australia" does not satisfy the reg 90(2) address particular]**, +61 407 779 474, brad@bwadvisorysolutions.com.au. The benefits under this guarantee are in addition to other rights and remedies you have under law.
 >
 > Our services come with guarantees that cannot be excluded under the Australian Consumer Law. For major failures with the service, you are entitled:
 >
@@ -188,12 +188,15 @@ _3. Retainer price-variation (N4): v1.1 decision — cross-check amendment (N4: 
 
 D2 closed: comma resolved — no comma after "major failure", comma after "if this is not done", confirmed against Reg 90 (Competition and Consumer Regulations 2010). D3 closed: cross-check amendment (N4: SHOULD-FIX) adopted — at least 30 days' written notice, buyer-exit-without-penalty applied.
 
+**D5 (new, v1.2):** Contracting entity changed from sole trader to BW Advisory Solutions Pty Ltd (ABN 32 701 834 513) in Clause 1 and the Clause 7 guarantee. This is a mechanical text update, not a solicitor-reviewed one — the switch to a limited-liability entity as contracting party and guarantor has substance beyond the name (novation of existing engagements, interaction with Clause 8 liability caps, whether the guarantee's personal-capacity framing needs redrafting) and should be confirmed alongside D1 and the two priority `[LAWYER TO CONFIRM]` items below before the draft banner comes off.
+
 ### Unresolved `[LAWYER TO CONFIRM]` markers from baseline
 
-All 12 `[LAWYER TO CONFIRM]` markers from the original Part 2 draft are retained in this document, inline against their clause. Most were substantively addressed by the LLM reviews but not resolved to "solicitor-confirmed" standard. The two items that carry residual uncertainty at a level both reviews flagged:
+All 12 `[LAWYER TO CONFIRM]` markers from the original Part 2 draft are retained in this document, inline against their clause. Most were substantively addressed by the LLM reviews but not resolved to "solicitor-confirmed" standard. The two items that carry residual uncertainty at a level both reviews flagged, plus the new D5 entity item:
 
 - **Clause 8 s 64A(3)–(4):** Both reviews reach "probably defensible" for the re-supply limitation at these prices; neither reaches "yes". The $1,497 tier is the weaker argument. Item most worth a solicitor's eye before public traffic.
 - **Clause 12 de-identification standard:** What "de-identification" requires in practice (for the methodology-improvement purpose) is noted but not resolved by either review.
+- **D5 — entity change (Clauses 1 and 7):** see above. Not an LLM-audited item; flagged here for tracking only.
 
 ---
 
@@ -207,10 +210,10 @@ All 12 `[LAWYER TO CONFIRM]` markers from the original Part 2 draft are retained
 | `[BRAD DECISION NEEDED]` markers | 1 (D1 only — D2 closed, D3 closed in v1.1) |
 | `[LAWYER TO CONFIRM]` markers retained | 12 |
 | Open decisions (BRAD DECISION NEEDED) | 1 (D1 business address) |
-| Open decisions (LAWYER TO CONFIRM, unresolved) | 2 priority items (Cl 8 s 64A, Cl 12 de-identification) |
+| Open decisions (LAWYER TO CONFIRM, unresolved) | 2 priority items (Cl 8 s 64A, Cl 12 de-identification) plus D5 (entity change, v1.2, not LLM-audited) |
 
-*Clause 3 expanded with liability-scope clarification and engagement-refusal clause (inline prose). Clause 7 client-responsibility paragraph added; D2 comma resolved. Clause 10 unchanged. Clause 12 retainer price-variation updated to 30 days; D3 closed.*
+*Clause 3 expanded with liability-scope clarification and engagement-refusal clause (inline prose). Clause 7 client-responsibility paragraph added; D2 comma resolved. Clause 10 unchanged. Clause 12 retainer price-variation updated to 30 days; D3 closed. v1.2: Clauses 1 and 7 updated for the sole-trader-to-Pty-Ltd entity change (D5, open).*
 
 ---
 
-*BW Advisory Solutions — Service Terms v1.1. 27 July 2026. Consolidated from: legal-review-pack-v2.md (22 July 2026 baseline), legal-review-pack-v2-fable-findings.md (Fable 5, 23 July 2026), legal-review-pack-v2-cross-check.md (Opus 4.8, 23 July 2026). v1.1 update: D2 punctuation resolved, D3 adopted, four protective-content sections added. LLM cross-check only — not solicitor advice. D1 (business address) and 2 LAWYER TO CONFIRM items remain outstanding before publication.*
+*BW Advisory Solutions Pty Ltd — Service Terms v1.2. 31 August 2026. Consolidated from: legal-review-pack-v2.md (22 July 2026 baseline), legal-review-pack-v2-fable-findings.md (Fable 5, 23 July 2026), legal-review-pack-v2-cross-check.md (Opus 4.8, 23 July 2026). v1.1 update: D2 punctuation resolved, D3 adopted, four protective-content sections added. v1.2 update: contracting entity changed to BW Advisory Solutions Pty Ltd (ABN 32 701 834 513) — see D5. LLM cross-check only — not solicitor advice. D1 (business address), D5 (entity change) and 2 LAWYER TO CONFIRM items remain outstanding before publication.*
