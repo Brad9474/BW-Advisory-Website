@@ -1,6 +1,6 @@
 import Footer from '../components/Footer';
 
-const EFFECTIVE_DATE = '18 July 2026';
+const EFFECTIVE_DATE = '31 August 2026';
 
 export default function Privacy() {
   return (
@@ -14,10 +14,10 @@ export default function Privacy() {
               How we handle your information.
             </h1>
             <p className="text-silver/75 font-light text-lg md:text-xl leading-relaxed max-w-3xl">
-              BW Advisory Solutions is an Australian sole-trader consultancy. This page sets out what we collect, why, where it lives, how long we keep it, and how you ask us to change or delete it.
+              BW Advisory Solutions Pty Ltd is an Australian company. This page sets out what we collect, why, where it lives, how long we keep it, and how you ask us to change or delete it.
             </p>
             <p className="text-silver/50 font-light text-sm">
-              Effective {EFFECTIVE_DATE}. BW Advisory Solutions, ABN 11 892 244 979. Perth, Western Australia.
+              Effective {EFFECTIVE_DATE}. BW Advisory Solutions Pty Ltd, ABN 32 701 834 513. Perth, Western Australia.
             </p>
           </header>
 
@@ -27,7 +27,7 @@ export default function Privacy() {
             <section className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">1. Who we are</h2>
               <p>
-                BW Advisory Solutions (ABN 11 892 244 979) is an Australian sole-trader consultancy based in Perth, Western Australia. We adhere to the <strong>Privacy Act 1988 (Cth)</strong> and the Australian Privacy Principles. The principal is Bradley Warburton, and he is the only person with access to your information.
+                BW Advisory Solutions Pty Ltd (ABN 32 701 834 513) is an Australian company based in Perth, Western Australia. We adhere to the <strong>Privacy Act 1988 (Cth)</strong> and the Australian Privacy Principles. Bradley Warburton is the sole director, and he is the only person with access to your information.
               </p>
             </section>
 
@@ -152,7 +152,7 @@ export default function Privacy() {
             <section className="bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-xl border border-[#C9A84C]/30 rounded-3xl p-8 md:p-10 mt-12">
               <h3 className="text-lg font-bold text-[#C9A84C] mb-4 tracking-wide">Privacy contact</h3>
               <div className="space-y-2 text-silver/80 text-sm font-light">
-                <p><strong className="text-white">Bradley Warburton</strong> — Principal, BW Advisory Solutions</p>
+                <p><strong className="text-white">Bradley Warburton</strong> — Principal, BW Advisory Solutions Pty Ltd</p>
                 <p>Email: <a href="mailto:brad@bwadvisorysolutions.com.au" className="text-[#C9A84C] hover:underline">brad@bwadvisorysolutions.com.au</a></p>
                 <p>Phone: +61 407 779 474</p>
                 <p>Perth, Western Australia</p>
@@ -161,7 +161,7 @@ export default function Privacy() {
 
             {/* Footer info */}
             <div className="pt-12 border-t border-[#C9A84C]/15 text-center text-silver/50 text-xs font-light">
-              <p>BW Advisory Solutions | ABN 11 892 244 979</p>
+              <p>BW Advisory Solutions Pty Ltd | ABN 32 701 834 513</p>
               <p>Effective {EFFECTIVE_DATE}</p>
               <p className="mt-4"><a href="/" className="text-[#C9A84C] hover:underline">Back to home</a></p>
             </div>

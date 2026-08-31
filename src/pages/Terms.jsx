@@ -1,7 +1,7 @@
 import Footer from '../components/Footer';
 
-const EFFECTIVE_DATE = '27 July 2026';
-const TERMS_VERSION = 'v1.1';
+const EFFECTIVE_DATE = '31 August 2026';
+const TERMS_VERSION = 'v1.2';
 
 // D2 closed (comma resolved per Reg 90). D3 closed (30-day notice adopted).
 // D1 deferred — business address/PO box still needed before publication.
@@ -20,7 +20,7 @@ export default function Terms() {
                 Draft — pending final legal advice
               </p>
               <p className="text-silver/65 font-light text-sm leading-relaxed">
-                Service Terms v1.1. One item deferred: [D1] a business address or PO box must be added to the Clause 7 warrantor details before publication. Two{' '}
+                Service Terms {TERMS_VERSION}. One item deferred: [D1] a business address or PO box must be added to the Clause 7 warrantor details before publication. Two{' '}
                 <code className="text-silver/45 text-xs">[LAWYER TO CONFIRM]</code>{' '}
                 items remain open (Clause 8 s 64A fair-or-reasonable positioning; Clause 12 de-identification standard). Not yet solicitor-advised.
               </p>
@@ -37,7 +37,7 @@ export default function Terms() {
               These terms govern every service BW Advisory Solutions supplies — the free AI Readiness diagnostic, both paid report tiers, and the AI Partner retainer. By ordering a service you agree to these terms.
             </p>
             <p className="text-silver/50 font-light text-sm">
-              Version {TERMS_VERSION}. Effective {EFFECTIVE_DATE}. BW Advisory Solutions, ABN 11 892 244 979. Perth, Western Australia.
+              Version {TERMS_VERSION}. Effective {EFFECTIVE_DATE}. BW Advisory Solutions Pty Ltd, ABN 32 701 834 513. Perth, Western Australia.
             </p>
           </header>
 
@@ -65,10 +65,10 @@ export default function Terms() {
             <section className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">1. Parties and application</h2>
               <p>
-                These terms govern the AI Readiness diagnostic, the AI Snapshot Report, the AI Solution Map, implementation services and the AI Partner retainer supplied by Bradley Warburton trading as BW Advisory Solutions (ABN 11 892 244 979) (&ldquo;BW Advisory&rdquo;, &ldquo;we&rdquo;). &ldquo;You&rdquo; means the person or business ordering the service. By ordering a service you agree to these terms.
+                These terms govern the AI Readiness diagnostic, the AI Snapshot Report, the AI Solution Map, implementation services and the AI Partner retainer supplied by BW Advisory Solutions Pty Ltd (ABN 32 701 834 513) (&ldquo;BW Advisory&rdquo;, &ldquo;we&rdquo;). &ldquo;You&rdquo; means the person or business ordering the service. By ordering a service you agree to these terms.
               </p>
               <p className="text-silver/50 text-sm font-light italic">
-                Version 1.1 — {EFFECTIVE_DATE}. The version you accept at checkout is the version that governs your purchase.
+                Version {TERMS_VERSION} — {EFFECTIVE_DATE}. The version you accept at checkout is the version that governs your purchase.
               </p>
             </section>
 
@@ -166,7 +166,7 @@ export default function Terms() {
                   within 60 days of delivery. You choose the remedy: we correct and reissue the report within 5 business days, or refund the fee in full to your original payment method within 10 business days. Claiming costs you nothing.
                 </p>
                 <p>
-                  This guarantee is given by Bradley Warburton trading as BW Advisory Solutions (ABN 11 892 244 979), Perth, Western Australia, +61 407 779 474,{' '}
+                  This guarantee is given by BW Advisory Solutions Pty Ltd (ABN 32 701 834 513), Perth, Western Australia, +61 407 779 474,{' '}
                   <a href="mailto:brad@bwadvisorysolutions.com.au" className="text-[#C9A84C] hover:underline">
                     brad@bwadvisorysolutions.com.au
                   </a>. The benefits under this guarantee are in addition to other rights and remedies you have under law.
@@ -281,17 +281,17 @@ export default function Terms() {
             <section className="bg-gradient-to-br from-white/8 to-white/3 backdrop-blur-xl border border-[#C9A84C]/30 rounded-3xl p-8 md:p-10 mt-12">
               <h3 className="text-lg font-bold text-[#C9A84C] mb-4 tracking-wide">Contact</h3>
               <div className="space-y-2 text-silver/80 text-sm font-light">
-                <p><strong className="text-white">Bradley Warburton</strong> — Principal, BW Advisory Solutions</p>
+                <p><strong className="text-white">Bradley Warburton</strong> — Principal, BW Advisory Solutions Pty Ltd</p>
                 <p>Email: <a href="mailto:brad@bwadvisorysolutions.com.au" className="text-[#C9A84C] hover:underline">brad@bwadvisorysolutions.com.au</a></p>
                 <p>Phone: +61 407 779 474</p>
                 <p>Perth, Western Australia</p>
-                <p>ABN 11 892 244 979</p>
+                <p>ABN 32 701 834 513</p>
               </div>
             </section>
 
             {/* Footer */}
             <div className="pt-12 border-t border-[#C9A84C]/15 text-center text-silver/50 text-xs font-light">
-              <p>BW Advisory Solutions | ABN 11 892 244 979</p>
+              <p>BW Advisory Solutions Pty Ltd | ABN 32 701 834 513</p>
               <p>Service Terms {TERMS_VERSION} — Effective {EFFECTIVE_DATE}</p>
               <p className="mt-4"><a href="/" className="text-[#C9A84C] hover:underline">Back to home</a></p>
             </div>
