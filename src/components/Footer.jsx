@@ -35,8 +35,8 @@ const Footer = () => (
           <div className="pt-4 border-t border-[#C9A84C]/10 space-y-3">
             <p className="text-[#C9A84C]/70 font-mono text-xs tracking-widest uppercase font-bold">Company Details</p>
             <div className="space-y-2 text-silver/70 font-light text-sm">
-              <p>BW Advisory Solutions</p>
-              <p>ABN 11 892 244 979</p>
+              <p>BW Advisory Solutions Pty Ltd</p>
+              <p>ABN 32 701 834 513</p>
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@ const Footer = () => (
       {/* Bottom Section */}
       <div className="flex flex-col md:flex-row items-center justify-center pt-6">
         <p className="text-silver/70 font-light text-xs tracking-widest text-center">
-          &copy; {new Date().getFullYear()} BW Advisory Solutions ABN 11 892 244 979. All rights reserved.
+          &copy; {new Date().getFullYear()} BW Advisory Solutions Pty Ltd ABN 32 701 834 513. All rights reserved.
         </p>
       </div>
     </div>
