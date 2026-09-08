@@ -68,7 +68,6 @@ const Home = () => {
   const [heroPassed, setHeroPassed] = useState(false);
   const [awPage, setAwPage] = useState(0);
   const [awVisible, setAwVisible] = useState(true);
-  const awPausedRef = useRef(false);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -108,20 +107,6 @@ const Home = () => {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
-
-  // Applied Work rotates through cases 3 at a time (never a partial last row),
-  // auto-advancing and pausing while the visitor's cursor is over the cards.
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (awPausedRef.current) return;
-      setAwVisible(false);
-      setTimeout(() => {
-        setAwPage((p) => (p + 1) % AW_PAGE_COUNT);
-        setAwVisible(true);
-      }, 900);
-    }, 30000);
-    return () => clearInterval(interval);
   }, []);
 
   const goToAwPage = (i) => {
@@ -175,17 +160,17 @@ const Home = () => {
         </div>
 
         <div
-          className="relative z-10 w-full flex flex-col items-center"
-          style={{ gap: '12px', padding: '190px 32px 14px', maxWidth: '900px', margin: '0 auto' }}
+          className="relative z-10 w-full flex flex-col items-center gap-2 sm:gap-3 pt-[120px] sm:pt-[150px] md:pt-[190px] px-8 pb-[14px]"
+          style={{ maxWidth: '900px', margin: '0 auto' }}
         >
           {/* 1 — Lockup */}
-          <div className="float-breathe flex flex-col items-center" style={{ gap: '12px' }}>
-            <div className="flex flex-col items-center" style={{ gap: '12px' }}>
-              <div className="shield-elem w-[130px] h-[143px] sm:w-[160px] sm:h-[176px] md:w-[190px] md:h-[209px] drop-shadow-[0_0_40px_rgba(3,105,161,0.6)]">
+          <div className="float-breathe flex flex-col items-center gap-2 sm:gap-3">
+            <div className="flex flex-col items-center gap-2 sm:gap-3">
+              <div className="shield-elem w-[92px] h-[101px] sm:w-[160px] sm:h-[176px] md:w-[190px] md:h-[209px] drop-shadow-[0_0_40px_rgba(3,105,161,0.6)]">
                 <TransparentShield />
               </div>
               <h2
-                className="logo-letter platinum-text font-serif font-semibold uppercase inline-block text-[46px] sm:text-[60px] md:text-[76px]"
+                className="logo-letter platinum-text font-serif font-semibold uppercase inline-block text-[32px] sm:text-[60px] md:text-[76px]"
                 style={{
                   letterSpacing: '0.06em',
                   lineHeight: 1.2,
@@ -212,14 +197,14 @@ const Home = () => {
           </div>
 
           {/* 2 — Headline */}
-          <div className="hero-elem flex flex-col items-center" style={{ gap: '14px', filter: 'drop-shadow(0 4px 18px rgba(0,0,0,0.8))' }}>
+          <div className="hero-elem flex flex-col items-center gap-2 sm:gap-3" style={{ filter: 'drop-shadow(0 4px 18px rgba(0,0,0,0.8))' }}>
             <h1
               className="font-display font-bold text-white text-center text-[32px] sm:text-[42px] md:text-[52px] lg:text-[60px] md:whitespace-nowrap"
               style={{ lineHeight: 1.06, letterSpacing: '-0.02em', maxWidth: '1000px' }}
             >
               The gaps you can't see.<br />The capability to close them.
             </h1>
-            <p className="font-serif italic font-medium text-[24px] sm:text-[32px] md:text-[40px] lg:text-[46px]" style={{ color: '#C9A84C', lineHeight: 1.1 }}>
+            <p className="font-serif italic font-medium text-[19px] sm:text-[32px] md:text-[40px] lg:text-[46px]" style={{ color: '#C9A84C', lineHeight: 1.1 }}>
               I deliver both.
             </p>
           </div>
@@ -239,7 +224,7 @@ const Home = () => {
           </p>
 
           {/* 4 — Kicker + CTA */}
-          <div className="hero-elem flex flex-col items-center" style={{ gap: '24px' }}>
+          <div className="hero-elem flex flex-col items-center gap-4 sm:gap-6">
             <p
               className="font-mono font-bold uppercase text-[10px] md:text-[12px] text-center"
               style={{
@@ -251,7 +236,7 @@ const Home = () => {
               Diagnose first. Build capability second. Guess never.
             </p>
             <Link
-              to="/#contact"
+              to="/consultation"
               onClick={() => posthog.capture('scoping_session_cta_clicked', { location: 'hero' })}
               className="group relative overflow-hidden bg-[#C9A84C] rounded-full text-[#0F172A] font-bold hover:bg-[#E0BC60] transition-all duration-300 uppercase text-center flex items-center justify-center gap-3 border border-white/10 hover:border-white/20 cursor-pointer px-10 py-4 md:px-16 text-sm md:text-[18px]"
               style={{
@@ -270,6 +255,44 @@ const Home = () => {
 
       </section>
 
+      {/* ── ABOUT ── */}
+      <section id="about" className="py-20 px-6 w-full bg-surface relative z-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+          <div className="lg:col-span-5 order-1 flex flex-col gap-6">
+            <div className="rounded-2xl overflow-hidden shadow-lg bg-background border border-silver/20">
+              <img src="/Brad_Professional_Shot_clean.webp" alt="Brad Warburton - Principal Advisor" loading="lazy" className="w-full h-[320px] sm:h-[380px] lg:h-[450px] object-cover object-top grayscale hover:grayscale-0 transition-all duration-500" />
+            </div>
+            <div className="text-center space-y-1">
+              <p className="text-primary font-bold text-2xl tracking-wide">Brad Warburton</p>
+              <p className="text-accent font-bold tracking-[0.2em] text-xs uppercase">Principal, BW Advisory Solutions</p>
+              <a
+                href="https://linkedin.com/in/bradwarburton"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-block text-[#C9A84C]/60 hover:text-[#C9A84C] font-mono text-[10px] tracking-[0.2em] uppercase transition-colors duration-200 mt-1"
+              >
+                LinkedIn ↗
+              </a>
+            </div>
+          </div>
+          <div className="lg:col-span-7 order-2 space-y-8">
+            <div>
+              <h2 className="font-light text-4xl lg:text-[3.2rem] text-primary leading-tight tracking-tight">
+                <span className="font-semibold block mb-2">Law enforcement precision.</span>
+                Private sector scalability.
+              </h2>
+            </div>
+            <div className="space-y-6 text-textDark/90 leading-relaxed text-xl font-light">
+              <p>I built operational systems for large-scale law enforcement long before digital tools existed to support them. Some of Western Australia's largest operational commands ran on processes and disciplines I wrote — not because technology enabled them, but because the thinking underneath was sound.</p>
+              <p>When a national health crisis required border management built from scratch, I designed and commanded it: more than a million travellers screened, no existing infrastructure, no tolerance for failure. The intelligence architecture that came next, inside a state-level command environment, existed so frontline operators could act on information while it still mattered.</p>
+              <p>Then the private sector, leading law enforcement partnerships for a retail intelligence technology company — sitting between what police need and what a technology business can actually deliver, proved across every Australian state and territory.</p>
+              <p>That order matters. Operational practice came first, before the tools existed. Then a seat inside a technology business, watching which products got used and which got bought and shelved. It is why I test a vendor the way I do — not on the demonstration, but on whether the practice around it will hold.</p>
+              <p className="font-medium text-textDark">The problems look different. The fundamentals are the same.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── PRACTICE AREAS ── */}
       <section className="py-32 w-full relative z-10 bg-primary">
         <div className="max-w-[1400px] mx-auto px-6 xl:px-12">
@@ -281,8 +304,8 @@ const Home = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2" style={{ gap: '36px' }}>
-            {/* Card 01 — Loss Intelligence */}
-            <a href="/loss-intelligence" className="practice-card group relative">
+            {/* Card 01 — Operational Resilience */}
+            <a href="/#advisory" className="practice-card group relative">
               <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/30 rounded-3xl opacity-0 group-hover:opacity-60 transition-all duration-700 blur-md"></div>
               <div
                 className="relative block rounded-3xl h-full flex flex-col border border-[#0369A1]/40 group-hover:border-[#C9A84C] transition-all duration-300 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.25)] group-hover:-translate-y-1"
@@ -293,9 +316,9 @@ const Home = () => {
               >
                 <div style={{ gap: '20px' }} className="flex flex-col flex-1">
                   <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-[11px] uppercase font-bold">Practice Area 01</p>
-                  <h3 className="font-display font-semibold text-3xl text-white leading-tight">Loss Intelligence</h3>
+                  <h3 className="font-display font-semibold text-3xl text-white leading-tight">Operational Resilience</h3>
                   <p className="text-[rgba(192,200,208,0.85)] font-light text-base leading-[1.7]" style={{ textWrap: 'pretty' }}>
-                    Retailers and multi-site operators losing value to theft, organised crime, and process failure — usually without a clear picture of where, or how much. I've worked both sides of this: running large-scale operational commands, then building the intelligence partnerships between retailers and law enforcement. I build that detection capability inside your business, so your team owns and runs it.
+                    Operations that have grown faster than the structure holding them together — where operational pressure, compliance exposure, and client or patient data risk start to compound. I map what the operation actually does, find where it breaks, and rebuild the parts that don't hold. Delivered without disrupting how you run day to day.
                   </p>
                 </div>
               </div>
@@ -326,7 +349,7 @@ const Home = () => {
               </div>
             </a>
 
-            {/* Card 03 — Operational Resilience */}
+            {/* Card 03 — Privacy Advisory Support */}
             <a href="/#advisory" className="practice-card group relative">
               <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/30 rounded-3xl opacity-0 group-hover:opacity-60 transition-all duration-700 blur-md"></div>
               <div
@@ -338,16 +361,16 @@ const Home = () => {
               >
                 <div style={{ gap: '20px' }} className="flex flex-col flex-1">
                   <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-[11px] uppercase font-bold">Practice Area 03</p>
-                  <h3 className="font-display font-semibold text-3xl text-white leading-tight">Operational Resilience</h3>
+                  <h3 className="font-display font-semibold text-3xl text-white leading-tight">Privacy Advisory Support</h3>
                   <p className="text-[rgba(192,200,208,0.85)] font-light text-base leading-[1.7]" style={{ textWrap: 'pretty' }}>
-                    Operations that have grown faster than the structure holding them together — where operational pressure, compliance exposure, and client or patient data risk start to compound. I map what the operation actually does, find where it breaks, and rebuild the parts that don't hold. Delivered without disrupting how you run day to day.
+                    Surveillance, analytics and AI tools collect more than most organisations realise, and more than most vendors can explain. I work alongside your privacy officer, your counsel or your external assessor — framing the operational questions, pressing the vendor on what the system actually does with personal information, and translating what comes back into something your board can decide on.
                   </p>
                 </div>
               </div>
             </a>
 
-            {/* Card 04 — Privacy Advisory Support (new) */}
-            <a href="/#advisory" className="practice-card group relative">
+            {/* Card 04 — Loss Intelligence */}
+            <a href="/loss-intelligence" className="practice-card group relative">
               <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/30 rounded-3xl opacity-0 group-hover:opacity-60 transition-all duration-700 blur-md"></div>
               <div
                 className="relative block rounded-3xl h-full flex flex-col border border-[#0369A1]/40 group-hover:border-[#C9A84C] transition-all duration-300 group-hover:shadow-[0_20px_60px_rgba(201,168,76,0.25)] group-hover:-translate-y-1"
@@ -358,9 +381,9 @@ const Home = () => {
               >
                 <div style={{ gap: '20px' }} className="flex flex-col flex-1">
                   <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-[11px] uppercase font-bold">Practice Area 04</p>
-                  <h3 className="font-display font-semibold text-3xl text-white leading-tight">Privacy Advisory Support</h3>
+                  <h3 className="font-display font-semibold text-3xl text-white leading-tight">Loss Intelligence</h3>
                   <p className="text-[rgba(192,200,208,0.85)] font-light text-base leading-[1.7]" style={{ textWrap: 'pretty' }}>
-                    Surveillance, analytics and AI tools collect more than most organisations realise, and more than most vendors can explain. I work alongside your privacy officer, your counsel or your external assessor — framing the operational questions, pressing the vendor on what the system actually does with personal information, and translating what comes back into something your board can decide on.
+                    Retailers and multi-site operators losing value to theft, organised crime, and process failure — usually without a clear picture of where, or how much. I've worked both sides of this: running large-scale operational commands, then building the intelligence partnerships between retailers and law enforcement. I build that detection capability inside your business, so your team owns and runs it.
                   </p>
                 </div>
               </div>
@@ -434,7 +457,7 @@ const Home = () => {
             ))}
           </div>
           <div className="flex justify-center w-full">
-            <Link to="/#contact" onClick={() => posthog.capture('scoping_session_cta_clicked', { location: 'advisory_section' })} className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer">
+            <Link to="/consultation" onClick={() => posthog.capture('scoping_session_cta_clicked', { location: 'advisory_section' })} className="group relative overflow-hidden bg-[#C9A84C] px-12 md:px-16 py-5 md:py-6 rounded-lg text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] transition-all duration-300 tracking-[0.15em] uppercase inline-flex items-center justify-center gap-4 shadow-[0_8px_24px_rgba(201,168,76,0.3)] hover:shadow-[0_12px_32px_rgba(201,168,76,0.4)] border border-white/10 cursor-pointer">
               Request a Scoping Session
               <svg className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
             </Link>
@@ -495,10 +518,7 @@ const Home = () => {
               Details remain confidential. The problems solved and outcomes delivered are not.
             </p>
           </div>
-          <div
-            onMouseEnter={() => { awPausedRef.current = true; }}
-            onMouseLeave={() => { awPausedRef.current = false; }}
-          >
+          <div>
           <div className={`grid grid-cols-1 lg:grid-cols-3 gap-6 transition-all duration-[900ms] ease-out ${awVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
             {awCards.map((cs) => (
               <div key={cs.num} className="group relative lg:grid lg:[grid-row:span_7] lg:[grid-template-rows:subgrid] lg:gap-y-0">
@@ -558,44 +578,6 @@ const Home = () => {
           <p className="phil-elem font-light text-2xl md:text-4xl text-silver/80 leading-relaxed">
             I engineer <span className="font-display font-bold text-accent italic">genuine operational reality.</span>
           </p>
-        </div>
-      </section>
-
-      {/* ── ABOUT ── */}
-      <section id="about" className="py-20 px-6 w-full bg-surface relative z-10">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
-          <div className="lg:col-span-5 order-1 flex flex-col gap-6">
-            <div className="rounded-2xl overflow-hidden shadow-lg bg-background border border-silver/20">
-              <img src="/Brad_Professional_Shot_clean.webp" alt="Brad Warburton - Principal Advisor" loading="lazy" className="w-full h-[320px] sm:h-[380px] lg:h-[450px] object-cover object-top grayscale hover:grayscale-0 transition-all duration-500" />
-            </div>
-            <div className="text-center space-y-1">
-              <p className="text-primary font-bold text-2xl tracking-wide">Brad Warburton</p>
-              <p className="text-accent font-bold tracking-[0.2em] text-xs uppercase">Principal, BW Advisory Solutions</p>
-              <a
-                href="https://linkedin.com/in/bradwarburton"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-block text-[#C9A84C]/60 hover:text-[#C9A84C] font-mono text-[10px] tracking-[0.2em] uppercase transition-colors duration-200 mt-1"
-              >
-                LinkedIn ↗
-              </a>
-            </div>
-          </div>
-          <div className="lg:col-span-7 order-2 space-y-8">
-            <div>
-              <h2 className="font-light text-4xl lg:text-[3.2rem] text-primary leading-tight tracking-tight">
-                <span className="font-semibold block mb-2">Law enforcement precision.</span>
-                Private sector scalability.
-              </h2>
-            </div>
-            <div className="space-y-6 text-textDark/90 leading-relaxed text-xl font-light">
-              <p>I built operational systems for large-scale law enforcement long before digital tools existed to support them. Some of Western Australia's largest operational commands ran on processes and disciplines I wrote — not because technology enabled them, but because the thinking underneath was sound.</p>
-              <p>When a national health crisis required border management built from scratch, I designed and commanded it: more than a million travellers screened, no existing infrastructure, no tolerance for failure. The intelligence architecture that came next, inside a state-level command environment, existed so frontline operators could act on information while it still mattered.</p>
-              <p>Then the private sector, leading law enforcement partnerships for a retail intelligence technology company — sitting between what police need and what a technology business can actually deliver, proved across every Australian state and territory.</p>
-              <p>That order matters. Operational practice came first, before the tools existed. Then a seat inside a technology business, watching which products got used and which got bought and shelved. It is why I test a vendor the way I do — not on the demonstration, but on whether the practice around it will hold.</p>
-              <p className="font-medium text-textDark">The problems look different. The fundamentals are the same.</p>
-            </div>
-          </div>
         </div>
       </section>
 

@@ -101,7 +101,7 @@ const Navbar = () => {
 
           <div className="flex items-center gap-4 flex-shrink-0">
             <Link
-              to="/#contact"
+              to="/consultation"
               className="hidden lg:inline-flex group relative overflow-hidden bg-[#C9A84C] px-10 py-3.5 rounded-full text-primary font-bold text-[12px] tracking-[0.12em] uppercase hover:bg-[#E0BC60] transition-all duration-300 transform hover:scale-[1.05] shadow-lg shadow-[#C9A84C]/20 cursor-pointer whitespace-nowrap"
             >
               Request a Scoping Session
@@ -142,7 +142,7 @@ const Navbar = () => {
             )
           ))}
           <Link
-            to="/#contact"
+            to="/consultation"
             onClick={() => setIsMenuOpen(false)}
             className="mt-4 bg-[#C9A84C] text-primary px-10 py-4 rounded-full font-bold text-sm uppercase tracking-[0.15em] hover:bg-[#E0BC60] transition-all duration-300"
           >
