@@ -155,7 +155,7 @@ const TheEngagement = () => {
       {/* CTA */}
       <div className="flex justify-center w-full relative z-10 px-6">
         <Link
-          to="/#contact"
+          to="/consultation"
           className="group relative overflow-hidden bg-[#C9A84C] px-12 py-4 md:py-5 rounded-full text-[#0F172A] font-bold text-sm md:text-base hover:bg-[#E0BC60] border border-white/10 transition-all duration-300 tracking-[0.15em] uppercase text-center flex items-center justify-center gap-4 shadow-[0_12px_32px_rgba(201,168,76,0.4)] hover:shadow-[0_16px_48px_rgba(201,168,76,0.6)] w-full md:w-auto"
         >
           Request a Scoping Session

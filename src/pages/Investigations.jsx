@@ -79,10 +79,6 @@ const Investigations = () => {
             Investigations that are<br />
             <span className="font-serif italic text-[#C9A84C] text-4xl md:text-5xl lg:text-6xl block mt-4">proven and defensible.</span>
           </h1>
-          <p className="text-2xl md:text-3xl text-silver/75 font-light leading-loose max-w-5xl mx-auto">
-            PROVED is my investigations framework.<br />
-            <span className="text-white font-semibold">A disciplined, six-stage protocol</span> designed to close the gap between strategic intent and frontline execution.
-          </p>
           <div className="mt-10">
             <Link to="/loss-intelligence" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.3em] uppercase font-bold transition-colors">
               See also: Loss Intelligence
@@ -142,6 +138,9 @@ const Investigations = () => {
             </h2>
             <p className="text-silver/60 font-light text-lg max-w-xl leading-loose">
               Six stages. One unified protocol. Every investigation conducted to a standard that withstands civil, disciplinary, or police scrutiny.
+            </p>
+            <p className="text-silver/60 font-light text-lg max-w-xl leading-loose">
+              PROVED is my investigations framework. <span className="text-white font-semibold">A disciplined, six-stage protocol</span> designed to close the gap between strategic intent and frontline execution.
             </p>
           </div>
           {/* Acronym display */}

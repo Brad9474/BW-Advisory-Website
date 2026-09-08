@@ -106,8 +106,10 @@ const BookingSection = ({ variant = 'section' }) => {
     e.preventDefault();
     if (!canSubmit || status === 'submitting') return;
     setStatus('submitting');
+
+    let res;
     try {
-      const res = await fetch('/api/booking/confirm', {
+      res = await fetch('/api/booking/confirm', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -119,14 +121,31 @@ const BookingSection = ({ variant = 'section' }) => {
           timeZone: tz,
         }),
       });
-      if (!res.ok) throw new Error(String(res.status));
-      posthog.identify(form.email.trim(), { name: form.name.trim(), organisation: form.organisation.trim() });
-      posthog.capture('booking_confirmed', { day: selectedSlot.dayLabel, time: selectedSlot.timeLabel });
-      setStatus('success');
     } catch {
-      posthog.capture('booking_confirm_failed');
-      setStatus('error');
+      // The request never reached a response (dropped connection, timeout) —
+      // the server may or may not have processed it. Don't invite a blind
+      // retry here, or a booking that actually succeeded gets duplicated.
+      posthog.capture('booking_confirm_uncertain');
+      setStatus('uncertain');
+      return;
     }
+
+    if (!res.ok) {
+      // A real response came back, so we know for certain this attempt
+      // didn't go through — safe to invite a retry.
+      posthog.capture('booking_confirm_failed', { status: res.status });
+      if (res.status === 409) {
+        setSelectedSlot(null);
+        setStatus('conflict');
+      } else {
+        setStatus('error');
+      }
+      return;
+    }
+
+    posthog.identify(form.email.trim(), { name: form.name.trim(), organisation: form.organisation.trim() });
+    posthog.capture('booking_confirmed', { day: selectedSlot.dayLabel, time: selectedSlot.timeLabel });
+    setStatus('success');
   };
 
   return (
@@ -303,8 +322,21 @@ const BookingSection = ({ variant = 'section' }) => {
 
                 {status === 'error' && (
                   <p role="alert" className="text-sm text-[#F5A98C] font-light leading-relaxed">
-                    Something went wrong — please email{' '}
+                    Your booking wasn't completed — please try again, or email{' '}
                     <a href="mailto:brad@bwadvisorysolutions.com.au" className="underline decoration-[#F5A98C]/40 underline-offset-2">brad@bwadvisorysolutions.com.au</a>{' '}directly.
+                  </p>
+                )}
+
+                {status === 'conflict' && (
+                  <p role="alert" className="text-sm text-[#F5A98C] font-light leading-relaxed">
+                    That time was just taken. Please choose another time above.
+                  </p>
+                )}
+
+                {status === 'uncertain' && (
+                  <p role="alert" className="text-sm text-[#F5A98C] font-light leading-relaxed">
+                    We couldn't confirm whether that went through. Please check your email before trying again, or email{' '}
+                    <a href="mailto:brad@bwadvisorysolutions.com.au" className="underline decoration-[#F5A98C]/40 underline-offset-2">brad@bwadvisorysolutions.com.au</a>{' '}to be sure.
                   </p>
                 )}
 
