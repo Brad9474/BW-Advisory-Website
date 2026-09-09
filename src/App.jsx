@@ -61,8 +61,6 @@ const Layout = ({ children }) => {
   const { pathname } = useLocation();
   usePageMeta(pathname);
   const isHome = pathname === '/';
-  const isIntelligence = pathname === '/loss-intelligence';
-  const isInvestigations = pathname === '/investigations';
   const isPlainDiagnostic =
     pathname === '/diagnostics' ||
     pathname === '/ai-readiness' ||
@@ -119,36 +117,6 @@ const Layout = ({ children }) => {
         {isHome ? (
           <>
             <div className="absolute inset-0 bg-[#0D2247]/35" />
-          </>
-        ) : isIntelligence ? (
-          <>
-            <div className="absolute inset-0 bg-[#0F1929]" />
-            <video
-              className="absolute inset-0 w-full h-full object-cover opacity-40"
-              src="/investigations-network.mp4"
-              poster="/investigations-network-poster.webp"
-              preload="auto"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0F1929]/45 via-[#0F1929]/30 to-[#0D2247]/75" />
-          </>
-        ) : isInvestigations ? (
-          <>
-            <div className="absolute inset-0 bg-[#0F1929]" />
-            <video
-              className="absolute inset-0 w-full h-full object-cover opacity-40"
-              src="/investigation-board.mp4"
-              poster="/investigation-board-poster.webp"
-              preload="auto"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0F1929]/45 via-[#0F1929]/30 to-[#0D2247]/75" />
           </>
         ) : isPlainDiagnostic ? (
           <>
