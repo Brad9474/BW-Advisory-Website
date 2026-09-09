@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import CinematicHero from '../components/CinematicHero';
 
 const intelligenceStages = [
   {
@@ -23,26 +24,17 @@ const intelligenceStages = [
 const LossIntelligence = () => (
   <div className="min-h-screen">
     {/* PAGE HERO */}
-    <section className="relative pt-48 pb-24 px-8 w-full z-10 text-center">
-      <div className="max-w-7xl mx-auto space-y-14">
-        <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase font-bold">Intelligence Capability</p>
-        <div className="mx-auto max-w-6xl">
-          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1] mb-8">
-            Build the capability to see,<br />
-            <span className="font-serif italic text-[#C9A84C] text-4xl md:text-5xl lg:text-6xl block mt-4">investigate, and act.</span>
-          </h1>
-          <p className="text-2xl md:text-3xl text-silver/75 font-light leading-relaxed max-w-5xl mx-auto">
-            Modern loss prevention is an <span className="text-white font-semibold">intelligence function</span>. I diagnose your current state, design and build the framework with your team, and hand over a fully operational intelligence capability that your organisation owns and controls.
-          </p>
-          <div className="mt-10">
-            <Link to="/investigations" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.2em] uppercase font-bold transition-colors">
-              See also: Investigations
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
+    <CinematicHero
+      eyebrow="Loss intelligence"
+      heading="Connect the incidents. Understand the loss. Act on the pattern."
+      body="I help retailers and multi-site operators build the capability to turn incident information into useful intelligence. Together, we develop the processes, analysis and response arrangements your team needs to identify patterns and act on them."
+      ctaLabel="Book a 30-minute conversation"
+      ctaHref="/consultation"
+      videoSrc="/loss-intelligence-urban-cinematic.mp4"
+      posterSrc="/loss-intelligence-urban.webp"
+      crossLinkTo="/investigations"
+      crossLinkLabel="See also: Investigations"
+    />
 
     {/* THREE PHASES */}
     <section className="pb-44 px-8 w-full relative z-10 bg-primary">

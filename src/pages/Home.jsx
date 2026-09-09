@@ -10,6 +10,71 @@ import Footer from '../components/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Homepage hero background video: scoped playback/accessibility behaviour shared
+// by the pause control below. Reduced-motion and mobile visitors get the static
+// poster only, until they explicitly press Play (see the skyline handoff spec).
+function useHeroBackgroundVideo(sectionRef) {
+  const videoRef = useRef(null);
+  const [userPaused, setUserPaused] = useState(
+    () =>
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      window.matchMedia('(max-width: 767px)').matches
+  );
+  const [onScreen, setOnScreen] = useState(true);
+  const [tabHidden, setTabHidden] = useState(false);
+  const [hasSource, setHasSource] = useState(false);
+  const [mediaError, setMediaError] = useState(false);
+
+  useEffect(() => {
+    const reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mobileQuery = window.matchMedia('(max-width: 767px)');
+    const pauseForPreference = () => {
+      if (reduceQuery.matches || mobileQuery.matches) setUserPaused(true);
+    };
+    reduceQuery.addEventListener('change', pauseForPreference);
+    mobileQuery.addEventListener('change', pauseForPreference);
+    return () => {
+      reduceQuery.removeEventListener('change', pauseForPreference);
+      mobileQuery.removeEventListener('change', pauseForPreference);
+    };
+  }, []);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return undefined;
+    const observer = new IntersectionObserver(([entry]) => setOnScreen(entry.isIntersecting), { threshold: 0.05 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [sectionRef]);
+
+  useEffect(() => {
+    const handleVisibility = () => setTabHidden(document.hidden);
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, []);
+
+  const shouldPlay = !userPaused && onScreen && !tabHidden && !mediaError;
+
+  useEffect(() => {
+    if (shouldPlay && !hasSource) {
+      // Mounts the <video>; this effect re-runs once the ref exists.
+      setHasSource(true);
+      return;
+    }
+    const video = videoRef.current;
+    if (!video) return;
+    if (shouldPlay) {
+      video.play().catch(() => setUserPaused(true)); // autoplay blocked — reflect the real state
+    } else {
+      video.pause();
+    }
+  }, [shouldPlay, hasSource]);
+
+  const togglePlayback = () => setUserPaused((p) => !p);
+
+  return { videoRef, userPaused, togglePlayback, hasSource, mediaError, setMediaError };
+}
+
 const APPLIED_WORK = [
   {
     num: '01',
@@ -68,6 +133,7 @@ const Home = () => {
   const [heroPassed, setHeroPassed] = useState(false);
   const [awPage, setAwPage] = useState(0);
   const [awVisible, setAwVisible] = useState(true);
+  const { videoRef, userPaused, togglePlayback, hasSource, mediaError, setMediaError } = useHeroBackgroundVideo(heroRef);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -125,52 +191,66 @@ const Home = () => {
       {/* ── HERO ── */}
       <section ref={heroRef} className="relative min-h-[100dvh] w-full flex flex-col justify-center items-center z-10 text-center overflow-hidden bg-primary">
 
-        <div className="absolute inset-0 z-0">
-          {/* hero-mp4.mp4 — Perth → Sydney → Melbourne → Perth boardroom loop */}
-          <video
-            className="absolute inset-0 w-full h-full object-cover"
-            src="/hero-mp4.mp4"
-            poster="/hero-poster.webp"
-            preload="auto"
-            fetchPriority="high"
-            autoPlay
-            loop
-            muted
-            playsInline
-            style={{ transform: 'scale(1.03)', filter: 'brightness(1.3) contrast(0.94) saturate(1.12)' }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#08101f]/14 via-[#0a1428]/8 to-[#08101f]/20 pointer-events-none" />
-          <div className="absolute bottom-0 left-0 right-0 h-[45%] bg-gradient-to-t from-[#08101f]/55 via-[#08101f]/18 to-transparent pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#08101f]/18 via-[#08101f]/5 to-transparent pointer-events-none" />
-          <div className="absolute top-0 left-0 right-0 h-[16%] bg-gradient-to-b from-[#08101f]/18 to-transparent pointer-events-none" />
-          {/* Wordmark vignette — extra depth behind shield/title/SOLUTIONS/tagline so they pop without heavier type */}
+        <div className="absolute inset-0 z-0" aria-hidden="true">
+          {/* hero-mp4.mp4 — Perth → Sydney → Melbourne → Perth boardroom loop.
+              Colour grade (blue-lean, tamed sunset/highlights) is baked into the
+              source file; no runtime brightness/saturate filter stacked on top. */}
+          {hasSource && !mediaError ? (
+            <video
+              ref={videoRef}
+              className="absolute inset-0 w-full h-full object-cover"
+              src="/hero-mp4.mp4"
+              poster="/hero-poster.webp"
+              preload="metadata"
+              muted
+              loop
+              playsInline
+              tabIndex={-1}
+              onError={() => setMediaError(true)}
+              style={{ transform: 'scale(1.03)' }}
+            />
+          ) : (
+            <img
+              src="/hero-poster.webp"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ transform: 'scale(1.03)' }}
+            />
+          )}
+          {/* Central reading overlay — soft ellipse, fades toward the edges so the
+              skyline stays visible at the perimeter (no broad rectangle/black tint). */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: 'radial-gradient(ellipse 62% 56% at 50% 36%, rgba(5,10,20,0.6) 0%, rgba(5,10,20,0.32) 55%, transparent 85%)',
+              background:
+                'radial-gradient(ellipse 62% 72% at 50% 50%, rgba(15,23,42,0.8) 0%, rgba(15,23,42,0.68) 45%, rgba(15,23,42,0.38) 72%, rgba(15,23,42,0.1) 100%)',
             }}
           />
-          {/* Lower vignette — same soft, edgeless treatment behind the support line and kicker */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background: 'radial-gradient(ellipse 60% 38% at 50% 78%, rgba(5,10,20,0.55) 0%, rgba(5,10,20,0.3) 55%, transparent 85%)',
-            }}
-          />
+          <div className="absolute inset-x-0 top-0 h-[18%] bg-gradient-to-b from-[#0F172A]/55 to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-[26%] bg-gradient-to-t from-[#0F172A]/55 to-transparent pointer-events-none" />
         </div>
 
+        <button
+          type="button"
+          onClick={togglePlayback}
+          className="absolute z-20 bottom-5 right-5 md:bottom-7 md:right-7 min-w-[44px] min-h-[44px] flex items-center justify-center gap-2 text-[#E2E8F0] bg-[#0F172A]/85 border border-white/25 rounded-lg px-4 py-2.5 text-xs font-sans font-semibold hover:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A84C] transition-colors"
+          aria-label={userPaused ? 'Play background video' : 'Pause background video'}
+        >
+          {userPaused ? 'Play background video ▷' : 'Pause background video Ⅱ'}
+        </button>
+
         <div
-          className="relative z-10 w-full flex flex-col items-center gap-2 sm:gap-3 pt-[120px] sm:pt-[150px] md:pt-[190px] px-8 pb-[14px]"
+          className="relative z-10 w-full flex flex-col items-center pt-[90px] sm:pt-[110px] md:pt-[130px] px-6 sm:px-8 lg:px-12 pb-[76px] md:pb-[14px]"
           style={{ maxWidth: '900px', margin: '0 auto' }}
         >
-          {/* 1 — Lockup */}
-          <div className="float-breathe flex flex-col items-center gap-2 sm:gap-3">
-            <div className="flex flex-col items-center gap-2 sm:gap-3">
-              <div className="shield-elem w-[92px] h-[101px] sm:w-[160px] sm:h-[176px] md:w-[190px] md:h-[209px] drop-shadow-[0_0_40px_rgba(3,105,161,0.6)]">
+          {/* 1 — Lockup (reduced ~28% from baseline so the proposition leads) */}
+          <div className="float-breathe flex flex-col items-center gap-1.5 sm:gap-2">
+            <div className="flex flex-col items-center gap-1.5 sm:gap-2">
+              <div className="shield-elem w-[66px] h-[73px] sm:w-[115px] sm:h-[127px] md:w-[137px] md:h-[150px] drop-shadow-[0_0_40px_rgba(3,105,161,0.6)]">
                 <TransparentShield />
               </div>
               <h2
-                className="logo-letter platinum-text font-serif font-semibold uppercase inline-block text-[32px] sm:text-[60px] md:text-[76px]"
+                className="logo-letter platinum-text font-serif font-semibold uppercase inline-block text-[24px] sm:text-[43px] md:text-[55px]"
                 style={{
                   letterSpacing: '0.06em',
                   lineHeight: 1.2,
@@ -180,10 +260,10 @@ const Home = () => {
                 BW ADVISORY
               </h2>
             </div>
-            <div className="flex items-center justify-center" style={{ gap: '22px' }}>
-              <div className="solutions-line h-px" style={{ width: '64px', background: 'linear-gradient(to right, transparent, rgba(201,168,76,0.4))' }} />
+            <div className="flex items-center justify-center" style={{ gap: '16px' }}>
+              <div className="solutions-line h-px" style={{ width: '46px', background: 'linear-gradient(to right, transparent, rgba(201,168,76,0.4))' }} />
               <p
-                className="solutions-word font-sans font-semibold uppercase text-[14px] sm:text-[17px] md:text-[20px]"
+                className="solutions-word font-sans font-semibold uppercase text-[11px] sm:text-[13px] md:text-[15px]"
                 style={{
                   color: '#C9A84C',
                   letterSpacing: '0.3em',
@@ -192,53 +272,37 @@ const Home = () => {
               >
                 SOLUTIONS
               </p>
-              <div className="solutions-line h-px" style={{ width: '64px', background: 'linear-gradient(to left, transparent, rgba(201,168,76,0.6))' }} />
+              <div className="solutions-line h-px" style={{ width: '46px', background: 'linear-gradient(to left, transparent, rgba(201,168,76,0.6))' }} />
             </div>
           </div>
 
-          {/* 2 — Headline */}
-          <div className="hero-elem flex flex-col items-center gap-2 sm:gap-3" style={{ filter: 'drop-shadow(0 4px 18px rgba(0,0,0,0.8))' }}>
-            <h1
-              className="font-display font-bold text-white text-center text-[32px] sm:text-[42px] md:text-[52px] lg:text-[60px] md:whitespace-nowrap"
-              style={{ lineHeight: 1.06, letterSpacing: '-0.02em', maxWidth: '1000px' }}
-            >
-              The gaps you can't see.<br />The capability to close them.
-            </h1>
-            <p className="font-serif italic font-medium text-[19px] sm:text-[32px] md:text-[40px] lg:text-[46px]" style={{ color: '#C9A84C', lineHeight: 1.1 }}>
-              I deliver both.
-            </p>
-          </div>
+          {/* 2 — Headline: first reading priority, directly after the lockup */}
+          <h1
+            className="hero-elem font-display font-semibold text-center text-[32px] sm:text-[34px] md:text-[44px] lg:text-[56px] leading-[1.18] md:leading-[1.15] tracking-[-0.015em] md:tracking-[-0.02em] mt-6 md:mt-8"
+            style={{ color: '#F8FAFC', maxWidth: '1000px', filter: 'drop-shadow(0 4px 18px rgba(0,0,0,0.8))' }}
+          >
+            The gaps you can't see.<br />The capability to close them.
+          </h1>
 
-          {/* 3 — Support line */}
+          {/* 3 — Supporting paragraph */}
           <p
-            className="hero-elem font-sans font-light text-[16px] md:text-[19px]"
+            className="hero-elem font-sans font-normal text-[17px] sm:text-[18px] md:text-[19px] leading-[1.6] md:leading-[1.65] mt-5 md:mt-6"
             style={{
-              lineHeight: 1.65,
-              color: 'rgba(240,244,248,0.94)',
-              maxWidth: '680px',
+              color: '#E2E8F0',
+              maxWidth: '760px',
               textWrap: 'pretty',
               textShadow: '0 2px 6px rgba(0,0,0,0.85), 0 1px 14px rgba(0,0,0,0.6)',
             }}
           >
-            I find what is actually happening inside your operation, then close the gap — with capability you own, or technology I have already vetted.
+            When your operation stops supporting what the business needs, another system rarely fixes it. I find what is getting in the way, then strengthen the people, processes and technology underneath — so you keep delivering under pressure and adapt when things change.
           </p>
 
-          {/* 4 — Kicker + CTA */}
-          <div className="hero-elem flex flex-col items-center gap-4 sm:gap-6">
-            <p
-              className="font-mono font-bold uppercase text-[10px] md:text-[12px] text-center"
-              style={{
-                letterSpacing: '0.3em',
-                color: '#E4C978',
-                textShadow: '0 2px 6px rgba(0,0,0,0.9), 0 1px 12px rgba(0,0,0,0.65)',
-              }}
-            >
-              Diagnose first. Build capability second. Guess never.
-            </p>
+          {/* 4 — CTA */}
+          <div className="hero-elem mt-7 md:mt-8">
             <Link
               to="/consultation"
               onClick={() => posthog.capture('scoping_session_cta_clicked', { location: 'hero' })}
-              className="group relative overflow-hidden bg-[#C9A84C] rounded-full text-[#0F172A] font-bold hover:bg-[#E0BC60] transition-all duration-300 uppercase text-center flex items-center justify-center gap-3 border border-white/10 hover:border-white/20 cursor-pointer px-10 py-4 md:px-16 text-sm md:text-[18px]"
+              className="group relative overflow-hidden bg-[#C9A84C] rounded-full text-[#0F172A] font-sans font-semibold hover:bg-[#E0BC60] transition-all duration-300 uppercase text-center flex items-center justify-center gap-3 border border-white/10 hover:border-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F8FAFC] cursor-pointer min-h-[52px] px-8 md:px-16 py-4 text-[15px] md:text-[16px] leading-[1.5]"
               style={{
                 minWidth: '280px',
                 letterSpacing: '0.15em',

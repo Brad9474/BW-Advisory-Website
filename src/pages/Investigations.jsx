@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Footer from '../components/Footer';
+import CinematicHero from '../components/CinematicHero';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,22 +73,17 @@ const Investigations = () => {
   return (
   <div className="bg-primary min-h-screen">
     {/* ── HERO ── */}
-    <section className="relative pt-48 pb-24 px-8 w-full z-10 text-center">
-      <div className="max-w-7xl mx-auto space-y-14">
-        <div className="mx-auto max-w-6xl">
-          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1] mb-14">
-            Investigations that are<br />
-            <span className="font-serif italic text-[#C9A84C] text-4xl md:text-5xl lg:text-6xl block mt-4">proven and defensible.</span>
-          </h1>
-          <div className="mt-10">
-            <Link to="/loss-intelligence" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.3em] uppercase font-bold transition-colors">
-              See also: Loss Intelligence
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
+    <CinematicHero
+      eyebrow="Investigations capability"
+      heading="Build a consistent, evidence-led approach to investigations."
+      body="I help your organisation improve how investigations are assessed, planned, conducted and documented. The aim is a repeatable approach that gives your team clear steps, sound records and a stronger basis for decisions."
+      ctaLabel="Book a 30-minute conversation"
+      ctaHref="/consultation"
+      videoSrc="/investigations-cinematic.mp4"
+      posterSrc="/investigations.webp"
+      crossLinkTo="/loss-intelligence"
+      crossLinkLabel="See also: Loss Intelligence"
+    />
 
     {/* ── THE DIFFERENTIATOR ── */}
     <section className="pt-24 pb-44 px-8 w-full relative z-10 bg-primary">
