@@ -189,7 +189,7 @@ const Home = () => {
   return (
     <>
       {/* ── HERO ── */}
-      <section ref={heroRef} className="relative min-h-[100dvh] w-full flex flex-col justify-center items-center z-10 text-center overflow-hidden bg-primary">
+      <section ref={heroRef} className="group/hero relative min-h-[100dvh] w-full flex flex-col justify-center items-center z-10 text-center overflow-hidden bg-primary">
 
         <div className="absolute inset-0 z-0" aria-hidden="true">
           {/* hero-mp4.mp4 — Perth → Sydney → Melbourne → Perth boardroom loop.
@@ -230,17 +230,21 @@ const Home = () => {
           <div className="absolute inset-x-0 bottom-0 h-[26%] bg-gradient-to-t from-[#0F172A]/55 to-transparent pointer-events-none" />
         </div>
 
+        {/* Kept quiet at rest on pointer devices; always visible on touch, where
+            it is the only way to start the video and there is no hover. */}
         <button
           type="button"
           onClick={togglePlayback}
-          className="absolute z-20 bottom-5 right-5 md:bottom-7 md:right-7 min-w-[44px] min-h-[44px] flex items-center justify-center gap-2 text-[#E2E8F0] bg-[#0F172A]/85 border border-white/25 rounded-lg px-4 py-2.5 text-xs font-sans font-semibold hover:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A84C] transition-colors"
+          className="absolute z-20 bottom-5 right-5 md:bottom-7 md:right-7 w-11 h-11 flex items-center justify-center rounded-full text-[#E2E8F0] bg-[#0F172A]/70 border border-white/20 backdrop-blur-sm opacity-100 md:opacity-30 md:group-hover/hero:opacity-100 focus-visible:opacity-100 hover:bg-[#0F172A]/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A84C] transition-opacity duration-300"
           aria-label={userPaused ? 'Play background video' : 'Pause background video'}
         >
-          {userPaused ? 'Play background video ▷' : 'Pause background video Ⅱ'}
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            {userPaused ? <path d="M8 5v14l11-7z" /> : <path d="M6 5h4v14H6zm8 0h4v14h-4z" />}
+          </svg>
         </button>
 
         <div
-          className="relative z-10 w-full flex flex-col items-center pt-[90px] sm:pt-[110px] md:pt-[130px] px-6 sm:px-8 lg:px-12 pb-[76px] md:pb-[14px]"
+          className="relative z-10 w-full flex flex-col items-center pt-[90px] sm:pt-[110px] md:pt-[130px] px-6 sm:px-8 lg:px-12 pb-[104px] md:pb-[14px]"
           style={{ maxWidth: '900px', margin: '0 auto' }}
         >
           {/* 1 — Lockup (reduced ~28% from baseline so the proposition leads) */}

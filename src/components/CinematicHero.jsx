@@ -81,7 +81,7 @@ const CinematicHero = ({
   const togglePlayback = () => setUserPaused((prev) => !prev);
 
   return (
-    <section ref={sectionRef} className="relative isolate min-h-[660px] flex items-center justify-center overflow-hidden px-6 py-28 md:py-32">
+    <section ref={sectionRef} className="group/hero relative isolate min-h-[660px] flex items-center justify-center overflow-hidden px-6 py-28 md:py-32">
       <div className="absolute inset-0 -z-20 bg-[#1A3560]">
         {hasSource && (
           <video
@@ -140,13 +140,17 @@ const CinematicHero = ({
         </div>
       </div>
 
+      {/* Kept quiet at rest on pointer devices; always visible on touch, where
+          it is the only way to start the video and there is no hover. */}
       <button
         type="button"
         onClick={togglePlayback}
-        className="absolute right-5 bottom-5 z-10 text-[#E2E8F0] bg-[#0F172A]/85 border border-white/25 rounded-lg px-3.5 py-2.5 text-xs font-sans font-semibold hover:border-white/40 transition-colors"
-        aria-label={userPaused ? 'Play background motion' : 'Pause background motion'}
+        className="absolute right-5 bottom-5 z-10 w-11 h-11 flex items-center justify-center rounded-full text-[#E2E8F0] bg-[#0F172A]/70 border border-white/20 backdrop-blur-sm opacity-100 md:opacity-30 md:group-hover/hero:opacity-100 focus-visible:opacity-100 hover:bg-[#0F172A]/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A84C] transition-opacity duration-300"
+        aria-label={userPaused ? 'Play background video' : 'Pause background video'}
       >
-        {userPaused ? 'Play motion ▷' : 'Pause motion Ⅱ'}
+        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          {userPaused ? <path d="M8 5v14l11-7z" /> : <path d="M6 5h4v14H6zm8 0h4v14h-4z" />}
+        </svg>
       </button>
     </section>
   );
