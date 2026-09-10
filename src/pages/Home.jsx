@@ -21,9 +21,12 @@ function useHeroBackgroundVideo(sectionRef) {
       window.matchMedia('(max-width: 767px)').matches
   );
   const [onScreen, setOnScreen] = useState(true);
-  const [tabHidden, setTabHidden] = useState(false);
+  // Read real visibility: a page opened in a background tab must wait for the
+  // hidden→visible change, or play() is aborted and nothing ever retries it.
+  const [tabHidden, setTabHidden] = useState(() => document.hidden);
   const [hasSource, setHasSource] = useState(false);
   const [mediaError, setMediaError] = useState(false);
+  const [videoVisible, setVideoVisible] = useState(false);
 
   useEffect(() => {
     const reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -64,7 +67,11 @@ function useHeroBackgroundVideo(sectionRef) {
     const video = videoRef.current;
     if (!video) return;
     if (shouldPlay) {
-      video.play().catch(() => setUserPaused(true)); // autoplay blocked — reflect the real state
+      // AbortError just means a pause() (off-screen / hidden tab) interrupted
+      // this play(); only a real refusal (autoplay blocked) flips to Play.
+      video.play().catch((err) => {
+        if (err.name !== 'AbortError') setUserPaused(true);
+      });
     } else {
       video.pause();
     }
@@ -72,7 +79,10 @@ function useHeroBackgroundVideo(sectionRef) {
 
   const togglePlayback = () => setUserPaused((p) => !p);
 
-  return { videoRef, userPaused, togglePlayback, hasSource, mediaError, setMediaError };
+  return {
+    videoRef, userPaused, togglePlayback, hasSource, mediaError, setMediaError,
+    videoVisible, onVideoPlaying: () => setVideoVisible(true),
+  };
 }
 
 const APPLIED_WORK = [
@@ -133,7 +143,7 @@ const Home = () => {
   const [heroPassed, setHeroPassed] = useState(false);
   const [awPage, setAwPage] = useState(0);
   const [awVisible, setAwVisible] = useState(true);
-  const { videoRef, userPaused, togglePlayback, hasSource, mediaError, setMediaError } = useHeroBackgroundVideo(heroRef);
+  const { videoRef, userPaused, togglePlayback, hasSource, mediaError, setMediaError, videoVisible, onVideoPlaying } = useHeroBackgroundVideo(heroRef);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -195,25 +205,26 @@ const Home = () => {
           {/* hero-mp4.mp4 — Perth → Sydney → Melbourne → Perth boardroom loop.
               Colour grade (blue-lean, tamed sunset/highlights) is baked into the
               source file; no runtime brightness/saturate filter stacked on top. */}
-          {hasSource && !mediaError ? (
+          {/* Poster stays mounted underneath; the video is revealed only once it
+              is actually rendering, so there's no element swap or blank frame. */}
+          <img
+            src="/hero-poster.webp"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ transform: 'scale(1.03)' }}
+          />
+          {hasSource && !mediaError && (
             <video
               ref={videoRef}
-              className="absolute inset-0 w-full h-full object-cover"
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 motion-reduce:transition-none ${videoVisible ? 'opacity-100' : 'opacity-0'}`}
               src="/hero-mp4.mp4"
-              poster="/hero-poster.webp"
               preload="metadata"
               muted
               loop
               playsInline
               tabIndex={-1}
+              onPlaying={onVideoPlaying}
               onError={() => setMediaError(true)}
-              style={{ transform: 'scale(1.03)' }}
-            />
-          ) : (
-            <img
-              src="/hero-poster.webp"
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
               style={{ transform: 'scale(1.03)' }}
             />
           )}

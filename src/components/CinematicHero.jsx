@@ -27,8 +27,19 @@ const CinematicHero = ({
       window.matchMedia('(max-width: 767px)').matches
   );
   const [onScreen, setOnScreen] = useState(true);
-  const [tabHidden, setTabHidden] = useState(false);
+  // Read real visibility: a page opened in a background tab must wait for the
+  // hidden→visible change, or play() is aborted and nothing ever retries it.
+  const [tabHidden, setTabHidden] = useState(() => document.hidden);
   const [hasSource, setHasSource] = useState(false);
+  const posterRef = useRef(null);
+  const [posterLoaded, setPosterLoaded] = useState(false);
+  const [videoVisible, setVideoVisible] = useState(false);
+
+  // A cached poster can finish loading before React attaches onLoad.
+  useEffect(() => {
+    const img = posterRef.current;
+    if (img?.complete && img.naturalWidth) setPosterLoaded(true);
+  }, []);
 
   useEffect(() => {
     const reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -72,7 +83,11 @@ const CinematicHero = ({
     const video = videoRef.current;
     if (!video) return;
     if (shouldPlay) {
-      video.play().catch(() => {});
+      // AbortError just means a pause() (off-screen / hidden tab) interrupted
+      // this play(); only a real refusal (autoplay blocked) flips to Play.
+      video.play().catch((err) => {
+        if (err.name !== 'AbortError') setUserPaused(true);
+      });
     } else {
       video.pause();
     }
@@ -82,26 +97,29 @@ const CinematicHero = ({
 
   return (
     <section ref={sectionRef} className="group/hero relative isolate min-h-[660px] flex items-center justify-center overflow-hidden px-6 py-28 md:py-32">
+      {/* The poster is the video's own first frame and stays mounted underneath;
+          the video is only revealed once it is actually rendering, so the
+          handover is seamless rather than an element swap. */}
       <div className="absolute inset-0 -z-20 bg-[#1A3560]">
+        <img
+          ref={posterRef}
+          src={posterSrc}
+          alt=""
+          aria-hidden="true"
+          onLoad={() => setPosterLoaded(true)}
+          className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 motion-reduce:transition-none ${posterLoaded ? 'opacity-100' : 'opacity-0'}`}
+        />
         {hasSource && (
           <video
             ref={videoRef}
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 motion-reduce:transition-none ${videoVisible ? 'opacity-100' : 'opacity-0'}`}
             src={videoSrc}
-            poster={posterSrc}
             muted
             loop
             playsInline
             preload="metadata"
             aria-hidden="true"
-          />
-        )}
-        {!hasSource && (
-          <img
-            src={posterSrc}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            onPlaying={() => setVideoVisible(true)}
           />
         )}
       </div>
