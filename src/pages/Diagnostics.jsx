@@ -20,7 +20,7 @@ const groups = [
         badge: "AI Readiness Diagnostic",
         audience: "Owner-managed businesses and professional services firms with manual work they suspect could be automated",
         duration: "About 8 min · 5 sections · 28 questions",
-        desc: "Five sections. About eight minutes. A scored result covering AI readiness, process optimisation opportunities, and security posture — with an opportunity estimate of what your gaps are costing you. Fully automated — your result is generated and returned instantly.",
+        desc: "Five sections. About eight minutes. A scored result covering AI readiness and process optimisation opportunities, with an indicative estimate of what your gaps are costing you. Fully automated — generated and returned instantly, without personal review.",
         href: "/ai-readiness",
         internal: true,
         icon: "/ai-icon.svg",
@@ -371,7 +371,7 @@ const Diagnostics = () => {
         <div className="space-y-6">
           <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">Rigorous Process</p>
           <h2 className="font-display font-bold text-5xl md:text-7xl text-white tracking-tight">
-            Every assessment is reviewed personally.
+            Four diagnostics. Personally reviewed.
           </h2>
         </div>
         <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">

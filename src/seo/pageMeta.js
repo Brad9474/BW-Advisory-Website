@@ -3,7 +3,7 @@ export const SITE = 'https://bwadvisorysolutions.com.au';
 const DEFAULT_META = {
   title: 'BW Advisory Solutions | Operational Resilience & Technology Advisory',
   description:
-    'BW Advisory Solutions closes the gap between strategic intent and frontline execution for operations and professional services firms — operational diagnostics, AI readiness, technology matching, and loss intelligence & investigations, backed by 30+ years of command experience.',
+    'BW Advisory Solutions helps organisations strengthen operational resilience through diagnostics, AI readiness, vendor proposal review, privacy and AI governance, and loss intelligence capability.',
 };
 
 // One entry per route in src/App.jsx. Routes not listed here fall back to

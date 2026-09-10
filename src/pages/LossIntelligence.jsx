@@ -46,7 +46,7 @@ const LossIntelligence = () => (
               <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase mb-6 font-semibold">Phase 01</p>
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">Diagnose.</h3>
               <p className="text-silver/80 font-light text-base leading-[1.6] flex-grow">
-                Operational assessment across your loss landscape, risk governance, and intelligence pipeline. I identify the gaps where organised threat actors are operating undetected.
+                Operational assessment across your loss landscape, risk governance, and intelligence pipeline. I identify where loss is going undetected.
               </p>
             </div>
           </div>
@@ -66,7 +66,7 @@ const LossIntelligence = () => (
               <p className="text-[#C9A84C] font-mono text-xs tracking-[0.2em] uppercase mb-6 font-semibold">Phase 03</p>
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">Embed.</h3>
               <p className="text-silver/80 font-light text-base leading-[1.6] flex-grow">
-                Embed the capability into your operation. I train your teams in intelligence analysis and investigation doctrine, align leadership to the intelligence-led model, and hand over an independent intelligence function. Ongoing advisory support for complex cases is available.
+                Embed the capability into your operation. I train your teams in intelligence analysis and investigation doctrine, align leadership to the intelligence-led model, and hand over a function your own people run. After handover, I review how it is performing against the measures we set together.
               </p>
             </div>
           </div>

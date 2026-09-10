@@ -9,6 +9,10 @@ const TransparentShield = () => {
   const lastX = useRef(0);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setHasEntered(true);
+      return undefined;
+    }
     const timer = setTimeout(() => {
       setIsAnimating(true);
       setRotationY(360);
@@ -77,10 +81,15 @@ const TransparentShield = () => {
       }
       oCtx.putImageData(imageData, 0, 0);
 
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        ctx.drawImage(originalCanvas, 0, 0);
+        return;
+      }
+
       const animate = (time) => {
         if (!startTime) startTime = time;
         const elapsed = time - startTime;
-        const progress = (elapsed % 3000) / 3000;
+        const progress = (elapsed % 8000) / 8000;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.globalCompositeOperation = 'source-over';
@@ -94,7 +103,7 @@ const TransparentShield = () => {
 
         const gradient = ctx.createLinearGradient(0, 0, canvas.width * 0.5, 0);
         gradient.addColorStop(0, 'rgba(255,255,255,0)');
-        gradient.addColorStop(0.5, 'rgba(255,255,255,0.7)');
+        gradient.addColorStop(0.5, 'rgba(255,255,255,0.45)');
         gradient.addColorStop(1, 'rgba(255,255,255,0)');
 
         ctx.fillStyle = gradient;

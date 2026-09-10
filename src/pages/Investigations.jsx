@@ -76,7 +76,7 @@ const Investigations = () => {
     <CinematicHero
       eyebrow="Investigations capability"
       heading="Build a consistent, evidence-led approach to investigations."
-      body="I help your organisation improve how investigations are assessed, planned, conducted and documented. The aim is a repeatable approach that gives your team clear steps, sound records and a stronger basis for decisions."
+      body="I help your organisation improve the process its own people use to assess, plan, conduct and document investigations. Your team gets a repeatable approach, clear steps, sound records and a stronger basis for decisions."
       ctaLabel="Book a 30-minute conversation"
       ctaHref="/consultation"
       videoSrc="/investigations-cinematic.mp4"
@@ -95,7 +95,7 @@ const Investigations = () => {
               Most retail risk functions are reactive — responding to incidents after the damage is done. PROVED changes the fundamental posture of the organisation from response to detection and prevention.
             </p>
             <p className="drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-              Built on 30 years of operational command in law enforcement, this framework applies the same evidentiary rigour used in complex criminal investigations to the commercial context.
+              Built on nearly three decades in law enforcement, this framework applies the same evidentiary rigour used in complex criminal investigations to the commercial context.
             </p>
           </div>
 
@@ -133,7 +133,7 @@ const Investigations = () => {
               The <span className="text-[#C9A84C]">PROVED</span> Model.
             </h2>
             <p className="text-silver/60 font-light text-lg max-w-xl leading-loose">
-              Six stages. One unified protocol. Every investigation conducted to a standard that withstands civil, disciplinary, or police scrutiny.
+              Six stages. One unified protocol your team can apply to every investigation — built to withstand civil, disciplinary or police scrutiny.
             </p>
             <p className="text-silver/60 font-light text-lg max-w-xl leading-loose">
               PROVED is my investigations framework. <span className="text-white font-semibold">A disciplined, six-stage protocol</span> designed to close the gap between strategic intent and frontline execution.
@@ -191,7 +191,7 @@ const Investigations = () => {
       <div className="max-w-[1400px] mx-auto">
         <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold mb-10">Where Capability Gets Built</p>
         <p className="text-2xl md:text-3xl text-silver/80 font-light leading-loose max-w-5xl mb-10">
-          PROVED governs every investigation run within a Loss Intelligence engagement. Loss Intelligence is where the capability gets built.
+          PROVED is the investigation method I build into your team during a Loss Intelligence engagement. Your investigators run it. Loss Intelligence is where the capability gets built.
         </p>
         <Link to="/loss-intelligence" className="inline-flex items-center gap-2 text-[#C9A84C] hover:text-[#E0BC60] font-mono text-xs tracking-[0.3em] uppercase font-bold transition-colors">
           Read about Loss Intelligence

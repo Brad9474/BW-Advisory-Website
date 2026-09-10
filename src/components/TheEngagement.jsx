@@ -29,7 +29,7 @@ const phases = [
   {
     step: "05",
     title: "Operationalise.",
-    desc: "Strategy delivers results here. I remain accountable by embedding change, aligning people, and measuring what matters until the gap closes."
+    desc: "Strategy delivers results here. I embed the change, align people, and measure what matters against the plan."
   }
 ];
 

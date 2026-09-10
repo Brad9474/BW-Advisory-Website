@@ -259,7 +259,7 @@ const Home = () => {
           style={{ maxWidth: '900px', margin: '0 auto' }}
         >
           {/* 1 — Lockup (reduced ~28% from baseline so the proposition leads) */}
-          <div className="float-breathe flex flex-col items-center gap-1.5 sm:gap-2">
+          <div className="flex flex-col items-center gap-1.5 sm:gap-2">
             <div className="flex flex-col items-center gap-1.5 sm:gap-2">
               <div className="shield-elem w-[66px] h-[73px] sm:w-[115px] sm:h-[127px] md:w-[137px] md:h-[150px] drop-shadow-[0_0_40px_rgba(3,105,161,0.6)]">
                 <TransparentShield />
@@ -337,7 +337,7 @@ const Home = () => {
       {/* ── ABOUT ── */}
       <section id="about" className="py-20 px-6 w-full bg-surface relative z-10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
-          <div className="lg:col-span-5 order-1 flex flex-col gap-6">
+          <div className="w-full max-w-[560px] mx-auto lg:max-w-none lg:mx-0 lg:col-span-5 order-1 flex flex-col gap-6">
             <div className="rounded-2xl overflow-hidden shadow-lg bg-background border border-silver/20">
               <img src="/Brad_Professional_Shot_clean.webp" alt="Brad Warburton - Principal Advisor" loading="lazy" className="w-full h-[320px] sm:h-[380px] lg:h-[450px] object-cover object-top grayscale hover:grayscale-0 transition-all duration-500" />
             </div>
@@ -362,10 +362,10 @@ const Home = () => {
               </h2>
             </div>
             <div className="space-y-6 text-textDark/90 leading-relaxed text-xl font-light">
-              <p>I built operational systems for large-scale law enforcement long before digital tools existed to support them. Some of Western Australia's largest operational commands ran on processes and disciplines I wrote — not because technology enabled them, but because the thinking underneath was sound.</p>
+              <p>I built operational systems for large-scale law enforcement long before digital tools existed to support them. Major operational commands ran on processes and disciplines I wrote — not because technology enabled them, but because the thinking underneath was sound.</p>
               <p>When a national health crisis required border management built from scratch, I designed and commanded it: more than a million travellers screened, no existing infrastructure, no tolerance for failure. The intelligence architecture that came next, inside a state-level command environment, existed so frontline operators could act on information while it still mattered.</p>
               <p>Then the private sector, leading law enforcement partnerships for a retail intelligence technology company — sitting between what police need and what a technology business can actually deliver, proved across every Australian state and territory.</p>
-              <p>That order matters. Operational practice came first, before the tools existed. Then a seat inside a technology business, watching which products got used and which got bought and shelved. It is why I test a vendor the way I do — not on the demonstration, but on whether the practice around it will hold.</p>
+              <p>That order matters. Operational practice came first, before the tools existed. Then a seat inside a technology business, watching which products got used and which got bought and shelved. It is why I review a vendor proposal the way I do — not on the demonstration, but on whether the proposal will hold in practice.</p>
               <p className="font-medium text-textDark">The problems look different. The fundamentals are the same.</p>
             </div>
           </div>
@@ -417,11 +417,11 @@ const Home = () => {
                   <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-[11px] uppercase font-bold">Practice Area 02</p>
                   <h3 className="font-display font-semibold text-3xl text-white leading-tight">Technology Advisory</h3>
                   <p className="text-[rgba(192,200,208,0.85)] font-light text-base leading-[1.7] flex-1" style={{ textWrap: 'pretty' }}>
-                    Cutting through an overcrowded technology market — as the end user who's needed these systems to work, not the vendor selling them. I diagnose what your operation actually needs, then bring you providers I have already tested — on privacy, on security, on what the product actually does with your data, and on whether the AI claim survives a question. Matched to how you work, not to how they sell.
+                    Make sense of a vendor's proposal before you commit. I assess how it fits your operation, how it handles your data, and whether its claims are supported. You get clear findings and practical questions to take back to the vendor. The supplier decision stays with you.
                   </p>
                   <div className="pt-[18px] border-t border-white/[0.12]">
                     <p className="text-[rgba(192,200,208,0.7)] font-light text-sm leading-[1.65]">
-                      Where I hold a commercial arrangement with a provider, you hear it from me before you hear their name.
+                      Any commission or other interest I hold in a provider is disclosed in writing before the work starts.
                     </p>
                   </div>
                 </div>
@@ -471,37 +471,26 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── THE INDEPENDENT SEAT ── */}
+      {/* ── BEFORE YOU SIGN ── */}
       <section id="seat" className="relative w-full z-10" style={{ background: '#0A1520', borderTop: '1px solid rgba(255,255,255,0.06)', padding: '120px 56px' }}>
         <div className="absolute bottom-0 left-0 pointer-events-none" style={{ width: '640px', height: '640px', background: 'rgba(3,105,161,0.09)', filter: 'blur(150px)' }} />
         <div className="relative z-10 mx-auto flex flex-col" style={{ maxWidth: '1000px', gap: '30px' }}>
-          <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs font-bold">The Independent Seat</p>
+          <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs font-bold">Before You Sign</p>
           <h2 className="font-display font-bold text-white" style={{ fontSize: '54px', lineHeight: 1.06, letterSpacing: '-0.02em' }}>
-            I sit on both sides of the table.
+            The proposal, not the demonstration.
           </h2>
-          <p className="font-serif italic font-medium" style={{ color: '#C9A84C', fontSize: '38px', lineHeight: 1.15 }}>
-            That is why my vetting means something.
+          <p className="font-sans font-light" style={{ fontSize: '19px', lineHeight: 1.7, color: 'rgba(240,244,248,0.85)', maxWidth: '74ch' }}>
+            The market is noise. AI claims that do not survive a question. Privacy exposure nobody costed. I spent years inside a technology business watching which products got used and which were bought and shelved. I read a vendor's proposal against the operation that has to run it.
           </p>
           <p className="font-sans font-light" style={{ fontSize: '19px', lineHeight: 1.7, color: 'rgba(240,244,248,0.85)', maxWidth: '74ch' }}>
-            Organisations ask me what to buy. Technology providers ask me what buyers will actually accept. I do both, which means I have seen the same product fail procurement and then sat with the vendor rewriting it until it passes.
+            You get a plain answer on what the technology does, how it handles data, and the questions your decision-makers should put to the vendor. Before you sign, not after.
           </p>
-          <p className="font-sans font-light" style={{ fontSize: '19px', lineHeight: 1.7, color: 'rgba(240,244,248,0.85)', maxWidth: '74ch' }}>
-            The market is noise. AI claims that do not survive a question, privacy exposure nobody costed, vendors who cannot complete a security questionnaire. I have already done the cutting through. By the time a provider reaches you, I have tested them on privacy, security, trust and safety — and I say no far more often than yes.
+          <p className="font-sans font-normal pt-8 mt-4" style={{ fontSize: '18px', lineHeight: 1.7, color: 'rgba(240,244,248,0.92)', maxWidth: '74ch', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+            I hold a commissioned referral arrangement with a technology provider. Where that, or any other interest I hold in a provider, touches an engagement, I disclose it in writing before the work starts.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 pt-8 mt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-            <div className="pt-8 md:pr-10 space-y-3">
-              <p className="font-mono font-bold uppercase" style={{ fontSize: '13px', letterSpacing: '0.2em', color: '#5FB4F0' }}>If you are buying</p>
-              <p className="font-sans font-normal" style={{ fontSize: '18px', color: 'rgba(240,244,248,0.92)' }}>
-                You get a shortlist that has already been through the questions your board will ask, and a plain answer on what the technology does with data.
-              </p>
-            </div>
-            <div className="pt-8 md:pl-10 space-y-3 md:border-l" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
-              <p className="font-mono font-bold uppercase" style={{ fontSize: '13px', letterSpacing: '0.2em', color: '#5FB4F0' }}>If you are building</p>
-              <p className="font-sans font-normal" style={{ fontSize: '18px', color: 'rgba(240,244,248,0.92)' }}>
-                You find out what your buyer's privacy, security and trust requirements really are before you lose a deal discovering them.
-              </p>
-            </div>
-          </div>
+          <p className="font-sans font-light" style={{ fontSize: '17px', lineHeight: 1.7, color: 'rgba(240,244,248,0.75)', maxWidth: '74ch' }}>
+            My role is advisory. I do not specify, select, design, site, supply, install, configure or price equipment. If equipment is required, you choose and engage a licensed supplier or installer.
+          </p>
         </div>
       </section>
 
@@ -514,14 +503,14 @@ const Home = () => {
               Operational Resilience and Technology Capability
             </h2>
             <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
-              Most businesses know they need to modernise — they just don't have time to work out what actually fits. I diagnose the operational reality, then identify and connect the technology built for it: practical improvements across operations, automation, and capability.
+              Most businesses know they need to modernise — they just don't have time to work out what actually fits. I diagnose the operational reality, then set out what technology must do to support it: practical improvements across operations, automation, and capability.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {[
-              { num: '01', name: 'Operational Resilience Diagnostic', desc: 'Structured assessment of where the business is exposed — operationally, financially, and from a security and compliance standpoint. Delivered as a prioritised action plan.' },
+              { num: '01', name: 'Operational Resilience Diagnostic', desc: "Structured assessment of the business's operational, financial and compliance exposure. Delivered as a prioritised action plan." },
               { num: '02', name: 'Process Automation and AI Integration', desc: 'Identify the manual, repetitive, error-prone work consuming partner and staff time. Replace it with automation and AI-assisted workflows that match how the business already operates.' },
-              { num: '03', name: 'Technology Matching', desc: "The market is crowded and everyone's short on time. I do the diligence most businesses can't — evaluating the technology landscape and connecting you with what actually fits, vetted and matched to how you operate." },
+              { num: '03', name: 'Vendor Proposal Review', desc: "Before you sign, I review a vendor proposal against the way your operation will actually run it. You get a clear view of whether it holds up, how the technology handles your data, and the questions to put to the vendor. The supplier decision remains yours." },
             ].map((tile) => (
               <div key={tile.num} className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/30 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
@@ -550,11 +539,11 @@ const Home = () => {
           <div className="max-w-4xl">
             <p className="text-[#C9A84C] font-mono tracking-[0.3em] uppercase text-xs mb-6 font-bold">Delivery</p>
             <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight mb-10">
-              Led by Brad. Specialists when required.
+              Led personally. Specialist developers for the build.
             </h2>
             <div className="space-y-6 text-xl md:text-2xl text-silver/75 font-light leading-relaxed">
-              <p>Every engagement is led personally. The diagnostic, the client relationship, the strategic direction — all Brad. When the work requires deeper technical execution, it is delivered by specialists drawn from cyber security, digital forensics, and IT infrastructure — matched to the specific need.</p>
-              <p>Most operations are running a fraction of the capability they already own. The saving is in what you stop paying for: duplicated tools, manual hours, and the breach you never have to absorb.</p>
+              <p>Every engagement is led personally — the diagnostic, the client relationship and the strategic direction. Where an engagement includes building an automation or AI workflow, independent specialist developers complete the build under my direction and my contract. I remain responsible for their work.</p>
+              <p>Most operations are running a fraction of the capability they already own. The value lies in reducing duplicated tools, avoidable manual hours and exposure to operational incidents.</p>
             </div>
           </div>
         </div>
