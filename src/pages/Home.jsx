@@ -572,7 +572,7 @@ const Home = () => {
           </div>
           <div className="pt-8 flex flex-col items-center gap-8">
             <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-white/90 font-normal text-base">
-              {['Four written by Brad, within 24 hours', 'One automated, returned instantly', 'Eight minutes each'].map((t) => (
+              {['Four written by Brad, within 24 hours', 'One automated, returned instantly', 'About eight minutes each'].map((t) => (
                 <span key={t} className="flex items-center gap-2">
                   <svg className="w-4 h-4 flex-shrink-0" style={{ color: '#5FB4F0' }} fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
                   {t}

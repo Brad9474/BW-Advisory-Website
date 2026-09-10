@@ -19,8 +19,8 @@ const groups = [
         num: "01",
         badge: "AI Readiness Diagnostic",
         audience: "Owner-managed businesses and professional services firms with manual work they suspect could be automated",
-        duration: "5 min · 5 sections · 28 questions",
-        desc: "Five sections. Five minutes. A scored result covering AI readiness, process optimisation opportunities, and security posture — with an opportunity estimate of what your gaps are costing you. Fully automated — your result is generated and returned instantly.",
+        duration: "About 8 min · 5 sections · 28 questions",
+        desc: "Five sections. About eight minutes. A scored result covering AI readiness, process optimisation opportunities, and security posture — with an opportunity estimate of what your gaps are costing you. Fully automated — your result is generated and returned instantly.",
         href: "/ai-readiness",
         internal: true,
         icon: "/ai-icon.svg",
@@ -111,27 +111,27 @@ const DiagnosticCardBody = ({ item }) => (
     {!item.comingSoon && (
       <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A84C]/40 to-accent/20 rounded-3xl opacity-0 group-hover:opacity-50 transition-all duration-700 blur-lg"></div>
     )}
-    <div className={`relative bg-gradient-to-br from-white/20 via-white/15 to-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 md:p-10 lg:p-12 transition-all duration-500 flex flex-col h-full ${item.comingSoon ? 'opacity-70' : 'group-hover:border-[#C9A84C]/50 group-hover:bg-white/22'}`}>
-      <div className="flex items-start justify-between mb-8 gap-6">
+    <div className={`relative bg-[#101C2F] border border-[#C9A84C]/30 rounded-3xl p-6 md:p-8 lg:p-10 transition-colors duration-300 flex flex-col h-full shadow-[0_16px_48px_rgba(0,0,0,0.2)] ${item.comingSoon ? 'opacity-70' : 'group-hover:border-[#C9A84C]/60 group-hover:bg-[#14243B]'}`}>
+      <div className="flex flex-wrap items-start justify-between mb-6 gap-5">
         <div className="space-y-3">
-          <p className="text-[#C9A84C] font-mono tracking-[0.2em] text-xs uppercase font-bold">{item.badge}</p>
-          <span className="text-silver/70 font-light text-sm font-mono tracking-[0.15em]">{item.duration}</span>
+          <h3 className="text-white font-display text-2xl md:text-3xl leading-tight font-semibold">{item.badge}</h3>
+          <span className="text-[#D8BC71] text-sm">{item.duration}</span>
         </div>
         {cardGlyph(item)}
       </div>
 
-      <h3 className="font-display font-bold text-3xl md:text-4xl text-white mb-8 leading-tight flex-1">
+      <p className="text-base md:text-lg text-[#CBD5E1] mb-8 leading-relaxed flex-1 max-w-4xl">
         {item.desc}
-      </h3>
+      </p>
 
-      <div className="flex items-end justify-between pt-8 border-t border-accent/15 mt-auto">
-        <p className="text-silver/70 text-xs font-mono tracking-widest uppercase font-bold">{item.audience}</p>
+      <div className="flex flex-wrap items-end justify-between gap-5 pt-6 border-t border-white/10 mt-auto">
+        <p className="text-[#CBD5E1] text-sm leading-relaxed max-w-lg"><span className="block text-[#D8BC71] text-xs font-semibold uppercase tracking-widest mb-2">Best for</span>{item.audience}</p>
         {item.comingSoon ? (
           <span className="text-silver/60 font-mono text-xs tracking-[0.15em] uppercase font-bold">
             {item.ctaLabel || "Coming 2026"}
           </span>
         ) : (
-          <span className="flex items-center gap-3 text-[#C9A84C] font-bold text-sm tracking-[0.15em] uppercase group-hover:gap-4 transition-all duration-300">
+          <span className="flex items-center gap-3 text-[#E4C66E] font-bold text-sm tracking-[0.15em] uppercase group-hover:gap-4 transition-all duration-300 shrink-0">
             <span>{item.ctaLabel || "Start"}</span>
             <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -143,25 +143,26 @@ const DiagnosticCardBody = ({ item }) => (
   </>
 );
 
-const DiagnosticCard = ({ item }) => {
-  const className = "diag-card group relative overflow-hidden h-full flex flex-col scroll-mt-32";
+const DiagnosticCard = ({ item, scrollOffset }) => {
+  const className = "diag-card group relative overflow-hidden h-full flex flex-col rounded-3xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E4C66E]";
+  const style = { scrollMarginTop: scrollOffset };
   const handleClick = () => posthog.capture('diagnostic_card_clicked', { diagnostic: item.id, badge: item.badge });
   if (item.comingSoon) {
     return (
-      <div id={item.id} className={className} aria-disabled="true">
+      <div id={item.id} className={className} style={style} aria-disabled="true">
         <DiagnosticCardBody item={item} />
       </div>
     );
   }
   if (item.internal) {
     return (
-      <Link id={item.id} to={item.href} onClick={handleClick} className={className}>
+      <Link id={item.id} to={item.href} onClick={handleClick} className={className} style={style}>
         <DiagnosticCardBody item={item} />
       </Link>
     );
   }
   return (
-    <a id={item.id} href={item.href} onClick={handleClick} className={className}>
+    <a id={item.id} href={item.href} onClick={handleClick} className={className} style={style}>
       <DiagnosticCardBody item={item} />
     </a>
   );
@@ -234,11 +235,40 @@ const Diagnostics = () => {
   }, []);
 
   return (
-  <div className="bg-primary min-h-screen">
+  <div className="relative z-10 isolate bg-[#0B1424] min-h-screen">
+    <style>{`
+      .diagnostics-atmosphere {
+        position: absolute; inset: 0 0 auto; height: 1600px; max-height: 100%;
+        overflow: hidden; pointer-events: none;
+        background:
+          radial-gradient(ellipse 45% 30% at 100% 12%, rgba(24, 109, 168, .34), transparent 85%),
+          radial-gradient(ellipse 30% 28% at 0% 48%, rgba(26, 102, 151, .25), transparent 85%),
+          radial-gradient(ellipse 30% 25% at 100% 65%, rgba(201, 168, 76, .1), transparent 85%);
+        mask-image: linear-gradient(#000 65%, transparent);
+      }
+      .diagnostics-contours {
+        position: absolute; top: 80px; right: -180px; width: 760px; height: 760px;
+        opacity: .48; mask-image: linear-gradient(to right, transparent, #000);
+      }
+      @media (max-width: 767px) {
+        .diagnostics-contours { right: -430px; opacity: .24; }
+      }
+    `}</style>
+    <div aria-hidden="true" className="diagnostics-atmosphere">
+      <svg className="diagnostics-contours" viewBox="0 0 760 760" fill="none" focusable="false">
+        <g stroke="#65ACD2" strokeOpacity=".35">
+          <circle cx="420" cy="340" r="120" /><circle cx="420" cy="340" r="200" />
+          <circle cx="420" cy="340" r="280" /><circle cx="420" cy="340" r="360" />
+          <path d="M420 0 V700 M40 340 H760 M150 70 L690 610 M150 610 L690 70" />
+        </g>
+        <g stroke="#D8BC71" strokeOpacity=".6">
+          <path d="M420 140 A200 200 0 0 1 620 340 M140 340 A280 280 0 0 0 420 620" />
+        </g>
+        <g fill="#D8BC71"><circle cx="620" cy="340" r="3" /><circle cx="420" cy="620" r="3" /></g>
+      </svg>
+    </div>
     {/* ── HERO ── */}
     <section className="relative pt-36 md:pt-44 pb-10 md:pb-14 px-6 w-full z-10 overflow-hidden">
-      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#0369A1]/5 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-0 left-1/2 w-[600px] h-[600px] bg-silver/5 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto space-y-14 relative z-10">
         <div className="space-y-8">
@@ -246,13 +276,13 @@ const Diagnostics = () => {
           <h1 className="diag-hero-elem font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1]">
             Start with what's true.
           </h1>
-          <p className="diag-hero-elem text-2xl md:text-3xl text-silver/75 font-light leading-relaxed max-w-5xl">
+          <p className="diag-hero-elem text-2xl md:text-3xl text-[#CBD5E1] font-normal leading-relaxed max-w-5xl">
             The gap doesn't close until you know exactly where it is.<br />
             <span className="text-white font-semibold">Five diagnostics. Three streams.</span>
           </p>
         </div>
 
-        <div className="diag-hero-elem flex flex-wrap gap-8 text-silver/60 text-sm font-light">
+        <div className="diag-hero-elem flex flex-wrap gap-8 text-[#CBD5E1] text-sm">
           <span className="flex items-center gap-2">
             <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
             5 proprietary diagnostics
@@ -279,8 +309,8 @@ const Diagnostics = () => {
           className={`diag-nav ${navPinned ? 'fixed top-[110px] left-0 right-0' : 'relative'} z-40 py-4 px-6 w-full`}
         >
           <div className="max-w-7xl mx-auto">
-            <div className="flex flex-wrap items-center gap-2 md:gap-3 bg-primary/75 backdrop-blur-xl border border-accent/20 rounded-2xl px-5 py-4 shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
-              <span className="text-silver/50 font-mono text-[10px] tracking-[0.25em] uppercase font-bold mr-2 shrink-0">Jump to</span>
+            <div className="flex flex-wrap items-center gap-2 md:gap-3 bg-[#101C2F] border border-[#C9A84C]/25 rounded-2xl px-5 py-4 shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
+              <span className="text-[#CBD5E1] font-mono text-[10px] tracking-[0.25em] uppercase font-bold mr-2 shrink-0">Jump to</span>
               {allItems.map((item) => {
                 const isActive = activeId === item.id;
                 return (
@@ -290,7 +320,7 @@ const Diagnostics = () => {
                     className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 text-sm font-light ${
                       isActive
                         ? 'border-[#C9A84C]/70 bg-[#C9A84C]/15 text-[#C9A84C]'
-                        : 'border-accent/20 hover:border-[#C9A84C]/60 hover:bg-white/5 text-silver/75 hover:text-[#C9A84C]'
+                        : 'border-white/15 hover:border-[#C9A84C]/60 hover:bg-white/5 text-[#CBD5E1] hover:text-[#E4C66E]'
                     }`}
                   >
                     <span className="font-mono text-[10px] text-[#C9A84C] font-bold">{item.num}</span>
@@ -312,13 +342,13 @@ const Diagnostics = () => {
               <div className="stream-header max-w-4xl space-y-6">
                 <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">{group.label}</p>
                 <h2 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white tracking-tight">{group.name}</h2>
-                <p className="text-xl md:text-2xl text-silver/75 font-light leading-relaxed">{group.desc}</p>
+                <p className="text-xl md:text-2xl text-[#CBD5E1] leading-relaxed">{group.desc}</p>
               </div>
 
               {/* Diagnostic Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 auto-rows-fr">
+              <div className={`grid grid-cols-1 ${group.items.length > 1 ? 'md:grid-cols-2' : ''} gap-8 auto-rows-fr`}>
                 {group.items.map((item) => (
-                  <DiagnosticCard key={item.badge} item={item} />
+                  <DiagnosticCard key={item.badge} item={item} scrollOffset={navHeight + 126} />
                 ))}
               </div>
 

@@ -1347,12 +1347,12 @@ const IntroScreen = ({ onStart }) => (
     <div className="space-y-3">
       <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI-Powered Diagnostic</p>
       <h2 className="font-display font-bold text-2xl md:text-3xl text-white leading-snug">Ready when you are.</h2>
-      <p className="text-silver/75 font-light text-base md:text-lg leading-relaxed max-w-lg mx-auto">
+      <p className="text-[#CBD5E1] font-normal text-base md:text-lg leading-relaxed max-w-lg mx-auto">
         No account, no download — just straight answers and a scored result the moment you finish.
       </p>
     </div>
-    <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-silver/70 text-sm font-light">
-      {['~5 minutes', 'One question at a time', 'Instant scored result'].map((t) => (
+    <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-[#CBD5E1] text-sm font-normal">
+      {['About 8 minutes', 'One question at a time', 'Instant scored result'].map((t) => (
         <span key={t} className="flex items-center gap-2">
           <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
           {t}
@@ -1897,25 +1897,67 @@ const AIReadiness = () => {
   const slideClass = direction === 'forward' ? 'slide-fwd' : 'slide-back';
 
   return (
-    <div className="bg-primary min-h-screen">
+    <div className="ai-readiness-page relative z-10 isolate bg-[#0B1424] min-h-screen">
       <style>{`
+        .ai-readiness-atmosphere {
+          position: absolute; inset: 0 0 auto; height: 1200px;
+          max-height: 100%; overflow: hidden; pointer-events: none; z-index: 0;
+          background:
+            radial-gradient(ellipse 35% 42% at 0% 32%, rgba(20, 119, 176, .36), transparent 85%),
+            radial-gradient(ellipse 32% 40% at 100% 18%, rgba(33, 92, 150, .38), transparent 85%),
+            radial-gradient(ellipse 28% 30% at 100% 62%, rgba(201, 168, 76, .12), transparent 80%);
+          mask-image: linear-gradient(to bottom, #000 65%, transparent);
+        }
+        .ai-readiness-circuits { width: 100%; height: 100%; opacity: .65; }
+        .ai-readiness-atmosphere[data-assessing="true"] { opacity: .55; }
+        @media (max-width: 767px) {
+          .ai-readiness-circuits { opacity: .3; }
+          .ai-readiness-atmosphere { height: 950px; }
+        }
         @keyframes aiFwd  { from { opacity: 0; transform: translateX( 32px); } to { opacity: 1; transform: translateX(0); } }
         @keyframes aiBack { from { opacity: 0; transform: translateX(-32px); } to { opacity: 1; transform: translateX(0); } }
         .slide-fwd  { animation: aiFwd  280ms ease-out; }
         .slide-back { animation: aiBack 280ms ease-out; }
         @media (prefers-reduced-motion: reduce) { .slide-fwd, .slide-back { animation: none; } }
       `}</style>
+      {/* Static edge detail keeps the centre calm and adds no image/video downloads. */}
+      <div aria-hidden="true" className="ai-readiness-atmosphere" data-assessing={showProgress}>
+        <svg className="ai-readiness-circuits" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMin slice" fill="none" focusable="false">
+          <defs>
+            <linearGradient id="ai-circuit-blue" x1="0" y1="0" x2="370" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#6AB9E3" stopOpacity=".6" />
+              <stop offset="1" stopColor="#6AB9E3" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="ai-circuit-gold" x1="1600" y1="0" x2="1220" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#D8BC71" stopOpacity=".65" />
+              <stop offset="1" stopColor="#D8BC71" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <g stroke="url(#ai-circuit-blue)" strokeWidth="1">
+            <path d="M0 180 H108 L190 262 V388 L300 498 H370 M0 240 H70 L142 312 V448 L250 556 H340 M0 570 H100 L202 672 V810 L340 948 M0 640 H60 L146 726 V870 L270 994" />
+            <path d="M40 0 V118 L244 322 V406 M82 0 V100 L286 304 V368 M0 930 H82 L164 1012 V1200" />
+          </g>
+          <g stroke="url(#ai-circuit-gold)" strokeWidth="1">
+            <path d="M1600 200 H1500 L1406 294 V420 L1286 540 H1230 M1600 264 H1530 L1450 344 V482 L1340 592 H1260 M1600 650 H1510 L1400 760 V912 L1270 1042" />
+            <path d="M1550 0 V122 L1358 314 V410 M1600 720 H1544 L1444 820 V966 L1334 1076" />
+          </g>
+          <g fill="#8DCCE9" opacity=".6">
+            <circle cx="190" cy="388" r="3" /><circle cx="142" cy="312" r="3" /><circle cx="202" cy="810" r="3" />
+          </g>
+          <g fill="#DFC27B" opacity=".65">
+            <circle cx="1406" cy="420" r="3" /><circle cx="1450" cy="344" r="3" /><circle cx="1400" cy="912" r="3" />
+          </g>
+        </svg>
+      </div>
 
-      <section className="relative pt-24 md:pt-32 pb-12 px-6 w-full z-10 overflow-hidden">
-        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#0369A1]/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-1/2 w-[600px] h-[600px] bg-silver/5 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative pt-32 pb-12 px-6 w-full z-10 overflow-hidden">
         <div className="max-w-3xl mx-auto space-y-4 relative z-10">
           <p className="text-[#C9A84C] font-mono text-xs tracking-[0.3em] uppercase font-bold">AI Readiness Diagnostic</p>
           <h1 className="font-display font-bold text-3xl md:text-5xl text-white tracking-tight leading-[1.1]">
             See where AI fits — and where it doesn't.
           </h1>
-          <p className="text-base md:text-lg text-silver/75 font-light leading-relaxed">
-            Five minutes. One question at a time. Your scored result appears the moment you finish — showing exactly where you're exposed and what each gap is likely costing you.
+          <p className="text-base md:text-lg text-[#CBD5E1] font-normal leading-relaxed">
+            About eight minutes. One question at a time. Your scored result appears the moment you finish — showing exactly where you're exposed and what each gap is likely costing you.
           </p>
         </div>
       </section>
@@ -1924,7 +1966,7 @@ const AIReadiness = () => {
         <div className="max-w-3xl mx-auto space-y-6">
           {showProgress && <ProgressBar current={progressCurrent} total={TOTAL_QUESTIONS} />}
 
-          <div className="relative bg-[#0F172A]/90 backdrop-blur-sm border border-white/20 rounded-3xl p-6 md:p-12 min-h-[420px]">
+          <div className="relative bg-[#101C2F] border border-[#C9A84C]/30 rounded-3xl p-6 md:p-12 min-h-[420px] shadow-[0_24px_80px_rgba(0,0,0,0.35),0_1px_0_rgba(201,168,76,0.2)_inset]">
             <div key={step} className={slideClass}>
               {screenContent}
             </div>
