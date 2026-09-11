@@ -1,7 +1,7 @@
 import Footer from '../components/Footer';
 
-const EFFECTIVE_DATE = '31 August 2026';
-const TERMS_VERSION = 'v1.2';
+const EFFECTIVE_DATE = '11 September 2026';
+const TERMS_VERSION = 'v1.3';
 
 // D2 closed (comma resolved per Reg 90). D3 closed (30-day notice adopted).
 // D1 deferred — business address/PO box still needed before publication.
@@ -13,19 +13,6 @@ export default function Terms() {
       <main className="relative z-10 pt-32 pb-24 px-6">
         <div className="max-w-4xl mx-auto space-y-12">
 
-          {/* Draft notice — toned down now D2 and D3 are closed */}
-          {!PURCHASE_ENABLED && (
-            <div className="bg-white/5 border border-white/15 rounded-xl p-4 space-y-2">
-              <p className="text-silver/50 font-mono text-xs tracking-[0.3em] uppercase font-bold">
-                Draft — pending final legal advice
-              </p>
-              <p className="text-silver/65 font-light text-sm leading-relaxed">
-                Service Terms {TERMS_VERSION}. One item deferred: [D1] a business address or PO box must be added to the Clause 7 warrantor details before publication. Two{' '}
-                <code className="text-silver/45 text-xs">[LAWYER TO CONFIRM]</code>{' '}
-                items remain open (Clause 8 s 64A fair-or-reasonable positioning; Clause 12 de-identification standard). Not yet solicitor-advised.
-              </p>
-            </div>
-          )}
 
           {/* Header */}
           <header className="space-y-6 mb-8">
@@ -34,7 +21,9 @@ export default function Terms() {
               How we work together.
             </h1>
             <p className="text-silver/75 font-light text-lg md:text-xl leading-relaxed max-w-3xl">
-              These terms govern every service BW Advisory Solutions supplies — the free AI Readiness diagnostic, both paid report tiers, and the AI Partner retainer. By ordering a service you agree to these terms.
+              {PURCHASE_ENABLED
+                ? 'These terms apply to the free diagnostics on this website, both paid AI report tiers, and automation and AI implementation services. Every other engagement is governed by its own signed engagement terms. By using or ordering a service, you agree to these terms.'
+                : 'These terms apply to the free diagnostics on this website and to automation and AI implementation services. Every other engagement is governed by its own signed engagement terms. By using or ordering a service, you agree to these terms.'}
             </p>
             <p className="text-silver/50 font-light text-sm">
               Version {TERMS_VERSION}. Effective {EFFECTIVE_DATE}. BW Advisory Solutions Pty Ltd, ABN 32 701 834 513. Perth, Western Australia.
@@ -51,10 +40,9 @@ export default function Terms() {
                   <li>Reports are built from your intake answers. Savings figures are estimates with stated assumptions, not guarantees.</li>
                 </>
               ) : (
-                <li>BW Advisory supplies business advisory services on workflow and technology selection — not legal, financial, tax or insurance advice.</li>
+                <li>BW Advisory supplies business advisory services, not legal, financial, tax or insurance advice.</li>
               )}
-              <li>If something is wrong, contact us: we correct it or refund you. Your Australian Consumer Law rights are never limited.</li>
-              <li>Retainers run month to month — at least 30 days&apos; written notice before any price change; 14 days&apos; notice to cancel, no lock-in.</li>
+              <li>If something is wrong, contact us. You have rights under the Australian Consumer Law that these terms cannot exclude. Clause 8 limits some remedies where that law allows.</li>
               <li>Questions: <a href="mailto:brad@bwadvisorysolutions.com.au" className="text-[#C9A84C] hover:underline">brad@bwadvisorysolutions.com.au</a> · +61 407 779 474</li>
             </ul>
           </div>
@@ -65,10 +53,14 @@ export default function Terms() {
             <section className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">1. Parties and application</h2>
               <p>
-                These terms govern the AI Readiness diagnostic, the AI Snapshot Report, the AI Solution Map, implementation services and the AI Partner retainer supplied by BW Advisory Solutions Pty Ltd (ABN 32 701 834 513) (&ldquo;BW Advisory&rdquo;, &ldquo;we&rdquo;). &ldquo;You&rdquo; means the person or business ordering the service. By ordering a service you agree to these terms.
+                {PURCHASE_ENABLED
+                  ? <>These terms apply to the free diagnostics on this website, the AI Snapshot Report, the AI Solution Map, and automation and AI implementation services supplied by BW Advisory Solutions Pty Ltd (ABN 32 701 834 513) (&ldquo;BW Advisory&rdquo;, &ldquo;we&rdquo;). Every other engagement is governed by its own signed engagement terms. Where signed engagement terms apply, they prevail over these terms if the two conflict. &ldquo;You&rdquo; means the person or business using or ordering the service. By using or ordering a service, you agree to these terms.</>
+                  : <>These terms apply to the free diagnostics on this website and to automation and AI implementation services supplied by BW Advisory Solutions Pty Ltd (ABN 32 701 834 513) (&ldquo;BW Advisory&rdquo;, &ldquo;we&rdquo;). Every other engagement is governed by its own signed engagement terms. Where signed engagement terms apply, they prevail over these terms if the two conflict. &ldquo;You&rdquo; means the person or business using or ordering the service. By using or ordering a service, you agree to these terms.</>}
               </p>
               <p className="text-silver/50 text-sm font-light italic">
-                Version {TERMS_VERSION} — {EFFECTIVE_DATE}. The version you accept at checkout is the version that governs your purchase.
+                {PURCHASE_ENABLED
+                  ? <>Version {TERMS_VERSION} — {EFFECTIVE_DATE}. The version you accept at checkout is the version that governs your purchase.</>
+                  : <>Version {TERMS_VERSION} — {EFFECTIVE_DATE}. The version in force when you use or order a service is the version that governs it.</>}
               </p>
             </section>
 
@@ -82,7 +74,10 @@ export default function Terms() {
 
             {/* Clause 3 */}
             <section className="space-y-4">
-              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">3. What each service is</h2>
+              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">3. Scope of our services</h2>
+              <p id="equipment-scope" className="scroll-mt-36">
+                We do not specify, select, design, site, supply, install, configure or price any equipment. That includes cameras, alarms, locks, doors, sensors and access control systems. Where a provider concludes that equipment is required, you engage a licensed supplier or installer of your own choosing, and we take no part in that selection.
+              </p>
               {PURCHASE_ENABLED && (
                 <div className="space-y-4">
                   <div>
@@ -115,7 +110,7 @@ export default function Terms() {
                 Our services do not include legal advice, tax advice, financial product advice, medical or psychological advice, or guarantees of specific commercial outcomes — clients should engage the relevant professional for those matters.
               </p>
               <p>
-                BW Advisory may decline or discontinue an engagement where it falls outside scope, requires professional advice we are not qualified to provide, involves subcontractor conflicts (see our published conflict register), or where continuing would be unsafe, unlawful, or inconsistent with our engagement standards.
+                BW Advisory may decline or discontinue an engagement if it falls outside scope, requires professional advice we are not qualified to provide or involves a conflict of interest, or if continuing would be unsafe or unlawful. If we discontinue an engagement, we will refund the fees for any part we have not delivered.
               </p>
             </section>
 
@@ -123,7 +118,7 @@ export default function Terms() {
             <section className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">4. Third-party tools and pricing currency</h2>
               <p>
-                Our reports identify third-party software we consider worth evaluating for your business. We do not own, resell, control or warrant those products. Vendors change prices, features, hosting and terms, and may discontinue products, without notice. Tool pricing and availability in your report are checked as at the date stated in the report. Before purchasing any tool you should confirm current pricing and terms with the vendor. Your report tells you what to verify; verifying it with the vendor is part of the intended use of the report.
+                Our reports identify third-party software we consider worth evaluating for your business. We do not own, resell, control or warrant those products. Vendors change prices, features, hosting and terms, and may discontinue products, without notice. Tool pricing and availability in your report are checked as at the date stated in the report. Before purchasing any tool you should confirm current pricing and terms with the vendor. Your report tells you what to verify; verifying it with the vendor is part of the intended use of the report. If we hold a commission or any other interest in a product that a report names, we will tell you in writing before the work starts, and the report will say so.
               </p>
             </section>
 
@@ -131,7 +126,7 @@ export default function Terms() {
             <section className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">5. Estimates and returns</h2>
               <p>
-                Savings, hours and return figures in our reports are estimates. Each is presented as a range, calculated from the information you provided and the assumptions stated alongside it in the report. They are not promises, forecasts or guarantees of results, which depend on your implementation and circumstances.
+                Savings, hours and return figures in our diagnostics and reports are estimates, calculated from the information you provided and our standard assumptions, such as typical hourly rates. They are not promises, forecasts or guarantees of results, which depend on your implementation and circumstances.
               </p>
             </section>
 
@@ -139,18 +134,18 @@ export default function Terms() {
             <section className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">6. Not licensed advice</h2>
               <p>
-                Our services are business advisory services about workflow and software selection. They are not financial product advice, insurance advice, tax agent services or legal services, and we are not licensed to provide those. Where a report raises an insurance, tax or legal question, it will say so and recommend you consult an appropriately licensed professional. Any observations about insurance readiness are general information about questions to raise with your own licensed insurance broker; we do not advise on, recommend or arrange any insurance product.
+                Our services are business advisory services. They are not financial product advice, insurance advice, tax agent services or legal services, and we are not licensed to provide those. Where a report raises an insurance, tax or legal question, it will say so and recommend that you consult an appropriately licensed professional. We do not advise on, recommend or arrange any insurance product.
               </p>
             </section>
 
             {/* Clause 7 */}
             <section className="space-y-4">
-              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">7. Fees, GST, guarantee, remedies and refunds</h2>
+              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">7. Fees, GST and remedies</h2>
               <p>Prices are in Australian dollars and include GST.</p>
               <div>
-                <p className="font-semibold text-white mb-1">If something is wrong with your report</p>
+                <p className="font-semibold text-white mb-1">If something is wrong</p>
                 <p>
-                  Contact us. For problems that can be fixed, we will correct and reissue the report (or re-perform the affected service) within 5 business days at no charge. For a major failure, you are entitled to your rights under the Australian Consumer Law, which include cancelling the service and a refund, and compensation for reasonably foreseeable consequential loss.
+                  Contact us and tell us what is wrong. We will reply within 5 business days. Clause 2 preserves your rights under the Australian Consumer Law.
                 </p>
               </div>
 
@@ -235,12 +230,12 @@ export default function Terms() {
             <section className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">10. Privacy, data handling, retention and deletion</h2>
               <p>
-                We collect and hold the information you provide (contact details, business details, questionnaire answers, interview notes) to deliver the services, improve our diagnostic methodology and, with your consent, send you relevant material. Your information is stored on infrastructure hosted in Australia, with limited processing outside Australia as described in our privacy policy.
+                We collect and hold the information you provide (contact details, business details, questionnaire answers and interview notes) to deliver the services, to improve our diagnostic methodology and, with your consent, to send you relevant material. Some of the service providers we use store or process information outside Australia, including in the United States. Our privacy policy names them.
               </p>
               <p>
-                Our collection notice and privacy policy at{' '}
+                Our privacy policy at{' '}
                 <a href="/privacy" className="text-[#C9A84C] hover:underline">bwadvisorysolutions.com.au/privacy</a>{' '}
-                explain what we hold, where it is hosted, how long we keep it, and how to access, correct or delete it. You may ask us to delete your intake and report data at any time; we will do so within 30 days except records we must keep for tax, accounting or legal reasons, including the working papers supporting any figures in your report (retained for a minimum of 6 years from report generation).
+                explains what we hold, where it is held, how long we keep it, and how to access, correct or delete it. You may ask us to delete your intake and report data at any time. We will do so within 30 days, except records we must keep for tax or accounting reasons. We also keep the working papers supporting any figures in your report for at least 6 years from the date of the report, in case of a claim.
               </p>
               <p>
                 Please do not include health information or personal details about your patients, customers or staff in questionnaire answers or interviews — describe your systems and challenges, not identifiable individuals.
@@ -254,22 +249,22 @@ export default function Terms() {
                 We may use vetted subcontractors to deliver implementation services under our brand and supervision. We remain responsible to you for those services. Subcontractors are bound by confidentiality obligations no less protective than ours.
               </p>
               <p>
-                If we refer you to a third-party professional (such as an insurance broker, lawyer or accountant), we will tell you at the time of the referral whether we receive a fee or other benefit for it, and you are free to use anyone you choose. We only pass your contact details to a referral partner with your consent.
+                If we refer you to a third party (such as an insurance broker, lawyer, accountant or technology provider), we will tell you in writing, before the work starts or before we make the referral, whether we receive a fee or other benefit for it, and you are free to use anyone you choose. We pass your contact details to a referral partner only with your consent.
               </p>
             </section>
 
             {/* Clause 12 */}
             <section className="space-y-4">
-              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">12. Intellectual property, retainer terms and general</h2>
+              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">12. Intellectual property, reliance and general</h2>
               <div className="space-y-3">
                 <p>
-                  <strong className="text-white">Intellectual property.</strong> We own our methodology, templates, questionnaires, knowledge base and report formats. On payment you receive a perpetual, non-transferable licence to use your report and deliverables within your business, including sharing it with your professional advisers. Content and data you provide remain yours; you licence us to use them to deliver the services and, in de-identified form, to improve our methodology.
+                  <strong className="text-white">Intellectual property.</strong> We own our methodology, templates, questionnaires, knowledge base and report formats. On payment, you receive a perpetual, non-transferable licence to use your report and deliverables within your business, including sharing them with your professional advisers. Content and data you provide remain yours. You license us to use them to deliver the services and, in de-identified form, to improve our methodology.
                 </p>
                 <p>
-                  <strong className="text-white">Retainer.</strong> Retainers run month to month. We will give you at least 30 days&apos; written notice before any price change takes effect. If you cancel your retainer in response to a price change, the change does not apply to you. You may cancel at any time with 14 days&apos; notice without penalty. No automatic lock-in, no cancellation fee.
+                  <strong className="text-white">Reliance.</strong> Our reports and deliverables are prepared for you alone. No one else may rely on them, and we owe no duty of care to anyone else who reads them.
                 </p>
                 <p>
-                  <strong className="text-white">Order screening.</strong> We may decline an order, or cancel it and refund it in full before your report is generated, if we reasonably consider the service is not suitable for your business.
+                  <strong className="text-white">Order screening.</strong> We may decline an order, or cancel it and refund it in full before we begin work, if we reasonably consider that the service is not suitable for your business.
                 </p>
                 <p>
                   <strong className="text-white">General.</strong> These terms are governed by the laws of Western Australia and the parties submit to the non-exclusive jurisdiction of its courts. Disputes: 14 days&apos; good-faith negotiation before proceedings (nothing prevents either party seeking urgent relief or using small-claims processes). Notices by email. Neither party may assign without consent. If part of a clause is void, the rest survives.

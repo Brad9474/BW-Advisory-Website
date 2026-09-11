@@ -442,7 +442,7 @@ const Home = () => {
                   <p className="text-[#C9A84C] font-mono tracking-[0.3em] text-[11px] uppercase font-bold">Practice Area 03</p>
                   <h3 className="font-display font-semibold text-3xl text-white leading-tight">Privacy Advisory Support</h3>
                   <p className="text-[rgba(192,200,208,0.85)] font-light text-base leading-[1.7]" style={{ textWrap: 'pretty' }}>
-                    Surveillance, analytics and AI tools collect more than most organisations realise, and more than most vendors can explain. I work alongside your privacy officer, your counsel or your external assessor — framing the operational questions, pressing the vendor on what the system actually does with personal information, and translating what comes back into something your board can decide on.
+                    Video analytics, biometric and AI tools collect more than most organisations realise, and more than most vendors can explain. I work alongside your privacy officer, your counsel or your external assessor — framing the operational questions, pressing the vendor on what the system actually does with personal information, and translating what comes back into something your board can decide on.
                   </p>
                 </div>
               </div>
@@ -485,12 +485,13 @@ const Home = () => {
           <p className="font-sans font-light" style={{ fontSize: '19px', lineHeight: 1.7, color: 'rgba(240,244,248,0.85)', maxWidth: '74ch' }}>
             You get a plain answer on what the technology does, how it handles data, and the questions your decision-makers should put to the vendor. Before you sign, not after.
           </p>
-          <p className="font-sans font-normal pt-8 mt-4" style={{ fontSize: '18px', lineHeight: 1.7, color: 'rgba(240,244,248,0.92)', maxWidth: '74ch', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-            I hold a commissioned referral arrangement with a technology provider. Where that, or any other interest I hold in a provider, touches an engagement, I disclose it in writing before the work starts.
-          </p>
-          <p className="font-sans font-light" style={{ fontSize: '17px', lineHeight: 1.7, color: 'rgba(240,244,248,0.75)', maxWidth: '74ch' }}>
-            My role is advisory. I do not specify, select, design, site, supply, install, configure or price equipment. If equipment is required, you choose and engage a licensed supplier or installer.
-          </p>
+          <aside aria-labelledby="scope-disclosures-heading" className="mt-4 border-t border-white/15 pt-6 space-y-5 max-w-3xl">
+            <h3 id="scope-disclosures-heading" className="text-[#D8BC71] text-sm font-semibold tracking-wide">Scope and disclosures</h3>
+            <div className="space-y-4 text-base leading-relaxed text-[#CBD5E1]">
+              <p><span className="block text-white/90 font-semibold mb-1">Commercial interests</span>I hold a commissioned referral arrangement with a technology provider. Before an engagement starts, I disclose in writing any commission arrangement or other interest relevant to the work.</p>
+              <p><span className="block text-white/90 font-semibold mb-1">Scope of advice</span>I review operational requirements and vendor proposals. I do not specify, select, design, site, supply, install, configure or price any equipment — including cameras, alarms, locks, doors, sensors and access control systems. Where equipment is required, you choose and engage a licensed supplier or installer of your own choosing.</p>
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -626,6 +627,9 @@ const Home = () => {
               ))}
             </div>
           )}
+          <p className="mt-8 text-center text-sm font-light text-silver/70">
+            Cases 01 to 03 are drawn from my law enforcement career.
+          </p>
           </div>
         </div>
       </section>
@@ -665,7 +669,7 @@ const Home = () => {
             </p>
           </div>
           <div className="space-y-6 font-light max-w-4xl" style={{ fontSize: '20px', lineHeight: 1.7, color: 'rgba(26,53,96,0.9)' }}>
-            <p>Two things are happening at once. Technology is arriving faster than any operation can absorb it, and choosing well takes diligence most businesses cannot spare. At the same time organised loss is moving across sites, stores and supply chains faster than most response capability can match.</p>
+            <p>Two things are happening at once. Technology is arriving faster than any operation can absorb it, and judging a vendor's proposal takes time most businesses cannot spare. At the same time organised loss is moving across sites, stores and supply chains faster than most response capability can match.</p>
             <p>Both problems have the same cause. Capability is being bought instead of built.</p>
             <p>The organisations that get clear on this in the next twelve to eighteen months will hold a structural advantage. The rest will spend years unpicking decisions that were preventable.</p>
             <p className="font-medium text-textDark" style={{ fontSize: '20px' }}>Large organisations solve this with a standing intelligence and operations function. Most businesses cannot carry one. That is the gap this practice exists to close.</p>
@@ -719,7 +723,7 @@ const Home = () => {
       {heroPassed && !stickyDismissed && (
         <div role="region" aria-label="Diagnostic call to action" className="fixed bottom-0 left-0 right-0 z-[90] bg-[#0F172A]/95 backdrop-blur-md border-t border-[#C9A84C]/30 shadow-[0_-8px_24px_rgba(0,0,0,0.35)]">
           <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-            <p className="text-white font-light text-sm md:text-base flex-1 text-center sm:text-left leading-snug">Find out what your gaps are costing you.</p>
+            <p className="text-white font-light text-sm md:text-base flex-1 text-center sm:text-left leading-snug">Get an indicative estimate of what your gaps may be costing you.</p>
             <div className="flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-auto">
               <Link to="/ai-readiness" className="bg-[#C9A84C] hover:bg-[#E0BC60] text-[#0F172A] font-bold text-xs md:text-sm tracking-[0.15em] uppercase px-6 py-3 rounded-lg transition-all duration-300 inline-flex items-center gap-2 shadow-[0_4px_12px_rgba(201,168,76,0.3)] hover:shadow-[0_6px_16px_rgba(201,168,76,0.4)] cursor-pointer whitespace-nowrap">
                 Know Your Exposure

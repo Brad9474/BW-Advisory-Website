@@ -133,7 +133,7 @@ const Investigations = () => {
               The <span className="text-[#C9A84C]">PROVED</span> Model.
             </h2>
             <p className="text-silver/60 font-light text-lg max-w-xl leading-loose">
-              Six stages. One unified protocol your team can apply to every investigation — built to withstand civil, disciplinary or police scrutiny.
+              Six stages. One unified protocol your team can apply to every investigation — designed with civil, disciplinary and police scrutiny in mind.
             </p>
             <p className="text-silver/60 font-light text-lg max-w-xl leading-loose">
               PROVED is my investigations framework. <span className="text-white font-semibold">A disciplined, six-stage protocol</span> designed to close the gap between strategic intent and frontline execution.

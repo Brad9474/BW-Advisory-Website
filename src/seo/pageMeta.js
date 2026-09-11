@@ -34,7 +34,7 @@ const PAGE_META = {
   '/terms': {
     title: 'Service Terms | BW Advisory Solutions',
     description:
-      'The terms governing every service BW Advisory Solutions Pty Ltd supplies — the AI Readiness diagnostic, paid report tiers, and the AI Partner retainer.',
+      'The terms that apply to the free diagnostics and to automation and AI implementation services supplied by BW Advisory Solutions Pty Ltd.',
   },
   '/ai-readiness': {
     title: 'AI Readiness Diagnostic | BW Advisory Solutions',
