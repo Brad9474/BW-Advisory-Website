@@ -1,6 +1,6 @@
 import Footer from '../components/Footer';
 
-const EFFECTIVE_DATE = '31 August 2026';
+const EFFECTIVE_DATE = '11 September 2026';
 
 export default function Privacy() {
   return (
@@ -27,7 +27,7 @@ export default function Privacy() {
             <section className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">1. Who we are</h2>
               <p>
-                BW Advisory Solutions Pty Ltd (ABN 32 701 834 513) is an Australian company based in Perth, Western Australia. We adhere to the <strong>Privacy Act 1988 (Cth)</strong> and the Australian Privacy Principles. Bradley Warburton is the sole director, and he is the only person with access to your information.
+                BW Advisory Solutions Pty Ltd (ABN 32 701 834 513) is an Australian company based in Perth, Western Australia. We handle personal information in line with the Australian Privacy Principles in the <strong>Privacy Act 1988 (Cth)</strong>. Bradley Warburton is the sole director, and BW Advisory has no employees. Your information is accessed only by him, by subcontractors working on your engagement, who see only what they need for that work, and by the service providers named in section 3.
               </p>
             </section>
 
@@ -35,7 +35,7 @@ export default function Privacy() {
             <section className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">2. What we collect</h2>
               <p>
-                We collect two categories of information, both provided by you.
+                We collect the information you give us in forms, emails and calls, and information about how you use this website.
               </p>
               <p>
                 <strong>What you tell us in a form.</strong> When you submit a consultation request, an intake, or the contact details at the end of a diagnostic, we collect the information you enter — your name, email, organisation, role or practice size, and the description of what you are trying to fix or improve. Required fields are marked. Anything not marked required can be left blank.
@@ -52,16 +52,28 @@ export default function Privacy() {
             <section className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">3. Where your information is stored</h2>
               <p>
-                <strong>Contact and CRM data</strong> is stored in <strong>HubSpot</strong>, our customer relationship management system. HubSpot processes information on servers in the United States under a standard Data Processing Agreement consistent with the Australian Privacy Principles. We use HubSpot to record your contact details, log emails and call notes, and track the status of an engagement from enquiry to delivery.
+                <strong>Contact and CRM data</strong> is stored in HubSpot, our customer relationship management system, in HubSpot&apos;s Australian data centre in Sydney. Some of HubSpot&apos;s sub-processors may process information outside Australia. We use HubSpot to record your contact details, log emails and call notes, and track the status of an engagement from enquiry to delivery.
               </p>
               <p>
-                <strong>Diagnostic responses and operational records</strong> — including intake submissions, scored diagnostic sessions, engagement notes, and generated reports — are stored in a managed <strong>PostgreSQL database hosted in Australia (Sydney region)</strong>. This data does not leave Australian infrastructure.
+                <strong>Diagnostic responses and operational records</strong>, including intake submissions, scored diagnostic sessions, engagement notes and generated reports, are stored in a managed PostgreSQL database hosted in Australia (Sydney region).
               </p>
               <p>
-                <strong>Financial records</strong> (invoices, receipts, tax-related documents) are stored on Australian-hosted accounting infrastructure and, where required, filed with the Australian Taxation Office.
+                <strong>AI tools.</strong> We use AI tools, including models supplied by Anthropic, to help analyse diagnostic responses and to draft our analysis and reports. These providers may process information outside Australia, including in the United States.
               </p>
               <p>
-                We do not sell your information. We do not share it with third parties other than the service providers (HubSpot, our Australian hosting infrastructure) that operate the platform on our behalf under written data-processing terms.
+                <strong>Email, documents and working notes</strong> are held in Google Workspace and Notion. Notes of calls may be produced with Granola, a transcription tool. These providers may store or process information outside Australia, including in the United States.
+              </p>
+              <p>
+                <strong>Financial records</strong> (invoices, receipts and tax-related documents) are kept in our Australian-hosted database and in email, and are provided to our accountant and to the Australian Taxation Office where required.
+              </p>
+              <p>
+                <strong>Website analytics.</strong> We use PostHog to measure how visitors use this website. PostHog records page views, interactions and device information, and sets cookies for that purpose. When you submit a form, we link that activity to your name, email and organisation. PostHog is hosted in the United States.
+              </p>
+              <p>
+                <strong>Website and bookings.</strong> This website is hosted by Netlify, and our Command Centre application runs on Vercel. Bookings are handled by Cal.com, which receives your name, email, organisation and any notes you add. These providers may process information outside Australia, including in the United States.
+              </p>
+              <p>
+                We do not sell your information. We share it only with the service providers named in this section, which hold it on our behalf, with subcontractors working on your engagement, with a referral partner if you agree to it, and where the law requires it.
               </p>
             </section>
 
@@ -73,6 +85,7 @@ export default function Privacy() {
                 <li>To produce the scored diagnostic report you have requested</li>
                 <li>To respond to your enquiry and maintain continuity across our communications</li>
                 <li>To deliver the consulting services we agree to provide</li>
+                <li>To improve our diagnostic methodology, using information that has been de-identified</li>
                 <li>To meet our record-keeping obligations under Australian tax law</li>
                 <li>If you have opted in: to send occasional insights and updates (you can unsubscribe at any time)</li>
               </ul>
@@ -90,20 +103,21 @@ export default function Privacy() {
                 <li><strong>Incomplete diagnostic sessions</strong> (where you did not submit contact details): retained for <strong>90 days</strong> as anonymous response data, then deleted.</li>
                 <li><strong>Referral tokens:</strong> retained for <strong>12 months</strong> to attribute referrals, then deleted.</li>
                 <li><strong>Email and CRM activity logs:</strong> retained for the life of the contact record, then deleted on request.</li>
+                <li><strong>Working papers supporting figures in a report</strong>, including the intake and diagnostic answers they rely on: retained for at least <strong>6 years</strong> from the date of the report. This overrides the shorter periods above.</li>
                 <li><strong>Financial records</strong> (invoices, receipts, tax-related documents): retained for <strong>7 years</strong> as required by Australian tax law.</li>
               </ul>
             </section>
 
             {/* 6. Your rights */}
             <section className="space-y-4">
-              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">6. Your rights under the Privacy Act</h2>
+              <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">6. Your choices</h2>
               <p>
-                Under the Privacy Act 1988 (Cth) you have the right to:
+                You can:
               </p>
               <ul className="space-y-2 list-disc list-outside pl-6">
                 <li><strong>Access</strong> a copy of the personal information we hold about you</li>
                 <li><strong>Correct</strong> any information that is inaccurate or out of date</li>
-                <li><strong>Request deletion</strong> of your information, subject to records we must retain for tax purposes</li>
+                <li><strong>Ask us to delete</strong> your information, subject to the records described in section 5</li>
                 <li><strong>Withdraw consent</strong> for marketing communications at any time</li>
                 <li><strong>Lodge a complaint</strong> with the Office of the Australian Information Commissioner if you believe we have mishandled your information</li>
               </ul>
@@ -115,7 +129,7 @@ export default function Privacy() {
               <p>
                 Email{" "}
                 <a href="mailto:brad@bwadvisorysolutions.com.au?subject=Privacy%20request" className="text-[#C9A84C] hover:underline">brad@bwadvisorysolutions.com.au</a>{" "}
-                with the subject line "Privacy request" and a brief description of what you are asking for. We aim to acknowledge promptly and to action requests within a reasonable timeframe, and we will confirm in writing once your information has been deleted, exported, or corrected. Where we are legally required to retain a subset of records (for example, invoices under Australian tax law), we will tell you specifically what has been retained and why.
+                with the subject line "Privacy request" and a brief description of what you are asking for. We will acknowledge your request promptly and action it within 30 days, and we will confirm in writing once your information has been deleted, exported, or corrected. Where we are legally required to retain a subset of records (for example, invoices under Australian tax law), we will tell you specifically what has been retained and why.
               </p>
               <p>
                 You do not need to give a reason for a deletion request. There is no charge.
@@ -126,7 +140,7 @@ export default function Privacy() {
             <section className="space-y-4">
               <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">8. Security</h2>
               <p>
-                All form submissions and data traffic are encrypted in transit. Data at rest in HubSpot and in our Australian-hosted database is encrypted. Access is restricted to the principal, and we do not share your information with third parties other than the service providers named in section 3.
+                All form submissions and data traffic are encrypted in transit. Data at rest in HubSpot and in our Australian-hosted database is encrypted. Access is limited to the principal, to subcontractors working on your engagement, and to the service providers named in section 3.
               </p>
             </section>
 
@@ -135,7 +149,7 @@ export default function Privacy() {
               <h2 className="font-display text-2xl font-bold text-white border-l-4 border-[#C9A84C] pl-4">9. Complaints</h2>
               <p>
                 If you believe we have mishandled your personal information, contact us first at{" "}
-                <a href="mailto:brad@bwadvisorysolutions.com.au?subject=Privacy%20complaint" className="text-[#C9A84C] hover:underline">brad@bwadvisorysolutions.com.au</a>. If you are not satisfied with our response, you can lodge a complaint with the <strong>Office of the Australian Information Commissioner</strong> at{" "}
+                <a href="mailto:brad@bwadvisorysolutions.com.au?subject=Privacy%20complaint" className="text-[#C9A84C] hover:underline">brad@bwadvisorysolutions.com.au</a>. We will acknowledge your complaint within 5 business days and give you a written response within 30 days. If you are not satisfied with our response, you can lodge a complaint with the <strong>Office of the Australian Information Commissioner</strong> at{" "}
                 <a href="https://www.oaic.gov.au" target="_blank" rel="noreferrer" className="text-[#C9A84C] hover:underline">www.oaic.gov.au</a>.
               </p>
             </section>

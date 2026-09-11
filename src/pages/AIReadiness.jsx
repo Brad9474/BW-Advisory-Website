@@ -1444,11 +1444,12 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
 
   const buildMailtoBody = () => {
     const riskLines = riskAreas.map((a) => `- ${a.label} (${a.severity})`).join('\n');
+    const purchaseEnabled = import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true';
     return [
       'I completed the BW Advisory AI Readiness Diagnostic.', '',
       `Score: ${score}/100`, '',
       `Estimated time lost per week: ${fmtHours(weeklyHours)} hours`,
-      'A full cost breakdown with substantiated ranges and stated assumptions is available in the AI Snapshot Report.', '',
+      ...(purchaseEnabled ? ['A full cost breakdown with substantiated ranges and stated assumptions is available in the AI Snapshot Report.', ''] : []),
       'Risk areas:', riskLines, '',
       'Assessment completed at bwadvisorysolutions.com.au/ai-readiness',
     ].join('\n');
@@ -1492,7 +1493,8 @@ const Results = ({ score, opportunity, riskAreas, review, lead, referralToken, d
           <p className="text-[#C9A84C] font-display font-bold text-3xl md:text-4xl">{fmtHours(weeklyHours)} hours</p>
         </div>
         <p className="text-silver/70 font-light text-sm leading-relaxed mt-4">
-          Your responses suggest meaningful time lost each week to workflows that could be simplified. The AI Snapshot Report quantifies this with substantiated ranges and stated assumptions.
+          Your responses suggest meaningful time lost each week to workflows that could be simplified.
+          {import.meta.env.VITE_PURCHASE_SURFACE_ENABLED === 'true' && ' The AI Snapshot Report quantifies this with substantiated ranges and stated assumptions.'}
         </p>
       </div>
 
@@ -1957,7 +1959,7 @@ const AIReadiness = () => {
             See where AI fits — and where it doesn't.
           </h1>
           <p className="text-base md:text-lg text-[#CBD5E1] font-normal leading-relaxed">
-            About eight minutes. One question at a time. Your scored result appears the moment you finish — showing exactly where you're exposed and what each gap is likely costing you.
+            About eight minutes. One question at a time. Your scored result appears the moment you finish. It shows where you may be exposed, with an indicative estimate of what each gap is costing you.
           </p>
         </div>
       </section>

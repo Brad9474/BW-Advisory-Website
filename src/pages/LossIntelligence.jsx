@@ -5,7 +5,7 @@ import CinematicHero from '../components/CinematicHero';
 const intelligenceStages = [
   {
     name: 'Signal Detection',
-    desc: 'Define data sources and collection protocols. Build real-time dashboards that surface anomalies before loss occurs.',
+    desc: 'Define data sources and collection protocols. Design the dashboards that surface anomalies early.',
   },
   {
     name: 'Intelligence Analysis',
