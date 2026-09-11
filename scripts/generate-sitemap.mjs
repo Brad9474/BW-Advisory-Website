@@ -9,9 +9,10 @@ const SITE = 'https://bwadvisorysolutions.com.au';
 const PURCHASE_SURFACE_ENABLED = process.env.VITE_PURCHASE_SURFACE_ENABLED === 'true';
 
 // Every route in src/App.jsx, excluding purchase result pages (never indexable)
-// and, until the purchase surface launches, /pricing and /solution-map.
+// and, until the purchase surface launches, /pricing, /solution-map and /terms
+// (unlinked from the site while there's nothing to sell — see Footer.jsx).
 const ALWAYS_EXCLUDED = new Set(['/purchase/confirmed', '/purchase/cancelled']);
-const GATED_ROUTES = new Set(['/pricing', '/solution-map']);
+const GATED_ROUTES = new Set(['/pricing', '/solution-map', '/terms']);
 
 const ROUTES = [
   { path: '/', priority: '1.0', changefreq: 'monthly' },
@@ -34,9 +35,11 @@ const ROUTES = [
 
 const today = new Date().toISOString().slice(0, 10);
 
-const urls = ROUTES
+const includedRoutes = ROUTES
   .filter((r) => !ALWAYS_EXCLUDED.has(r.path))
-  .filter((r) => PURCHASE_SURFACE_ENABLED || !GATED_ROUTES.has(r.path))
+  .filter((r) => PURCHASE_SURFACE_ENABLED || !GATED_ROUTES.has(r.path));
+
+const urls = includedRoutes
   .map((r) => `  <url>
     <loc>${SITE}${r.path}</loc>
     <lastmod>${today}</lastmod>
@@ -53,4 +56,4 @@ ${urls}
 
 const outPath = resolve(__dirname, '../public/sitemap.xml');
 writeFileSync(outPath, xml, 'utf8');
-console.log(`[sitemap] wrote ${ROUTES.length - (PURCHASE_SURFACE_ENABLED ? 2 : 4)} URLs to public/sitemap.xml`);
+console.log(`[sitemap] wrote ${includedRoutes.length} URLs to public/sitemap.xml`);
